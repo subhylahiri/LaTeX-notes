@@ -1,0 +1,265 @@
+% -*- TeX -*- -*- UK -*-
+% ----------------------------------------------------------------
+% arXiv Paper ************************************************
+%
+% Subhaneil Lahiri's template
+%
+% Before submitting:
+%    Comment out hyperref
+%    Comment out showkeys
+%    Replace \input{mydefs.tex} with its contents
+%       or include mydefs.tex in zip/tar file
+%    Replace \input{newsymb.tex} with its contents
+%       or include newsymb.tex in zip/tar file
+%    Put this file, the .bbl file, any picture or
+%       other additional files and natbib.sty
+%       file in a zip/tar file
+%
+% **** -----------------------------------------------------------
+\documentclass[12pt]{article}
+% Preamble:
+\usepackage{a4wide}
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage[sort&compress,numbers]{natbib}
+%\usepackage{citeB}
+\usepackage{ifpdf}
+%\usepackage{graphicx}
+%\usepackage{graphics} for finding documentation only
+%\usepackage{xcolor}
+%\usepackage{pgf}
+\ifpdf
+\usepackage[pdftex,bookmarks]{hyperref}
+\else
+\usepackage[hypertex]{hyperref}
+\DeclareGraphicsRule{.png}{eps}{.bb}{}
+\fi
+%
+% >> Only for drafts! <<
+%\usepackage[notref,notcite]{showkeys}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\numberwithin{equation}{section}
+%\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+% New commands etc.
+\input{mydefs.tex}
+\input{newsymb.tex}
+
+\DeclareMathOperator{\cum}{cum}
+\DeclareMathOperator{\bias}{Bias}
+\DeclareMathOperator{\var}{Var}
+\newcommand{\tk}{\tilde c}
+\newcommand{\mh}{\hat\mu}
+\newcommand{\sh}{\hat{s}}
+\newcommand{\sih}{\hat{\sigma}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title info:
+\title{Weighted estimators}
+%
+% Author List:
+%
+\author{Subhaneil Lahiri
+\\
+%
+% Addresses:
+%
+\small{\emph{Harvard University}}
+%
+}
+
+\begin{document}
+
+\maketitle
+
+% Preprint numbers, etc.
+%\preprintno{8cm}{6cm}{
+%    \texttt{arXiv:yymm.nnnn [hep-th]}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}  We compute estimators and standard errors for samples that are independent but not identically distributed, assuming that cumulants scale in a particular way.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of Article:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Grouping data points}
+
+Suppose that we start with an independent, identically distributed (iid) sample, \ie a set of random variables $\{y_a\}$, $a=1...M$
+%
+\begin{equation}\label{eq:iid}
+  \cum_r(y_a) = c_r.
+\end{equation}
+%
+Now, say we put them into groups of size $\{n_i\}$, $i=1...N$, and only recorded the means of each group
+%
+\begin{equation}\label{eq:group}
+  x_i = \frac{\sum_{b=1}^{n_i}y_{n_{i-1}+b}}{n_i}\,.
+\end{equation}
+%
+Then the $\{n_i\}$ would be independent but not identically distributed. In fact, their cumulants would be
+%
+\begin{equation}\label{eq:groupcum}
+  \cum_r(x_i) = \frac{c_r}{(n_i)^{r-1}}\,.
+\end{equation}
+%
+In practice, we often do not have any concept of ``number of samples per group''. Instead we have some quantity that scales the same way, \ie
+%
+\begin{equation}\label{eq:scalecum}
+  \cum_r(x_i) = \frac{\tk_r}{(w_i)^{r-1}}\,.
+\end{equation}
+%
+We will refer to this as independent, differently scaled (ids). One can think of these quantities as being related to \eqref{eq:groupcum} by
+%
+\begin{equation}\label{eq:scale}
+  w_i = \alpha n_i, \qquad \tk_r = \alpha^{r-1} c_r.
+\end{equation}
+%
+Note the $w_i$ and $\tk_r$ are not separately well defined, as we can redefine them (changing $\alpha$ in \eqref{eq:scale}) with,
+%
+\begin{equation}\label{eq:rescale}
+  w_i \to \lambda w_i, \qquad \tk_r \to \lambda^{r-1} \tk_r.
+\end{equation}
+%
+Only quantities that are invariant under this redefinition are well defined. In particular, $\tk_1$ is the only one of the $\tk_r$ that is really meaningful.
+
+\section{Estimators}
+
+First let us define
+%
+\begin{equation}\label{eq:defcum}
+  \mu = \tk_1,\quad
+  \sigma^2 = \tk_2, \quad
+  \gamma = \tk_3, \quad
+  \kappa = \tk_4.
+\end{equation}
+%
+As the $x_i$ are independent, we have
+%
+\begin{equation}\label{eq:polyexp}
+  \begin{aligned}
+    \E(x_i) =& \mu,\\
+    \E(x_i x_j) =& \mu^2
+        + \sigma^2 \frac{\delta_{ij}}{w_i}\,,\\
+    \E(x_i x_j x_k) =& \mu^3
+        + \mu\sigma^2 \prn{\frac{\delta_{ij}}{w_i} +\frac{\delta_{jk}}{w_j} +\frac{\delta_{ki}}{w_k}}
+        + \gamma \frac{\delta_{ijk}}{w_i^2}\,,\\
+    \E(x_i x_j x_k x_l) =& \mu^4
+        + \mu^2\sigma^2 \prn{\frac{\delta_{ij}}{w_i} +\frac{\delta_{ik}}{w_i} +\frac{\delta_{il}}{w_i} +\frac{\delta_{jk}}{w_j} +\frac{\delta_{jl}}{w_j} +\frac{\delta_{kl}}{w_k}}
+        \\ &+ \sigma^4  \prn{\frac{\delta_{ij}}{w_i}\frac{\delta_{kl}}{w_k} +\frac{\delta_{ik}}{w_i}\frac{\delta_{jl}}{w_j} +\frac{\delta_{il}}{w_i}\frac{\delta_{jk}}{w_j}}
+        \\ &+ \mu\gamma \prn{\frac{\delta_{ijk}}{w_i^2} +\frac{\delta_{ijl}}{w_j^2} +\frac{\delta_{ikl}}{w_k^2} +\frac{\delta_{jkl}}{w_l^2}}
+        + \kappa \frac{\delta_{ijkl}}{w_i^3}\,,
+  \end{aligned}
+\end{equation}
+%
+where the generalised Kronecker-delta symbols are defined by
+%
+\begin{equation}\label{eq:kronecker}
+  \delta_{ijkl...} = \left\{
+  \begin{aligned}
+    1\quad &\text{if}\quad i=j=k=l...\\
+    0\quad &\text{otherwise}.
+  \end{aligned}
+  \right.
+\end{equation}
+%
+
+We will now go through the construction of an estimator for the mean, $\mu$, in detail. Let
+%
+\begin{equation}\label{eq:estmeangen}
+  \mh = \sum_i g_i x_i.
+\end{equation}
+%
+We have
+%
+\begin{equation}\label{eq:estmeanbias}
+  \bias(\mh) = \prn{\sum_i g_i -1} \mu, \qquad
+  \var(\mh) = \prn{\sum_i \frac{g_i^2}{w_i}} \sigma^2.
+\end{equation}
+%
+If we minimise the variance subject to the constraint that the bias is zero,
+%
+\begin{equation}\label{eq:minvarmean}
+  \pdiff{\var(\mh)}{g_i} - \beta \pdiff{\bias(\mh)}{g_i} = \frac{2g_i}{w_i}\sigma^2 - \beta\mu = 0,
+\end{equation}
+%
+where $\beta$ is a Lagrange multiplier. Therefore, we must set
+%
+\begin{equation}\label{eq:meanweights}
+  g_i = \frac{w_i}{\sum_j w_j}\,.
+\end{equation}
+%
+This leaves us with
+%
+\begin{equation}\label{eq:meanest}
+  \mh = \frac{\sum_i w_i x_i}{\sum_i w_i}, \qquad
+  \bias(\mh) = 0, \qquad
+  \var(\mh) = \frac{\sigma^2}{\sum_i w_i}\,.
+\end{equation}
+%
+Therefore, this estimator is unbiased and consistent, assuming that the $w_i/\sigma^2$ do not decrease faster than the sample size increases.
+
+We will construct an estimator for the variance in much less detail, starting with a good guess and improving it. Consider the quantity
+%
+\begin{equation}\label{eq:varestguess}
+  \sh^2 = \frac{\sum_i w_i (x_i-\mh)^2}{\sum_i w_i}\,.
+\end{equation}
+%
+Using \eqref{eq:polyexp}, one can show that
+%
+\begin{equation}\label{eq:varestmoments}
+ \begin{aligned}
+  \E(\sh^2) &= \frac{N-1}{\sum_i w_i} \sigma^2, \\
+  \var(\sh^2) &= \frac{2(N-1)}{\prn{\sum_i w_i}^2} \sigma^2 + \frac{\prn{\sum_i w_i^{-1}}\prn{\sum_i w_i} - 2N + 1}{\prn{\sum_i w_i}^3}\kappa.
+ \end{aligned}
+\end{equation}
+%
+So we can define an estimator for the variance
+%
+\begin{equation}\label{eq:varest}
+ \begin{aligned}
+  \sih^2 &= \frac{\sum_i w_i (x_i-\mh)^2}{N-1}, \qquad&
+  \bias(\sih^2) &= 0, \\ & &
+  \var(\sih^2) &= \frac{2\sigma^4}{N-1} + \frac{\brk{\prn{\sum_{ij} w_i/w_j} - 2N + 1}\kappa}{\prn{\sum_i w_i}(N-1)^2}\,.
+ \end{aligned}
+\end{equation}
+%
+This estimator is unbiased and consistent, as above. However it is not invariant under the rescaling \eqref{eq:rescale}. This is not surprising, given that $\sigma^2$ is itself not invariant under a rescaling of all the weights. Nevertheless, it can be used to compute a standard error in the mean:
+%
+\begin{equation}\label{eq:stderr}
+  \delta\mu^2 = \frac{\sum_i w_i (x_i-\mh)^2}{\prn{\sum_i w_i}(N-1)}, \qquad
+  \E(\delta\mu^2) = \var(\mh).
+\end{equation}
+%
+Not that both the estimators for the mean \eqref{eq:meanest} and its standard error \eqref{eq:stderr} are invariant under the rescaling \eqref{eq:rescale}. These are the only two fully meaningful formulae in the section.
+
+
+
+
+%\section*{Acknowledgements}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Appendices}
+%\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bibliographystyle{utcaps_sl}
+%\bibliography{qft,string,adscft,gr,maths}
+
+\end{document}
