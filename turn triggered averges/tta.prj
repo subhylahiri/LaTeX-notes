@@ -1,0 +1,46 @@
+307 Patch Control
+
+0
+0
+1
+tta.tex
+8
+4
+0
+
+
+
+
+
+
+tta.tex
+TeX
+286273531 0 -1 5041 -1 5042 175 175 797 624 1 209 612 -1 -1 0 0 -1 -1 -1 -1 1 0 5042 -1   0
+:\Users\Subhy\MiKTeX\tex\latex\newsymb.tex
+TeX
+1060859 0 -1 590 -1 591 200 200 591 655 0 225 357 -1 -1 0 0 1 -1 -1 1 1 0 591 -1   0
+:\Users\Subhy\MiKTeX\tex\latex\mydefs.tex
+TeX
+1060859 0 -1 1761 -1 1729 150 150 541 605 0 241 629 -1 -1 0 0 55 -1 -1 55 1 0 1729 -1   0
+:\Users\Subhy\MiKTeX\bibtex\bib\maths.bib
+BibTeX
+1049586 0 47 1 47 1 225 225 610 789 0 25 612 -1 -1 0 0 -1 -1 -1 -1 1 0 1 47   0
+:\Users\Subhy\AppData\Roaming\WinEdt Team\WinEdt 6\ConfigEx\MainMenu.ini
+DATA:INI:EDT
+269485050 0 1566 54 1566 97 175 175 566 630 1 660 459 -1 -1 0 0 83 0 0 83 1 0 97 1566   0
+:\Users\Subhy\Documents\wstats\wstats.tex
+TeX:UK
+286273531 0 -1 1751 -1 1182 125 125 1372 596 1 81 272 185 -833 1 0 5725 -1 -1 6317 1 0 1182 -1   0
+:\Users\Subhy\Documents\TeXMed\texmed-2.0.5\cgi-bin\list.cgi
+CPerl:UNIX
+269583346 0 0 1 0 1 75 75 748 360 1 73 0 -1 -1 0 0 19 0 0 19 1 0 1 0   0
+:\Users\Subhy\AppData\Roaming\WinEdt Team\WinEdt 6\ConfigEx\Templates.ini
+DATA:INI:EDT
+269485050 0 21 35 21 36 50 50 1254 521 1 353 357 -1 -1 0 0 -1 -1 -1 -1 1 0 36 21   0
+
+*tta.tex
+>
+*mydefs.tex
+*newsymb.tex
+*maths.bib
+<

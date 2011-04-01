@@ -1,0 +1,168 @@
+% -*- TeX -*- -*- UK -*-
+% ----------------------------------------------------------------
+% arXiv Paper ************************************************
+%
+% Subhaneil Lahiri's template
+%
+% Before submitting:
+%    Comment out hyperref
+%    Comment out showkeys
+%    Replace \input{mydefs.tex} with its contents
+%       or include mydefs.tex in zip/tar file
+%    Replace \input{newsymb.tex} with its contents
+%       or include newsymb.tex in zip/tar file
+%    Put this file, the .bbl file, any picture or
+%       other additional files and natbib.sty
+%       file in a zip/tar file
+%
+% **** -----------------------------------------------------------
+\documentclass[12pt]{article}
+% Preamble:
+\usepackage{a4wide}
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage[sort&compress,numbers]{natbib}
+%\usepackage{citeB}
+\usepackage{ifpdf}
+%\usepackage{graphicx}
+%\usepackage{graphics} for finding documentation only
+%\usepackage{xcolor}
+%\usepackage{pgf}
+\ifpdf
+\usepackage[pdftex,bookmarks]{hyperref}
+\else
+\usepackage[hypertex]{hyperref}
+\DeclareGraphicsRule{.png}{eps}{.bb}{}
+\fi
+%
+% >> Only for drafts! <<
+\usepackage[notref,notcite]{showkeys}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\numberwithin{equation}{section}
+%\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+% New commands etc.
+\input{mydefs.tex}
+\input{newsymb.tex}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title info:
+\title{Non-linear, history-dependent response functions}
+%
+% Author List:
+%
+\author{Subhaneil Lahiri
+\\
+%
+% Addresses:
+%
+\small{\emph{Harvard University}}
+%
+}
+
+\begin{document}
+
+\maketitle
+
+%% Preprint numbers, etc.
+%\preprintno{8cm}{6cm}{
+%    \texttt{arXiv:yymm.nnnn [hep-th]}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}
+  We look at methods of characterising non-linear, history-dependent responses, particularly the rates of inhomogeneous Poisson processes.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of Article:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}\label{sec:intro}
+
+In this note we will look at responses, $r(t)$, that are \emph{functionals} of some stimulus, $s(t)$,
+%
+\begin{equation}\label{eq:response}
+  r(t) = r_t[s].
+\end{equation}
+%
+
+We will look at types of series expansion: the Volterra series in \sref{sec:volterra} that is analogous to the Taylor expansion for function; and the Wiener series in \sref{sec:wiener} that is analogous to the expansion in Hermite polynomials for functions.
+
+When constructing a set of orthogonal polynomials, one has to choose a weighting function for the integration measure:
+%
+\begin{equation}\label{eq:functionprod}
+  f \cdot g = \int f(t) g(t)\, w(t) \dr t.
+\end{equation}
+%
+For Hermite polynomials, one chooses $w(t)=\e^{-t^2}$, for Legendre polynomials, one chooses $w(t)=\theta(1-t)\theta(1+t)$ and for Laguerre polynomials, one chooses $w(t)=\theta(t)\e^{-t}$.
+
+For orthogonal functionals, one has to choose a measure for the space of functions:
+%
+\begin{equation}\label{eq:functionalprod}
+  F \cdot G = \int F[s] G[s]\, W[s] \CD s.
+\end{equation}
+%
+In analogy with the Hermite polynomials, we will choose
+%
+\begin{equation}\label{eq:whitenoisemeasure}
+  W[s] \propto \exp\prn{-\int \frac{s(t)^2}{2\sigma^2}\,\dr t}.
+\end{equation}
+%
+
+There is a statistical way of looking at this that is helpful when thinking about how to measure these quantities. In the case of functions, one can normalise $w(t)$ and think of it as a probability density, then we have $f \cdot g = \av{f(t)g(t)}$, where $t$ is a random variable whose probability distribution is given by $w(t)$.
+
+For functionals, we should think of the input, $s(t)$, as being a \emph{stochastic process}. The stochastic process corresponding to \eqref{eq:whitenoisemeasure} is called zero-mean, Gaussian white noise. We will discuss this in more detail in \sref{sec:whitenoise}.
+
+When the response function, $r(t)$, is the rate of an inhomogeneous Poisson process, it can be difficult to measure. One has to repeat the stimulus many times and count the events in various time bins. If one wishes to use small time bins, one has to repeat the stimulus more times to get enough data in each bin.
+
+Instead, there is a simpler method where one compute averages of the \emph{stimulus} at various time shifts before each event. With this method, one never needs to determine $r(t)$. We will discuss this in \sref{sec:poisson}.
+
+
+\section{Volterrra series}\label{sec:volterra}
+
+
+
+
+
+\section{Gaussian white noise}\label{sec:whitenoise}
+
+
+
+
+\section{Wiener series}\label{sec:wiener}
+
+
+
+
+\section{Inhomogeneous Poisson processes}\label{sec:poisson}
+
+
+
+
+
+%\section*{Acknowledgements}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Appendices}
+%\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{utcaps_sl}
+\bibliography{maths}
+
+\end{document}
