@@ -21,11 +21,10 @@
 \usepackage{a4wide}
 \usepackage[centertags]{amsmath}
 \usepackage{amssymb}
-%\usepackage{amsthm}
 \usepackage[sort&compress,numbers]{natbib}
 %\usepackage{citeB}
 \usepackage{ifpdf}
-%\usepackage{graphicx}
+\usepackage{graphicx}
 %\usepackage{graphics} for finding documentation only
 %\usepackage{xcolor}
 %\usepackage{pgf}
@@ -43,6 +42,36 @@
 \hfuzz2pt % Don't report over-full h-boxes if over-edge is small
 %\numberwithin{equation}{section}
 %\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+\usepackage{amsthm}
+\newtheoremstyle{sldefinition}%
+  {3pt}%space above
+  {3pt}%space below
+  {}%body font
+  {}%indent amount
+  {\bfseries}%theorem head font
+  {}%theorem head punctuation
+  {\newline}%space after head
+  {\thmname{#1}\thmnumber{ #2}:{\bfseries\thmnote{ #3}}}%head spec
+\newtheoremstyle{slplain}%
+  {3pt}%space above
+  {3pt}%space below
+  {}%body font
+  {}%indent amount
+  {\bfseries}%theorem head font
+  {}%theorem head punctuation
+  {\newline}%space after head
+  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}:}%head spec
+%
+\theoremstyle{slplain}
+\newtheorem{thm}{Theorem}
+%
+\theoremstyle{sldefinition}
+\newtheorem{defn}{Definition}
+%
+\theoremstyle{remark}
+\newtheorem*{notn}{Notation}
+\newtheorem*{rem}{Remark}
 % ----------------------------------------------------------------
 % New commands etc.
 \input{mydefs.tex}
@@ -122,13 +151,70 @@ For functionals, we should think of the input, $s(t)$, as being a \emph{stochast
 
 When the response function, $r(t)$, is the rate of an inhomogeneous Poisson process, it can be difficult to measure. One has to repeat the stimulus many times and count the events in various time bins. If one wishes to use small time bins, one has to repeat the stimulus more times to get enough data in each bin.
 
-Instead, there is a simpler method where one compute averages of the \emph{stimulus} at various time shifts before each event. With this method, one never needs to determine $r(t)$. We will discuss this in \sref{sec:poisson}.
+Instead, there is a simpler method where one compute averages of the \emph{stimulus} at various time shifts before each event. With this method, one never needs to determine $r(t)$. We will discuss this further in \sref{sec:poisson}.
 
 
 \section{Volterrra series}\label{sec:volterra}
 
+Suppose we have a functional that is also a function of the independent variable, \eg if we have a system that responds to some time varying input, $x(t)$, in a history dependent way (\ie the system has some memory), then the response at time $t$ is a function of $t$ as well as a functional of $x(t')$.
+The Volterra series is a way of expanding such a functional in powers of the input. It is analogous to the Taylor series expansion of a function.
+
+\begin{defn}[Volterra functional]
+A Volterra functional of degree $p$ is one of the form:
+%
+\begin{equation}\label{eq:volfunc}
+  V^{(p)}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+\end{equation}
+%
+\end{defn}
+
+\begin{defn}[Volterra series]
+  A Volterra series of degree $n$ is a sum of Volterra functionals of degree less than or equal to $n$:
+%
+\begin{equation}\label{eq:volser}
+  F_t[x] = \sum_{n=0}^n\prod_{i=1}^p \int\!\dr t_i\,  f_p(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+\end{equation}
+%
+  The term ``Voltera series'', without specification of degree, shall be taken to mean a Volterra series of infinite degree.
+\end{defn}
+
+\begin{defn}[Volterra kernel]
+  The $p^{\text{th}}$ Volterra kernel is the function $f_p(t_1,\ldots,t_p)$ that appears in \eqref{eq:volser}.
+\end{defn}
+
+\begin{thm}[Determination of Volterra kernels]
+  Suppose we are given some functional, $F_t[x]$, and we want to express it as a Volterra sreies. The Volterra kernels that we would use are given by
+  %
+  \begin{equation}\label{eq:volkern}
+    f_p(t_1,\ldots,t_p) = \frac{1}{p!}\, \frac{\delta^p F_t[0]}{\delta x(t-t_1) \ldots \delta x(t-t_p)}.
+  \end{equation}
+  %
+\end{thm}
+\begin{proof}
+  Substitute \eqref{eq:volser} into \eqref{eq:volkern} and see what you get.
+\end{proof}
+
+The Volterra expansion is only valid for inputs close to zero if all the functional derivatives in \eqref{eq:volkern} exist, similar to how a Taylor series can only be used for analytic functions. In addition, the Taylor series is only valid inside the radius of convergence, which is equal to the distance to the nearest non-analyticity. This is one of the reasons why orthogonal function expansions are often better than Taylor series: in return for demanding a weaker form of convergence, the class of functions that can be represented is larger.
 
 
+\begin{rem}[impulse response]
+  The experimental analogue of \eqref{eq:volkern} involves measuring the response to a series of impulses. Let 
+  %
+  \begin{equation}\label{eq:imulses}
+  \begin{aligned}
+    x(t) &= \sum_{i=1}^p \epsilon_i \delta(t-t_i), \\
+    F(t;\vec{t},\vec{\epsilon} ) &= F_t[x],
+  \end{aligned}
+  \end{equation}
+  %
+  where $\vec{t}$ represents $(t_1,\ldots,t_p)$, etc. Then one can determine the Volterra kernels via
+  %
+  \begin{equation}\label{eq:impkern}
+    f_p(t_1,\ldots,t_p) = \frac{1}{p!}\, \frac{\p^p F(t;\vec{t},\vec{0})}{\p\epsilon_1\ldots\p\epsilon_p}.
+  \end{equation}
+  %
+  However, one has to perform this experiment several times, varying $\vec{\epsilon}$ and $\vec{t}$.
+\end{rem}
 
 
 \section{Gaussian white noise}\label{sec:whitenoise}
