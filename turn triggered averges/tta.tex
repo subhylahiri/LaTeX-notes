@@ -160,21 +160,23 @@ Suppose we have a functional that is also a function of the independent variable
 The Volterra series is a way of expanding such a functional in powers of the input. It is analogous to the Taylor series expansion of a function.
 
 \begin{defn}[Volterra functional]
-A Volterra functional of degree $p$ is one of the form:
-%
-\begin{equation}\label{eq:volfunc}
-  V^{(p)}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
-\end{equation}
-%
+  A Volterra functional of degree $p$ is one of the form:
+  %
+  \begin{equation}\label{eq:volfunc}
+    V^{(p)}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+  \end{equation}
+  %
+  Without loss of generality, we may assume that the function $v(t_1,\ldots,t_p)$ is symmetric under interchange of any of its arguments
 \end{defn}
+
 
 \begin{defn}[Volterra series]
   A Volterra series of degree $n$ is a sum of Volterra functionals of degree less than or equal to $n$:
-%
-\begin{equation}\label{eq:volser}
-  F_t[x] = \sum_{n=0}^n\prod_{i=1}^p \int\!\dr t_i\,  f_p(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
-\end{equation}
-%
+  %
+  \begin{equation}\label{eq:volser}
+    F_t[x] = \sum_{n=0}^n\prod_{i=1}^p \int\!\dr t_i\,  f_p(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+  \end{equation}
+  %
   The term ``Voltera series'', without specification of degree, shall be taken to mean a Volterra series of infinite degree.
 \end{defn}
 
@@ -198,7 +200,7 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
 
 
 \begin{rem}[impulse response]
-  The experimental analogue of \eqref{eq:volkern} involves measuring the response to a series of impulses. Let 
+  The experimental analogue of \eqref{eq:volkern} involves measuring the response to a series of impulses. Let
   %
   \begin{equation}\label{eq:imulses}
   \begin{aligned}
@@ -210,16 +212,65 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   where $\vec{t}$ represents $(t_1,\ldots,t_p)$, etc. Then one can determine the Volterra kernels via
   %
   \begin{equation}\label{eq:impkern}
-    f_p(t_1,\ldots,t_p) = \frac{1}{p!}\, \frac{\p^p F(t;\vec{t},\vec{0})}{\p\epsilon_1\ldots\p\epsilon_p}.
+    f_p(t-t_1,\ldots,t-t_p) = \frac{1}{p!}\, \frac{\p^p F(t;\vec{t},\vec{0})}{\p\epsilon_1\ldots\p\epsilon_p}.
   \end{equation}
   %
-  However, one has to perform this experiment several times, varying $\vec{\epsilon}$ and $\vec{t}$.
+  However, one has to perform this experiment several times, varying $\vec{\epsilon}$ and $\vec{t}$, in order to determine one of the Volterra kernels.
 \end{rem}
 
 
 \section{Gaussian white noise}\label{sec:whitenoise}
 
+\begin{defn}[Stationary process]
+  A stochastic process, $x(t)$ is said to be stationary if
+  %
+  \begin{equation}\label{eq:statproc}
+    \av{x(t_1)x(t_2) \ldots x(t_n)} = \av{x(t_1+\tau)x(t_2+\tau) \ldots x(t_n+\tau)}
+    \qquad \forall n,t_i,\tau
+  \end{equation}
+  %
+\end{defn}
 
+\begin{defn}[Gaussian process]
+  A stochastic process is said to be Gaussian if
+  %
+  \begin{equation}\label{eq:gaussproc}
+    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{\ir\!\intd{t} [J(t)\mu(t)] - \intd{t\dr t'} [J(t)J(t')\phi(t,t')]}.
+  \end{equation}
+  %
+  This means that all correlation functions can be expressed in terms of the connected one and two-point functions, \eg
+  %
+  \begin{equation}\label{eq:gaussmom}
+    \begin{aligned}
+      \av{x(t_1)} &= \mu(t_1), \\
+      \av{x(t_1)x(t_2)}  &= \mu(t_1)\mu(t_2) + \phi(t_1,t_2), \\
+      \av{x(t_1)x(t_2)x(t_3)}  &= \mu(t_1)\mu(t_2)\mu(t_3) + \phi(t_1,t_2)\mu(t_3) + \phi(t_1,t_3)\mu(t_2) + \phi(t_2,t_3)\mu(t_1).
+    \end{aligned}
+  \end{equation}
+  %
+  If a process is Gaussian and stationary,
+  %
+  \begin{equation}\label{eq:statgauss}
+    \begin{aligned}
+      \mu(t) &= \mu, \\
+      \phi(t,t')  &= \phi(t-t').
+    \end{aligned}
+  \end{equation}
+  %
+  The Fourier transform of $\phi(t)$, $\tilde{\phi}(\omega)$, is called the \textbf{power density spectrum} of $x(t)$.
+\end{defn}
+
+\begin{defn}[Gaussian white noise]
+  Gaussian white noise of power $\sigma^2$ is a stationary Gaussian process with
+  %
+  \begin{equation}\label{eq:gaussianwhite}
+    \phi(t-t') = \sigma^2\delta(t-t'), \qquad 
+    \tilde{\phi}(\omega) = \sigma^2, \qquad
+    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\sigma^2\!\intd{t} [J(t)]^2}.
+  \end{equation}
+  %
+  \ie the power density spectrum is the same for all frequencies. In practice, one can only have white noise up to some high frequency cut-off.
+\end{defn}
 
 
 \section{Wiener series}\label{sec:wiener}
