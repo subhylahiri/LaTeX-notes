@@ -1,0 +1,683 @@
+\chapter{Fluid mechanics}\label{ch:fluids}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of Article:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In this chapter, we will review the general formalism we will use in the rest of this dissertation: the thermodynamics of fluids, relativistic fluid mechanics and the relativistic treatment of surface tension. In \S\ref{sec:rigidrot} we will discuss the construction of equilibrium configurations of fluids and their overall thermodynamics. Our treatment of relativistic fluid mechanics is largely based on \cite{Andersson:2006nr}.
+
+
+\section{Thermodynamics}\label{sec:fltherm}
+
+The first law of thermodynamics for a fluid with $c$ conserved (global) charges is
+%
+\begin{equation}\label{firstlaw:eq}
+  \dr\eloc = \tloc\dr\sloc - \ploc\dr V + \ml_i \,\dr\rloc_i,
+\end{equation}
+%
+where $\eloc$ is its energy, $\sloc$ is its entropy, $V$ is its volume, $\rloc_i$ is its $i^{th}$  conserved charge, $\tloc$ is its temperature, $\ploc$ is its pressure and $\ml_i$ is its $i^{th}$ chemical potential. In a non-relativistic theory particle number could be one of the conserved charges, but in a relativistic theory we have to replace it with something like baryon number, or in this case R-charge.
+Suppose we rescale the system by a factor $(1+\epsilon)$. Extensivity tells us that $\dr\eloc=\epsilon\eloc$, $\dr\sloc=\epsilon\sloc$, $\dr V=\epsilon V$ and $\dr\rloc_i=\epsilon\rloc_i$. Then \eqref{firstlaw:eq} tells us that
+%
+\begin{equation*}
+  \eloc = \tloc\sloc - \ploc V + \ml_i \rloc_i.
+\end{equation*}
+%
+Defining intensive quantities $\rho=\eloc/V$, $s=\sloc/V$ and $\rl_i=\rloc/V$, we have
+%
+\begin{equation}\label{inttherm:eq}
+  \begin{split}
+    \rho+\ploc &= s\tloc + \ml_i \rl_i, \\
+    \dr\rho &= \tloc \dr s + \ml_i \,\dr \rl_i, \\
+    \dr\ploc &= s\, \dr\tloc + \rl_i \,\dr\ml_i.
+  \end{split}
+\end{equation}
+%
+Note that all intensive thermodynamic quantities can be written as functions of $(1+c)$ variables, which we will usually choose to be the temperature and chemical potentials. Once we are given the pressure as a function of temperature and chemical potential, we can use \eqref{inttherm:eq} to determine the others. In Ch.\ref{ch:rotbh} we will consider conformal fluids, which have equations of state of the form \eqref{hdef:eq}. In Ch.\ref{ch:plasmaring}-\ref{ch:hidim} we will consider uncharged fluids that are dual to Scherk-Schwarz compactifications of AdS that have equations of state of the form \eqref{thermint:eq}.
+
+
+\section{Relativistic fluid mechanics}\label{sec:fluid}
+
+%\subsection{The equations of motion}\label{sec:basiceq}
+
+A fluid static fluid can be described by specifying its rest frame (which can be described by a vector $u^\mu$ that takes the form $u^\mu=(1,0,0,\dots)$ in that rest frame) and by specifying the the temperature, $\tloc$, and chemical potentials, $\ml_i$. All other intensive properties of the fluid can be computed using \eqref{inttherm:eq}. It is useful to let $(\tloc,\ml_i)$ refer to these quantities as measured in the rest frame -- this means that they are Lorentz scalars, which is convenient when we construct Lorentz covariant equations of motion.
+
+
+Now consider a fluid that is disturbed from equilibrium. Provided all length scales of variation are large compared to the thermalisation scale of the fluid (which we call $\mfp$), each patch of the fluid is well described by equilibrium thermodynamics in its rest frame. The fluid is characterised by the velocity of these patches (described by a vector $u^\mu(x)=\gamma(x)(1,\vec{v}(x))$ where $\gamma=(1-\vec{v}^2)^{-1/2}$ is a normalisation factor) and the intensive thermodynamic quantities in their rest frames (which can all be computed from the proper temperature, $\tloc(x)$, and proper chemical potentials, $\ml_i(x)$). We promote the quantities mentioned in the previous paragraph to fields. As long as these quantities vary slowly, we can write equations of motion for them in a derivative expansion. One would expect the length scale associated with this expansion to be the scale of microscopic physics, $\mfp$.
+
+The equations of fluid dynamics are simply a statement of the conservation of the stress tensor $T^{\mu \nu}$ and the charge currents $J^\mu_i$.
+%
+\begin{equation}\label{Epconsv:eq} \begin{split}
+  \nabla_\mu T^{\mu\nu} &%= \p_\mu T^{\mu\nu}
+%                        + \Gamma^\mu_{\mu\lambda} T^{\lambda\nu}
+%                        + \Gamma^\nu_{\mu\lambda} T^{\mu\lambda}
+                        = 0\,, \\
+\nabla_\mu J^\mu_i &%= \p_\mu J_i^\mu + \Gamma^\mu_{\mu \alpha} J^\alpha_i
+                        =0\,.
+\end{split}
+\end{equation}
+%
+These provide $(d+c)$ equations for the evolution of for the $(d+c)$ quantities $\vec{v(x)}$, $\tloc(x)$ and $\ml_i(x)$ once we write the stress tensor and charge currents in terms of these quantities.
+
+It is also convenient to define an entropy current $J^\mu_S$ that describes the density and flux of entropy. This is not an independent object, there are no equations of motion associated to its conservation and the current itself is determined by the stress tensor and charge currents. In fact, its divergence gives the rate of entropy production per unit volume. Demanding that this is positive will impose restrictions on the form of the stress tensor and charge currents.
+
+\subsection{Perfect fluid stress tensor}\label{sec:perfstr}
+
+The dynamics of a fluid is completely specified once the stress tensor and charge currents are given as functions of $\tloc$, $\ml_i$ and $u^\mu$. As we have explained in the introduction, fluid mechanics is an effective description at long distances. As a consequence it is natural to expand the stress tensor and charge current in powers of derivatives. In this subsection we briefly review the leading (i.e.\ zeroth) order terms in this expansion.
+
+It is convenient to define a projection tensor
+%
+\begin{equation}\label{proj:eq}
+  P^{\mu\nu} = g^{\mu\nu} + u^\mu u^\nu.
+\end{equation}
+%
+This tensor projects vectors onto the $(d-1)$ dimensional subspace orthogonal to $u^\mu$. In other words, $P^{\mu\nu}$ may be thought of as a projector onto spatial coordinates in the rest frame of the fluid. In a similar fashion, $- u^\mu u^\nu$ projects vectors onto the time direction in the fluid rest frame.
+
+To zeroth order in the derivative expansion, Lorentz invariance demands that the stress tensor be a linear combination of the two projection tensors mentioned above and that the currents are proportional to the velocity with scalar coefficients. The correct static limit uniquely determine these coefficients in terms of the thermodynamic variables. We have
+%
+\begin{equation}\label{currents:eq}
+\begin{split}
+  T^{\mu\nu}_\text{perfect}& = \rho(\tloc,\ml) u^\mu u^\nu
+                               + \ploc(\tloc,\ml) P^{\mu\nu}, \\
+  J^\mu_{i,\text{perfect}}&=\rl_i(\tloc,\ml)u^\mu, \\
+  J^\mu_{S,\text{perfect}}&=s(\tloc,\ml) u^\mu,
+\end{split}
+\end{equation}
+%
+where all thermodynamic quantities are measured in the local rest frame of the fluid, so that they are Lorentz scalars. It is not difficult to verify that in this zero-derivative (or perfect fluid) approximation, the entropy current is conserved. Entropy production (associated with dissipation) occurs only at the first subleading order in the derivative expansion, as we will see in the next subsection.
+
+\subsection{Dissipation and diffusion}\label{sec:visc}
+
+Now, we proceed to examine the first subleading order in the derivative expansion. As there is no entropy production when we truncate the derivative expansion to zeroth order, this will be the leading contribution to some questions.
+
+Before we do this, it is useful to think about the physical interpretation of various components of the stress tensor. First of all, consider $u_\mu u_\nu T^{\mu\nu}$. In the rest frame of the fluid this would be $T^{tt}$. In other words, it is the energy density in the rest frame which we have already defined as $\rho$, i.e.\ $\rho=u_\mu u_\nu T^{\mu\nu}$.
+
+Next, consider $q_\mu = -P_{\mu\nu}u_{\lambda}T^{\lambda\nu}$. In the rest frame of the fluid these are the $T^{tx}$ components, which are physically interpreted as momentum density or energy flux. Energy flow in the rest frame of the fluid will only result from thermal conductivity, and the inertia of flowing heat will lead to some momentum density in the rest frame. So we interpret $q^\mu$ as heat flux.
+
+Finally, consider $S_{\mu\nu}=P_{\mu\lambda}P_{\nu\sigma}T^{\lambda\sigma}$. In the rest frame of the fluid these are the $T^{xy}$ components. These have the physical interpretation of force per unit area in the fluid rest frame.
+
+We can write
+%
+\begin{equation}\label{strsssep:eq}
+  T^{\mu\nu} = \rho u^\mu u^\nu + q^\mu u^\nu + u^\mu q^\nu + S^{\mu\nu}.
+\end{equation}
+%
+
+Similarly, we have the charge density, $\rl_i = -u_\mu J^\mu_i$, and the diffusion current, $j^\mu_i = P^{\mu}_{\nu} J^\nu_i$, and
+%
+\begin{equation}\label{currentsep:eq}
+   J^\mu_i = \rl_i u^\mu + j^\mu_i.
+\end{equation}
+%
+
+Now, when there is energy flow or charge flow there must also be entropy flow, as given by the second line of \eqref{inttherm:eq}. This tells us that we must have
+%
+\begin{equation}\label{entcurrentsep:eq}
+  J^\mu_S = s u^\mu + \frac{q^\mu-\ml_i j^\mu_{i}}{\tloc}\,.
+\end{equation}
+%
+
+It is also helpful to separate velocity gradients into the pieces that are orthogonal/parallel to the velocity and into the antisymmetric/symmetric traceless/trace pieces:
+%
+\begin{equation}\label{gradvel:eq}
+  \nabla_\mu u_\nu = -u_\mu a_\nu + \omega_{\mu\nu} + \sigma_{\mu\nu} + \frac{1}{d-1}\vartheta P_{\mu\nu}
+\end{equation}
+%
+where
+%
+\begin{equation}\label{fluidtensors:eq}
+\begin{split}
+  a^\mu &= u^\nu \nabla_\nu u^\mu, \\
+  \vartheta &= \nabla_\mu u^\mu, \\
+  \sigma^{\mu\nu} &= \half \prn{P^{\mu\lambda} \nabla_\lambda u^\nu
+                   + P^{\nu\lambda} \nabla_\lambda u^\mu}
+                   - \frac{1}{d-1} \vartheta P^{\mu\nu}, \\
+  \omega^{\mu\nu} &= \half \prn{P^{\mu\lambda} \nabla_\lambda u^\nu
+                   - P^{\nu\lambda} \nabla_\lambda u^\mu}, \\
+\end{split}
+\end{equation}
+%
+are the acceleration, expansion, shear tensor and rotation tensor respectively.
+
+Using the definitions of $q^\mu$ and $j^\mu_i$ and \eqref{inttherm:eq}, one can show that
+%
+\begin{equation*}
+\begin{split}
+  \nabla_\mu q^\mu &= -u^\mu\p_\mu\rho - \rho\vartheta - q^\mu a_\mu
+                      - S^{\mu\nu}\sigma_{\mu\nu}
+                      - \frac{1}{d-1}S^{\mu\nu}P_{\mu\nu}\vartheta, \\
+  \nabla_\mu j^\mu_i &= -u^\mu\p_\mu\rl_i - \rl_i\vartheta,
+\end{split}
+\end{equation*}
+%
+which leads to
+%
+\begin{equation}\label{divent:eq}
+  \tloc \nabla_\mu J^\mu_S =
+    \vartheta\prn{\ploc - \frac{1}{d-1}P^{\mu\nu}S_{\mu\nu}}
+    - \sigma^{\mu\nu} S_{\mu\nu}
+    - \frac{1}{\tloc} q^\mu \prn{\p_\mu + \tloc a_\mu}
+    - \tloc j^\mu_i \p_\mu\!\brk{\frac{\mu_i}{\tloc}}.
+\end{equation}
+%
+This quantity is the rate of production of entropy per unit volume (times temperature). We demand that this quantity is positive.
+
+Allowing only one terms up to one derivative, this forces us to choose
+%
+\begin{equation}\label{visc:eq}
+\begin{split}
+ q^\mu &= -\kappa P^{\mu\nu} (\p_\nu\tloc + a_\nu\tloc)\,,
+ \\
+ S^{\mu\nu} &= \ploc P^{\mu\nu} -\zeta \vartheta P^{\mu\nu} -
+  2\eta\sigma^{\mu\nu}
+ \\
+ j^\mu_{i}
+    &= - D_{ij} P^{\mu\nu}\p_\nu\! \brk{\frac{\ml_j}{\tloc}},
+\end{split}
+\end{equation}
+%
+These equations define a set of new fluid dynamical parameters in addition to those of the previous subsection: $\zeta$ is the bulk viscosity, $\eta$ is the shear viscosity, $\kappa$ is the thermal conductivity and $D_{ij}$ are the diffusion coefficients (they are related to the usual diffusion coefficients by a factor of $\pdiff{}{\rl_i}\! \brk{\frac{\ml_j}{\tloc}}$). All of these parameters are functions of $(\tloc,\ml_i)$, the precise dependence will depend on which fluid we are talking about. Fourier's law of heat conduction $\vec{q} = -\kappa \vec{\nabla} \tloc$ has been relativistically modified with an extra term that is related to the redshifting of the temperature. The diffusive contribution to the charge current is the relativistic generalisation of Fick's law.
+
+To summarise, we have
+%
+\begin{equation}\label{extraTvisc:eq}
+\begin{split}
+  T^{\mu\nu}_\mathrm{dissipative} &= -\zeta \vartheta P^{\mu\nu} -
+  2\eta\sigma^{\mu\nu} + q^\mu u^\nu + u^\mu q^\nu,\\
+ (J^\mu_i)_\mathrm{dissipative} &= j^\mu_{i},\\
+ (J^\mu_S)_\mathrm{dissipative} &= \frac{q^\mu-\ml_i j^\mu_{i}}{\tloc}\,.
+\end{split}
+\end{equation}
+%
+where
+%
+\begin{equation}\label{heatdiffusion:eq}
+\begin{split}
+ q^\mu &= -\kappa P^{\mu\nu} (\p_\nu\tloc + a_\nu\tloc)\,,
+ \\
+ j^\mu_{i}
+    &= - D_{ij} P^{\mu\nu}\p_\nu\! \brk{\frac{\ml_j}{\tloc}},
+\end{split}
+\end{equation}
+%
+we also have
+%
+\begin{equation}\label{increase:eq}
+ \tloc\nabla_\mu J^\mu_S = \zeta \vartheta ^2
+  + 2 \eta \sigma_{\mu \nu} \sigma^{\mu \nu}
+%  + \frac{\kappa}{\tloc}P^{\mu\nu}(\p_\mu\tloc + \tloc a_\mu) (\p_\nu\tloc + \tloc a_\nu)
+%  + \tloc D_{ij}P^{\mu\nu} \p_\mu\!\brk{\frac{\ml_i}{\tloc}} \p_\nu\!\brk{\frac{\ml_j}{\tloc}} .
+  + \frac{q^\mu q_\mu}{\kappa\tloc}
+  + \tloc (D^{-1})^{ij} j^\mu_i j_{j\mu} .
+\end{equation}
+%
+As $q^\mu$, $j^\mu_i$ and $\sigma^{\mu \nu}$ are all spacelike
+vectors and tensors, the RHS of \eqref{increase:eq} is positive provided
+$\eta, \zeta, \kappa$ and $D$ are positive parameters, a condition we further assume. This establishes that (even locally) entropy can only be produced but never destroyed. In equilibrium, $\nabla_\mu J^\mu_S$ must vanish. It follows that, $q^\mu$, $j^\mu_i$, $\vartheta$ and $\sigma^{\mu \nu}$
+each individually vanish in equilibrium.
+
+For fluids with gravity duals, the shear viscosity is given by $\eta=\frac{s}{4\pi}$ \cite{Son:2007vk}. We can estimate the thermalisation length of the fluid by comparing coefficients at different orders in the derivative expansion
+%
+\begin{equation}\label{mfp:eq}
+  \mfp \sim \frac{\eta}{\rho} = \frac{s}{4\pi\rho}.
+\end{equation}
+%
+This length scale may plausibly be identified with the thermalisation length scale of the fluid. This may be demonstrated within the kinetic theory, where $\mfp$ is simply the mean free path of colliding molecules, but is expected to apply to more generally to any fluid with short range interactions.
+
+When studying fluids on curved manifolds (as we will proceed to do in Ch.\ref{ch:rotbh}), one could add generally covariant terms, built out of curvatures, to the stress tensor. For instance, we could add a term proportional to $R^{\mu \nu}$ to the expression for $T^{\mu\nu}$. We will ignore all such terms in this dissertation for a reason we now explain. In all the solutions of fluid mechanics that we will study, the length scale over which fluid quantities vary is at least as large as the length scale of curvatures of the manifold. Any expression built out of a curvature contains at least two spacetime derivatives of the metric; it follows that any contribution to the stress tensor proportional to a curvature is effectively at least two orders subleading in the derivative expansion, and so is negligible compared to all the other terms we have retained.
+
+\subsection{Definitions of velocity}\label{sec:velocity}
+
+So far, we have been vague regarding precisely what we mean by the velocity, $u^\mu$. We stated that it was the velocity of the rest frame of the fluid without specifying the rest frame. In this section we will discuss various definitions of velocity. Changes in the definition of velocity will change the transport coefficients. Note that this is not a gauge invariance -- there is no ambiguity in the evolution of the velocity, these field redefinitions change the equations of motion.
+
+If one views fluid mechanics as a phenomenological theory, designed to describe the results of experiments where one can measure properties of the fluid directly, the velocity \emph{should not} be defined abstractly. The velocity can be measured directly, e.g.\ by inserting probe particles and watching them or putting small turbines in the fluid. The method of measuring the velocity provides the definition. One determines the transport coefficients by performing a few experiments and uses these to make predictions for other situations. In writing down the equations of fluid mechanics, one should leave the precise definition of velocity ambiguous, as the measurements of transport coefficients will fix this.
+
+However, when one tries to derive the equations of fluid mechanics, with expressions for the transport coefficients, from a microscopic theory (or a gravity dual!) \emph{one needs} an abstract definition of velocity so that one has a microscopic notion of rest frame. Two popular definitions are due to Landau \cite{Landau+Lifshitz-FluiMech:59} -- the velocity of energy flow -- and Eckart \cite{Eckart-TherIrreProc:40} -- the velocity of charge flow.
+
+The Landau definition boils down to
+%
+\begin{equation}\label{landau:eq}
+  \begin{split}
+    q^\mu_\text{Landau} &= -u^\lambda P^{\mu\nu} T_{\lambda\nu} =0 ,\\
+    \implies
+    u^\mu_\text{Landau} &= u^\mu +\frac{q^\mu}{\rho+\ploc}\,, \\
+    j^\mu_{i,\text{Landau}} &= j^\mu_i -\frac{\rl_i}{\rho+\ploc}q^\mu \,,
+  \end{split}
+\end{equation}
+%
+with the correction to $S^{\mu\nu}$ being second order in derivatives. Essentially, one reabsorbs thermal conductivity into a redefinition of velocity.
+
+In contrast, the Eckart definition boils down to
+%
+\begin{equation}\label{eckart:eq}
+  \begin{split}
+    j^\mu_{i,\text{Eckart}} &=  P^{\mu\nu} J_{i\nu} =0 ,\\
+    \implies
+    u^\mu_{\text{Eckart}} &= u^\mu + \frac{j^\mu_i}{\rl_i}\,,\\
+    q^\mu_{\text{Eckart}} &= q^\mu - \frac{\rho+\ploc}{\rl_i}j^\mu_i\,,
+  \end{split}
+\end{equation}
+%
+with the correction to $S^{\mu\nu}$ being second order in derivatives, again. Here one reabsorbs diffusion into a redefinition of velocity.
+
+We emphasise that these two abstract definitions need not agree with the velocity that one would measure in an actual experiment. In fact, the Landau definition will disagree when thermal conduction takes place and the Eckart definition will disagree when there is diffusion.
+
+In this dissertation, we are not in either of these situations. We are not trying to describe the results of experiments and we are not trying to derive transport coefficients from some more fundamental theory. Instead, we wish to use solutions of the equations of fluid mechanics to make predictions for gravity. We do not have any means to measure the velocity, but the actual value of the velocity is not important so long as the equations are consistent. We are free to pursue either approach -- use an abstract definition of velocity or leave it ambiguous.
+
+We will choose to leave the velocity ambiguous for the following reason. As mentioned in the introduction, we wish to make as much use as possible of our physical intuition for fluids. Thermal conductivity and diffusion are both physically intuitive effects and we don't want to spoil our intuition by removing thesm with a funny choice of variables.
+
+One can imagine situations where either of the two abstract definitions of velocity would lead to unintuitive descriptions of the physics. For example, consider two parallel infinite plates held at different temperatures with the region between them filled with water. Clearly there will be heat flow from the hotter plate to the colder one. If we used the Landau definition of velocity, we would have to say that water is flowing from one plate to the other. For this to make sense, water would have to be created at one plate and destroyed at the other. This is clearly an unphysical description of this situation.
+
+
+
+
+
+\section{Surfaces}\label{sec:surface}
+
+The plasmaball configurations we will consider in Ch.\ref{ch:plasmaring}-\ref{ch:hidim} have a domain wall separating a bubble of the deconfined phase from the confined phase. As the density, pressure, etc.\ of the deconfined phase are a factor of $N^2$ larger than the confined phase, we can treat the confined phase as the vacuum and the domain wall as a surface bounding the deconfined fluid.
+
+At surfaces, the density of the fluid changes too rapidly to be described by fluid mechanics. However, provided that we look at length scales much larger than the thickness of the surface, we can replace this region by a delta function localised piece of the stress tensor. At these length scales, this stress tensor will depend on the direction of the surface, with dependance on its curvature being suppressed.
+
+In general, introducing a surface energy density $\sigma_E$, a surface entropy density $\sigma_S$ and a surface tension $\sigma$, surface R-charge densities $\sigma_{R_i}$, considerations similar to those leading to \eqref{inttherm:eq} lead to
+%
+\begin{equation*}
+  \begin{split}
+    \sigma_E &= \sigma + \tloc \sigma_S + \ml_i \,\sigma_{R_i},
+    \\
+    \dr\sigma_E &= \tloc\, \dr\sigma_S + \ml_i \dr\sigma_{R_i}.
+    \\
+    \dr\sigma &= -\sigma_S\, \dr\tloc -\sigma_{R_i} \dr\ml_i.
+  \end{split}
+\end{equation*}
+%
+However, the surface tension was only computed at the phase transition $\tloc=\tc$, $\ml_i=0$ in \cite{Aharony:2005bm}, so we will have to ignore its temperature and chemical potential dependence. As we can see above, this is equivalent to setting $\sigma_S=\sigma_{R_i}=0$ and $\sigma_E=\sigma$.
+
+Let's describe the location of the surface by a function $f(x)$ that is positive inside the fluid and has a first order zero on the surface.
+%
+\begin{equation}\label{fluidsurf:eq}
+  T^{\mu\nu} = \theta(f)T^{\mu\nu}_\text{fluid} + \delta(f)T^{\mu\nu}_\text{surface}.
+\end{equation}
+%
+At large length scales, as mentioned above, $T^{\mu\nu}_\text{surface}$ will only depend on the first derivative of $f$ and no higher derivatives.
+
+If we demand invariance under reparameterisations of the function $f(x)$, which can be expressed as $f(x) \to g(x)f(x)$ with $g(x) > 0$, and that the surface moves at the velocity of the fluid
+%
+\begin{equation}\label{surfvel:eq}
+  \left. u^\mu \p_\mu f \right\vert_{f=0} =0,
+\end{equation}
+%
+the most general surface stress tensor we can have is (see \S2.3 of \cite{Lahiri:2007ae})
+%
+\begin{equation*}
+    T^{\mu\nu}_\mathrm{surface} = \brk{A n^\mu n^\nu
+                   +B u^\mu u^\nu
+                   +C \prn{u^\mu n^\nu + n^\mu u^\nu}
+                   +D g^{\mu\nu}}\sqrt{\p f\cdt\p f}\delta(f)\,.
+\end{equation*}
+%
+%
+where $n_\mu = -\p_\mu f / \sqrt{\p f \cdt \p f}$ is the outward pointing unit normal to the surface.
+
+We can fix $A,B,C,D$ by looking at a fluid at rest, $u^\mu = (1,0,0,\ldots)$, with a surface $f(x)=x$
+%
+\begin{equation*}
+  T^{\mu\nu}_\mathrm{surface} =
+  \begin{pmatrix}
+    B-D & -C   & 0  \\
+    -C   & A+D & 0  \\
+    0   & 0   & D  \\
+  \end{pmatrix}
+     \delta(x)=
+  \begin{pmatrix}
+    \sigma_E & 0 &  0   \\
+    0 & 0 &  0   \\
+    0 & 0 & -\sigma   \\
+  \end{pmatrix}
+     \delta(x).
+\end{equation*}
+%
+This gives
+%
+\begin{equation}\label{surfstressgen:eq}
+  T^{\mu\nu}_\text{surface} = \sqrt{\p f \cdt \p f} \brk{\sigma_E u^\mu u^\nu -\sigma(g^{\mu\nu}- n^\mu n^\nu + u^\mu u^\nu)},
+\end{equation}
+%
+Note that $(\p_\mu f) T^{\mu\nu}_\text{surface}=0$.
+
+If we take the surface tension to be constant, as discussed above, we get
+%
+\begin{equation}\label{surfstress:eq}
+  T^{\mu\nu}_\text{surface} = -\sigma h^{\mu\nu} \sqrt{\p f \cdt \p f},
+\end{equation}
+%
+where $h_{\mu\nu} = g_{\mu\nu} - n_\mu n_\nu$ is the induced metric of the surface.
+
+The factor of $\sqrt{\p f \cdt \p f}$ also has a simple interpretation: suppose we use a coordinate system where $f$ is one of the coordinates. Then
+%
+\begin{equation}\label{surfmeasure:eq}
+  \sqrt{\p f \cdt \p f} = \sqrt{g^{ff}} = \sqrt{\frac{\det h}{\det g}}\,,
+\end{equation}
+%
+which provides the correct change of integration measure for localisation to the surface. If we used some other coordinates, there'd be an extra Jacobian factor.
+
+We have
+%
+\begin{equation}\label{surfeom:eq}
+  \nabla_\mu T^{\mu\nu} = \theta(f)\nabla_\mu T^{\mu\nu}_\text{fluid} + \delta(f)(\p_\mu f) T^{\mu\nu}_\text{fluid} + \delta(f)\nabla_\mu T^{\mu\nu}_\text{surface}.
+\end{equation}
+%
+So, in addition to the equation of motion \eqref{Epconsv:eq}, we also have the boundary conditions
+%
+\begin{equation}\label{surfbc:eq}
+  \left.\phantom{\half}(\p_\mu f) T^{\mu\nu}_\text{fluid} + \nabla_\mu T^{\mu\nu}_\text{surface}\right\vert_{f=0}=0.
+\end{equation}
+%
+Also, when we take the surface tension to be constant:
+%
+\begin{equation}\label{extcurvsurf:eq}
+  \nabla_\mu T^{\mu\nu}_\text{surface} = \sigma \brk{\frac{\square f}{(\p f \cdt \p f)^{1/2}} - \frac{(\p^\mu\! f) (\p^\lambda\! f)\nabla_\mu\p_\lambda f }{(\p f \cdt \p f)^{3/2}}} \p^\nu\! f = -\sigma \,\Theta \, \p^\nu\! f,
+\end{equation}
+%
+where $\Theta$ is the trace of the extrinsic curvature of the surface, as seen from outside the fluid (see \S\ref{sec:extrinsic}).
+
+If we have several disconnected surfaces, it is convenient to make the separation $f=\prod_i f_i$. As the surfaces are disconnected, the zero sets of the $f_i$ do not intersect. Also, the $f_i$ are all positive inside the fluid. Therefore, whenever one of the $f_i$ is negative or zero, all the others are positive. Luckily, \eqref{surfeom:eq} splits nicely
+%
+\begin{equation*}
+  \nabla_\mu T^{\mu\nu} = \prod_i \theta\prn{f_i}\nabla_\mu T^{\mu\nu}_\text{fluid} + \sum_i \delta(f_i)\brk{(\p_\mu f_i) T^{\mu\nu}_\text{fluid} + \nabla_\mu T^{\mu\nu}_\text{surface}(f_i)}.
+\end{equation*}
+%
+
+
+From the form of the gravity solution \fref{fig:domainwall}, we would expect $\sigma_E/\rho$ to be similar to the thickness of the surface. We can estimate it using
+
+\begin{equation}\label{thick:eq}
+  \xi = \frac{\sigma}{\rc} %= \frac{\sigma}{4\eos\tc^3}
+  \,.
+\end{equation}
+%
+Where $\rc$ is the density at the phase transition. %In general, it will be of order $N^0$ and is similar to the surface thickness and $\mfp$ (if $8\pi$ can be considered similar to 1).
+
+%For the domain wall of \cite{Aharony:2005bm}, the thickness and surface tension in 2+1 dimensions are $6\times \frac{1}{2\pi \tc}$ and $\sigma=2.0 \times \frac{\rc}{\tc}$ respectively. This gives $\xi = \frac{2.0}{\tc}$, which is pretty close to the thickness. In 3+1 dimensions, the thickness and surface tension are $5\times \frac{1}{2\pi \tc}$ and $\sigma=1.7 \times \frac{\rc}{\tc}$ respectively. This gives $\xi = \frac{1.7}{\tc}$, which is also pretty close to the thickness.
+
+
+\section{Rigid rotation}\label{sec:rigidrot}
+
+In this section we will show how to use the general formalism of the previous sections to construct equilibrium configurations of fluids.  We will also derive a simple approach to studying the overall thermodynamic properties of these configurations.
+
+
+
+\subsection{Solutions for the interior}\label{sec:rotint}
+
+We want to find solutions of \eqref{Epconsv:eq} that are independent of time. For this to happen, it is essential that entropy is not being produced, which means we need to set \eqref{increase:eq} to zero. This means we need velocity configurations that have zero expansion and shear. In general, this would be a combination of a uniform boost and rigid rotation (when we consider fluids on spheres in chapter \ref{ch:rotbh} it will just be rigid rotation). We can always boost to a frame where the centre of rotation is static and the rotation lies in the Cartan directions of the rotation group. This gives
+%
+\begin{equation}\label{rigidrot:eq}
+  u = \gamma(\p_t + \Omega_a \p_{\phi_a}),
+\end{equation}
+%
+where $\Omega_a$ are the angular velocities and $\p_{\phi_a}$ are a set of commuting rotational Killing vectors. The important feature is that the velocity is a normalisation factor times a Killing vector:
+%
+\begin{equation}\label{eqvel:eq}
+  u^\mu = \gamma K^\mu, \qquad
+  \gamma^2 K^\mu K_\mu = -1, \qquad
+  \nabla_{(\mu} K_{\nu)} = 0.
+\end{equation}
+%
+One can deduce that
+%
+\begin{equation*}
+  \vartheta = \sigma^{\mu\nu}=0, \qquad
+  u^\mu \p_\mu \gamma = 0, \qquad
+  a_\mu = -\frac{\p_\mu \gamma}{\gamma}\,.
+\end{equation*}
+%
+Which leads to
+%
+\begin{equation*}
+  q^\mu = -\kappa \gamma P^{\mu\nu} \p_\nu \brk{\frac{\tloc}{\gamma}}, \qquad
+  j^\mu_i = -D_{ij} P^{\mu\nu} \p_\nu \brk{\frac{\ml_j}{\tloc}}.
+\end{equation*}
+%
+One can also show that
+%
+\begin{equation*}
+\begin{split}
+  \nabla_\mu T^{\mu\nu}_\mathrm{perfect} =&
+    \gamma \prn{s P^{\nu\mu}
+        + \brc{\tloc \pdiffc{s}{\tloc} + \ml_i \pdiffc{\rl_i}{\tloc}} u^\nu u^\mu}
+       \p_\mu \brk{\frac{\tloc}{\gamma}}\\
+   &+\gamma \prn{\rl_i P^{\nu\mu}
+        + \brc{\tloc \pdiffc{s}{\ml_i} + \ml_j \pdiffc{\rl_j}{\ml_i}} u^\nu u^\mu}
+       \p_\mu \brk{\frac{\ml_i}{\gamma}},\\
+  \nabla_\mu J^\mu_{i,\text{perfect}} =&
+   \gamma \pdiffc{\rl_i}{\tloc} u^\mu\p_\mu \brk{\frac{\tloc}{\gamma}}
+   + \gamma \pdiffc{\rl_i}{\ml_j} u^\mu\p_\mu \brk{\frac{\ml_j}{\gamma}}
+\end{split}
+\end{equation*}
+%
+So the velocity configuration \eqref{rigidrot:eq} will be an equilibrium solution to the equations of motion provided that
+%
+\begin{equation}\label{rotsol:eq}
+  \frac{\tloc}{\gamma} = T = \text{constant}, \qquad
+  \frac{\ml_i}{\gamma} = \mg_i = \text{constant}, \qquad
+  \frac{\ml_i}{\tloc} = \nu_i = \frac{\mg_i}{T} = \text{constant}.
+\end{equation}
+%
+Using the equation of state and \eqref{inttherm:eq}, this determines all of the intensive thermodynamic quantities in the fluid.
+
+\subsection{Solutions for surfaces}\label{sec:rotsurf}
+
+The fluid configurations described in the previous subsection have $T^{\mu\nu}_\mathrm{dissipative}=0$. Therefore
+%
+\begin{equation*}
+  (\p_\mu f) T^{\mu\nu}_\text{fluid} = (\p_\mu f) T^{\mu\nu}_\text{perfect} = \ploc \p^\nu\! f.
+\end{equation*}
+%
+This means that \eqref{surfbc:eq} and \eqref{extcurvsurf:eq} reduce to
+%
+\begin{equation}\label{rotsurfbc:eq}
+  \ploc|_{f=0} = \sigma \Theta.
+\end{equation}
+%
+As the pressure is determined by \eqref{rotsol:eq}, this provides a differential equation that determines allowed positions of surfaces. Demanding that the surface has no conical singularities turns out to provide enough boundary conditions to determine the position of the surface completely (up to discrete choices) in terms of the parameters $\Omega_a$, $T$ and $\mg_i$.
+
+\subsection{Thermodynamics of solutions}\label{sec:rottherm}
+
+We compute the extensive thermodynamic properties of these solutions by integrating the time components of the corresponding currents (noting that the current associated with a Killing vector $\zeta^\mu$ is $J^\mu_\zeta = T^{\mu\nu}\zeta_\nu$):
+%
+\begin{equation}\label{noetherch:eq}
+ \begin{split}
+  Q_X &= \int\!\dr V J^0_X.
+ \end{split}
+\end{equation}
+%
+In particular, also noting that for equilibrium configurations $\p^0\!f=0$,
+%
+\begin{equation}\label{killingcharge:eq}
+  Q_\zeta = \int\!\dr V \theta(f)\brk{(\rho+\ploc)\gamma^2 K^0 K\cdt\zeta
+   + \ploc \zeta^0 } - \int\!\dr V \delta(f) \sqrt{\p f\cdt\p f} \sigma \zeta^0.
+\end{equation}
+%
+Noting that $K^0=(\p_t)^0=1$ and $(\p_{\phi_a})^0=0$, this gives
+%
+\begin{equation}\label{thermcharge:eq}
+  \begin{aligned}
+    E &= -Q_{\p_t}& &= -\int\!\dr V \theta(f)\brk{
+           (\rho+\ploc)\gamma^2 K\cdt\p_t +\ploc}
+       + \int\!\dr V \delta(f) \sqrt{\p f\cdt\p f} \sigma, \\
+    L_a &= Q_{\p_{\phi_a}}& &= \int\!\dr V \theta(f)\brk{
+          (\rho+\ploc)\gamma^2 K\cdt \p_{\phi_a}},\\
+    S &= Q_S& &= \int\!\dr V \theta(f)\brk{\gamma s},\\
+    R_i &= Q_{R_i}& &= \int\!\dr V \theta(f)\brk{\gamma \rl_i}.\\
+  \end{aligned}
+\end{equation}
+%
+
+From these quantities, we can compute overall angular velocities $\Omega_a$, temperature $T$ and chemical potentials $\mg_i$ thermodynamically
+%
+\begin{equation}\label{chpotdef:eq}
+  \dr E = \Omega_a \,\dr L_a + T \,\dr S + \mg_i \,\dr R_i.
+\end{equation}
+%
+Note that these quantities are different from the local thermodynamic properties of the fluid in its rest frame. The quantities $(\tloc,\ml_i)$ are properties of each patch of fluid, in contrast to $(T,\mg_i)$, which are properties of the entire configuration. In particular, the local temperature, $\tloc$, only knows about the thermal energy of the plasma, whereas the overall temperature, $T$, also knows about its kinetic energy.
+
+\emph{A priori}, it may not seems that these quantities have to be the same as $\Omega_a$, $T$ and $\mg_i$ from \eqref{rigidrot:eq} and \eqref{rotsol:eq}. However, we can show that they are the same by checking that the quantities  taken from \eqref{rigidrot:eq} and \eqref{rotsol:eq} satisfy \eqref{chpotdef:eq}. In practice, it is easier to verify the equivalent statement
+%
+\begin{equation}\label{chpotcheck:eq}
+  \dr(E -\Omega_a L_a - T S - \mg_i R_i) = - L_a \,\dr \Omega_a - S \,\dr T - R_i \,\dr \mg_i.
+\end{equation}
+%
+
+First, making use of \eqref{inttherm:eq}, we see that
+%
+\begin{equation}\label{thermpot:eq}
+  E -\Omega_a L_a - T S - \mg_i R_i = -Q_K - T Q_S - \mg_i Q_{R_i}
+   = - \int\!\dr V \theta(f) \ploc + \int\!\dr V \delta(f) \sqrt{\p f\cdt\p f} \sigma.
+\end{equation}
+%
+Note that the second integral is simply $\sigma$ times the surface area: as we saw in \eqref{surfmeasure:eq} the factor of $\sqrt{\p f\cdt\p f}$ provides the correct change of measure for the delta function to localise the integral to the surface.
+
+Consider an infinitesimal change of $\Omega_a$, $T$ and $\mg_i$. We have
+%
+\begin{equation*}
+\begin{split}
+  \dr \ploc &= s\,\dr(\gamma T) + r_i\,\dr(\gamma\mg_i) = \frac{\rho+\ploc}{\gamma}\,\dr\gamma + \gamma s\,\dr T +\gamma  \rl_i\,\dr\mg_i,\\
+  \gamma^{-3}\,\dr\gamma &= K\cdt\dr K = K\cdt l_a \,\dr\Omega_a.
+\end{split}
+\end{equation*}
+%
+From this, we see that \eqref{chpotcheck:eq} is satisfied by the contributions from the interior. As the right hand side of \eqref{chpotcheck:eq} has no contributions from the surface, we need to check that the surface contributions of the variation of \eqref{thermpot:eq} cancel.
+
+The change in the surface area can be written as
+%
+\begin{equation*}
+  \dr\mathcal{A} = \oint\dr A\, \vec{n}\cdt\vec{w},
+\end{equation*}
+%
+where the integral is performed over the union of the initial and final surfaces, $\vec{n}$ is a unit normal vector pointing into the initial fluid and out of the final fluid and $\vec{w}$ is some vector field that is equal to the outward pointing normal at both the initial and final surfaces. By Gauss' theorem, this can be written as
+%
+\begin{equation*}
+  \dr\mathcal{A} = \int\!\dr V\, \nabla\cdt\vec{w},
+\end{equation*}
+%
+with the integral performed over the region between the two surfaces. The volume element can be written as $\int\!\dr V = \int\!\dr A\,(\vec{n}\cdt\Delta x)$, with $\vec{n}$ pointing outwards. As the volume element is already infinitesimal, we can replace $\vec{w}$ with the vector field described in \eqref{normoffsurf:eq}, as the difference would be infinitesimal, i.e.\ $\nabla\cdt\vec{w} \to \Theta$. Also, as $f=0$ on the initial surface, and $f+\dr f=0$ on the final surface ($\dr f$ refers to the change in $f$ due to the change in $\Omega_a$, $T$ and $\mg_i$), we have
+%
+\begin{equation*}
+\begin{split}
+  \p_\mu f \Delta x^\mu + \pdiff{f}{\Omega_a}\dr\Omega_a + \pdiff{f}{T}\dr T + \pdiff{f}{\mg_i}\dr\mg_i = 0,\\
+  \implies \vec{n}\cdt\Delta x = \frac{\dr f}{\sqrt{\p f\cdt\p f}}.
+\end{split}
+\end{equation*}
+%
+Therefore
+%
+\begin{equation*}
+  \dr\mathcal{A} = \int\!\dr V \delta(f) \Theta \,\dr f.
+\end{equation*}
+%
+So, we can write the surface contribution to the variation of \eqref{thermpot:eq} as
+%
+\begin{equation*}
+  \dr(E -\Omega_a L_a - T S - \mg_i R_i)_{\text{surface}}
+  =-\int\!\dr V \delta(f) \,\ploc \,\dr f + \int\!\dr V \delta(f)\,\sigma \Theta \,\dr f,
+\end{equation*}
+%
+which vanishes due to \eqref{rotsurfbc:eq}.
+
+The thermodynamics of the solution can be summarised by defining a grand partition function
+%
+\begin{equation}\label{gpf:eq}
+  \gpf = \Tr\exp\prn{-\frac{E -\Omega_a L_a  - \mg_i R_i}{T}}.
+\end{equation}
+%
+In the thermodynamic limit,
+%
+\begin{equation}\label{gpftherm:eq}
+  \begin{split}
+    -T\ln\gpf &= E -\Omega_a L_a - T S - \mg_i R_i, \\
+    \dr(T\ln\gpf) &= L_a \,\dr \Omega_a + S \,\dr T + R_i \,\dr \mg_i.
+  \end{split}
+\end{equation}
+%
+We have seen that
+%
+\begin{equation}\label{gpfrot:eq}
+  T\ln\gpf = \int_{f>0}\!\!\!\dr V \,\ploc - \int_{f=0}\!\!\!\dr A \,\sigma
+\end{equation}
+%
+and the $\Omega_a$, $T$ and $\mg_i$ are the same as those given by \eqref{rigidrot:eq} and \eqref{rotsol:eq}.
+
+
+
+%\section*{Acknowledgements}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Appendices}
+\begin{subappendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extrinsic curvature}\label{sec:extrinsic}
+
+Suppose we have a timelike surface with unit normal vector $n$ pointing toward us (spacelike surfaces will require some sign differences). The induced metric on the surface is
+%
+\begin{equation}\label{indmet:eq}
+  h_{\mu\nu} = g_{\mu\nu} - n_\mu n_\nu.
+\end{equation}
+%
+The extrinsic curvature is given by \cite{Wald-GeneRela:84}
+%
+\begin{equation}\label{extrdef:eq}
+  \Theta_{\mu\nu} = \half \CL_n h_{\mu\nu} = \nabla_\mu n_\nu.
+\end{equation}
+%
+We have to be a little careful with the last expression. It agrees with the first expression when projected tangent to the surface. The first expression has vanishing components normal to the surface. The normal components of the second expression depend on how we extend $n$ off the surface.
+
+The conventional choice for extending $n$ is as follows: at each point on the surface, construct the geodesic that passes through that point tangent to $n$ and parallel transport $n$ along it. In other words
+%
+\begin{equation}\label{geodesic:eq}
+  n^\mu \nabla_\mu n^\nu = 0.
+\end{equation}
+%
+This ensures that the second expression in \eqref{extrdef:eq} has vanishing components normal to the surface. The other normal component, $n^\nu \nabla_\mu n_\nu$, vanishes due to the normalisation of $n$.
+
+For the surfaces given by $f(x)=0$, considered in \S\ref{sec:surface}, the unit normal on the surface is given by
+%
+\begin{equation}\label{normonsurf:eq}
+  n_\mu = -\frac{\p_\mu f}{\sqrt{\p f \cdt \p f}}.
+\end{equation}
+%
+However, if we used this vector away from the surface, it would not satisfy \eqref{geodesic:eq}. We could still use either expression in \eqref{extrdef:eq} with this vector --- we would just have to project the second one tangent to the surface. Alternatively, we can use
+%
+\begin{equation}\label{normoffsurf:eq}
+  n_\mu = -\frac{\p_\mu f}{(\p f \cdt \p f)^{1/2}}
+   +\brk{ \frac{\p^\nu\! f\, \nabla_\nu \p_\mu f}{(\p f \cdt \p f)^{3/2}}
+      - \frac{\p_\mu f\, \p^\lambda\! f\, \p^\nu\! f\, \nabla_\lambda \p_\nu f}{(\p f \cdt \p f)^{5/2}} } f
+   + \CO(f^2).
+\end{equation}
+%
+The $\CO(f^2)$ terms don't contribute to \eqref{extrdef:eq} or \eqref{geodesic:eq} on the surface. The contribution of the $\CO(f)$ terms on the surface to \eqref{extrdef:eq} are normal to the surface and ensure that $n$ satisfies \eqref{geodesic:eq}.
+
+Either way, on the surface, we get
+%
+\begin{equation}\label{extrsurf:eq}
+  \Theta_{\mu\nu} = -\frac{\nabla_\mu \p_\nu f}{(\p f \cdt \p f)^{1/2}}
+    + \frac{\p_\mu f\, \p^\lambda\! f\, \nabla_\lambda \p_\nu f + \p_\nu f\, \p^\lambda\! f\, \nabla_\lambda \p_\mu f}
+           {(\p f \cdt \p f)^{3/2}}
+    - \frac{\p_\mu f\, \p_\nu f\, \p^\lambda\! f\, \p^\sigma\! f\, \nabla_\lambda \p_\sigma f}
+           {(\p f \cdt \p f)^{5/2}}.
+\end{equation}
+%
+As this is perpendicular to $n$, it doesn't matter if we contract its indices with the full metric $g_{\mu\nu}$ or the induced metric $h_{\mu\nu}$. We get
+%
+\begin{equation}\label{trextrsurf:eq}
+  \Theta = \Theta_\mu^\mu = -\frac{\square f}{(\p f \cdt \p f)^{1/2}}
+    + \frac{\p^\mu\! f\, \p^\nu\! f\, \nabla_\mu \p_\nu f}
+           {(\p f \cdt \p f)^{3/2}}.
+\end{equation}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{subappendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
