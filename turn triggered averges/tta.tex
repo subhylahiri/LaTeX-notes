@@ -351,6 +351,8 @@ where $S_p$ is the group of permutations of $p$ objects.
   \begin{aligned}
     D\rp{0}_{t,\vec{tau}} =&\, 1, \\
     D\rp{1}_{t,\vec{tau}} =&\, x(t-\tau_1), \\
+    D\rp{2}_{t,\vec{tau}} =&\, x(t-\tau_1)x(t-\tau_2)-\sigma^2\delta(\tau_1-\tau_2), \\
+    D\rp{3}_{t,\vec{tau}} =&\, x(t-\tau_1)x(t-\tau_2)x(t-\tau_3)\\& - \sigma^2 [\delta(\tau_1-\tau_2)x(t-\tau_3) + \delta(\tau_1-\tau_3)x(t-\tau_2) + \delta(\tau_2-\tau_3)x(t-\tau_1) ]. \\
   \end{aligned}
 \end{equation}
 %
@@ -362,6 +364,38 @@ In general:
 %
 \begin{proof}
   It's not difficult to see that the highest degree terms in \eqref{eq:wienerdelta} and \eqref{eq:wienerdeltagen} agree. Therefore we only need to show that it is orthogonal to all lower degree Volterra functionals. In fact, it suffices to show that it is orthogonal to $\prod_{i=1}^q x(t-s_i)$ for $q<p$, as these form a basis for the Volterra functionals.
+  %
+  \begin{equation}\label{eq:wienerdeltavol}
+    \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{j=1}^q x(t-s_i)} = 0 \quad \forall q<p.
+  \end{equation}
+  %
+  We can construct a generating function for the left hand side:
+  %
+  \begin{equation}\label{eq:wienerdeltavolgen}
+    \begin{aligned}
+      Z[J,J'] &= \brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \e^{\ir\!\intd{t'} [J(t') x(t-t')]}} \e^{\ir\!\intd{s} [J'(s) x(t-s)]},\\
+      \frac{(-\ir)^{p+q}\delta^{p+q}Z[0,0]}{\delta J(\tau_1)\ldots\delta J(\tau_p) \delta J'(s_1)\ldots\delta J'(s_q)}  &= \brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{j=1}^q x(t-s_i).
+    \end{aligned}
+  \end{equation}
+  %
+  Using \eqref{eq:zeromeanwhite},
+  %
+  \begin{equation*}
+    \begin{aligned}
+      Z[J,J'] &= \e^{-\frac{\sigma^2}{2}\!\intd{t} [J(t)]^2} \e^{\ir\!\intd{s} [J(t-s)+J'[t-s] x(s)}, \\
+       \av{Z[J,J']} &= \e^{-\frac{\sigma^2}{2}\intd{s} J'(s)[J'(s)+2J(s)]},\\
+       \frac{(-\ir)^{p}\delta^{p}\av{Z[0,0]}}{\delta J(\tau_1)\ldots\delta J(\tau_p)}  &= (\ir\sigma^2)^p \prn{\prod_{i=1}^p J'(\tau_i)}\e^{-\frac{\sigma^2}{2}\intd{s} J'(s)^2}.
+    \end{aligned}
+  \end{equation*}
+  %
+  Therefore, if we take the functional derivative with respect to $J'(s_j)$ $q$ times, with $q<p$, we will still have some of the factors of $J'(\tau_i)$ left in front. When we set $J'(s)=0$ after that, we will get zero, \ie
+  %
+  \begin{equation*}
+  \begin{aligned}
+    \frac{(-\ir)^{p+q}\delta^{p+q}\av{Z[0,0]}}{\delta J(\tau_1)\ldots\delta J(\tau_p) \delta J'(s_1)\ldots\delta J'(s_q)}  &= \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{j=1}^q x(t-s_i)}\\ &= 0 \quad \forall q<p.
+  \end{aligned}
+  \end{equation*}
+  %
 \end{proof}
 
 Using \eqref{eq:wienerinner}, we have
