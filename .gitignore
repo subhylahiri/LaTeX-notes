@@ -1,8 +1,15 @@
 *.bbl
+
 *.blg
+
 *.aux
+
 *.log
 *.out
 *.synctex
+
 *.dvi
+
 *.bak
+*.sav
+*.prj
