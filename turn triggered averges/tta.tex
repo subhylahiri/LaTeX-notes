@@ -265,12 +265,19 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   %
   \begin{equation}\label{eq:gaussianwhite}
     \phi(t-t') = \sigma^2\delta(t-t'), \qquad 
-    \tilde{\phi}(\omega) = \sigma^2, \qquad
-    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\sigma^2\!\intd{t} [J(t)]^2}.
+    \tilde{\phi}(\omega) = \sigma^2.
   \end{equation}
   %
   \ie the power density spectrum is the same for all frequencies. In practice, one can only have white noise up to some high frequency cut-off.
 \end{defn}
+
+Most of the time, we will be dealing with zero mean gaussian white noise, \ie
+%
+\begin{equation}\label{eq:zeromeanwhite}
+  \mu=0, \qquad
+  \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\sigma^2\!\intd{t} [J(t)]^2}.
+\end{equation}
+%
 
 
 \section{Wiener series}\label{sec:wiener}
