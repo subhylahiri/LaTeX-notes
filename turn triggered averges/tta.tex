@@ -163,10 +163,10 @@ The Volterra series is a way of expanding such a functional in powers of the inp
   A Volterra functional of degree $p$ is one of the form:
   %
   \begin{equation}\label{eq:volfunc}
-    V^{(p)}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+    V\rp{p}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
   \end{equation}
   %
-  Without loss of generality, we may assume that the function $v(t_1,\ldots,t_p)$ is symmetric under interchange of any of its arguments
+  Without loss of generality, we may assume that the function $v(t_1,\ldots,t_p)$ is symmetric under interchange of any of its arguments. It is causal if $v$ vanishes whenever any of its arguments is negative.
 \end{defn}
 
 
@@ -174,7 +174,7 @@ The Volterra series is a way of expanding such a functional in powers of the inp
   A Volterra series of degree $n$ is a sum of Volterra functionals of degree less than or equal to $n$:
   %
   \begin{equation}\label{eq:volser}
-    F_t[x] = \sum_{n=0}^n\prod_{i=1}^p \int\!\dr t_i\,  f_p(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
+    F_t[x] = \sum_{p=0}^n\prod_{i=1}^p \int\!\dr t_i\,  f_p(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
   \end{equation}
   %
   The term ``Voltera series'', without specification of degree, shall be taken to mean a Volterra series of infinite degree.
@@ -235,7 +235,7 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   A stochastic process is said to be Gaussian if
   %
   \begin{equation}\label{eq:gaussproc}
-    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{\ir\!\intd{t} [J(t)\mu(t)] - \intd{t\dr t'} [J(t)J(t')\phi(t,t')]}.
+    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{\ir\!\intd{t} [J(t)\mu(t)] - \frac{1}{2}\intd{t\dr t'} [J(t)J(t')\phi(t,t')]}.
   \end{equation}
   %
   This means that all correlation functions can be expressed in terms of the connected one and two-point functions, \eg
@@ -264,7 +264,7 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   Gaussian white noise of power $\sigma^2$ is a stationary Gaussian process with
   %
   \begin{equation}\label{eq:gaussianwhite}
-    \phi(t-t') = \sigma^2\delta(t-t'), \qquad 
+    \phi(t-t') = \sigma^2\delta(t-t'), \qquad
     \tilde{\phi}(\omega) = \sigma^2.
   \end{equation}
   %
@@ -275,12 +275,102 @@ Most of the time, we will be dealing with zero mean gaussian white noise, \ie
 %
 \begin{equation}\label{eq:zeromeanwhite}
   \mu=0, \qquad
-  \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\sigma^2\!\intd{t} [J(t)]^2}.
+  \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\frac{\sigma^2}{2}\!\intd{t} [J(t)]^2}.
 \end{equation}
 %
 
 
 \section{Wiener series}\label{sec:wiener}
+
+The Wiener series is an alternative series expansion of a response functional (the type described at the beginning of \sref{sec:volterra}) that is analogous to an expansion of a function as a series of orthogonal functions. For this, we need to define an inner product for functionals:
+%
+\begin{equation}\label{eq:innerfunc}
+  F \cdot G = \av{F_t[x]G_t[x]} = \int\!\CD x \brc{F_t[x]G_t[x]\,\e^{-\intd{t}\brk{\frac{x(t)^2}{2\sigma^2}}}},
+\end{equation}
+%
+\ie $x(t)$ is zero mean Gaussian white noise with power $\sigma^2$.
+
+\begin{defn}[Wiener functional]
+  A Wiener functional of degree $p$ is a Volterra series of degree $p$ that is orthogonal to all Volterra functionals of degree less than $p$.
+\end{defn}
+
+Once the $p^{\text{th}}$ Volterra kernel of a degree $p$ Wiener functional has been specified, all the lower order Volterra kernels are determined. We will use the notation $G\rp{p}_t[k;x]$ for a degree $p$ Wiener functional whose $p^{\text{th}}$ Volterra kernel is $k$, at time $t$ with input $x$. \eg \cite[ch.12]{schetzen:1980}:
+%
+\begin{equation}\label{eq:wienerex}
+  \begin{aligned}
+    G\rp{0}_t[k;x] =& k, \\
+    G\rp{1}_t[k;x] =& \intd{t_1}k(t_1)x(t-t_1), \\
+    G\rp{2}_t[k;x] =& \intd{t_1\dr t_2}k(t_1,t_2)x(t-t_1)x(t-t_2)
+                     -\sigma^2\intd{t_1}k(t_1,t_1), \\
+    G\rp{3}_t[k;x] =& \intd{t_1\dr t_2\dr t_3}k(t_1,t_2,t_3)x(t-t_1)x(t-t_2)x(t-t_3)\\
+                     &-3\sigma^2\intd{t_1\dr t_2}k(t_1,t_2,t_2))x(t-t_1). 
+  \end{aligned}
+\end{equation}
+%
+Note that the Wiener functionals also depend on the choice of $\sigma^2$.
+
+\begin{defn}[Wiener series]
+  A Wiener series of degree $n$ is a sum of Wiener functionals of degree less than or equal to $n$:
+  %
+  \begin{equation}\label{eq:wienerser}
+    F_t[x] = \sum_{p=0}^n G\rp{p}_t[k_p;x].
+  \end{equation}
+  %
+  The term ``Wiener series'', without specification of degree, shall be taken to mean a Wiener series of infinite degree.
+\end{defn}
+
+\begin{defn}[Wiener kernel]
+  The $p^{\text{th}}$ Wiener kernel is the function $k_p(t_1,\ldots,t_p)$ that appears in \eqref{eq:wienerser}.
+\end{defn}
+
+\begin{thm}[Inner product of Wiener functionals]
+  The inner product of two Wiener functionals of arbitrary degree with kernels $f$ and $g$ is:
+  %
+  \begin{equation}\label{eq:wienerinner}
+    \av{G\rp{p}_t[f;x] G\rp{q}_t[g;x]} = \delta_{p,q}\, p! \sigma^{2p} \intd{t_1\ldots \dr t_p} f(t_1,\ldots,t_p) g(t_1,\ldots,t_p).
+  \end{equation}
+  %
+\end{thm}
+\begin{proof}
+  see \cite[\S14.2]{schetzen:1980}
+\end{proof}
+
+A particularly useful set of Wiener functionals are:
+%
+\begin{equation}\label{eq:wienerdelta}
+  \begin{aligned}
+    D\rp{p}_{t,\vec{\tau}}[x] =& \, G\rp{p}_t[\delta\rp{p}_{\vec{\tau}};x], \\ \text{where}\quad
+    \delta\rp{p}_{\vec{\tau}}(t_1,\ldots,t_p) =& \, \frac{1}{p!}\,\sum_{\pi\in S_p} \prod_{i=1}^p \delta(t_i-\tau_{\pi(i)}),
+  \end{aligned}
+\end{equation}
+%
+where $S_p$ is the group of permutations of $p$ objects. 
+\eg
+%
+\begin{equation}\label{eq:wienerdeltaex}
+  \begin{aligned}
+    D\rp{0}_{t,\vec{tau}} =&\, 1, \\
+    D\rp{1}_{t,\vec{tau}} =&\, x(t-\tau_1), \\
+  \end{aligned}
+\end{equation}
+%
+In general:
+%
+\begin{equation}\label{eq:wienerdeltagen}
+  D\rp{p}_{t,\vec{\tau}}[x] = \exp\prn{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \prod_{i=1}^p x(t-\tau_i).
+\end{equation}
+%
+\begin{proof}
+  It's not difficult to see that the highest degree terms in \eqref{eq:wienerdelta} and \eqref{eq:wienerdeltagen} agree. Therefore we only need to show that it is orthogonal to all lower degree Volterra functionals. In fact, it suffices to show that it is orthogonal to $\prod_{i=1}^q x(t-s_i)$ for $q<p$, as these form a basis for the Volterra functionals.
+\end{proof}
+
+Using \eqref{eq:wienerinner}, we have
+%
+\begin{equation}\label{eq:wienerkern}
+  \av{F_t[x] D\rp{p}_{t,\vec{\tau}}[x]} = p!\sigma^{2p}k_p(\tau_1,\ldots,\tau_p),
+\end{equation}
+%
+where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$. This formula can be used to determine the kernels to use if we want to represent a functional as a Wiener series. One can show that this choice is optimal, in a least squares sense. Note that the kernels depend on the choice of $\sigma^2$, which should not be a surprise, as the Wiener functionals themselves depend on it.
 
 
 
