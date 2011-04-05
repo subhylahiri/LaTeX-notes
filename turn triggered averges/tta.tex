@@ -427,11 +427,11 @@ The probability of a particular event train, $\{t_1,\ldots,t_n\}$, is given by
   P(t_1,\ldots,t_n)\,\dr t_1\ldots \dr t_n = \e^{-\intd{t}r(t)} \prod_{i=1}^n r(t_i)\,\dr t_i, \qquad t_1<t_2<\ldots<t_n,
 \end{equation}
 %
-where the exponential factor comes from demanding that there are no events at times other than $\{t_1,\ldots,t_n\}$.When integrating over all $\{t_1,\ldots,t_n\}$, one can ignore the restriction over the order of the $t_i$ provided one also divides by $n!$. When integrating over all possibilities, one must also sum over all possible event counts, $n$.
+where the exponential factor comes from demanding that there are no events at times other than $\{t_1,\ldots,t_n\}$. When integrating over all $\{t_1,\ldots,t_n\}$, one can ignore the restriction over the order of the $t_i$ provided one also divides by $n!$. When integrating over all possibilities, one must also sum over all possible event counts, $n$.
 
 Measuring the rate function can be difficult. If one performs $N$ repetitions with tim bins of width $\Delta t$, the uncertainty scales as $1/\sqrt{N\Delta t}$. Using small time bins will require many repetitions. We will now discuss a method of measuring the response to stimuli that circumvents the need to measure $r_t[s]$ if we wanted to use \eqref{eq:impkern} or \eqref{eq:wienerkern} directly. 
 
-We are going to consider responses to stimuli that are stochastic processes themselves. As we will have two stochastic processes, the stimuli and the timing of events, it will be usefule to define some notation.
+We are going to consider responses to stimuli that are stochastic processes themselves. As we will have two stochastic processes, the stimuli and the timing of events, it will be useful to define some notation.
 
 \begin{notn}[outcomes]
   Let $\hat{t}$, $\widehat{\{t_i\}}$ and $\hat{s}$ denote the following outcomes:
@@ -508,7 +508,7 @@ where $s(t)$ is Gaussian white noise of power $\sigma^2$.
 
 \subsection{Unbiased estimators}\label{sec:poissonest}
 
-The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability that we will not know in an experimental situation. We have to estimate it from the results of an experiment.
+The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability distributions that we will not know in an experimental situation. We have to estimate it from the results of an experiment.
 
 Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a period $T$, and we see that events take place at times $(t_1,\ldots,t_n)$. The obvious choice of estimator is
 %
@@ -549,6 +549,18 @@ Suppose we present the system with zero-mean Gaussian white noise of power $\sig
   \end{equation*}
   %
 \end{proof}
+
+
+\subsection{Estimator variance and consistency}\label{sec:poissonvar}
+
+In this section we will compute the variances of the estimators defined in the previous section and show that they are consistent, \ie that the variance vanishes in the limit $T\to\infty$ (we have already shown that the bias vanishes). Again, these will be theoretical variances, with respect to the true probability distributions. We will postpone the definition of estimators for the variance until the next section.
+
+\subsection{Standard error}\label{sec:poissonstderr}
+
+In this section we will define estimators for the variances computed in the previous section. These will allow us to put error bars on the estimators in \eqref{eq:ratewienerest}.
+
+
+
 
 %\section*{Acknowledgements}
 
