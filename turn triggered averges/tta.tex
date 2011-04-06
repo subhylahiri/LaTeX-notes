@@ -77,6 +77,11 @@
 \input{mydefs.tex}
 \input{newsymb.tex}
 \DeclareMathOperator{\ETC}{ETC}
+\newcommand{\tj}{\widetilde{J}}
+\newcommand{\hz}{\widehat{\Gamma}}
+\newcommand{\hhz}{\widehat{\overline{\Gamma}}}
+\newcommand{\hw}{\widehat{W}}
+\newcommand{\hhw}{\widehat{\overline{W}}}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title info:
@@ -157,7 +162,8 @@ Instead, there is a simpler method where one compute averages of the \emph{stimu
 
 \section{Volterrra series}\label{sec:volterra}
 
-Suppose we have a functional that is also a function of the independent variable, \eg if we have a system that responds to some time varying input, $x(t)$, in a history dependent way (\ie the system has some memory), then the response at time $t$ is a function of $t$ as well as a functional of $x(t')$.
+Suppose we have a functional that is also a function of the independent variable, \eg if we have a system that responds to some time varying input, $x(t)$, in a history dependent way (\ie the system has some memory), then the response at time $t$ is a function of $t$ as well as a functional of $x(t')$. We will assume that the response is invariant under time translations, \ie $F_t[x(t')]=F_{t+T}[x(t'+T)]$.
+
 The Volterra series is a way of expanding such a functional in powers of the input. It is analogous to the Taylor series expansion of a function.
 
 \begin{defn}[Volterra functional]
@@ -272,7 +278,7 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   \ie the power density spectrum is the same for all frequencies. In practice, one can only have white noise up to some high frequency cut-off.
 \end{defn}
 
-Most of the time, we will be dealing with zero mean gaussian white noise, \ie
+Most of the time, we will be dealing with zero-mean gaussian white noise, \ie
 %
 \begin{equation}\label{eq:zeromeanwhite}
   \mu=0, \qquad
@@ -408,6 +414,61 @@ Using \eqref{eq:wienerinner}, we have
 %
 where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$. This formula can be used to determine the kernels to use if we want to represent a functional as a Wiener series. One can show that this choice is optimal, in a least squares sense \cite[\S15.2]{schetzen:1980}. Note that the kernels depend on the choice of $\sigma^2$, which should not be a surprise, as the Wiener functionals themselves depend on it.
 
+\subsection{Estimators}\label{sec:wienerest}
+
+Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a time period $T$, and we record the response $F_t[x]$. The obvious choice of estimator is
+%
+\begin{equation}\label{eq:wienerest}
+  \begin{aligned}
+    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x] .
+  \end{aligned}
+\end{equation}
+%
+It is trivial to show that this estimator is unbiased
+%
+\begin{equation}\label{eq:wienerestbias}
+  \begin{aligned}
+    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} \av{F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x]} 
+      &= \frac{1}{T}\intd{t}k_p(\tau_1,\ldots,\tau_p) \\
+      &= k_p(\tau_1,\ldots,\tau_p).
+  \end{aligned}
+\end{equation}
+%
+It is much harder to show that this is consistent. First we define some generating functionals:
+%
+\begin{equation}\label{eq:wienergen}
+  \begin{aligned}
+    \Gamma[J] &= \av{F_t[x(t')] \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}},  \\
+    W[J] &= \av{F_t[x(t')] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{x(v)^2}} \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}}
+     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  \\
+    \hz[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}},  \\
+    \hw[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{x(v)^2}} \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}}
+     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  
+  \end{aligned}
+\end{equation}
+%
+then
+%
+\begin{equation}\label{eq:wienergendiff}
+  \begin{aligned}
+     k_p(\tau_1,\ldots,\tau_p) &= \frac{(-\ir)^{p}}{p!} \fdf{^p W[J]}{J(\tau_1)\ldots\delta J(\tau_p)}, \\
+     \hat{k}_p(\tau_1,\ldots,\tau_p) &= \frac{(-\ir)^{p}}{p!} \fdf{^p \hw[J]}{J(\tau_1)\ldots\delta J(\tau_p)}.
+  \end{aligned}
+\end{equation}
+%
+As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
+
+\begin{thm}[Consitency of estimators \eqref{eq:wienerest}]\label{th:wienercons}
+  The covariance of the estimators \eqref{eq:wienerest} vanishes as the sample size goes to infinity:
+  %
+  \begin{equation}\label{eq:wienercons}
+    \lim_{T\to\infty} \cov\prn{ \hw[J], \hw[\tj] } = 0.
+  \end{equation}
+  %
+  As we have already showed that they are unbiased, this is sufficient for consistency.
+\end{thm}
+
+
 
 
 
@@ -416,12 +477,12 @@ where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$. This formula can be u
 A Poisson process consists of a series of discrete events whose timing is stochastic. The probability of an event occurring at time $t$ is given by a rate function, $r(t)$, (for a homogeneous Poisson process, the rate is constant). This probability is independent of the timing of any other events, but in our model it can depend on the history of some stimulus, $s(t)$.
 %
 \begin{equation}\label{eq:poissonrate}
-  P(\text{event}\in[t,t+\dr t]) = r(t)\dr t,
+  P(\text{event time}\in[t,t+\dr t]) = r(t)\dr t,
   \qquad
   r(t) = r_t[s].
 \end{equation}
 %
-The probability of a particular event train, $\{t_1,\ldots,t_n\}$, is given by
+We also assume time translational invariance: $r_t[s(t')] = r_{t+T}[s(t'+T)]$. The probability of a particular event train, $\{t_1,\ldots,t_n\}$, is given by
 %
 \begin{equation}\label{eq:evtrain}
   P(t_1,\ldots,t_n)\,\dr t_1\ldots \dr t_n = \e^{-\intd{t}r(t)} \prod_{i=1}^n r(t_i)\,\dr t_i, \qquad t_1<t_2<\ldots<t_n,
@@ -510,7 +571,7 @@ where $s(t)$ is Gaussian white noise of power $\sigma^2$.
 
 The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability distributions that we will not know in an experimental situation. We have to estimate it from the results of an experiment.
 
-Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a period $T$, and we see that events take place at times $(t_1,\ldots,t_n)$. The obvious choice of estimator is
+Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a time period $T$, and we see that events take place at times $(t_1,\ldots,t_n)$. The obvious choice of estimator is
 %
 \begin{equation}\label{eq:ratewienerest}
   \begin{aligned}
@@ -536,15 +597,15 @@ Suppose we present the system with zero-mean Gaussian white noise of power $\sig
     \end{aligned}
   \end{equation*}
   %
-  Now we can also average over stimuli
+  Now we can also average over stimuli (see \eqref{eq:wienerestbias})
   %
   \begin{equation*}
     \begin{aligned}
       \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}  &= 
         \av{ \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}_{\widehat{\{t_i\}}|\hat{s}} }_{\hat{s}} 
         = \av{ \frac{ \intd{t} r_{t}[s] \, D\rp{p}_{t,\vec{\tau}}[s] }{ p! \, \sigma^{2p} \, T } } \\
-        &=  \frac{ \av{ r_{t}[s] \, D\rp{p}_{t,\vec{\tau}}[s] } }{ p! \, \sigma^{2p}  }  
-        = k_p(\tau_1,\ldots,\tau_n).
+        &=  %\frac{ \av{ r_{t}[s] \, D\rp{p}_{t,\vec{\tau}}[s] } }{ p! \, \sigma^{2p}  } =
+        k_p(\tau_1,\ldots,\tau_n).
     \end{aligned}
   \end{equation*}
   %
@@ -554,6 +615,61 @@ Suppose we present the system with zero-mean Gaussian white noise of power $\sig
 \subsection{Estimator variance and consistency}\label{sec:poissonvar}
 
 In this section we will compute the variances of the estimators defined in the previous section and show that they are consistent, \ie that the variance vanishes in the limit $T\to\infty$ (we have already shown that the bias vanishes). Again, these will be theoretical variances, with respect to the true probability distributions. We will postpone the definition of estimators for the variance until the next section.
+
+First we define some new generating functions, in addition to those in \eqref{eq:wienergen}:
+%
+\begin{equation}\label{eq:ratewienergen}
+  \begin{aligned}
+    \hhz[J] &= \frac{1}{T}\sum_i\e^{\frac{\ir}{\sigma^2}\intd{u}s(t-u)J(u)}, \\
+    \hhw[J] &= \frac{1}{T}\sum_i\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \e^{\frac{\ir}{\sigma^2}\intd{u}s(t-u)J(u)}
+    =  \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \hhz[J], \\
+    \hat{k}_p(\tau_1,\ldots,\tau_p) &= \frac{(-\ir)^{p}}{p!} \fdf{^p \hhw[J]}{J(\tau_1)\ldots\delta J(\tau_p)}.
+  \end{aligned}
+\end{equation}
+%
+The results of the previous section imply that $\av{\hhw[J]}=W[J]$.
+
+\begin{thm}[Consitency of estimators \eqref{eq:ratewienerest}]
+  The covariance of the estimators \eqref{eq:ratewienerest} vanishes as the sample size goes to infinity:
+  %
+  \begin{equation}\label{eq:ratewienercons}
+    \lim_{T\to\infty} \cov\prn{ \hhw[J], \hhw[\tj] } = 0.
+  \end{equation}
+  %
+  As we have already showed that they are unbiased, this is sufficient for consistency.
+\end{thm}
+\begin{proof}
+  We will suppress the dependence of $r(t)=r_t[s]$ on $s(t)$ and the range of sums and products.
+  %
+  \begin{equation*}
+    \begin{aligned}
+      \av{\hhz[J]\hhz[\tj]}_{\widehat{\{t_i\}}|\hat{s}} =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \prod_ir(t_i) \sum_{jk} \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]} \\
+        =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \left\{
+         \sum_{j\neq k} \brk{\prn{\prod_{i\neq j,k} r(t_i)} r(t_j) r(t_k) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]}}
+        \right. \\&\left. \qquad\qquad\qquad\qquad
+         + \sum_{j=k} \brk{\prn{\prod_{i\neq j} r(t_i)} r(t_j) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}}
+        \right\} \\
+      =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \left\{
+         n(n-1) \prn{\intd{t} r(t)}^{n-2} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)]}}
+         \right.\\& \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad
+         \times \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)\tj(u)]}}
+         \\&
+         \left. \qquad\qquad\qquad
+         +  n \prn{\intd{t} r(t)}^{n-1} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}} 
+        \right\} \\
+        =& \,\hz[J]\hz[\tj] + \frac{\hz[J+\tj]}{T}.
+    \end{aligned}
+  \end{equation*}
+  %
+  Therefore
+  %
+  \begin{equation*}
+    \cov\prn{\hhw[J],\hhw[\tj]} = \cov\prn{\hw[J]\hw[\tj]} + \frac{\e^{-\intd{v}\frac{J(v)\tj(v)}{\sigma^2}}}{T}W[J+\tj]
+  \end{equation*}
+  %
+  Given that we showed that the first term vanishes in the limit in Th.\ref{th:wienercons}, \eqref{eq:ratewienercons} is clearly true.
+\end{proof}
+
 
 \subsection{Standard error}\label{sec:poissonstderr}
 
