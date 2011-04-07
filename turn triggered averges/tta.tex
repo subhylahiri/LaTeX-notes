@@ -420,7 +420,7 @@ Suppose we present the system with zero-mean Gaussian white noise of power $\sig
 %
 \begin{equation}\label{eq:wienerest}
   \begin{aligned}
-    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x] .
+    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd[_0^T\!\!]{t} F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x] .
   \end{aligned}
 \end{equation}
 %
@@ -467,9 +467,86 @@ As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
   %
   As we have already showed that they are unbiased, this is sufficient for consistency.
 \end{thm}
-
-
-
+%
+We will need to use an identity from Sidney Coleman:
+%
+\begin{equation}\label{eq:coleman}
+  F\prn{-\ir\pdiff{}{x}} G\prn{x} = \left. G\prn{-\ir\pdiff{}{y}} F\prn{y} \e^{\ir x \cdt y} \right|_{y=0}.
+\end{equation}
+%
+It can be proved by expressing both sides in terms of the Fourier transforms $F$ and $G$ and verifying that the integrands are equal. It holds equally well when we replace functions by functionals and partial derivatives by functional derivatives.
+%
+\begin{proof}
+  First let's look at $\hz[J]$:
+  %
+  \begin{equation}\label{eq:wienergenex1}
+    \begin{aligned}
+      \av{\hz[J]} =& \int\!\!\frac{\dr t}{T} \av{F_t[x(t')] \e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}}  \\
+        =& \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \av{\e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}} \\
+        =&  \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \e^{-\frac{1}{2\sigma^2}\intd{u}J(t-u)^2} \\
+        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\fdf{^2}{x(v)^2}} \int\!\!\frac{\dr t}{T} F_t[x(t')] \e^{\frac{\ir}{\sigma^2}\intd{u}x(t-u)J(u)} \right|_{x=0}.
+    \end{aligned}
+  \end{equation}
+  %
+  Using essentially the same argument:
+  %
+  \begin{equation}\label{eq:wienergenex2}
+    \begin{aligned}
+      \av{\hz[J]\hz[\tj]} 
+        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\!\brk{\fdf{}{x(v)}+\fdf{}{y(v)}}^2} \!\!\int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(t-u)\tj(u)]} \right|_{x=y=0}.
+    \end{aligned}
+  \end{equation}
+  %
+  Combining \eqref{eq:wienergenex1} and \eqref{eq:wienergenex2} leads to
+  %
+  \begin{equation}\label{eq:wienergencov}
+    \begin{aligned}
+      \cov\prn{\hz[J],\hz[\tj]}  
+        =&  
+        \prn{\e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1}
+        \e^{-\frac{\sigma^2}{2} \intd{v}\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}}
+        \\& \quad\quad\quad \left.
+        \int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(t-u)\tj(u)]} \right|_{x=y=0}.
+    \end{aligned}
+  \end{equation}
+  %
+  Note that
+  %
+  \begin{equation*}
+    \intd{v}\fdf{}{x(v)}\fdf{}{y(v)}\: x(u) y(v) = 
+    \frac{1}{2} \intd{v}\fdf{^2}{x(v)^2}\: x(u)x(v) = 
+    \delta(u-v).
+  \end{equation*}
+  %
+  If we look at a Volterra expansion of $F$, \eqref{eq:volser}, we see that $t$ only appears in $x(t-u_a)$ and $s$ only appears in $y(s-v_a)$. As we will set $x=y=0$ at the end, the only $s$ and $t$ dependence will come from the delta functions. Furthermore, in the delta functions resulting from $\frac{\sigma^2}{2} \intd{v}\!\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}$, the $s$ and $t$ dependence will cancel. Because 
+  %
+  \begin{equation*}
+    \e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1 = 
+      \sum_{n=}^\infty \frac{(-\sigma^2)^n}{n!} \brk{ \intd{v}\fdf{}{x(v)}\fdf{}{y(v)} }^n,
+  \end{equation*}
+  %
+  every term will have at least one delta function of the form $\delta(s-t+u_a-v_b)$. Terms with multiple delta functions of that for can be processed using 
+  %
+  \begin{equation*}
+    \delta(s-t+u_a-v_b)\delta(s-t+u_c-v_d)\delta(s-t+u_e-v_f)\ldots
+    = \delta(s-t+u_a-v_b)\delta(v_b-u_a+u_c-v_d)\delta(v_b-u_a+u_e-v_f)\ldots \,.
+  \end{equation*}
+  %
+  Therefore, the only $s$ and $t$ dependence will come from a single delta function of the form $\delta(s-t+u_a-v_b)$ in each term. This allows us to do the $s$ and $t$ integrals
+  %
+  \begin{equation*}
+    \int\!\!\frac{\dr t\dr s}{T^2}\,\delta(s-t+u_a-v_b) = \frac{1}{T}.
+  \end{equation*}
+  %
+  This will be the only $T$ dependent part of the whole thing. In conclusion
+  %
+  \begin{equation}\label{eq:wienergenconspf}
+    \cov\prn{\hw[J],\hw[\tj]} =  \e^{\frac{1}{2\sigma^2} \intd{v}[J(v)^2 + \tj(v)^2]} \cov\prn{\hz[J],\hz[\tj]} 
+    \propto \frac{1}{T},
+  \end{equation}
+  %
+  which implies \eqref{eq:wienercons}.
+\end{proof}
 
 
 \section{Inhomogeneous Poisson processes}\label{sec:poisson}
@@ -661,13 +738,13 @@ The results of the previous section imply that $\av{\hhw[J]}=W[J]$.
     \end{aligned}
   \end{equation*}
   %
-  Therefore
+  If we then average over stimuli, we find
   %
   \begin{equation*}
     \cov\prn{\hhw[J],\hhw[\tj]} = \cov\prn{\hw[J]\hw[\tj]} + \frac{\e^{-\intd{v}\frac{J(v)\tj(v)}{\sigma^2}}}{T}W[J+\tj]
   \end{equation*}
   %
-  Given that we showed that the first term vanishes in the limit in Th.\ref{th:wienercons}, \eqref{eq:ratewienercons} is clearly true.
+  Given that we showed that the first term vanishes in the limit to prove Th.\ref{th:wienercons}, \eqref{eq:ratewienercons} is clearly true.
 \end{proof}
 
 
