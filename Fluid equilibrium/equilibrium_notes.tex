@@ -112,8 +112,8 @@ A fluid satisfies
   \dr\eloc = \tloc\dr\sloc - \ploc\dr \mathcal{V} + \ml_i \,\dr\rloc_i.
 \end{equation}
 %
-Suppose we rescale the system by a factor $(1+\epsilon)$. 
-Extensivity tells us that $\dr\eloc=\epsilon\eloc$, $\dr\sloc=\epsilon\sloc$, $\dr\mathcal{V}=\epsilon\mathcal{V}$ and $\dr\rloc_i=\epsilon\rloc_i$. 
+Suppose we rescale the system by a factor $(1+\epsilon)$.
+Extensivity tells us that $\dr\eloc=\epsilon\eloc$, $\dr\sloc=\epsilon\sloc$, $\dr\mathcal{V}=\epsilon\mathcal{V}$ and $\dr\rloc_i=\epsilon\rloc_i$.
 Then \eqref{firstlaw:eq} tells us that
 %
 \begin{equation*}
@@ -264,9 +264,9 @@ The surface energy, area, entropy and charge will satisfy
 \begin{equation}\label{firstlawsurf:eq}
   \dr\eloc_\mathcal{A} = \tloc\,\dr\sloc_\mathcal{A} + \sigma\,\dr\mathcal{A} + \ml_i\,\dr\rloc_{i,\mathcal{A}}\,.
 \end{equation}
-% 
+%
 where $\sigma$ is the surface tension and $\mathcal{A}$ is the surface area.
-Suppose we rescale the area by a factor $(1+\epsilon)$. 
+Suppose we rescale the area by a factor $(1+\epsilon)$.
 Extensivity tells us that $\dr\eloc_\mathcal{A}=\epsilon\eloc_\mathcal{A}$, $\dr\sloc_\mathcal{A}=\epsilon\sloc_\mathcal{A}$, $\dr\mathcal{A}=\epsilon\mathcal{A}$ and $\dr\rloc_{i,\mathcal{A}}\epsilon\rloc_{i,\mathcal{A}}$.
 Then \eqref{firstlawsurf:eq} tells us that
 %
@@ -355,10 +355,10 @@ Similar reasoning leads to
 %
 \begin{equation}\label{surfcurr:eq}
   \begin{split}
-    J^\mu_i &= \theta(f)J^\mu_{i,\text{fluid}} + \delta(f)J^\mu_{i,\text{surface}}\,,\\
-    J^\mu_{i,\text{surface}} &= \sqrt{\p f \cdt \p f} \sigma_{R_i} u^\mu.\\
-    J^\mu_S &= \theta(f)J^\mu_{S,\text{fluid}} + \delta(f)J^\mu_{S,\text{surface}}\,,\\
-    J^\mu_{S,\text{surface}} &= \sqrt{\p f \cdt \p f} \sigma_{S} u^\mu.
+    J^\mu_i &= \theta(f)J^\mu_{i,\text{fluid}} + \delta(f)J^\mu_{i,\text{ surface}}\,,\\
+    J^\mu_{i,\text{ surface}} &= \sqrt{\p f \cdt \p f} \sigma_{R_i} u^\mu.\\
+    J^\mu_S &= \theta(f)J^\mu_{S,\text{fluid}} + \delta(f)J^\mu_{S,\text{ surface}}\,,\\
+    J^\mu_{S,\text{ surface}} &= \sqrt{\p f \cdt \p f} \sigma_{S} u^\mu.
   \end{split}
 \end{equation}
 %
@@ -403,8 +403,8 @@ So, in addition to the equation of motion \eqref{Epconsv:eq}, we also have the b
 %
 \begin{equation}\label{surfbc:eq}
   \left.
-  -\ploc n^\mu + u^\mu u^\nu \p_\nu (\sigma_E-\sigma) 
-  +(\sigma_E-\sigma)(  a^\mu - u^\mu n_\lambda n_\lambda \sigma^{\lambda\nu})
+  -\ploc n^\mu + u^\mu u^\nu \p_\nu (\sigma_E-\sigma)
+  +(\sigma_E-\sigma)\prn{ \frac{d-2}{d-1}\vartheta u^\mu  + a^\mu - u^\mu n_\lambda n_\nu \sigma^{\lambda\nu}}
   -h^{\mu\nu}\p_\nu\sigma + \sigma\Theta n^\mu
   \right\vert_{f=0} = 0
 \end{equation}
@@ -414,8 +414,8 @@ where $\Theta$ is the trace of the extrinsic curvature of the surface, as seen f
 Similar reasoning leads to
 %
 \begin{equation}\label{surfchbc:eq}
-  \nabla_\mu J^\mu_i= \theta(f)\nabla_\mu J^\mu_{i,\text{fluid}} 
-   + \delta(f)\sqrt{\p f \cdt \p f} (u^\mu\p_\mu\sigma_{R_i} - \sigma_{R_i}n_\mu n_\lambda \sigma^{\mu\nu}),
+  \nabla_\mu J^\mu_i= \theta(f)\nabla_\mu J^\mu_{i,\text{fluid}}
+   + \delta(f)\sqrt{\p f \cdt \p f} \prn{\frac{d-2}{d-1}\vartheta u^\mu + u^\mu\p_\mu\sigma_{R_i} - \sigma_{R_i}n_\mu n_\lambda \sigma^{\mu\nu}},
 \end{equation}
 %
 which leads to an additional boundary condition to go with \eqref{Epconsv:eq}.
@@ -443,10 +443,10 @@ so there is no entropy production at the surface to leading order in the derivat
 
 \subsection{Solutions for the interior}\label{sec:rotint}
 
-We want to find solutions of \eqref{Epconsv:eq} that are independent of time, which means we need to set \eqref{increase:eq} to zero. 
-This means we need velocity configurations that have zero expansion and shear. 
+We want to find solutions of \eqref{Epconsv:eq} that are independent of time, which means we need to set \eqref{increase:eq} to zero.
+This means we need velocity configurations that have zero expansion and shear.
 As argued in \cite{Caldarelli:2008mv}, combined with the equations of fluid mechanics, this implies that the velocity must be proportional to a Killing vector.
-In general, this would be a combination of a uniform boost and rigid rotation. 
+In general, this would be a combination of a uniform boost and rigid rotation.
 We can always boost to a frame where the centre of rotation is static and the rotation lies in the Cartan directions of the rotation group. This gives
 %
 \begin{equation}\label{rigidrot:eq}
@@ -505,7 +505,7 @@ Using the equation of state and \eqref{inttherm:eq}, this determines all of the 
 
 \subsection{Solutions for surfaces}\label{sec:rotsurf}
 
-The fluid configurations described in the previous subsection have $\sigma^{\mu\nu}=\vartheta=u^\mu\p_\mu\gamma=0$. 
+The fluid configurations described in the previous subsection have $\sigma^{\mu\nu}=\vartheta=u^\mu\p_\mu\gamma=0$.
 In addition, the quantities $\sigma$, $\sigma_E$ and $\sigma_{R_i}$ are functions of $\tloc$ and $\ml_i$, which in turn are proportional to $\gamma$.
 Therefore, using \eqref{surftherm:eq} and \eqref{rotvelder:eq},
 %
@@ -614,7 +614,7 @@ The first part of $\dr\Phi_f=0$ is
   -\dr\brk{\vint\,\ploc}_f = -\dvint\,\ploc,
 \end{equation*}
 %
-where $\Delta\Gamma$ is the region between the new and the old surfaces (with appropriate signs). 
+where $\Delta\Gamma$ is the region between the new and the old surfaces (with appropriate signs).
 
 The change in the surface area can be written as
 %
