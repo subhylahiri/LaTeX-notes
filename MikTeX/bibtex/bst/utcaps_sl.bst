@@ -17,7 +17,7 @@
 %                 3) "publisher, address" instead of "address: publisher"
 %                 4) added "report" field for article entries.
 %                 5) particle physics-oriented abbreviations, rather than ieee.
-%                 6) added "collaboration" field, as per 
+%                 6) added "collaboration" field, as per
 %                    Jonathan Flynn' suggestion. SPIRES now supports this field.
 %                 7) Improved output of Proceedings entries
 %
@@ -28,7 +28,7 @@
 %                    ver 1.2  7/97 - added a "\providecommand{\href}[2]{#2}"
 %                                    to handle case where \href is not defined
 %                    ver 1.3 12/97 - fixed lousy-looking proceedings output.
-%                    ver 1.4  1/98 - fixed format.number, address in 
+%                    ver 1.4  1/98 - fixed format.number, address in
 %                                    proceedings entries
 %                    ver 1.5  3/99 - added (nonprinting) CITATION field for
 %                                    SLAC internal use
@@ -47,7 +47,7 @@
 %                   ver 2.0   4/08 - support "new-style" eprint identifiers
 %                   ver 2.1   4/08 - support for "url" field
 %                   ver 2.2   4/08 - support for "doi" field
-%                   ver 2.?   9/08 - created function add.comma, 
+%                   ver 2.?   9/08 - created function add.comma,
 %                      uses add.comma in format.title and add.period$ in format.title.p
 %
 % HyperTeX Wizardry:
@@ -57,7 +57,7 @@
 %   eprint   = "hep-th/9605023"
 % and
 %   eprint   = "hep-th/9605023"
-% both produce 
+% both produce
 %
 %    \href{http://arxiv.org/abs/hep-th/9605023}{{\tt hep-th/9605023}}
 %
@@ -86,7 +86,7 @@
 %
 %  produces
 %
-%     \href{http://cogprints.org/5542}{{\tt Cogprints:5542}}  
+%     \href{http://cogprints.org/5542}{{\tt Cogprints:5542}}
 %
 %  If a
 %
@@ -342,7 +342,7 @@ FUNCTION {format.archive}
   archivePrefix empty$
       { "" }
       { archivePrefix ":" *}
-  if$            
+  if$
 }
 
 FUNCTION {format.primaryClass}
@@ -350,17 +350,17 @@ FUNCTION {format.primaryClass}
   primaryClass empty$
       { "" }
       { " [" primaryClass * "]" *}
-  if$            
+  if$
 }
 
 FUNCTION {format.eprint}
 { eprint empty$
      { ""}
      { archive empty$
-          {"\href{http://arxiv.org/abs/" eprint * "}" * 
+          {"\href{http://arxiv.org/abs/" eprint * "}" *
              "{{\tt " * format.archive * eprint *
               format.primaryClass * "}}" *}
-          {"\href{" archive *  "/" * eprint * "}" * 
+          {"\href{" archive *  "/" * eprint * "}" *
              "{{\tt " * format.archive * eprint *
               format.primaryClass * "}}" *}
        if$
@@ -417,8 +417,8 @@ FUNCTION {add.comma}
    { ttt lastcharacter #1 substring$ "}" = }
    { lastcharacter #-1 + 'lastcharacter := }
   while$
-      ttt lastcharacter #1 substring$ "?" = 
-      ttt lastcharacter #1 substring$ "!" = 
+      ttt lastcharacter #1 substring$ "?" =
+      ttt lastcharacter #1 substring$ "!" =
      or
       { ttt }
       { ttt "," * }
@@ -795,7 +795,7 @@ FUNCTION {format.incoll.inproc.crossref}
 }
 
 FUNCTION {format.journal}
-{ journal missing$   
+{ journal missing$
     { "" }
     {journal emphasize " " *
      format.volume *
@@ -816,7 +816,7 @@ FUNCTION {article}
   format.title "title" output.check
   blank.sep
   crossref missing$
-  { journal missing$   
+  { journal missing$
         {}
         { format.journal add.doi "journal" output.check}
      if$
@@ -1219,6 +1219,7 @@ MACRO {pr} {"Phys. Rev."}
 MACRO {arXiv}     {"http://arxiv.org/abs"}
 MACRO {cogprints} {"http://cogprints.org"}
 MACRO {pubmed}    {"http://www.ncbi.nlm.nih.gov/pubmed"}
+MACRO {adsabs}    {"http://adsabs.harvard.edu/abs"}
 
 READ
 
@@ -1253,7 +1254,7 @@ FUNCTION {begin.bib}
     { preamble$ write$ newline$ }
   if$
   "\providecommand{\href}[2]{#2}"
-  "\begingroup\raggedright\begin{thebibliography}{" * longest.label  * 
+  "\begingroup\raggedright\begin{thebibliography}{" * longest.label  *
   "}" * write$ newline$ }
 
 EXECUTE {begin.bib}

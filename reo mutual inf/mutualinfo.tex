@@ -1,0 +1,171 @@
+% -*- TeX -*- -*- UK -*-
+% ----------------------------------------------------------------
+% arXiv Paper ************************************************
+%
+% Subhaneil Lahiri's template
+%
+% Before submitting:
+%    Comment out hyperref
+%    Comment out showkeys
+%    Replace \input{mydefs.tex} with its contents
+%       or include mydefs.tex in zip/tar file
+%    Replace \input{newsymb.tex} with its contents
+%       or include newsymb.tex in zip/tar file
+%    Put this file, the .bbl file, any picture or
+%       other additional files and natbib.sty
+%       file in a zip/tar file
+%
+% **** -----------------------------------------------------------
+\documentclass[12pt]{article}
+% Preamble:
+\usepackage{a4wide}
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage[sort&compress,numbers]{natbib}
+%\usepackage{citeB}
+\usepackage{ifpdf}
+%\usepackage{graphicx}
+%\usepackage{graphics} for finding documentation only
+%\usepackage{xcolor}
+%\usepackage{pgf}
+\ifpdf
+\usepackage[pdftex,bookmarks]{hyperref}
+\else
+\usepackage[hypertex]{hyperref}
+\DeclareGraphicsRule{.png}{eps}{.bb}{}
+\fi
+%
+% >> Only for drafts! <<
+\usepackage[notref,notcite]{showkeys}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\numberwithin{equation}{section}
+%\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+% New commands etc.
+\input{mydefs.tex}
+\input{newsymb.tex}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title info:
+\title{Mutual information between successive reorientations}
+%
+% Author List:
+%
+\author{Subhaneil Lahiri
+\\
+%
+% Addresses:
+%
+\small{\emph{Harvard University,}}
+%
+}
+
+\begin{document}
+
+\maketitle
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}
+  We show how mutual information can be used to describe the independence of successive reorientations
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of Article:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reorientation sequences}\label{sec:reoseq}
+
+As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
+
+Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$.
+
+\section{Entropy and mutual information}\label{sec:entropy}
+
+The \textbf{entropy} of a probability distribution is a measure of the lack of information we have about a random variable:
+%
+\begin{equation}\label{eq:ent}
+  H(X) = \av{-\log P(X)}.
+\end{equation}
+%
+It takes its minimum value of $0$ when $X$ can only take one value. It takes its maximum value of $\log n$ when $X$ has a uniform distribution over $n$ possibilities.
+
+With several random variables, we can define a joint entropy from their joint probability distribution:
+%
+\begin{equation}\label{eq:jointent}
+  H(X_1,\ldots,X_r) = \av{-\log P(X1,\ldots,X_r)}.
+\end{equation}
+%
+It satisfies the bounds
+%
+\begin{equation}\label{eq:entbounds}
+  \max_i H(X_i) \leq H(X_1,\ldots,X_r) \leq \sum_{i=1}^r H(X_i).
+\end{equation}
+%
+The lower bound is saturated when one of the variables is enough to determine the others. The upper bound is saturated when the $X_i$ are independent:
+%
+\begin{equation}\label{eq:indent}
+  P(X1,\ldots,X_r) = \prod_{i=1}^r P(X_i) 
+  \quad \implies \quad
+  H(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i).
+\end{equation}
+%
+
+We can define the following measure of (lack of) independence:
+%
+\begin{equation}\label{eq:mutinf}
+  I(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i) - H(X_1,\ldots,X_r).
+\end{equation}
+%
+In the case $r=2$, this is the \textbf{mutual information} between $X_1$ and $X_2$. For $r>2$, there are many different generalisations of mutual information. This one is called the \textbf{total correlation} \cite{Watanabe:1960:ITA:1661258.1661265}, or multiinformation. It has the properties:
+%
+\begin{itemize}
+  \item it vanishes if and only if the random variables are independent
+  \item otherwise, it is positive.
+  \item it is bounded from above by $\sum_{i=1}^r H(X_i) - \max_i H(X_i)$.
+\end{itemize}
+%
+
+In our cases, the random variables, $X_i$, all have the same distribution, so the total correlation satisfies the bounds
+%
+\begin{equation}\label{eq:mutinfbounds}
+  0 \leq I_r(X_1,\ldots,X_r) \leq (r-1)H(X).
+\end{equation}
+%
+We can define a normalised total correlation:
+%
+\begin{equation}\label{eq:normmutinf}
+  C_r = \frac{I_r}{(r-1)H_1}, \qquad 0 \leq C_r \leq 1.
+\end{equation}
+%
+The lower bound corresponds to complete independence. The upper bound corresponds to complete redundancy.
+
+
+
+
+%\section*{Acknowledgements}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Appendices}
+%\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{utcaps_sl}
+\bibliography{neuro,maths}
+
+\end{document}

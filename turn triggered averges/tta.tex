@@ -351,7 +351,7 @@ A particularly useful set of Wiener functionals are:
   \end{aligned}
 \end{equation}
 %
-where $S_p$ is the group of permutations of $p$ objects. 
+where $S_p$ is the group of permutations of $p$ objects.
 \eg
 %
 \begin{equation}\label{eq:wienerdeltaex}
@@ -428,7 +428,7 @@ It is trivial to show that this estimator is unbiased
 %
 \begin{equation}\label{eq:wienerestbias}
   \begin{aligned}
-    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} \av{F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x]} 
+    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} \av{F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x]}
       &= \frac{1}{T}\intd{t}k_p(\tau_1,\ldots,\tau_p) \\
       &= k_p(\tau_1,\ldots,\tau_p).
   \end{aligned}
@@ -443,7 +443,7 @@ It is much harder to show that this is consistent. First we define some generati
      = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  \\
     \hz[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}},  \\
     \hw[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{x(v)^2}} \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}}
-     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  
+     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],
   \end{aligned}
 \end{equation}
 %
@@ -474,7 +474,7 @@ We will need to use an identity from Sidney Coleman:
   F\prn{-\ir\pdiff{}{x}} G\prn{x} = \left. G\prn{-\ir\pdiff{}{y}} F\prn{y} \e^{\ir x \cdt y} \right|_{y=0}.
 \end{equation}
 %
-It can be proved by expressing both sides in terms of the Fourier transforms $F$ and $G$ and verifying that the integrands are equal. It holds equally well when we replace functions by functionals and partial derivatives by functional derivatives.
+It can be proved by expressing both sides in terms of the Fourier transforms of $F$ and $G$ and verifying that the integrands are equal. It holds equally well when we replace functions by functionals and partial derivatives by functional derivatives.
 %
 \begin{proof}
   First let's look at $\hz[J]$:
@@ -484,7 +484,7 @@ It can be proved by expressing both sides in terms of the Fourier transforms $F$
       \av{\hz[J]} =& \int\!\!\frac{\dr t}{T} \av{F_t[x(t')] \e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}}  \\
         =& \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \av{\e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}} \\
         =&  \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \e^{-\frac{1}{2\sigma^2}\intd{u}J(t-u)^2} \\
-        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\fdf{^2}{x(v)^2}} \int\!\!\frac{\dr t}{T} F_t[x(t')] \e^{\frac{\ir}{\sigma^2}\intd{u}x(t-u)J(u)} \right|_{x=0}.
+        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\fdf{^2}{x(v)^2}} \int\!\!\frac{\dr t}{T} F_t[x(t')] \, \e^{\frac{\ir}{\sigma^2}\intd{u}x(t-u)J(u)} \right|_{x=0}.
     \end{aligned}
   \end{equation}
   %
@@ -492,8 +492,8 @@ It can be proved by expressing both sides in terms of the Fourier transforms $F$
   %
   \begin{equation}\label{eq:wienergenex2}
     \begin{aligned}
-      \av{\hz[J]\hz[\tj]} 
-        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\!\brk{\fdf{}{x(v)}+\fdf{}{y(v)}}^2} \!\!\int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(t-u)\tj(u)]} \right|_{x=y=0}.
+      \av{\hz[J]\hz[\tj]}
+        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\!\brk{\fdf{}{x(v)}+\fdf{}{y(v)}}^2} \!\!\int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
     \end{aligned}
   \end{equation}
   %
@@ -501,31 +501,31 @@ It can be proved by expressing both sides in terms of the Fourier transforms $F$
   %
   \begin{equation}\label{eq:wienergencov}
     \begin{aligned}
-      \cov\prn{\hz[J],\hz[\tj]}  
-        =&  
+      \cov\prn{\hz[J],\hz[\tj]}
+        =&
         \prn{\e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1}
         \e^{-\frac{\sigma^2}{2} \intd{v}\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}}
         \\& \quad\quad\quad \left.
-        \int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(t-u)\tj(u)]} \right|_{x=y=0}.
+        \int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
     \end{aligned}
   \end{equation}
   %
   Note that
   %
   \begin{equation*}
-    \intd{v}\fdf{}{x(v)}\fdf{}{y(v)}\: x(u) y(v) = 
-    \frac{1}{2} \intd{v}\fdf{^2}{x(v)^2}\: x(u)x(v) = 
+    \intd{v}\fdf{}{x(v)}\fdf{}{y(v)}\: x(u) y(v) =
+    \frac{1}{2} \intd{v}\fdf{^2}{x(v)^2}\: x(u)x(v) =
     \delta(u-v).
   \end{equation*}
   %
-  If we look at a Volterra expansion of $F$, \eqref{eq:volser}, we see that $t$ only appears in $x(t-u_a)$ and $s$ only appears in $y(s-v_a)$. As we will set $x=y=0$ at the end, the only $s$ and $t$ dependence will come from the delta functions. Furthermore, in the delta functions resulting from $\frac{\sigma^2}{2} \intd{v}\!\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}$, the $s$ and $t$ dependence will cancel. Because 
+  If we look at a Volterra expansion of $F$, \eqref{eq:volser}, we see that $t$ only appears in $x(t-u_a)$ and $s$ only appears in $y(s-v_a)$. As we will set $x=y=0$ at the end, the only $s$ and $t$ dependence will come from the delta functions. Furthermore, in the delta functions resulting from $\frac{\sigma^2}{2} \intd{v}\!\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}$, the $s$ and $t$ dependence will cancel. Because
   %
   \begin{equation*}
-    \e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1 = 
-      \sum_{n=}^\infty \frac{(-\sigma^2)^n}{n!} \brk{ \intd{v}\fdf{}{x(v)}\fdf{}{y(v)} }^n,
+    \e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1 =
+      \sum_{n=1}^\infty \frac{(-\sigma^2)^n}{n!} \brk{ \intd{v}\fdf{}{x(v)}\fdf{}{y(v)} }^n,
   \end{equation*}
   %
-  every term will have at least one delta function of the form $\delta(s-t+u_a-v_b)$. Terms with multiple delta functions of that for can be processed using 
+  every term will have at least one delta function of the form $\delta(s-t+u_a-v_b)$. Terms with multiple delta functions of that for can be processed using
   %
   \begin{equation*}
     \delta(s-t+u_a-v_b)\delta(s-t+u_c-v_d)\delta(s-t+u_e-v_f)\ldots
@@ -541,7 +541,7 @@ It can be proved by expressing both sides in terms of the Fourier transforms $F$
   This will be the only $T$ dependent part of the whole thing. In conclusion
   %
   \begin{equation}\label{eq:wienergenconspf}
-    \cov\prn{\hw[J],\hw[\tj]} =  \e^{\frac{1}{2\sigma^2} \intd{v}[J(v)^2 + \tj(v)^2]} \cov\prn{\hz[J],\hz[\tj]} 
+    \cov\prn{\hw[J],\hw[\tj]} =  \e^{\frac{1}{2\sigma^2} \intd{v}[J(v)^2 + \tj(v)^2]} \cov\prn{\hz[J],\hz[\tj]}
     \propto \frac{1}{T},
   \end{equation}
   %
@@ -567,7 +567,7 @@ We also assume time translational invariance: $r_t[s(t')] = r_{t+T}[s(t'+T)]$. T
 %
 where the exponential factor comes from demanding that there are no events at times other than $\{t_1,\ldots,t_n\}$. When integrating over all $\{t_1,\ldots,t_n\}$, one can ignore the restriction over the order of the $t_i$ provided one also divides by $n!$. When integrating over all possibilities, one must also sum over all possible event counts, $n$.
 
-Measuring the rate function can be difficult. If one performs $N$ repetitions with tim bins of width $\Delta t$, the uncertainty scales as $1/\sqrt{N\Delta t}$. Using small time bins will require many repetitions. We will now discuss a method of measuring the response to stimuli that circumvents the need to measure $r_t[s]$ if we wanted to use \eqref{eq:impkern} or \eqref{eq:wienerkern} directly. 
+Measuring the rate function can be difficult. If one performs $N$ repetitions with tim bins of width $\Delta t$, the uncertainty scales as $1/\sqrt{N\Delta t}$. Using small time bins will require many repetitions. We will now discuss a method of measuring the response to stimuli that circumvents the need to measure $r_t[s]$ if we wanted to use \eqref{eq:impkern} or \eqref{eq:wienerkern} directly.
 
 We are going to consider responses to stimuli that are stochastic processes themselves. As we will have two stochastic processes, the stimuli and the timing of events, it will be useful to define some notation.
 
@@ -678,8 +678,8 @@ Suppose we present the system with zero-mean Gaussian white noise of power $\sig
   %
   \begin{equation*}
     \begin{aligned}
-      \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}  &= 
-        \av{ \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}_{\widehat{\{t_i\}}|\hat{s}} }_{\hat{s}} 
+      \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}  &=
+        \av{ \av{\hat{k}_p(\tau_1,\ldots,\tau_n)}_{\widehat{\{t_i\}}|\hat{s}} }_{\hat{s}}
         = \av{ \frac{ \intd{t} r_{t}[s] \, D\rp{p}_{t,\vec{\tau}}[s] }{ p! \, \sigma^{2p} \, T } } \\
         &=  %\frac{ \av{ r_{t}[s] \, D\rp{p}_{t,\vec{\tau}}[s] } }{ p! \, \sigma^{2p}  } =
         k_p(\tau_1,\ldots,\tau_n).
@@ -732,7 +732,7 @@ The results of the previous section imply that $\av{\hhw[J]}=W[J]$.
          \times \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)\tj(u)]}}
          \\&
          \left. \qquad\qquad\qquad
-         +  n \prn{\intd{t} r(t)}^{n-1} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}} 
+         +  n \prn{\intd{t} r(t)}^{n-1} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}}
         \right\} \\
         =& \,\hz[J]\hz[\tj] + \frac{\hz[J+\tj]}{T}.
     \end{aligned}
