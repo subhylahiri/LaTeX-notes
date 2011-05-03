@@ -184,9 +184,9 @@ We can then estimate $p_{j}=P(X=x_{j})$ with
 \end{equation}
 %
 
-From now on, we will use $A$ to denote the estimate of $A(p)$ with $p$ replaced by $q$ and $\widehat{A}=A-\bias(A)$.
+From now on, we will use $A$ to denote the estimate of $A(p)$ with $p$ replaced by $q$ and $\widehat{A}=A-\bias(A)$, where $A$ is one of $(H_1,H_r,I_r,C_r)$.
 
-Our bias estimates are essentially the same as those of \cite{1999PhyD..125..285R}, except that the number of samples for $H_1$ is $rN$ instead of $N$:
+Our bias estimates are essentially the same as those of \cite{1999PhyD..125..285R}, except that the number of samples for $H_1$ is $rN$ rather than $N$:
 %
 \begin{equation}\label{eq:biasH}
   B_1 = \bias(H_1) = -\frac{\#b_1}{2rN},
@@ -194,7 +194,7 @@ Our bias estimates are essentially the same as those of \cite{1999PhyD..125..285
   B_r = \bias(H_r) = -\frac{\#b_r}{2N},
 \end{equation}
 %
-where $\#b_r$ is the number of non-empty bins. The bias estimate for $I$ and $C$ follow in the same way.
+where $\#b_r$ is the number of non-empty bins. The bias estimate for $I$ and $C$ follow in the usual way.
 
 We can estimate the standard errors with
 %
@@ -226,11 +226,11 @@ which leads to
     \qquad
     \pdiff{I_{r}}{n_{j_1\ldots j_r}} &= -\frac{\prn{\sum_a \log q_{j_a}}-\log q_{i_1\ldots i_r} + I_r}{N}, \\
     \pdiff{H_1}{n_{j_1\ldots j_r}} &= -\frac{\frac{1}{r} \prn{\sum_a \log q_{j_a}} + H_1}{N}, &
-    \pdiff{C_{r}}{n_{j_1\ldots j_r}} &= \frac{\log q_{i_1\ldots i_r} H_1 - \frac{1}{r} \prn{\sum_a \log q_{j_a}} H_r}{(r-1)N(H_1)^2},
+    \pdiff{C_{r}}{n_{j_1\ldots j_r}} &= \frac{\log q_{i_1\ldots i_r} H_1 - \frac{1}{r} \prn{\sum_a \log q_{j_a}} H_r}{(r-1)N(H_1)^2}.
    \end{aligned}
 \end{equation}
 %
-all of these formulae are equally true if you put hats on every capital letter (except $N$).
+All of these formulae are equally true if you put hats on every capital letter (except $N$).
 
 
 %\section*{Acknowledgements}
