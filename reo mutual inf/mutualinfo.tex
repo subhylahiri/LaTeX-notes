@@ -87,6 +87,8 @@ As a worm navigates, it performs a sequence of turns. When turns occur sufficien
 
 Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$.
 
+In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
+
 \section{Entropy and mutual information}\label{sec:entropy}
 
 The \textbf{entropy} of a probability distribution is a measure of the lack of information we have about a random variable:
@@ -148,7 +150,20 @@ We can define a normalised total correlation:
 The lower bound corresponds to complete independence. The upper bound corresponds to complete redundancy.
 
 
-\appendix
+\section{Correcting systematic errors}\label{sec:syscorr}
+
+The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias them upwards. There are several methods for estimating this. 
+
+One approach involves expending the errors in one over the sample size, see \cite{1999PhyD..125..285R} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
+
+As the bias estimates are independent of the actual probability distribution, depending only on sample size and number of bins, we can estimate the bias by computing the mutual information for a completely random sequence in the same way. As the true value is zero, the result of this computation is an estimate of the bias. Furthermore, if the probabilities of the individual elements of the sequence are the same as in the data, this can be regarded as a Monte-Carlo simulation of the null hypothesis -- that the individual elements of the sequence are independent of each other. Thus, we can compute a p-value by seeing where the original result ranks amongst the results of the simulation.
+
+We will do this using the non-parametric bootstrap. This is conceptually similar to the common alternative procedure of shuffling the sequence. Shuffling can be thought of as resampling without replacement, whereas the non-parametric bootstrap is resampling with replacement. They both involve removing any information in the sequence without changing the probabilities of the individual elements.
+
+The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity.
+
+
+\appendix\section*{Appendices}
 
 \section{Bias and standard error}\label{sec:stderr}
 
@@ -215,7 +230,7 @@ which leads to
    \end{aligned}
 \end{equation}
 %
-all of these formulae apply if you put hats on every capital letter.
+all of these formulae are equally true if you put hats on every capital letter (except $N$).
 
 
 %\section*{Acknowledgements}
