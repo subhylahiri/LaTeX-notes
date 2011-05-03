@@ -112,7 +112,7 @@ It satisfies the bounds
 The lower bound is saturated when one of the variables is enough to determine the others. The upper bound is saturated when the $X_i$ are independent:
 %
 \begin{equation}\label{eq:indent}
-  P(X1,\ldots,X_r) = \prod_{i=1}^r P(X_i) 
+  P(X1,\ldots,X_r) = \prod_{i=1}^r P(X_i)
   \quad \implies \quad
   H(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i).
 \end{equation}
@@ -148,6 +148,74 @@ We can define a normalised total correlation:
 The lower bound corresponds to complete independence. The upper bound corresponds to complete redundancy.
 
 
+\appendix
+
+\section{Bias and standard error}\label{sec:stderr}
+
+We will follow the approach of \cite{1999PhyD..125..285R}. Our situation is slightly different from that one. As all the $X_i$ have the same distribution, we will estimate $P(X)$ from the pooled data, rather that estimating the $P(X_i)$ separately. This means that our estimates may not satisfy the bounds, such as \eqref{eq:mutinfbounds}.
+
+Let $p_{i_1\ldots i_r}$ denote the probability $P(X_1=x_{i_1},\ldots,X_r=x_{i_r})$ and $n_{i_1\ldots i_r}$ denote the number of corresponding r-tuples in the sample. We can estimate $p_{i_1\ldots i_r}$ with
+%
+\begin{equation}\label{eq:tupprob}
+  q_{i_1\ldots i_r} = \frac{n_{i_1\ldots i_r}}{N},
+  \qquad
+  N = \sum_{j_1\ldots ji_r} n_{j_1\ldots j_r}.
+\end{equation}
+%
+We can then estimate $p_{j}=P(X=x_{j})$ with
+%
+\begin{equation}\label{eq:singprob}
+  q_j = \sum_{i_1\ldots i_r}\prn{ \frac{q_{i_1\ldots i_r}}{r} \sum_{a=1}^r \delta_{j,i_a}}.
+\end{equation}
+%
+
+From now on, we will use $A$ to denote the estimate of $A(p)$ with $p$ replaced by $q$ and $\widehat{A}=A-\bias(A)$.
+
+Our bias estimates are essentially the same as those of \cite{1999PhyD..125..285R}, except that the number of samples for $H_1$ is $rN$ instead of $N$:
+%
+\begin{equation}\label{eq:biasH}
+  B_1 = \bias(H_1) = -\frac{\#b_1}{2rN},
+  \qquad
+  B_r = \bias(H_r) = -\frac{\#b_r}{2N},
+\end{equation}
+%
+where $\#b_r$ is the number of non-empty bins. The bias estimate for $I$ and $C$ follow in the same way.
+
+We can estimate the standard errors with
+%
+\begin{equation}\label{eq:stderr}
+  \var(A) = \sum_{i_1\ldots i_r} \prn{\pdiff{A}{n_{i_1\ldots i_r}}}^2 \var(n_{i_1\ldots i_r}),
+  \qquad
+  \var(n_{i_1\ldots i_r}) \approx N q_{i_1\ldots i_r}(1-q_{i_1\ldots i_r}).
+\end{equation}
+%
+where the corrections to the last formula are lower order in $N$.
+
+We find that
+%
+\begin{equation}\label{eq:dqbydn}
+  \begin{aligned}
+    \pdiff{q_{i_1\ldots i_r}}{n_{j_1\ldots j_r}} &= \frac{\prn{\prod_a \delta_{i_a,j_a}} - q_{i_1\ldots i_r}}{N}, &
+    \qquad
+    \pdiff{B_{r}}{n_{j_1\ldots j_r}} &= -\frac{B_r}{N},\\
+    \pdiff{q_{i}}{n_{j_1\ldots j_r}} &= \frac{\frac{1}{r} \prn{\sum_a \delta_{i,j_a}} - q_{i}}{N}, &
+    \pdiff{B_{1}}{n_{j_1\ldots j_r}} &= -\frac{B_1}{N}, 
+   \end{aligned}
+\end{equation}
+%
+which leads to
+%
+\begin{equation}\label{eq:dhbydn}
+  \begin{aligned}
+    \pdiff{H_r}{n_{j_1\ldots j_r}} &= -\frac{\log q_{i_1\ldots i_r} + H_r}{N}, &
+    \qquad
+    \pdiff{I_{r}}{n_{j_1\ldots j_r}} &= -\frac{\prn{\sum_a \log q_{j_a}}-\log q_{i_1\ldots i_r} + I_r}{N}, \\
+    \pdiff{H_1}{n_{j_1\ldots j_r}} &= -\frac{\frac{1}{r} \prn{\sum_a \log q_{j_a}} + H_1}{N}, &
+    \pdiff{C_{r}}{n_{j_1\ldots j_r}} &= \frac{\log q_{i_1\ldots i_r} H_1 - \frac{1}{r} \prn{\sum_a \log q_{j_a}} H_r}{(r-1)N(H_1)^2},
+   \end{aligned}
+\end{equation}
+%
+all of these formulae apply if you put hats on every capital letter.
 
 
 %\section*{Acknowledgements}
