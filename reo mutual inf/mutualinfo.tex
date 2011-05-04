@@ -35,6 +35,8 @@
 \usepackage[hypertex]{hyperref}
 \DeclareGraphicsRule{.png}{eps}{.bb}{}
 \fi
+\usepackage{epstopdf}
+\epstopdfsetup{update,suffix=-generated}
 %
 % >> Only for drafts! <<
 \usepackage[notref,notcite]{showkeys}
@@ -152,7 +154,7 @@ The lower bound corresponds to complete independence. The upper bound correspond
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias them upwards. There are several methods for estimating this. 
+The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias them upwards. There are several methods for estimating this.
 
 One approach involves expending the errors in one over the sample size, see \cite{1999PhyD..125..285R} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
 
@@ -199,12 +201,12 @@ where $\#b_r$ is the number of non-empty bins. The bias estimate for $I$ and $C$
 We can estimate the standard errors with
 %
 \begin{equation}\label{eq:stderr}
-  \var(A) = \sum_{i_1\ldots i_r} \prn{\pdiff{A}{n_{i_1\ldots i_r}}}^2 \var(n_{i_1\ldots i_r}),
+  \var(A) \approx \sum_{i_1\ldots i_r} \prn{\pdiff{A}{n_{i_1\ldots i_r}}}^2 \var(n_{i_1\ldots i_r}),
   \qquad
   \var(n_{i_1\ldots i_r}) \approx N q_{i_1\ldots i_r}(1-q_{i_1\ldots i_r}).
 \end{equation}
 %
-where the corrections to the last formula are lower order in $N$.
+where the first formula is valid provided each term is small(we'll see later that they are proportional to $1/N$) and the corrections to the last formula are lower order in $N$.
 
 We find that
 %
@@ -214,7 +216,7 @@ We find that
     \qquad
     \pdiff{B_{r}}{n_{j_1\ldots j_r}} &= -\frac{B_r}{N},\\
     \pdiff{q_{i}}{n_{j_1\ldots j_r}} &= \frac{\frac{1}{r} \prn{\sum_a \delta_{i,j_a}} - q_{i}}{N}, &
-    \pdiff{B_{1}}{n_{j_1\ldots j_r}} &= -\frac{B_1}{N}, 
+    \pdiff{B_{1}}{n_{j_1\ldots j_r}} &= -\frac{B_1}{N},
    \end{aligned}
 \end{equation}
 %
