@@ -25,7 +25,7 @@
 \usepackage[sort&compress,numbers]{natbib}
 %\usepackage{citeB}
 \usepackage{ifpdf}
-%\usepackage{graphicx}
+\usepackage{graphicx}
 %\usepackage{graphics} for finding documentation only
 %\usepackage{xcolor}
 %\usepackage{pgf}
@@ -87,9 +87,21 @@
 
 As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
 
-Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$.
+Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
+
+These probability distributions can be estimated from the frequencies in a sample sequence (described schematically in \fref{fig:schematic}). However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in appendix \ref{sec:stderr}.
 
 In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=10cm]{schematic.eps}
+  \end{center}
+  %\input{.TpX}
+  \caption{Schematic calculation of probabilities. (a) Sample sequence of reorientations. (b) Grouping sequence into $r$-tuples ($r=2$). (c) Estimating probabilities for individual members and for $r$-tuples from relative frequencies in sample.} \label{fig:schematic}
+\end{figure}
+
+
 
 \section{Entropy and mutual information}\label{sec:entropy}
 
@@ -104,7 +116,7 @@ It takes its minimum value of $0$ when $X$ can only take one value. It takes its
 With several random variables, we can define a joint entropy from their joint probability distribution:
 %
 \begin{equation}\label{eq:jointent}
-  H(X_1,\ldots,X_r) = \av{-\log P(X1,\ldots,X_r)}.
+  H(X_1,\ldots,X_r) = \av{-\log P(X_1,\ldots,X_r)}.
 \end{equation}
 %
 It satisfies the bounds
@@ -154,7 +166,10 @@ The lower bound corresponds to complete independence. The upper bound correspond
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias them upwards. There are several methods for estimating this.
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information.
+
+
+The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
 
 One approach involves expending the errors in one over the sample size, see \cite{1999PhyD..125..285R} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
 
@@ -162,7 +177,7 @@ As the bias estimates are independent of the actual probability distribution, de
 
 We will do this using the non-parametric bootstrap. This is conceptually similar to the common alternative procedure of shuffling the sequence. Shuffling can be thought of as resampling without replacement, whereas the non-parametric bootstrap is resampling with replacement. They both involve removing any information in the sequence without changing the probabilities of the individual elements.
 
-The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity.
+The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compare to the number of bins.
 
 
 \appendix\section*{Appendices}
@@ -171,7 +186,7 @@ The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample s
 
 We will follow the approach of \cite{1999PhyD..125..285R}. Our situation is slightly different from that one. As all the $X_i$ have the same distribution, we will estimate $P(X)$ from the pooled data, rather that estimating the $P(X_i)$ separately. This means that our estimates may not satisfy the bounds, such as \eqref{eq:mutinfbounds}.
 
-Let $p_{i_1\ldots i_r}$ denote the probability $P(X_1=x_{i_1},\ldots,X_r=x_{i_r})$ and $n_{i_1\ldots i_r}$ denote the number of corresponding r-tuples in the sample. We can estimate $p_{i_1\ldots i_r}$ with
+Let $p_{i_1\ldots i_r}$ denote the probability $P_r(X_1=x_{i_1},\ldots,X_r=x_{i_r})$ and $n_{i_1\ldots i_r}$ denote the number of corresponding r-tuples in the sample. We can estimate $p_{i_1\ldots i_r}$ with
 %
 \begin{equation}\label{eq:tupprob}
   q_{i_1\ldots i_r} = \frac{n_{i_1\ldots i_r}}{N},
@@ -179,7 +194,7 @@ Let $p_{i_1\ldots i_r}$ denote the probability $P(X_1=x_{i_1},\ldots,X_r=x_{i_r}
   N = \sum_{j_1\ldots ji_r} n_{j_1\ldots j_r}.
 \end{equation}
 %
-We can then estimate $p_{j}=P(X=x_{j})$ with
+We can then estimate $p_{j}=P_1(X=x_{j})$ with
 %
 \begin{equation}\label{eq:singprob}
   q_j = \sum_{i_1\ldots i_r}\prn{ \frac{q_{i_1\ldots i_r}}{r} \sum_{a=1}^r \delta_{j,i_a}}.
