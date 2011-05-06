@@ -176,8 +176,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.9258871"
-     inkscape:cx="384.98432"
-     inkscape:cy="774.16937"
+     inkscape:cx="322.93499"
+     inkscape:cy="504.16393"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1073,7 +1073,7 @@
            height="65.943634"
            x="73.213013"
            y="346.19412" /></flowRegion><flowPara
-         id="flowPara3065"></flowPara></flowRoot>    <flowRoot
+         id="flowPara3065" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot3067"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1084,7 +1084,7 @@
            height="244.56262"
            x="60.751225"
            y="338.40549" /></flowRegion><flowPara
-         id="flowPara3073"></flowPara></flowRoot>    <text
+         id="flowPara3073" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="265"
@@ -1105,13 +1105,13 @@
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="265"
-       y="558.36218"
+       y="558.61969"
        id="text3438-1-4-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3131-7"
          x="265"
-         y="558.36218"
+         y="558.61969"
          dy="0 0 -8.8271017"
          dx="0 0 5.7116542">P<tspan
    style="font-size:18px"
@@ -1122,13 +1122,13 @@
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="265"
-       y="598.36218"
+       y="603.61969"
        id="text3438-1-4-1-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3131-7-5"
          x="265"
-         y="598.36218"
+         y="603.61969"
          dy="0 0 -8.8271017"
          dx="0 0 5.7116542">P<tspan
    style="font-size:18px"
@@ -1154,7 +1154,7 @@
          sodipodi:role="line"
          id="tspan3197"
          x="30"
-         y="62.362183">Sequence:</tspan></text>
+         y="62.362183">(a) Sequence:</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1164,7 +1164,7 @@
          sodipodi:role="line"
          id="tspan3201"
          x="41.539299"
-         y="254.28841">2-tuples:</tspan></text>
+         y="254.28841">(b) 2-tuples:</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1174,7 +1174,7 @@
          sodipodi:role="line"
          id="tspan3205"
          x="40.500816"
-         y="463.29221">Probabilities:</tspan></text>
+         y="463.29221">(c) Probabilities:</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot3231"
@@ -1185,7 +1185,7 @@
            height="42.577782"
            x="454.85532"
            y="473.92746" /></flowRegion><flowPara
-         id="flowPara3237"></flowPara></flowRoot>    <path
+         id="flowPara3237" /></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:7.10188341;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
        d="m 350,119.10914 0,88.25304"
        id="path3239" />
