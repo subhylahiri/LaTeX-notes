@@ -166,7 +166,7 @@ The lower bound corresponds to complete independence. The upper bound correspond
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information.
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
 
 The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
@@ -177,7 +177,33 @@ As the bias estimates are independent of the actual probability distribution, de
 
 We will do this using the non-parametric bootstrap. This is conceptually similar to the common alternative procedure of shuffling the sequence. Shuffling can be thought of as resampling without replacement, whereas the non-parametric bootstrap is resampling with replacement. They both involve removing any information in the sequence without changing the probabilities of the individual elements.
 
-The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compare to the number of bins.
+The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compared to the number of bins. With this method, it is difficult to compute error bars and p-values, as the process is slow.
+
+We show three examples of these methods in \fref{fig:biascomp}, one where they agreed really well, one where the agreement was not too bad and one where it was terrible, probably indicating that the sample size is too small.
+
+
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=7cm]{comparison.eps}
+    (b)i)\includegraphics[width=7cm]{spat_dur_3.eps}\\
+    ii)\includegraphics[width=7cm]{warm_typ_2.eps}
+    iii)\includegraphics[width=7cm]{iso_ang_2.eps}
+  \end{center}
+  \caption{Comparison of different methods for removing bias. (a) Three examples of the three unbiased estimates of mutual information/total correlation. First-order refers to the methods of appendix \ref{sec:stderr}. Monte-Carlo refers to subtracting the mean of 1000 nonparametric bootstrap simulations, the error-bars are the standard deviation of the bootstrap simulations. (b) Illustration of the direct method, Blue line is the uncorrected estimates with different sample sizes, red dashed line shows the extrapolation to infinite sample size and red dotted line indicates the result of this extrapolation. Green line shows the unbiased estimator using the first-order method of appendix \ref{sec:stderr} for comparison, darker green shading is $\pm$ one standard error. i)-iii) the three cases shown in (a).} \label{fig:biascomp}
+\end{figure}
+
+\section{Results}\label{sec:results}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=8cm]{isotropic.eps}
+    \includegraphics[width=8cm]{spatial.eps}\\
+    \includegraphics[width=8cm]{temporal.eps}
+    \includegraphics[width=8cm]{warming.eps}\\
+    \includegraphics[width=8cm]{cooling.eps}
+  \end{center}
+  \caption{Normalised total correlation/mutual information}\label{fig:results}
+\end{figure}
 
 
 \appendix\section*{Appendices}
