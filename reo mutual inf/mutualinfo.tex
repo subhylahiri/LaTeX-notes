@@ -49,6 +49,7 @@
 % New commands etc.
 \input{mydefs.tex}
 \input{newsymb.tex}
+\input{units.tex}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title info:
@@ -179,7 +180,9 @@ We will do this using the non-parametric bootstrap. This is conceptually similar
 
 The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compared to the number of bins. With this method, it is difficult to compute error bars and p-values, as the process is slow.
 
-We show three examples of these methods in \fref{fig:biascomp}, one where they agreed really well, one where the agreement was not too bad and one where it was terrible, probably indicating that the sample size is too small.
+We show three examples of these methods in \fref{fig:biascomp}, one where they agreed really well, one where the agreement was not too bad and one where it was terrible. In the last case, it even showed the wrong trend: the bias is supposed to be positive and decreasing with increasing sample size. This probably indicates that the sample size is too small and we were not in the asymptotic regime where the results of appendix \ref{sec:stderr} can be trusted.
+
+We can see how much this discrepancy varied with sample size in \fref{fig:discrep}. This can be used as a guide for when $N$ is large enough to trust the results.
 
 
 \begin{figure}
@@ -192,6 +195,14 @@ We show three examples of these methods in \fref{fig:biascomp}, one where they a
   \caption{Comparison of different methods for removing bias. (a) Three examples of the three unbiased estimates of mutual information/total correlation. First-order refers to the methods of appendix \ref{sec:stderr}. Monte-Carlo refers to subtracting the mean of 1000 nonparametric bootstrap simulations, the error-bars are the standard deviation of the bootstrap simulations. (b) Illustration of the direct method, Blue line is the uncorrected estimates with different sample sizes, red dashed line shows the extrapolation to infinite sample size and red dotted line indicates the result of this extrapolation. Green line shows the unbiased estimator using the first-order method of appendix \ref{sec:stderr} for comparison, darker green shading is $\pm$ one standard error. i)-iii) the three cases shown in (a).} \label{fig:biascomp}
 \end{figure}
 
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=7cm]{discpair.eps}
+    (b)\includegraphics[width=7cm]{disctrip.eps}
+  \end{center}
+  \caption{Effect of sample size in discrepancy between bias removal methods; size of discrepancy between unbiased estimates from direct method and first order method divided by first order standard error for (a) pairs (maximum of 25 bins) (b) triplets (maximum of 125 bins).} \label{fig:discrep}
+\end{figure}
+
 \section{Results}\label{sec:results}
 
 \begin{figure}
@@ -202,7 +213,7 @@ We show three examples of these methods in \fref{fig:biascomp}, one where they a
     \includegraphics[width=8cm]{warming.eps}\\
     \includegraphics[width=8cm]{cooling.eps}
   \end{center}
-  \caption{Normalised total correlation/mutual information}\label{fig:results}
+  \caption{Normalised total correlation/mutual information for (a) isotropic assay, (b) spatial assay, (c) temporal assay, (d) temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$, (e) temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
 \end{figure}
 
 
