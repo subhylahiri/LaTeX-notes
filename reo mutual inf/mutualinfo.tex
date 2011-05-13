@@ -138,7 +138,7 @@ The lower bound is saturated when one of the variables is enough to determine th
 We can define the following measure of (lack of) independence:
 %
 \begin{equation}\label{eq:mutinf}
-  I(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i) - H(X_1,\ldots,X_r).
+  I(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i) - H(X_1,\ldots,X_r) = \av{ \log \frac{P(X_1,\ldots,X_r)}{P(X_1)\ldots P(X_r)} }.
 \end{equation}
 %
 In the case $r=2$, this is the \textbf{mutual information} between $X_1$ and $X_2$. For $r>2$, there are many different generalisations of mutual information. This one is called the \textbf{total correlation} \cite{Watanabe:1960:ITA:1661258.1661265}, or multiinformation. It has the properties:
@@ -204,6 +204,12 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
 \end{figure}
 
 \section{Results}\label{sec:results}
+
+The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $?-?\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
+
+We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $20\s$ as well as pairs separated by more than $20\s$.
+
+Note that when we impose a restriction on the separation of reorientations, it is no longer true that the distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars should be ignored in \fref{fig:results}.
 
 \begin{figure}
   \begin{center}
