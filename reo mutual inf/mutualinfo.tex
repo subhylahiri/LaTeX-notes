@@ -88,7 +88,7 @@
 
 As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
 
-Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
+Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables\footnote{ Actually, reorientation type is not a random variable, as it is not described by a number. However, the concept of a probability distribution still makes sense, so the discussion would be essentially unchanged for that. }: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
 
 These probability distributions can be estimated from the frequencies in a sample sequence (described schematically in \fref{fig:schematic}). However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in appendix \ref{sec:stderr}.
 
@@ -129,7 +129,7 @@ It satisfies the bounds
 The lower bound is saturated when one of the variables is enough to determine the others. The upper bound is saturated when the $X_i$ are independent:
 %
 \begin{equation}\label{eq:indent}
-  P(X1,\ldots,X_r) = \prod_{i=1}^r P(X_i)
+  P(X_1,\ldots,X_r) = \prod_{i=1}^r P(X_i)
   \quad \implies \quad
   H(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i).
 \end{equation}
@@ -150,10 +150,10 @@ In the case $r=2$, this is the \textbf{mutual information} between $X_1$ and $X_
 \end{itemize}
 %
 
-In our cases, the random variables, $X_i$, all have the same distribution, so the total correlation satisfies the bounds
+In our cases, the random variables, $X_i$, all have the same distribution, so $H(X_i)=H_1\; \forall i$ and the total correlation satisfies the bounds
 %
 \begin{equation}\label{eq:mutinfbounds}
-  0 \leq I_r(X_1,\ldots,X_r) \leq (r-1)H(X).
+  0 \leq I_r(X_1,\ldots,X_r) \leq (r-1)H_1.
 \end{equation}
 %
 We can define a normalised total correlation:
@@ -205,21 +205,32 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
 
 \section{Results}\label{sec:results}
 
+We computed the mutual information in successive reorientation types (the combination of reversals, unreversals and omega turns that comprise the reorientation), reorientation angles (the total change in heading direction during the reorientation)  and run durations (the time between this reorientations and the previous one).
+
 The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $?-?\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
 
 We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $20\s$ as well as pairs separated by more than $20\s$.
 
-Note that when we impose a restriction on the separation of reorientations, it is no longer true that the distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars should be ignored in \fref{fig:results}.
+Note that when we impose a restriction on the separation of reorientations, it is no longer true that the distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}.
+
+%\begin{figure}
+%  \begin{center}
+%    \includegraphics[width=8cm]{isotropic.eps}
+%    \includegraphics[width=8cm]{spatial.eps}\\
+%    \includegraphics[width=8cm]{temporal.eps}
+%    \includegraphics[width=8cm]{warming.eps}\\
+%    \includegraphics[width=8cm]{cooling.eps}
+%  \end{center}
+%  \caption{Normalised total correlation/mutual information for (a) isotropic assay, (b) spatial assay, (c) temporal assay, (d) temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$, (e) temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
+%\end{figure}
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=8cm]{isotropic.eps}
-    \includegraphics[width=8cm]{spatial.eps}\\
-    \includegraphics[width=8cm]{temporal.eps}
-    \includegraphics[width=8cm]{warming.eps}\\
-    \includegraphics[width=8cm]{cooling.eps}
+    (a)\includegraphics[width=7cm]{reotype.eps}
+    (b)\includegraphics[width=7cm]{reoangle.eps}\\
+    (c)\includegraphics[width=7cm]{rundur.eps}
   \end{center}
-  \caption{Normalised total correlation/mutual information for (a) isotropic assay, (b) spatial assay, (c) temporal assay, (d) temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$, (e) temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
+  \caption{Normalised total correlation/mutual information in successive (a) reorientation types, (b) reorientation angles and (c) run durations for isotropic assay, spatial assay, temporal assay, temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$ and temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
 \end{figure}
 
 

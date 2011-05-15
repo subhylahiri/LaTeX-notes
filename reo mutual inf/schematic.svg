@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="schematic.svg">
   <defs
      id="defs4">
@@ -175,15 +175,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.9258871"
-     inkscape:cx="322.93499"
-     inkscape:cy="504.16393"
+     inkscape:zoom="0.96856778"
+     inkscape:cx="367.60478"
+     inkscape:cy="729.51823"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-global="true"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
+     inkscape:window-width="1280"
+     inkscape:window-height="750"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1">
@@ -206,6 +206,23 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="379"
+       y="512.36218"
+       id="text3438-1-4-17"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-4"
+         x="379"
+         y="512.36218"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-0"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(21)=1/8,</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.86602539px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 30,78.36218 40,0 0,30 -40,0 0,-30 z"
@@ -1007,7 +1024,7 @@
    style="font-size:18px"
    id="tspan3456"
    dy="9.0846281"
-   dx="-3.7852619">1</tspan>(2)=4/16</tspan></text>
+   dx="-3.7852619">1</tspan>(2)=4/16,</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot3462"
@@ -1045,7 +1062,7 @@
    style="font-size:18px"
    id="tspan3456-4"
    dy="9.0846281"
-   dx="-3.7852619">1</tspan>(1)=6/16</tspan></text>
+   dx="-3.7852619">1</tspan>(1)=6/16,</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1061,7 +1078,7 @@
    style="font-size:18px"
    id="tspan3456-4-4"
    dy="9.0846281"
-   dx="-3.7852619">1</tspan>(3)=6/16</tspan></text>
+   dx="-3.7852619">1</tspan>(3)=6/16,</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot3059"
@@ -1087,64 +1104,54 @@
          id="flowPara3073" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="265"
+       x="225"
        y="513.36218"
        id="text3438-1-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3131"
-         x="265"
+         x="225"
          y="513.36218"
          dy="0 0 -8.8271017"
          dx="0 0 5.7116542">P<tspan
    style="font-size:18px"
    id="tspan3133"
    dy="8.8271017"
-   dx="-5.7116542">2</tspan>(11)=1/8</tspan></text>
+   dx="-5.7116542">2</tspan>(11)=1/8,</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="265"
+       x="225"
        y="558.61969"
        id="text3438-1-4-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3131-7"
-         x="265"
+         x="225"
          y="558.61969"
          dy="0 0 -8.8271017"
          dx="0 0 5.7116542">P<tspan
    style="font-size:18px"
    id="tspan3133-1"
    dy="8.8271017"
-   dx="-5.7116542">2</tspan>(12)=0/8</tspan></text>
+   dx="-5.7116542">2</tspan>(12)=0/8,</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="265"
+       x="225"
        y="603.61969"
        id="text3438-1-4-1-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3131-7-5"
-         x="265"
+         x="225"
          y="603.61969"
          dy="0 0 -8.8271017"
          dx="0 0 5.7116542">P<tspan
    style="font-size:18px"
    id="tspan3133-1-2"
    dy="8.8271017"
-   dx="-5.7116542">2</tspan>(13)=2/8</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:28px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="425"
-       y="512.36218"
-       id="text3191"><tspan
-         sodipodi:role="line"
-         id="tspan3193"
-         x="425"
-         y="512.36218">...</tspan></text>
+   dx="-5.7116542">2</tspan>(13)=2/8,</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1203,5 +1210,90 @@
        d="m 570,107.36218 c 35,60 25,150 -10,210"
        id="path5441"
        sodipodi:nodetypes="cs" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="379"
+       y="557.61969"
+       id="text3438-1-4-1-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-7-4"
+         x="379"
+         y="557.61969"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-1-8"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(22)=0/8,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="379"
+       y="602.61969"
+       id="text3438-1-4-1-1-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-7-5-2"
+         x="379"
+         y="602.61969"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-1-2-4"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(23)=1/8,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="533"
+       y="511.36218"
+       id="text3438-1-4-17-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-4-5"
+         x="533"
+         y="511.36218"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-0-1"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(31)=1/8,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="533"
+       y="556.61969"
+       id="text3438-1-4-1-9-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-7-4-1"
+         x="533"
+         y="556.61969"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-1-8-1"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(32)=2/8,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="533"
+       y="601.61969"
+       id="text3438-1-4-1-1-8-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3131-7-5-2-2"
+         x="533"
+         y="601.61969"
+         dy="0 0 -8.8271017"
+         dx="0 0 5.7116542">P<tspan
+   style="font-size:18px"
+   id="tspan3133-1-2-4-7"
+   dy="8.8271017"
+   dx="-5.7116542">2</tspan>(33)=0/8.</tspan></text>
   </g>
 </svg>
