@@ -414,9 +414,26 @@ Using \eqref{eq:wienerinner}, we have
 %
 where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$. This formula can be used to determine the kernels to use if we want to represent a functional as a Wiener series. One can show that this choice is optimal, in a least squares sense \cite[\S15.2]{schetzen:1980}. Note that the kernels depend on the choice of $\sigma^2$, which should not be a surprise, as the Wiener functionals themselves depend on it.
 
+If you are worried by the presence of delta functions in \eqref{eq:wienerdelta}, note the alternative expression \cite{Lee1965}:
+%
+\begin{equation}\label{eq:wieneralt}
+  \av{\prn{ F_t[x] - \sum_{q=0}^{p-1} G_t\rp{p}[k_q;x]} \prod_{i=1}^p x(t-\tau_i) } = p!\,\sigma^{2p}\,k_p(\tau_1,\ldots,\tau_p).
+\end{equation}
+%
+This formula agrees with \eqref{eq:wienerkern} because $\av{x(s)x(t)}=\delta(s-t)$. In a practical situation, delta functions cannot be realised, but we see that one should simply replace the delta functions in \eqref{eq:wienerdelta} with the actual autocorrelation function of the stimulus.
+
 \subsection{Estimators}\label{sec:wienerest}
 
-Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a time period $T$, and we record the response $F_t[x]$. The obvious choice of estimator is
+There are several sources of error in estimating the response functions in an experiment, e.g.:
+\begin{itemize}
+  \item finite sample size,
+  \item non-whiteness of stimulus (perfectly white noise is an idealisation requiring infinite power and temporal resolution),
+  \item non-gaussianity of the stimulus (truly gaussian quantities can go to $\pm\infty$),
+  \item noise in measurements of response and stimulus.
+\end{itemize}
+We will concentrate on the first of these for now.
+
+Suppose we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$. Say we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we record the response $F_t[x]$ at least for the time period $0 \leq t \leq T$. The obvious choice of estimator is
 %
 \begin{equation}\label{eq:wienerest}
   \begin{aligned}
@@ -458,7 +475,7 @@ then
 %
 As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
 
-\begin{thm}[Consitency of estimators \eqref{eq:wienerest}]\label{th:wienercons}
+\begin{thm}[Consistency of estimators \eqref{eq:wienerest}] \label{th:wienercons}
   The covariance of the estimators \eqref{eq:wienerest} vanishes as the sample size goes to infinity:
   %
   \begin{equation}\label{eq:wienercons}

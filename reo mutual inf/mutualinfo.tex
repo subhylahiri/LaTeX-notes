@@ -157,7 +157,7 @@ We can define a normalised total correlation:
 %
 The lower bound corresponds to complete independence. The upper bound corresponds to complete redundancy.
 
-In our cases, the random variables, $X_i$, all have the same distribution, so $H(X_i)=H_1\; \forall i$ and the total correlation satisfies the bounds
+In our cases, the random variables, $X_i$, all have the same marginal distribution, so $H(X_i)=H_1\; \forall i$ and the total correlation satisfies the bounds
 %
 \begin{equation}\label{eq:mutinfbounds}
   0 \leq I_r(X_1,\ldots,X_r) \leq (r-1)H_1.
@@ -174,7 +174,7 @@ We will use this version except where explicitly stated otherwise.
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
 
 The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
@@ -218,7 +218,7 @@ The results of this analysis are presented in \fref{fig:results}. The analysis w
 
 We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $20\s$ as well as pairs separated by more than $20\s$.
 
-Note that when we impose a restriction on the separation of reorientations, it is no longer true that the distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only.
+Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only.
 
 %\begin{figure}
 %  \begin{center}
