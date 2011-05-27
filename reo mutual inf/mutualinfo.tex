@@ -171,6 +171,25 @@ and the normalised version is:
 %
 We will use this version except where explicitly stated otherwise.
 
+\subsection{Markov processes}\label{sec:markov}
+
+Compare the mutual information for pairs and triplets:
+%
+\begin{equation}\label{eq:parivstripgen}
+  \begin{aligned}
+    I_2 &= \av{\log \frac{P(X_1,X_2)}{P(X_1)P(X_2)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}}, \\
+    I_3 &= \av{\log \frac{P(X_1,X_2,X_3)}{P(X_1)P(X_2)P(X_3)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} + \av{\log \frac{P(X_3 \vert X_1,X_2)}{P(X_3)}}.
+  \end{aligned}
+\end{equation}
+%
+If the process is Markovian, $P(X_3 \vert X_1,X_2)$ is independent of $X_1$, and is the same function as $P(X_2 \vert X_1)$, \ie one reorientation/run is only affected by the previous reorientation/run and not any earlier ones. Therefore
+%
+\begin{equation}\label{eq:tripvspair}
+  I_3 = 2I_2, \qquad C_3 = \frac{I_3}{2H_1} = C_2.
+\end{equation}
+%
+Similar arguments apply for longer $r$-tuples. One can look for non-Markovian behaviour by looking for differences in $C_r$ for different $r$.
+
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
