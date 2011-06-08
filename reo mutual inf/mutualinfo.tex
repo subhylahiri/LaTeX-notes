@@ -141,7 +141,7 @@ We can define the following measure of (lack of) independence:
   I(X_1,\ldots,X_r) = \sum_{i=1}^r H(X_i) - H(X_1,\ldots,X_r) = \av{ \log \frac{P(X_1,\ldots,X_r)}{P(X_1)\ldots P(X_r)} }.
 \end{equation}
 %
-In the case $r=2$, this is the \textbf{mutual information} between $X_1$ and $X_2$. For $r>2$, there are many different generalisations of mutual information. This one is called the \textbf{total correlation} \cite{Watanabe:1960:ITA:1661258.1661265}, or multiinformation. It has the properties:
+In the case $r=2$, this is the \textbf{mutual information} between $X_1$ and $X_2$. For $r>2$, there are many different generalisations of mutual information. This one is called the \textbf{total correlation} \cite{Watanabe:1960}, or multiinformation. It has the properties:
 %
 \begin{itemize}
   \item it vanishes if and only if the random variables are independent
@@ -175,7 +175,7 @@ We will use this version except where explicitly stated otherwise.
 
 Compare the mutual information for pairs and triplets:
 %
-\begin{equation}\label{eq:parivstripgen}
+\begin{equation}\label{eq:tripvspairgen}
   \begin{aligned}
     I_2 &= \av{\log \frac{P(X_1,X_2)}{P(X_1)P(X_2)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}}, \\
     I_3 &= \av{\log \frac{P(X_1,X_2,X_3)}{P(X_1)P(X_2)P(X_3)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} + \av{\log \frac{P(X_3 \vert X_1,X_2)}{P(X_3)}}.
@@ -193,18 +193,29 @@ Similar arguments apply for longer $r$-tuples. One can look for non-Markovian be
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types. When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{2005cs........2017S} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types (the probabilities of the different types are shown in \fref{fig:typeprob}). When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
+
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=7cm]{ReoTypeProb-cryospat.eps}
+    (b)\includegraphics[width=7cm]{ReoTypeProb-thermospat.eps}\\[1cm]
+    (c)\includegraphics[width=7cm]{ReoTypeProb-iso.eps}
+  \end{center}
+  %\input{.TpX}
+  \caption{Probabilities of different reorientation types for (a) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (b)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (c) worms grown at $20\dC$ on no gradient at $20\dC$. Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
+\end{figure}
+
 
 
 The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
 
-One approach involves expending the errors in one over the sample size, see \cite{1999PhyD..125..285R} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
+One approach involves expending the errors in one over the sample size, see \cite{Roulston1999} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
 
 As the bias estimates are independent of the actual probability distribution, depending only on sample size and number of bins, we can estimate the bias by computing the mutual information for a completely random sequence in the same way. As the true value is zero, the result of this computation is an estimate of the bias. Furthermore, if the probabilities of the individual elements of the sequence are the same as in the data, this can be regarded as a Monte-Carlo simulation of the null hypothesis -- that the individual elements of the sequence are independent of each other. Thus, we can compute a p-value by seeing where the original result ranks amongst the results of the simulation.
 
 We will do this using the non-parametric bootstrap. This is conceptually similar to the common alternative procedure of shuffling the sequence. Shuffling can be thought of as resampling without replacement, whereas the non-parametric bootstrap is resampling with replacement. They both involve removing any information in the sequence without changing the probabilities of the individual elements.
 
-The direct method of \cite{1998PhRvL..80..197S} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compared to the number of bins. With this method, it is difficult to compute error bars and p-values, as the process is slow.
+The direct method of \cite{Strong1998} consists of varying the sample size and extrapolating to infinity. This can also be used to check that the number of samples is large enough compared to the number of bins. With this method, it is difficult to compute error bars and p-values, as the process is slow.
 
 We show three examples of these methods in \fref{fig:biascomp}, one where they agreed really well, one where the agreement was not too bad and one where it was terrible. In the last case, it even showed the wrong trend: the bias is supposed to be positive and decreasing with increasing sample size. This probably indicates that the sample size is too small and we were not in the asymptotic regime where the results of appendix \ref{sec:stderr} can be trusted.
 
@@ -237,7 +248,7 @@ The results of this analysis are presented in \fref{fig:results}. The analysis w
 
 We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $20\s$ as well as pairs separated by more than $20\s$.
 
-Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only.
+Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only, in which case the uncertainty and bias can be calculated using the methods of \cite{Roulston1999} without modification.
 
 %\begin{figure}
 %  \begin{center}
@@ -273,7 +284,7 @@ Note that when we impose a restriction on the separation of reorientations, it i
 
 \section{Bias and standard error}\label{sec:stderr}
 
-We will follow the approach of \cite{1999PhyD..125..285R}. Our situation is slightly different from that one. As all the $X_i$ have the same distribution, we will estimate $P(X)$ from the pooled data, rather that estimating the $P(X_i)$ separately. This means that our estimates may not satisfy the bounds, such as \eqref{eq:mutinfbounds}.
+We will follow the approach of \cite{Roulston1999}. Our situation is slightly different from that one. As all the $X_i$ have the same distribution, we will estimate $P(X)$ from the pooled data, rather that estimating the $P(X_i)$ separately. This means that our estimates may not satisfy the bounds, such as \eqref{eq:mutinfbounds}.
 
 Let $p_{i_1\ldots i_r}$ denote the probability $P_r(X_1=x_{i_1},\ldots,X_r=x_{i_r})$ and $n_{i_1\ldots i_r}$ denote the number of corresponding r-tuples in the sample. We can estimate $p_{i_1\ldots i_r}$ with
 %
@@ -292,7 +303,7 @@ We can then estimate $p_{j}=P_1(X=x_{j})$ with
 
 From now on, we will use $A$ to denote the estimate of $A(p)$ with $p$ replaced by $q$ and $\widehat{A}=A-\bias(A)$, where $A$ is one of $(H_1,H_r,I_r,C_r)$.
 
-Our bias estimates are essentially the same as those of \cite{1999PhyD..125..285R}, except that the number of samples for $H_1$ is $rN$ rather than $N$:
+Our bias estimates are essentially the same as those of \cite{Roulston1999}, except that the number of samples for $H_1$ is $rN$ rather than $N$:
 %
 \begin{equation}\label{eq:biasH}
   B_1 = \bias(H_1) = -\frac{\#b_1}{2rN},
