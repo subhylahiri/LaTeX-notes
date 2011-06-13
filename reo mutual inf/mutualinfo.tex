@@ -88,11 +88,9 @@
 
 As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
 
-Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables\footnote{ Actually, reorientation type is not a random variable, as it is not described by a number. However, the concept of a probability distribution still makes sense, so the discussion would be essentially unchanged for that. }: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
+Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables\footnote{ Actually, reorientation type is not a random variable, as it is not described by a number. However, the concept of a probability distribution still makes sense, and the probability of the outcome can be considered a random variable. }: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
 
 These probability distributions can be estimated from the frequencies in a sample sequence (described schematically in \fref{fig:schematic}). However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in appendix \ref{sec:stderr}.
-
-In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
 
 \begin{figure}
   \begin{center}
@@ -102,6 +100,9 @@ In principle we should look at all the characteristics together. However, increa
   \caption{Schematic calculation of probabilities. (a) Sample sequence of reorientations. (b) Grouping sequence into $r$-tuples ($r=2$). (c) Estimating probabilities for individual members and for $r$-tuples from relative frequencies in sample.} \label{fig:schematic}
 \end{figure}
 
+In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
+
+Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes larger turns than the others. In this situation, if the first reorientation in an $r$-tuple is large it would make it more likely that the worm in question is the large-turning one, making it more likely that the other reorientations in the $r$-tuple are large. Thus the probability distributions would not show independence even in the absence of actual causation. 
 
 
 \section{Entropy and mutual information}\label{sec:entropy}
@@ -193,7 +194,7 @@ Similar arguments apply for longer $r$-tuples. One can look for non-Markovian be
 
 \section{Correcting systematic errors}\label{sec:syscorr}
 
-We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 5 most common types (the probabilities of the different types are shown in \fref{fig:typeprob}). When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
 \begin{figure}
   \begin{center}
@@ -244,11 +245,15 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
 
 We computed the mutual information in successive reorientation types (the combination of reversals, unreversals and omega turns that comprise the reorientation), reorientation angles (the total change in heading direction during the reorientation)  and run durations (the time between this reorientations and the previous one).
 
-The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $19.7-21\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
+%The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $19.7-21\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
 
-We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $20\s$ as well as pairs separated by more than $20\s$.
+The results of this analysis are presented in \fref{fig:results}. The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $15\dC$ (thermophilic).
 
-Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only, in which case the uncertainty and bias can be calculated using the methods of \cite{Roulston1999} without modification.
+We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $30\s$ as well as pairs separated by more than $30\s$.
+
+%Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. This was not dealt with properly, so the corresponding bars have been excluded in \fref{fig:results}. If run duration can affect reorientation type or angle, this same problem could exist in those cases. In \fref{fig:results2} we repeat the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only, in which case the uncertainty and bias can be calculated using the methods of \cite{Roulston1999} without modification.
+
+Note that when we impose a restriction on the separation of reorientations, it is no longer true that the marginal distributions of the first and second run durations in a pair are identical. If run duration can affect reorientation type or angle, this same problem could exist in those cases. Therefore we performed the analysis using \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for these cases only, in which case the uncertainty and bias can be calculated using the methods of \cite{Roulston1999} without modification.
 
 %\begin{figure}
 %  \begin{center}
@@ -261,23 +266,33 @@ Note that when we impose a restriction on the separation of reorientations, it i
 %  \caption{Normalised total correlation/mutual information for (a) isotropic assay, (b) spatial assay, (c) temporal assay, (d) temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$, (e) temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
 %\end{figure}
 
-\begin{figure}
-  \begin{center}
-    (a)\includegraphics[width=7cm]{reotype.eps}
-    (b)\includegraphics[width=7cm]{reoangle.eps}\\[1cm]
-    (c)\includegraphics[width=7cm]{rundur.eps}
-  \end{center}
-  \caption{Normalised total correlation/mutual information in successive (a) reorientation types, (b) reorientation angles and (c) run durations for isotropic assay, spatial assay, temporal assay, temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$ and temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
-\end{figure}
+%\begin{figure}
+%  \begin{center}
+%    (a)\includegraphics[width=7cm]{reotype.eps}
+%    (b)\includegraphics[width=7cm]{reoangle.eps}\\[1cm]
+%    (c)\includegraphics[width=7cm]{rundur.eps}
+%  \end{center}
+%  \caption{Normalised total correlation/mutual information in successive (a) reorientation types, (b) reorientation angles and (c) run durations for isotropic assay, spatial assay, temporal assay, temporal assay restricted to times when $\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$ and temporal assay restricted to times when $\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
+%\end{figure}
+%
+%\begin{figure}
+%  \begin{center}
+%    (a)\includegraphics[width=7cm]{reotype2.eps}
+%    (b)\includegraphics[width=7cm]{reoangle2.eps}\\[1cm]
+%    (c)\includegraphics[width=7cm]{rundur2.eps}
+%  \end{center}
+%  \caption{Same as \fref{fig:results}, but we use \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for the cases where we restrict attention to pairs of reorientations whose starts were separated by less than $20\s$ or pairs separated by more than $20\s$.} \label{fig:results2}
+%\end{figure}
 
 \begin{figure}
   \begin{center}
-    (a)\includegraphics[width=7cm]{reotype2.eps}
-    (b)\includegraphics[width=7cm]{reoangle2.eps}\\[1cm]
-    (c)\includegraphics[width=7cm]{rundur2.eps}
+    (a)\includegraphics[width=7cm]{reotype3.eps}
+    (b)\includegraphics[width=7cm]{reoangle3.eps}\\[1cm]
+    (c)\includegraphics[width=7cm]{rundur3.eps}
   \end{center}
-  \caption{Same as \fref{fig:results}, but we use \eqref{eq:normmutinfgen} instead of \eqref{eq:normmutinf} for the cases where we restrict attention to pairs of reorientations whose starts were separated by less than $20\s$ or pairs separated by more than $20\s$.} \label{fig:results2}
+  \caption{Normalised total correlation/mutual information in successive (a) reorientation types, (b) reorientation angles and (c) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
 \end{figure}
+
 
 
 \appendix\section*{Appendices}
