@@ -172,24 +172,68 @@ and the normalised version is:
 %
 We will use this version except where explicitly stated otherwise.
 
-\subsection{Markov processes}\label{sec:markov}
+\subsection{Entropy, information and bits}\label{sec:bits}
 
-Compare the mutual information for pairs and triplets:
+If we take the logarithms to base 2, we can think of entropy as a measure of ``the average number of bits'' of information we are missing by not knowing the value of $X$, and hence the number of bits of information we'd gain by measuring it. \Eg suppose $X$ can take on two values with equal probability, then $H(X)=1$. If the probabilities were 1 and 0, then $H(X)=$, as we'd gain no information by measuring it due to the fact that we already know its value. If we have $n$ independent two state systems of the first type, we'd have an entropy of $n$ due to \eqref{eq:indent}. On the other hand, if the first bit determined the remaining $n-1$ bits, we'd have an entropy of 1.
+
+There is another way of thinking of mutual information in terms of \textbf{conditional entropy}:
 %
-\begin{equation}\label{eq:tripvspairgen}
+\begin{equation}\label{eq:condent}
+  H(Y|X) = \av{-\log P(Y|X)},
+\end{equation}
+%
+where the average is over all values of $X$ and $Y$. This can be thought of as the number of bits of missing information due to not knowing $Y$ that remain after measuring $X$.
+
+Then the mutual information can be written as
+%
+\begin{equation}\label{eq:mutinfcond}
+  I(X,Y) = H(Y) - H(Y|X) = H(X) - H(X|Y),
+\end{equation}
+%
+\ie it is the number of bits of information about $Y$ that we gain by measuring $X$ (and vice-versa).
+
+When we have three random variables, we can write
+%
+\begin{equation}\label{eq:multiinfcond}
   \begin{aligned}
-    I_2 &= \av{\log \frac{P(X_1,X_2)}{P(X_1)P(X_2)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}}, \\
-    I_3 &= \av{\log \frac{P(X_1,X_2,X_3)}{P(X_1)P(X_2)P(X_3)}} =  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} + \av{\log \frac{P(X_3 \vert X_1,X_2)}{P(X_3)}}.
+    I_3 &= \av{\log \frac{P(X_1,X_2,X_3)}{P(X_1)P(X_2)P(X_3)}} \\
+      &=  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} + \av{\log \frac{P(X_3 \vert X_1,X_2)}{P(X_3)}} \\
+      &= \brk{H(X_2)-H(X_2|X_1)} +  \brk{ H(X_3)-H(X_3|X_1,X_2)}.
   \end{aligned}
 \end{equation}
 %
+In general, we can write
+%
+\begin{equation}\label{eq:multiinfcond}
+  \begin{aligned}
+    I_r &= \av{\log \frac{P(X_1,X_2,\ldots,X_r)}{P(X_1)P(X_2)\ldots P(X_r)}} \\
+      &=  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} +\ldots+ \av{\log \frac{P(X_r \vert X_1,\ldots,X_{r-1})}{P(X_r)}} \\
+      &= \brk{H(X_2)-H(X_2|X_1)} + \ldots + \brk{ H(X_r)-H(X_r|X_1,\ldots,X_{r-1})} \\
+      &= \sum_{i=2}^{r} \brk{ H(X_i)-H(X_i|X_1,\ldots,X_{i-1})}.
+  \end{aligned}
+\end{equation}
+%
+\ie its the sum of number of bits of information about each $X_i$ that we gain by measuring the previous ones.
+
+
+\subsection{Markov processes}\label{sec:markov}
+
 If the process is Markovian, \ie one reorientation/run is only affected by the previous reorientation/run and not any earlier ones, then $P(X_3 \vert X_1,X_2)$ is independent of $X_1$, and is the same function as $P(X_2 \vert X_1)$. Therefore
 %
 \begin{equation}\label{eq:tripvspair}
-  I_3 = 2I_2, \qquad C_3 = \frac{I_3}{2H_1} = C_2.
+  \begin{aligned}
+    H(X_3|X_1,X_2) &= H(X_2|X_1).\\
+    I_3 &= 2I_2, \qquad C_3 = \frac{I_3}{2H_1} = C_2.
+  \end{aligned}
 \end{equation}
 %
-Similar arguments apply for longer $r$-tuples. One can look for non-Markovian behaviour by looking for differences in $C_r$ for different $r$.
+Similar arguments apply for longer $r$-tuples:
+ %
+ \begin{equation}\label{eq:markovinf}
+   I_r = (r-1)I_2, \qquad C_r = \frac{I_r}{(r-1)H_1} = C_2.
+\end{equation}
+%
+One can look for non-Markovian behaviour by looking for differences in $C_r$ for different $r$.
 
 
 \section{Correcting systematic errors}\label{sec:syscorr}
@@ -210,7 +254,7 @@ We will compute the quantities defined in the previous section by estimating the
 
 The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
 
-One approach involves expending the errors in one over the sample size, see \cite{Roulston1999} and estimating the leading order correction. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
+One approach involves expending the errors in the reciprocal of the sample size and estimating the leading order correction, see \cite{Roulston1999}. One can also estimate the random errors using this approach. Our estimators are slightly different to those used there, the appropriate versions of the estimates are calculated in Appendix \ref{sec:stderr}.
 
 As the bias estimates are independent of the actual probability distribution, depending only on sample size and number of bins, we can estimate the bias by computing the mutual information for a completely random sequence in the same way. As the true value is zero, the result of this computation is an estimate of the bias. Furthermore, if the probabilities of the individual elements of the sequence are the same as in the data, this can be regarded as a Monte-Carlo simulation of the null hypothesis -- that the individual elements of the sequence are independent of each other. Thus, we can compute a p-value by seeing where the original result ranks amongst the results of the simulation.
 
