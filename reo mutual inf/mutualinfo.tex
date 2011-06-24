@@ -79,6 +79,7 @@
   We show how mutual information can be used to describe the independence of successive reorientations
 \end{abstract}
 
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Beginning of Article:
@@ -107,7 +108,7 @@ Note that this method can confuse animal-to-animal variability with causation. \
 
 \section{Entropy and mutual information}\label{sec:entropy}
 
-The \textbf{entropy} of a probability distribution is a measure of the lack of information we have about a random variable:
+The \textbf{entropy} of a probability distribution is a measure of the lack of information we have about a random variable \cite{Cover:2006}:
 %
 \begin{equation}\label{eq:ent}
   H(X) = \av{-\log P(X)}.
@@ -236,7 +237,86 @@ Similar arguments apply for longer $r$-tuples:
 One can look for non-Markovian behaviour by looking for differences in $C_r$ for different $r$.
 
 
-\section{Correcting systematic errors}\label{sec:syscorr}
+\subsection{Effect of animal-to-animal variability}\label{sec:variability}
+
+In this section we will look at the effect that animal-to-animal variability can have on mutual information in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In specific cases these two outcomes will be the two most important reorientation types (omega or reversal-omega) and the reorientation direction (right or left).
+
+Label the individual worms with $i=1\ldots N$. Then, for a single reorientation
+%
+\begin{equation}\label{eq:varisinglereo}
+  P(i) = q_i, \qquad
+  P(+|i) = p_i, \qquad
+  P(-|i) = 1-p_i.
+\end{equation}
+%
+The prior probability that a reorientation was from a particular animal, $q_i$, will be proportional to that animal's reorientation rate, which may not be the same for all animals. We also introduce the notation
+%
+\begin{equation}\label{eq:varinot}
+  \bar{p} = \sum_i q_i p_i, \qquad
+  \delta p = \sqrt{\sum_i q_i(p_i-\bar{p})^2}.
+\end{equation}
+%
+So that
+%
+\begin{equation}\label{eq:varimarg}
+  P(+) = \bar{p}, \qquad P(-) = 1-\bar{p}.
+\end{equation}
+%
+Then, using Bayes' theorem
+%
+\begin{equation}\label{eq:singlereobayes}
+  P(i|+) = \frac{P(+|i)P(i)}{P(+)} = \frac{q_ip_i}{\bar{p}}, \qquad
+  P(i|-) = \frac{P(-|i)P(i)}{P(-)} = \frac{q_i(1-p_i)}{1-\bar{p}}.
+\end{equation}
+%
+
+This allows us to calculate conditional probabilities for next reorientation, given previous reorientation
+%
+\begin{equation}\label{eq:varicond}
+  \begin{aligned}
+    P(+|+) &= \sum_i P(+|i)P(i|+) = \bar{p} + \frac{\delta p^2}{\bar{p}}, \\
+    P(+|-) &= \sum_i P(+|i)P(i|-) = \bar{p} - \frac{\delta p^2}{1-\bar{p}}, \\
+    P(-|+) &= \sum_i P(-|i)P(i|+) = 1-\bar{p} - \frac{\delta p^2}{\bar{p}}, \\
+    P(-|-) &= \sum_i P(-|i)P(i|-) =1- \bar{p} + \frac{\delta p^2}{1-\bar{p}},
+  \end{aligned}
+\end{equation}
+%
+and the joint probabilities of previous and next reorientations
+%
+\begin{equation}\label{eq:varijoint}
+  \begin{aligned}
+    P(+,+) &= P(+|+)P(+) = \bar{p}^2 + \delta p^2, \\
+    P(+,-) &= P(-|+)P(+) = \bar{p}(1-\bar{p}) - \delta p^2, \\
+    P(-,+) &= P(+|-)P(-) = \bar{p}(1-\bar{p}) - \delta p^2, \\
+    P(-,-) &= P(-|-)P(-) = (1-\bar{p})^2 + \delta p^2.
+  \end{aligned}
+\end{equation}
+%
+
+The entropy of single reorientations is then
+%
+\begin{equation}\label{eq:varient}
+  H_1 = - \sum_{a\in\{+,-\}} P(a)\log P(a) 
+   = - \bar{p}\log \bar{p} - (1-\bar{p})\log(1-\bar{p}),
+\end{equation}
+%
+and the mutual information is
+%
+\begin{equation}\label{eq:varimutinf}
+  \begin{aligned}
+  I_2 =& \sum_{a,b\in\{+,-\}} P(a,b)\log \frac{P(a,b)}{P(a)P(b)}\\
+   =& \prn{\bar{p}^2 + \delta p^2}\log\prn{1 + \frac{\delta p^2}{\bar{p}^2}}
+   + 2\prn{\bar{p}(1-\bar{p}) - \delta p^2}\log\prn{1 - \frac{\delta p^2}{\bar{p}(1-\bar{p})}}
+   \\&+ \prn{(1-\bar{p})^2 + \delta p^2}\log\prn{1 + \frac{\delta p^2}{(1-\bar{p})^2}},
+  \end{aligned} 
+\end{equation}
+%
+which vanishes when $\delta p=0$.
+
+
+\section{Practical issues}\label{sec:practical}
+
+\subsection{Correcting systematic errors}\label{sec:syscorr}
 
 We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
@@ -284,6 +364,34 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
   \end{center}
   \caption{Effect of sample size in discrepancy between bias removal methods; size of discrepancy between unbiased estimates from direct method and first order method divided by first order standard error for (a) pairs (maximum of 25 bins) (b) triplets (maximum of 125 bins).} \label{fig:discrep}
 \end{figure}
+
+
+\subsection{Estimating variability}\label{sec:variest}
+
+Estimating $\delta p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal.
+
+For reorientation type, we count the number of omegas in each track, $w_i$, and the number of reversal-omegas, $r_i$. If the track length is $t_i$,
+%
+\begin{equation}\label{eq:varesttype}
+  R_i = \frac{w_i+r_i}{t_i}, \qquad 
+  q_i = \frac{R_i}{\sum_j R_j}, \qquad
+  p_i = \frac{w_i}{w_i+r_i}.
+\end{equation}
+%
+Then, $\bar{p}$ and $\delta p$ can be calculated with \eqref{eq:varinot}.
+
+For reorientation direction, we count the number of right turns in each track, $r_i$, and the number of left turns, $l_i$. If the track length is $t_i$,
+%
+\begin{equation}\label{eq:varesttype}
+  R_i = \frac{r_i+l_i}{t_i}, \qquad
+  q_i = \frac{R_i}{\sum_j R_j}, \qquad
+  p_i = \frac{r_i}{r_i+l_i}.
+\end{equation}
+%
+Then, $\bar{p}$ and $\delta p$ can be calculated with \eqref{eq:varinot}.
+
+
+
 
 \section{Results}\label{sec:results}
 
