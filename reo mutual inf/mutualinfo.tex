@@ -253,7 +253,7 @@ The prior probability that a reorientation was from a particular animal, $q_i$, 
 %
 \begin{equation}\label{eq:varinot}
   \bar{p} = \sum_i q_i p_i, \qquad
-  \delta p = \sqrt{\sum_i q_i(p_i-\bar{p})^2}.
+  \sigma_p = \sqrt{\sum_i q_i(p_i-\bar{p})^2}.
 \end{equation}
 %
 So that
@@ -274,10 +274,10 @@ This allows us to calculate conditional probabilities for next reorientation, gi
 %
 \begin{equation}\label{eq:varicond}
   \begin{aligned}
-    P(+|+) &= \sum_i P(+|i)P(i|+) = \bar{p} + \frac{\delta p^2}{\bar{p}}, \\
-    P(+|-) &= \sum_i P(+|i)P(i|-) = \bar{p} - \frac{\delta p^2}{1-\bar{p}}, \\
-    P(-|+) &= \sum_i P(-|i)P(i|+) = 1-\bar{p} - \frac{\delta p^2}{\bar{p}}, \\
-    P(-|-) &= \sum_i P(-|i)P(i|-) =1- \bar{p} + \frac{\delta p^2}{1-\bar{p}},
+    P(+|+) &= \sum_i P(+|i)P(i|+) = \bar{p} + \frac{\sigma_p^2}{\bar{p}}, \\
+    P(+|-) &= \sum_i P(+|i)P(i|-) = \bar{p} - \frac{\sigma_p^2}{1-\bar{p}}, \\
+    P(-|+) &= \sum_i P(-|i)P(i|+) = 1-\bar{p} - \frac{\sigma_p^2}{\bar{p}}, \\
+    P(-|-) &= \sum_i P(-|i)P(i|-) =1- \bar{p} + \frac{\sigma_p^2}{1-\bar{p}},
   \end{aligned}
 \end{equation}
 %
@@ -285,10 +285,10 @@ and the joint probabilities of previous and next reorientations
 %
 \begin{equation}\label{eq:varijoint}
   \begin{aligned}
-    P(+,+) &= P(+|+)P(+) = \bar{p}^2 + \delta p^2, \\
-    P(+,-) &= P(-|+)P(+) = \bar{p}(1-\bar{p}) - \delta p^2, \\
-    P(-,+) &= P(+|-)P(-) = \bar{p}(1-\bar{p}) - \delta p^2, \\
-    P(-,-) &= P(-|-)P(-) = (1-\bar{p})^2 + \delta p^2.
+    P(+,+) &= P(+|+)P(+) = \bar{p}^2 + \sigma_p^2, \\
+    P(+,-) &= P(-|+)P(+) = \bar{p}(1-\bar{p}) - \sigma_p^2, \\
+    P(-,+) &= P(+|-)P(-) = \bar{p}(1-\bar{p}) - \sigma_p^2, \\
+    P(-,-) &= P(-|-)P(-) = (1-\bar{p})^2 + \sigma_p^2.
   \end{aligned}
 \end{equation}
 %
@@ -296,7 +296,7 @@ and the joint probabilities of previous and next reorientations
 The entropy of single reorientations is then
 %
 \begin{equation}\label{eq:varient}
-  H_1 = - \sum_{a\in\{+,-\}} P(a)\log P(a) 
+  H_1 = - \sum_{a\in\{+,-\}} P(a)\log P(a)
    = - \bar{p}\log \bar{p} - (1-\bar{p})\log(1-\bar{p}),
 \end{equation}
 %
@@ -305,13 +305,13 @@ and the mutual information is
 \begin{equation}\label{eq:varimutinf}
   \begin{aligned}
   I_2 =& \sum_{a,b\in\{+,-\}} P(a,b)\log \frac{P(a,b)}{P(a)P(b)}\\
-   =& \prn{\bar{p}^2 + \delta p^2}\log\prn{1 + \frac{\delta p^2}{\bar{p}^2}}
-   + 2\prn{\bar{p}(1-\bar{p}) - \delta p^2}\log\prn{1 - \frac{\delta p^2}{\bar{p}(1-\bar{p})}}
-   \\&+ \prn{(1-\bar{p})^2 + \delta p^2}\log\prn{1 + \frac{\delta p^2}{(1-\bar{p})^2}},
-  \end{aligned} 
+   =& \prn{\bar{p}^2 + \sigma_p^2}\log\prn{1 + \frac{\sigma_p^2}{\bar{p}^2}}
+   + 2\prn{\bar{p}(1-\bar{p}) - \sigma_p^2}\log\prn{1 - \frac{\sigma_p^2}{\bar{p}(1-\bar{p})}}
+   \\&+ \prn{(1-\bar{p})^2 + \sigma_p^2}\log\prn{1 + \frac{\sigma_p^2}{(1-\bar{p})^2}},
+  \end{aligned}
 \end{equation}
 %
-which vanishes when $\delta p=0$.
+which vanishes when $\sigma_p=0$.
 
 
 \section{Practical issues}\label{sec:practical}
@@ -368,27 +368,27 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
 
 \subsection{Estimating variability}\label{sec:variest}
 
-Estimating $\delta p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal.
+Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal.
 
-For reorientation type, we count the number of omegas in each track, $w_i$, and the number of reversal-omegas, $r_i$. If the track length is $t_i$,
+For reorientation type, we count the number of omegas in each track, $\Omega_i$, and the number of reversal-omegas, $R_i$. If the track length is $t_i$,
 %
 \begin{equation}\label{eq:varesttype}
-  R_i = \frac{w_i+r_i}{t_i}, \qquad 
-  q_i = \frac{R_i}{\sum_j R_j}, \qquad
-  p_i = \frac{w_i}{w_i+r_i}.
+  r_i = \frac{\Omega_i+R_i}{t_i}, \qquad
+  q_i = \frac{r_i}{\sum_j r_j}, \qquad
+  p_i = \frac{\Omega_i}{\Omega_i+R_i}.
 \end{equation}
 %
-Then, $\bar{p}$ and $\delta p$ can be calculated with \eqref{eq:varinot}.
+Then, $\bar{p}$ and $\sigma_p$ can be calculated with \eqref{eq:varinot}.
 
-For reorientation direction, we count the number of right turns in each track, $r_i$, and the number of left turns, $l_i$. If the track length is $t_i$,
+For reorientation direction, we count the number of right turns in each track, $R_i$, and the number of left turns, $L_i$. If the track length is $t_i$,
 %
 \begin{equation}\label{eq:varesttype}
-  R_i = \frac{r_i+l_i}{t_i}, \qquad
-  q_i = \frac{R_i}{\sum_j R_j}, \qquad
-  p_i = \frac{r_i}{r_i+l_i}.
+  r_i = \frac{R_i+L_i}{t_i}, \qquad
+  q_i = \frac{r_i}{\sum_j r_j}, \qquad
+  p_i = \frac{R_i}{R_i+L_i}.
 \end{equation}
 %
-Then, $\bar{p}$ and $\delta p$ can be calculated with \eqref{eq:varinot}.
+Then, $\bar{p}$ and $\sigma_p$ can be calculated with \eqref{eq:varinot}.
 
 
 
@@ -447,6 +447,10 @@ Note that when we impose a restriction on the separation of reorientations, it i
 
 \subsection{Binary versions}\label{sec:binaryresults}
 
+Now we will restrict attention to binary cases, \ie for reorientation type we only look at two types: omega and reversal-omega. For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left. The results are in \fref{fig:binaryresults}.
+
+
+
 \begin{figure}
   \begin{center}
     (a)\rotatebox[origin=cc]{-90}{\includegraphics[height=7cm]{cond_type.eps}}
@@ -454,7 +458,7 @@ Note that when we impose a restriction on the separation of reorientations, it i
     (c)\includegraphics[width=7cm]{reotype_bin.eps}
     (d)\includegraphics[width=7cm]{reoangle_bin.eps}
   \end{center}
-  \caption{(a-b) Conditional probabilities for (a)reorientation types and (b) reorientation directions. (c-d) Normalised total correlation/mutual information in successive (c) reorientation types and (d) reorientation angles.  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample. In both cases, data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}. Both done with worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$.} \label{fig:results}
+  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. (a-b) Conditional probabilities for (a) reorientation types and (b) reorientation directions. Data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}. (c-d) Normalised total correlation/mutual information in successive (c) reorientation types and (d) reorientation angles.  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
 \end{figure}
 
 
@@ -521,7 +525,7 @@ which leads to
 %
 \begin{equation}\label{eq:dhbydn}
   \begin{aligned}
-    \pdiff{H_r}{n_{j_1\ldots j_r}} &= -\frac{\log q_{i_1\ldots i_r} + H_r}{N}, &
+    \pdiff{H_r}{n_{j_1\ldots j_r}} &= -\frac{\log q_{j_1\ldots j_r} + H_r}{N}, &
     \qquad
     \pdiff{I_{r}}{n_{j_1\ldots j_r}} &= -\frac{\prn{\sum_a \log q_{j_a}}-\log q_{i_1\ldots i_r} + I_r}{N}, \\
     \pdiff{H_1}{n_{j_1\ldots j_r}} &= -\frac{\frac{1}{r} \prn{\sum_a \log q_{j_a}} + H_1}{N}, &
