@@ -195,7 +195,7 @@ Then the mutual information can be written as
 
 When we have three random variables, we can write
 %
-\begin{equation}\label{eq:multiinfcond}
+\begin{equation}\label{eq:multiinfcond3}
   \begin{aligned}
     I_3 &= \av{\log \frac{P(X_1,X_2,X_3)}{P(X_1)P(X_2)P(X_3)}} \\
       &=  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} + \av{\log \frac{P(X_3 \vert X_1,X_2)}{P(X_3)}} \\
@@ -205,7 +205,7 @@ When we have three random variables, we can write
 %
 In general, we can write
 %
-\begin{equation}\label{eq:multiinfcond}
+\begin{equation}\label{eq:multiinfcondgen}
   \begin{aligned}
     I_r &= \av{\log \frac{P(X_1,X_2,\ldots,X_r)}{P(X_1)P(X_2)\ldots P(X_r)}} \\
       &=  \av{\log \frac{P(X_2 \vert X_1)}{P(X_2)}} +\ldots+ \av{\log \frac{P(X_r \vert X_1,\ldots,X_{r-1})}{P(X_r)}} \\
@@ -318,18 +318,7 @@ which vanishes when $\sigma_p=0$.
 
 \subsection{Correcting systematic errors}\label{sec:syscorr}
 
-We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately. When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). When looking at angles and run durations, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
-
-\begin{figure}
-  \begin{center}
-    (a)\includegraphics[width=7cm]{ReoTypeProb-cryospat.eps}
-    (b)\includegraphics[width=7cm]{ReoTypeProb-thermospat.eps}\\[1cm]
-    (c)\includegraphics[width=7cm]{ReoTypeProb-iso.eps}
-  \end{center}
-  %\input{.TpX}
-  \caption{Probabilities of different reorientation types for (a) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (b)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (c) worms grown at $20\dC$ on no gradient at $20\dC$. Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
-\end{figure}
-
+We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately.
 
 
 The lower bounds on mutual information, \eqref{eq:mutinfbounds} and \eqref{eq:normmutinf}, lead to systematic errors which tend to bias these estimates upwards. There are several methods for estimating this bias.
@@ -378,17 +367,17 @@ For reorientation type, we count the number of omegas in each track, $\Omega_i$,
   p_i = \frac{\Omega_i}{\Omega_i+R_i}.
 \end{equation}
 %
-Then, $\bar{p}$ and $\sigma_p$ can be calculated by substituting into \eqref{eq:varinot}.
 
 For reorientation direction, we count the number of right turns in each track, $R_i$, and the number of left turns, $L_i$. If the track length is $t_i$,
 %
-\begin{equation}\label{eq:varesttype}
+\begin{equation}\label{eq:varestdir}
   r_i = \frac{R_i+L_i}{t_i}, \qquad
   q_i = \frac{r_i}{\sum_j r_j}, \qquad
   p_i = \frac{R_i}{R_i+L_i}.
 \end{equation}
 %
-Then, $\bar{p}$ and $\sigma_p$ can be calculated by substituting into \eqref{eq:varinot}.
+
+In both cases, $\bar{p}$ and $\sigma_p$ can be calculated by substituting \eqref{eq:varesttype} or \eqref{eq:varestdir} into \eqref{eq:varinot}.
 
 The estimators for $\sigma_p$ may be biased, but they should be consistent. As the sample sizes are large, the bias should be negligible. We will not attempt to calculate standard errors for these estimators.
 
@@ -396,7 +385,9 @@ The estimators for $\sigma_p$ may be biased, but they should be consistent. As t
 
 \section{Results}\label{sec:results}
 
-We computed the mutual information in successive reorientation types (the combination of reversals, unreversals and omega turns that comprise the reorientation), reorientation angles (the total change in heading direction during the reorientation)  and run durations (the time between this reorientations and the previous one).
+\subsection{Continuous cases}
+
+We computed the mutual information in successive reorientation angles (the total change in heading direction during the reorientation)  and run durations (the time between this reorientations and the previous one). As these are continuous variables, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
 %The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $19.7-21\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
 
@@ -439,17 +430,32 @@ Note that when we impose a restriction on the separation of reorientations, it i
 
 \begin{figure}
   \begin{center}
-    (a)\includegraphics[width=7cm]{reotype3.eps}
-    (b)\includegraphics[width=7cm]{reoangle3.eps}\\[1cm]
-    (c)\includegraphics[width=7cm]{rundur3.eps}
+    (a)\includegraphics[width=7cm]{reoangle3.eps}
+    (b)\includegraphics[width=7cm]{rundur3.eps}
   \end{center}
-  \caption{Normalised total correlation/mutual information in successive (a) reorientation types, (b) reorientation angles and (c) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
+  \caption{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
 \end{figure}
 
-\subsection{Binary versions}\label{sec:binaryresults}
+\subsection{Binary cases}\label{sec:binaryresults}
 
-Now we will restrict attention to binary cases, \ie for reorientation type we only look at two types: omega and reversal-omega. For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left. The results are in \fref{fig:binaryresults}.
+Now we will restrict attention to binary cases, \ie for reorientation type we only look at two types: omega and reversal-omega. For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left.
 
+When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}).
+
+The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic).
+
+We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}. 
+
+
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=7cm]{ReoTypeProb-neutraliso.eps}\\[1cm]
+    (b)\includegraphics[width=7cm]{ReoTypeProb-cryospat.eps}
+    (c)\includegraphics[width=7cm]{ReoTypeProb-thermospat.eps}
+  \end{center}
+  %\input{.TpX}
+  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
+\end{figure}
 
 
 \begin{figure}
