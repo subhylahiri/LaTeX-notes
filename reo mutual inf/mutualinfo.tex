@@ -239,7 +239,7 @@ One can look for non-Markovian behaviour by looking for differences in $C_r$ for
 
 \subsection{Effect of animal-to-animal variability}\label{sec:variability}
 
-In this section we will look at the effect that animal-to-animal variability can have on mutual information in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In specific cases these two outcomes will be the two most important reorientation types (omega or reversal-omega) and the reorientation direction (right or left).
+In this section we will look at the effect that animal-to-animal variability can have on mutual information in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In specific cases these two outcomes will be the two most important reorientation types (omega or reversal-omega) and the reorientation direction (right or left). We will assume that animal-to-animal variability is the only effect and that there is no memory
 
 Label the individual worms with $i=1\ldots N$. Then, for a single reorientation
 %
@@ -270,7 +270,14 @@ Then, using Bayes' theorem
 \end{equation}
 %
 
-This allows us to calculate conditional probabilities for next reorientation, given previous reorientation
+For pairs of successive reorientations, we use the notation
+%
+\begin{equation}\label{eq:varipairnot}
+  P(\text{next}=a|\text{prev}=b) = P(a|b) , \qquad
+  P(\text{prev}=b \cap \text{next}=a) = P(b,a) .
+\end{equation}
+%
+We can calculate conditional probabilities for next reorientation, given previous reorientation
 %
 \begin{equation}\label{eq:varicond}
   \begin{aligned}
@@ -442,19 +449,21 @@ Now we will restrict attention to binary cases, \ie for reorientation type we on
 
 When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}).
 
-The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic).
+The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic). It was also done for worms grown on $50\mM$ salt concentration on a spatial salt gradient from $0-50\mM$ over $22\cm$ (saltphilic) and on a gradient from $50-100\mM$ also over $22\cm$ (saltphobic).
 
 We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}. 
 
 
 \begin{figure}
   \begin{center}
-    (a)\includegraphics[width=7cm]{ReoTypeProb-neutraliso.eps}\\[1cm]
-    (b)\includegraphics[width=7cm]{ReoTypeProb-cryospat.eps}
-    (c)\includegraphics[width=7cm]{ReoTypeProb-thermospat.eps}
+    (a)\includegraphics[width=6cm]{ReoTypeProb-neutraliso.eps}\\[1cm]
+    (b)\includegraphics[width=6cm]{ReoTypeProb-cryospat.eps}
+    (c)\includegraphics[width=6cm]{ReoTypeProb-thermospat.eps}\\[1cm]
+    (d)\includegraphics[width=6cm]{ReoTypeProb-lowsalt.eps}
+    (e)\includegraphics[width=6cm]{ReoTypeProb-highsalt.eps}
   \end{center}
   %\input{.TpX}
-  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
+  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (d)  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$, (e)  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
 \end{figure}
 
 
