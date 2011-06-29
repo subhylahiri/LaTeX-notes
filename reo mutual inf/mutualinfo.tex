@@ -364,7 +364,7 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
 
 \subsection{Estimating animal-to-animal variability}\label{sec:variest}
 
-Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We will then assume that the estimate for $\sigma_p$ applies to the whole experiment.
+Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
 
 For reorientation type, we count the number of omegas in each track, $\Omega_i$, and the number of reversal-omegas, $R_i$. If the track length is $t_i$,
 %
@@ -392,13 +392,13 @@ The estimators for $\sigma_p$ may be biased, but they should be consistent. As t
 
 \section{Results}\label{sec:results}
 
-\subsection{Continuous cases}
+\subsection{Continuous cases}\label{sec:ctsresults}
 
 We computed the mutual information in successive reorientation angles (the total change in heading direction during the reorientation)  and run durations (the time between this reorientations and the previous one). As these are continuous variables, the data has to be binned. We will follow the approach of \cite{Slonim:2005} and place the bins on quantiles of the data, preserving the coordinate invariance of the mutual information. In both cases, we will use 5 bins.
 
-%The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $19.7-21\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > 10^{-4}\mbox{}\dC/\mathrm{s}$) and cooling ($\diff{T}{t} < -10^{-4}\mbox{}\dC/\mathrm{s}$).
+%The results of this analysis are presented in \fref{fig:results}. The analysis was performed for an isotropic assay (where the temperature was uniform and constant), a spatial assay (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $9\cm$) and a temporal assay (where the temperature was constant in space but varied sinusoidally in time from $19.7-21\dC$ with a period of $10\mins$). For the temporal assay, the analysis was also performed restricted to periods of warming ($\diff{T}{t} > \ee{-4}\mbox{}\dC/\s[]$) and cooling ($\diff{T}{t} < -\ee{-4}\mbox{}\dC/\mathrm{s}$).
 
-The results of this analysis are presented in \fref{fig:results}. The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic).
+The results of this analysis are presented in \fref{fig:ctsresults}. The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic).
 
 We looked at the cases $r=2$ (pairs of consecutive reorientations) and $r=3$ (triplets of consecutive reorientations). We also restricted attention to pairs of reorientations whose starts were separated by less than $30\s$ as well as pairs separated by more than $30\s$.
 
@@ -440,18 +440,16 @@ Note that when we impose a restriction on the separation of reorientations, it i
     (a)\includegraphics[width=7cm]{reoangle3.eps}
     (b)\includegraphics[width=7cm]{rundur3.eps}
   \end{center}
-  \caption{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:results}
+  \caption{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:ctsresults}
 \end{figure}
 
 \subsection{Binary cases}\label{sec:binaryresults}
 
-Now we will restrict attention to binary cases, \ie for reorientation type we only look at two types: omega and reversal-omega. For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left.
-
-When looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}).
+Now we will restrict attention to binary cases, \ie when looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left.
 
 The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic). It was also done for worms grown on $50\mM$ salt concentration on a spatial salt gradient from $0-50\mM$ over $22\cm$ (saltphilic) and on a gradient from $50-100\mM$ also over $22\cm$ (saltphobic).
 
-We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}. 
+We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}.
 
 
 \begin{figure}
