@@ -87,11 +87,22 @@
 
 \section{Reorientation sequences}\label{sec:reoseq}
 
-As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
+As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. Some example tracks, consisting of runs and reorientations, are shown in \fref{fig:tracks}. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
 
 Consider a sequence of $r$ successive reorientations. The values of a particular characteristic of these reorientations is an $r$-tuple of random variables\footnote{ Actually, reorientation type is not a random variable, as it is not described by a number. However, the concept of a probability distribution still makes sense, and the probability of the outcome can be considered a random variable. }: $(X_1,\ldots,X_r)$. We are asking whether or not $P(X_1,\ldots,X_r) = P(X_1)\ldots P(X_r)$. We will discuss some measures of independence in \sref{sec:entropy}.
 
 These probability distributions can be estimated from the frequencies in a sample sequence (described schematically in \fref{fig:schematic}). However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in appendix \ref{sec:stderr}.
+
+\begin{figure}
+  (a)\includegraphics[width=6cm]{track1.eps}
+  (b)\includegraphics[width=6cm]{track2.eps}\\[1cm]
+  (c)\includegraphics[width=6cm]{track3.eps}
+  (d)\includegraphics[width=6cm]{track4.eps}
+  %\input{.TpX}
+  \caption{Example tracks. Runs: Coloured, thin lines, reorientations: black, thin lines. Omega turns and reversals labelled as $\Omega$ and $R$. Grouping of turns into reorientations indicated by reo 1, reo 2, etc.} \label{fig:tracks}
+\end{figure}
+
+
 
 \begin{figure}
   \begin{center}
@@ -472,7 +483,21 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
     (c)\includegraphics[width=7cm]{reotype_bin.eps}
     (d)\includegraphics[width=7cm]{reoangle_bin.eps}
   \end{center}
-  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. (a-b) Conditional probabilities for (a) reorientation types and (b) reorientation directions. Data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}. (c-d) Normalised total correlation/mutual information in successive (c) reorientation types and (d) reorientation angles.  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
+  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$, 
+  worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$, 
+  worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$, 
+  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$ over $22\cm$,
+  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$ over $22\cm$.
+  (a-b) Conditional probabilities for 
+  (a) reorientation types and 
+  (b) reorientation directions.
+  Data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}.
+  (c-d) Normalised total correlation/mutual information in successive 
+  (c) reorientation types and 
+  (d) reorientation angles.  
+  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. 
+  P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. 
+  $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
 \end{figure}
 
 
