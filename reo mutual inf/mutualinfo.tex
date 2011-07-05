@@ -139,7 +139,7 @@ It satisfies the bounds
   \max_i H(X_i) \leq H(X_1,\ldots,X_r) \leq \sum_{i=1}^r H(X_i).
 \end{equation}
 %
-The lower bound is saturated when one of the variables is enough to determine the others. The upper bound is saturated when the $X_i$ are independent:
+The lower bound is saturated when one of the variables is enough to determine the others, it only makes sense for discrete distributions. The upper bound is saturated when the $X_i$ are independent:
 %
 \begin{equation}\label{eq:indent}
   P(X_1,\ldots,X_r) = \prod_{i=1}^r P(X_i)
@@ -399,9 +399,63 @@ In both cases, $\bar{p}$ and $\sigma_p$ can be calculated by substituting \eqref
 
 The estimators for $\sigma_p$ may be biased, but they should be consistent. As the sample sizes are large, the bias should be negligible. We will not attempt to calculate standard errors for these estimators.
 
+\begin{figure}
+  (a)\includegraphics[width=7cm]{TypeProbs_individual.eps}
+  (b)\includegraphics[width=7cm]{DirProbs_individual.eps}
+  %\input{.TpX}
+  \caption{Estimating animal-to animal variability. (a) probability of $\Omega$ turns for individual animals and the weighted mean. (b) probability of Right turns for individual animals and the weighted mean. For weighted mean, errorbar is the square root of $\sigma_p$ \eqref{eq:varinot}. }\label{fig:variability}
+\end{figure}
 
 
 \section{Results}\label{sec:results}
+
+
+\subsection{Binary cases}\label{sec:binaryresults}
+
+Now we will restrict attention to binary cases, \ie when looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left.
+
+The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic). It was also done for worms grown on $50\mM$ salt concentration on a spatial salt gradient from $0-50\mM$ over $22\cm$ (saltphilic) and on a gradient from $50-100\mM$ also over $22\cm$ (saltphobic).
+
+We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}.
+
+
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=6cm]{ReoTypeProb-neutraliso.eps}\\[1cm]
+    (b)\includegraphics[width=6cm]{ReoTypeProb-cryospat.eps}
+    (c)\includegraphics[width=6cm]{ReoTypeProb-thermospat.eps}\\[1cm]
+    (d)\includegraphics[width=6cm]{ReoTypeProb-lowsalt.eps}
+    (e)\includegraphics[width=6cm]{ReoTypeProb-highsalt.eps}
+  \end{center}
+  %\input{.TpX}
+  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (d)  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$, (e)  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
+\end{figure}
+
+
+\begin{figure}
+  \begin{center}
+    (a)\includegraphics[width=7cm]{cond_type.eps}
+    (b)\includegraphics[width=7cm]{cond_dir.eps}\\[1cm]
+    (c)\includegraphics[width=7cm]{reotype_bin.eps}
+    (d)\includegraphics[width=7cm]{reoangle_bin.eps}
+  \end{center}
+  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$,
+  worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
+  worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
+  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$ over $22\cm$,
+  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$ over $22\cm$.
+  (a-b) Conditional probabilities for
+  (a) reorientation types and
+  (b) reorientation directions.
+  Data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}.
+  (c-d) Normalised total correlation/mutual information in successive
+  (c) reorientation types and
+  (d) reorientation angles.
+  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}.
+  P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy.
+  $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
+\end{figure}
+
 
 \subsection{Continuous cases}\label{sec:ctsresults}
 
@@ -453,54 +507,6 @@ Note that when we impose a restriction on the separation of reorientations, it i
   \end{center}
   \caption{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:ctsresults}
 \end{figure}
-
-\subsection{Binary cases}\label{sec:binaryresults}
-
-Now we will restrict attention to binary cases, \ie when looking at reorientation types, we will restrict attention to the 2 most common types - \emph{omega} and \emph{reversal-omega} (the probabilities of the different types are shown in \fref{fig:typeprob}). For reorientation angle we only pay attention to the sign, \ie whether it is to the right or to the left.
-
-The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic). It was also done for worms grown on $50\mM$ salt concentration on a spatial salt gradient from $0-50\mM$ over $22\cm$ (saltphilic) and on a gradient from $50-100\mM$ also over $22\cm$ (saltphobic).
-
-We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}.
-
-
-\begin{figure}
-  \begin{center}
-    (a)\includegraphics[width=6cm]{ReoTypeProb-neutraliso.eps}\\[1cm]
-    (b)\includegraphics[width=6cm]{ReoTypeProb-cryospat.eps}
-    (c)\includegraphics[width=6cm]{ReoTypeProb-thermospat.eps}\\[1cm]
-    (d)\includegraphics[width=6cm]{ReoTypeProb-lowsalt.eps}
-    (e)\includegraphics[width=6cm]{ReoTypeProb-highsalt.eps}
-  \end{center}
-  %\input{.TpX}
-  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (d)  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$, (e)  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
-\end{figure}
-
-
-\begin{figure}
-  \begin{center}
-    (a)\includegraphics[width=7cm]{cond_type.eps}
-    (b)\includegraphics[width=7cm]{cond_dir.eps}\\[1cm]
-    (c)\includegraphics[width=7cm]{reotype_bin.eps}
-    (d)\includegraphics[width=7cm]{reoangle_bin.eps}
-  \end{center}
-  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$, 
-  worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$, 
-  worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$, 
-  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$ over $22\cm$,
-  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$ over $22\cm$.
-  (a-b) Conditional probabilities for 
-  (a) reorientation types and 
-  (b) reorientation directions.
-  Data refers to the actual measured values, variability refers to the predictions assuming that the only effect is due to animal-to animal variability as discussed in \sref{sec:variability}, with the variability measured as discussed in \sref{sec:variest}.
-  (c-d) Normalised total correlation/mutual information in successive 
-  (c) reorientation types and 
-  (d) reorientation angles.  
-  Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. 
-  P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. 
-  $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
-\end{figure}
-
-
 
 
 
