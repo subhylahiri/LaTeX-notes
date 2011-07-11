@@ -110,7 +110,7 @@ These probability distributions can be estimated from the frequencies in a sampl
   (e)\includegraphics[width=6cm]{track2_type.eps}
   (f)\includegraphics[width=6cm]{track4_type.eps}
   %\input{.TpX}
-  \caption{(a-b)Example tracks. Runs: Coloured, thin lines, reorientations: black, thin lines. Omega turns and reversals labelled as $\Omega$ and $R$. Grouping of turns into reorientations indicated by reo 1, reo 2, etc. 
+  \caption{(a-b)Example tracks. Runs: Coloured, thin lines, reorientations: black, thin lines. Omega turns and reversals labelled as $\Omega$ and $R$. Grouping of turns into reorientations indicated by reo 1, reo 2, etc.
   (c-d) heading direction during tracks in (a-b).
   (e-f) Segmentation into runs and turns.  } \label{fig:tracks}
 \end{figure}
@@ -152,7 +152,7 @@ It satisfies the bounds
   \max_i H(X_i) \leq H(X_1,\ldots,X_r) \leq \sum_{i=1}^r H(X_i).
 \end{equation}
 %
-The lower bound is saturated when one of the variables is enough to determine the others, it only makes sense for discrete distributions. The upper bound is saturated when the $X_i$ are independent:
+The lower bound is saturated when one of the variables is enough to determine the others, but it only makes sense for discrete distributions. The upper bound is saturated when the $X_i$ are independent:
 %
 \begin{equation}\label{eq:indent}
   P(X_1,\ldots,X_r) = \prod_{i=1}^r P(X_i)
@@ -412,11 +412,13 @@ In both cases, $\bar{p}$ and $\sigma_p$ can be calculated by substituting \eqref
 
 The estimators for $\sigma_p$ may be biased, but they should be consistent. As the sample sizes are large, the bias should be negligible. We will not attempt to calculate standard errors for these estimators.
 
+The results of this analysis for worms without any stimulus is shown in \fref{fig:variability}.
+
 \begin{figure}
   (a)\includegraphics[width=7cm]{TypeProbs_individual.eps}
   (b)\includegraphics[width=7cm]{DirProbs_individual.eps}
   %\input{.TpX}
-  \caption{Estimating animal-to animal variability. (a) probability of $\Omega$ turns for individual animals and the weighted mean. (b) probability of Right turns for individual animals and the weighted mean. For weighted mean, errorbar is the square root of $\sigma_p$ \eqref{eq:varinot}. }\label{fig:variability}
+  \caption{Estimating animal-to animal variability. (a) probability of $\Omega$ turns for individual animals and the weighted mean. (b) probability of Right turns for individual animals and the weighted mean. The weighted mean is $\bar{p}$ and its errorbar is $\sigma_p$ \eqref{eq:varinot}. }\label{fig:variability}
 \end{figure}
 
 
