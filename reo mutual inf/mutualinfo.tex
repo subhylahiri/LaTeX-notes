@@ -723,9 +723,42 @@ Using the Binomial distribution, one can show that
 \end{equation}
 %
 
+The obvious estimator for $\bar{p}$ works just fine:
+%
+\begin{equation}\label{eq:pbarest}
+  \E\brk{\sum_i\hat{q}_i\hat{p}_i\middle|\hat{n}_i} = \sum_i \hat{q}_ip_i,
+  \qquad
+  \E\brk{\sum_i\hat{q}_ip_i} + \CO\prn{\frac{1}{n_i^2}} = \sum_iq_ip_i = \bar{p} + \CO\prn{\frac{1}{n_i^2}}.
+\end{equation}
+%
 
-
-
+However, the obvious estimator for $\sigma_p^2$ fails at the first hurdle:
+%
+\begin{equation}\label{eq:sigest1}
+  \E\brk{\sum_i\hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2\middle|\hat{n}_i} = \sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2 + \sum_i \frac{\hat{q}_i (1-\hat{q}_i)p_i(1-p_i)}{\hat{n}_i}.
+\end{equation}
+%
+We can correct this,
+%
+\begin{equation}\label{eq:sigest2}
+  \E\brk{\sum_i\hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \sum_i \frac{\hat{q}_i (1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i-1} \middle|\hat{n}_i} = \sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2 ,
+\end{equation}
+%
+but it fails at the next hurdle:
+%
+\begin{equation}\label{eq:sigest3}
+  \E\brk{\sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2 } = \frac{N_0-1}{N_0}\prn{\sum_i q_i p_i^2 - \prn{\sum_i q_ip_i}^2} + \CO\prn{\frac{1}{n_i^2}}.
+\end{equation}
+%
+Luckily, this can be corrected:
+%
+\begin{equation}\label{eq:sigest4}
+\begin{aligned}
+  \E\brk{\frac{N_0+1}{N_0}\prn{\sum_i\hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \sum_i \frac{\hat{q}_i (1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i-1} } \middle|\hat{n}_i} &= \frac{N_0-1}{N_0}\prn{\sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2} ,\\
+  \E\brk{\frac{N_0-1}{N_0}\prn{\sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2} } &= \sum_i q_i p_i^2 - \prn{\sum_i q_ip_i}^2 + \CO\prn{\frac{1}{n_i^2}} \\&= \sigma_p^2 + \CO\prn{\frac{1}{n_i^2}}.
+\end{aligned}
+\end{equation}
+%
 
 
 
