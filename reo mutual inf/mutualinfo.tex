@@ -19,6 +19,7 @@
 \documentclass[12pt]{article}
 % Preamble:
 \usepackage{a4wide}
+\usepackage{multirow}
 \usepackage[centertags]{amsmath}
 \usepackage{amssymb}
 %\usepackage{amsthm}
@@ -80,6 +81,8 @@
 \end{abstract}
 
 \tableofcontents
+\listoffigures
+\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Beginning of Article:
@@ -110,7 +113,7 @@ These probability distributions can be estimated from the frequencies in a sampl
   (e)\includegraphics[width=6cm]{track2_type.eps}
   (f)\includegraphics[width=6cm]{track4_type.eps}
   %\input{.TpX}
-  \caption{(a-b)Example tracks. Runs: Coloured, thin lines, reorientations: black, thin lines. Omega turns and reversals labelled as $\Omega$ and $R$. Grouping of turns into reorientations indicated by reo 1, reo 2, etc.
+  \caption[Example tracks.]{(a-b)Example tracks. Runs: Coloured, thin lines, reorientations: black, thin lines. Omega turns and reversals labelled as $\Omega$ and $R$. Grouping of turns into reorientations indicated by reo 1, reo 2, etc.
   (c-d) heading direction during tracks in (a-b).
   (e-f) Segmentation into runs and turns.  } \label{fig:tracks}
 \end{figure}
@@ -122,7 +125,7 @@ These probability distributions can be estimated from the frequencies in a sampl
     \includegraphics[width=10cm]{schematic.eps}
   \end{center}
   %\input{.TpX}
-  \caption{Schematic calculation of probabilities. (a) Sample sequence of reorientations. (b) Grouping sequence into $r$-tuples ($r=2$). (c) Estimating probabilities for individual members and for $r$-tuples from relative frequencies in sample.} \label{fig:schematic}
+  \caption[Schematic calculation of probabilities.]{Schematic calculation of probabilities. (a) Sample sequence of reorientations. (b) Grouping sequence into $r$-tuples ($r=2$). (c) Estimating probabilities for individual members and for $r$-tuples from relative frequencies in sample.} \label{fig:schematic}
 \end{figure}
 
 In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
@@ -374,7 +377,7 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
     ii)\includegraphics[width=7cm]{warm_typ_2.eps}
     iii)\includegraphics[width=7cm]{iso_ang_2.eps}
   \end{center}
-  \caption{Comparison of different methods for removing bias. (a) Three examples of the three unbiased estimates of mutual information/total correlation. First-order refers to the methods of appendix \ref{sec:stderr}. Monte-Carlo refers to subtracting the mean of 1000 nonparametric bootstrap simulations, the error-bars are the standard deviation of the bootstrap simulations. (b) Illustration of the direct method, Blue line is the uncorrected estimates with different sample sizes, red dashed line shows the extrapolation to infinite sample size and red dotted line indicates the result of this extrapolation. Green line shows the unbiased estimator using the first-order method of appendix \ref{sec:stderr} for comparison, darker green shading is $\pm$ one standard error. i)-iii) the three cases shown in (a).} \label{fig:biascomp}
+  \caption[Comparison of different methods for removing bias.]{Comparison of different methods for removing bias. (a) Three examples of the three unbiased estimates of mutual information/total correlation. First-order refers to the methods of appendix \ref{sec:stderr}. Monte-Carlo refers to subtracting the mean of 1000 nonparametric bootstrap simulations, the error-bars are the standard deviation of the bootstrap simulations. (b) Illustration of the direct method, Blue line is the uncorrected estimates with different sample sizes, red dashed line shows the extrapolation to infinite sample size and red dotted line indicates the result of this extrapolation. Green line shows the unbiased estimator using the first-order method of appendix \ref{sec:stderr} for comparison, darker green shading is $\pm$ one standard error. i)-iii) the three cases shown in (a).} \label{fig:biascomp}
 \end{figure}
 
 \begin{figure}
@@ -382,35 +385,51 @@ We can see how much this discrepancy varied with sample size in \fref{fig:discre
     (a)\includegraphics[width=7cm]{discpair.eps}
     (b)\includegraphics[width=7cm]{disctrip.eps}
   \end{center}
-  \caption{Effect of sample size in discrepancy between bias removal methods; size of discrepancy between unbiased estimates from direct method and first order method divided by first order standard error for (a) pairs (maximum of 25 bins) (b) triplets (maximum of 125 bins).} \label{fig:discrep}
+  \caption[Effect of sample size in discrepancy between bias removal methods.]{Effect of sample size in discrepancy between bias removal methods; size of discrepancy between unbiased estimates from direct method and first order method divided by first order standard error for (a) pairs (maximum of 25 bins) (b) triplets (maximum of 125 bins).} \label{fig:discrep}
 \end{figure}
 
 
 \subsection{Estimating animal-to-animal variability}\label{sec:variest}
 
-Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions. What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
+Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions (a problem that does not affect $\bar{p}$, see \eqref{eq:variests} below). What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We also only consider the first $20\mins$ of each track (whilst this reduces the amount of data, it makes it possible to estimate bias and standard error, see appendix \ref{sec:varibias}). We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
 
 For reorientation type, we count the number of omegas in each track, $\Omega_i$, and the number of reversal-omegas, $R_i$. If the track length is $t_i$,
 %
 \begin{equation}\label{eq:varesttype}
-  r_i = \frac{\Omega_i+R_i}{t_i}, \qquad
-  q_i = \frac{r_i}{\sum_j r_j}, \qquad
-  p_i = \frac{\Omega_i}{\Omega_i+R_i}.
+  \hat{n}_i = \Omega_i+R_i, \qquad
+  N = \sum_i \hat{n}_i, \qquad
+  \hat{q}_i = \frac{\hat{n}_i}{N}, \qquad
+  \hat{p}_i = \frac{\Omega_i}{\Omega_i+R_i}.
 \end{equation}
 %
 
 For reorientation direction, we count the number of right turns in each track, $R_i$, and the number of left turns, $L_i$. If the track length is $t_i$,
 %
 \begin{equation}\label{eq:varestdir}
-  r_i = \frac{R_i+L_i}{t_i}, \qquad
-  q_i = \frac{r_i}{\sum_j r_j}, \qquad
-  p_i = \frac{R_i}{R_i+L_i}.
+  \hat{n}_i = \frac{R_i+L_i}{t_i}, \qquad
+  N = \sum_i \hat{n}_i, \qquad
+  \hat{q}_i = \frac{\hat{n}_i}{N}, \qquad
+  \hat{p}_i = \frac{R_i}{R_i+L_i}.
 \end{equation}
 %
 
-In both cases, $\bar{p}$ and $\sigma_p$ can be calculated by substituting \eqref{eq:varesttype} or \eqref{eq:varestdir} into \eqref{eq:varinot}.
+In both cases, $\bar{p}$ can be estimated by substituting \eqref{eq:varesttype} or \eqref{eq:varestdir} into \eqref{eq:varinot}. However, estimating $\sigma_p^2$ is more complicated, as the variance of the sample also receives contributions from the Binomial statistics of each track. In appendix \ref{sec:varibias}, we discuss the construction of approximately unbiased estimators and their variance. The result is
+%
+\begin{equation}\label{eq:variests}
+  \begin{aligned}
+    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i
+       =\left\{\begin{aligned}
+      & \frac{\sum_i \Omega_i}{N} \quad \text{for reorientation type,}\\
+      & \frac{\sum_i R_i}{N}  \quad \text{for reorientation direction,}
+       \end{aligned}\right. \\
+    \var(\hat{\bar{p}}) &\approx \frac{\bar{p}(1-\bar{p})}{N},\\
+    \hat{\sigma}_p^2 &= \frac{N+1}{N} \sum_i\prn{ \hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \frac{\hat{q}_i(1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i}}.
+  \end{aligned}
+\end{equation}
+%
+The expression for the variance of $\hat{\sigma}_p^2$ is a colossal mess. Instructions for computing it can be found in appendix \ref{sec:varibias}. We won't attempt to construct unbiased estimators for the estimator variances, instead we'll simply replace each quantity with its estimator.
 
-The estimators for $\sigma_p$ may be biased, but they should be consistent. As the sample sizes are large, the bias should be negligible. We will not attempt to calculate standard errors for these estimators.
+As the second expression for $\hat{\bar{p}}$ doesn't rely on maintaining animal identity, we can use the full data set to estimate it. As we will use a larger data set for $\hat{\bar{p}}$ than for $\hat{\sigma}_p^2$, we ignore possible correlations in their standard errors when computing standard errors in derived quantities.
 
 The results of this analysis for worms without any stimulus is shown in \fref{fig:variability}.
 
@@ -418,7 +437,10 @@ The results of this analysis for worms without any stimulus is shown in \fref{fi
   (a)\includegraphics[width=7cm]{TypeProbs_individual.eps}
   (b)\includegraphics[width=7cm]{DirProbs_individual.eps}
   %\input{.TpX}
-  \caption{Estimating animal-to animal variability. (a) probability of $\Omega$ turns for individual animals and the weighted mean. (b) probability of Right turns for individual animals and the weighted mean. The weighted mean is $\bar{p}$ and its errorbar is $\sigma_p$ \eqref{eq:varinot}. }\label{fig:variability}
+  \caption[Estimating animal-to animal variability.]{Estimating animal-to animal variability. (a) probability of $\Omega$ turns for individual animals and the weighted mean. (b) probability of Right turns for individual animals and the weighted mean. The weighted mean is $\hat{\bar{p}}$ \eqref{eq:variests}.
+  The green shaded region is $\pm$ the standard deviation one would expect if each animal's number of reorientations was equal to the mean.
+  The blue shaded region is $\pm$ the actual standard deviation observed (computed by substituting (\ref{eq:varesttype}) or (\ref{eq:varestdir}) into (\ref{eq:varinot})).
+  The red shaded region is $\pm$ the amount of animal-to-animal variability needed to explain the difference, $\hat{\sigma}_p$ \eqref{eq:variests}. }\label{fig:variability}
 \end{figure}
 
 
@@ -431,7 +453,7 @@ Now we will restrict attention to binary cases, \ie when looking at reorientatio
 
 The analysis was performed for isotropic assays (where the temperature was held uniform and constant at $20\dC$) and spatial assays (where the temperature was constant in time but varied linearly in space from $18-23\dC$ over $22\cm$). These were done with worms cultivated at $20\dC$ (neutral), $15\dC$ (cryophilic) ant $25\dC$ (thermophilic). It was also done for worms grown on $50\mM$ salt concentration on a spatial salt gradient from $0-50\mM$ over $22\cm$ (saltphilic) and on a gradient from $50-100\mM$ also over $22\cm$ (saltphobic).
 
-We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}.
+We only looked at the cases $r=2$ (pairs of consecutive reorientations). The results are in \fref{fig:binaryresults}. The p-values for differences in conditional probabilities can be found in table \ref{tab:condpval}.
 
 
 \begin{figure}
@@ -443,7 +465,7 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
     (e)\includegraphics[width=6cm]{ReoTypeProb-highsalt.eps}
   \end{center}
   %\input{.TpX}
-  \caption{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (d)  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$, (e)  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
+  \caption[Probabilities of different reorientation types.]{Probabilities of different reorientation types for (a) worms grown at $20\dC$ on no gradient at $20\dC$, (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$, (c)  worms grown at $25\dC$ on spatial gradient from $18-23\dC$, (d)  worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$, (e)  worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$.  Reorientation labels: w - Omega turn, r - reversal, s - unreversal. }\label{fig:typeprob}
 \end{figure}
 
 
@@ -454,7 +476,7 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
     (c)\includegraphics[width=7cm]{reotype_bin.eps}
     (d)\includegraphics[width=7cm]{reoangle_bin.eps}
   \end{center}
-  \caption{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$,
+  \caption[Conditional probabilities and mutual information (binary).]{Conditional probabilities and mutual information for worms grown at $20\dC$ on no gradient at $20\dC$,
   worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
   worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
   worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$ over $22\cm$,
@@ -467,9 +489,55 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
   (c) reorientation types and
   (d) reorientation angles.
   Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}.
-  P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy.
-  $N$ is the number of $r$-tuples in the sample.} \label{fig:binaryresults}
+  P-values for ``data'' are the probability that it is nonzero, they were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy.
+  $N$ is the number of $r$-tuples in the sample.
+  P-values for ``variability'' are for the difference between it and ``data'', they were computed with a Z-test.} \label{fig:binaryresults}
 \end{figure}
+
+
+\begin{table}
+  %
+  \begin{center}
+  \begin{tabular}{|r|l|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{3}{*}{Assay} & \multicolumn{4}{|c|}{Comparison to} \\
+    \cline{2-5}
+      & \multicolumn{2}{|c|}{Marginal} & \multicolumn{2}{|c|}{Variability} \\
+      \cline{2-5}
+      & $P(\Omega|\Omega)$ & $P(\Omega|R\Omega)$ & $P(\Omega|\Omega)$ & $P(\Omega|R\Omega)$ \\
+    \hline
+    Neutral      & $1\ee{-8}$ & $2\ee{-8}$ & $0.9$ & $0.8$ \\
+    Cryophilic   & $2\ee{-16}$ & $5\ee{-9}$ & $2\ee{-6}$ & $e\ee{-3}$ \\
+    Thermophilic & $3\ee{-8}$ & $1\ee{-7}$ & $0.01$ & $0.4$ \\
+    Saltphilic   & $1\ee{-7}$ & $0$ & $0.8$ & $0.04$ \\
+    Saltphobic   & $2\ee{-11}$ & $3\ee{-12}$ & $0.2$ & $0.9$ \\
+    \hline
+  \end{tabular}
+
+  \vspace{1cm}
+
+  \begin{tabular}{|r|l|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{3}{*}{Assay} & \multicolumn{4}{|c|}{Comparison to} \\
+    \cline{2-5}
+      & \multicolumn{2}{|c|}{Marginal} & \multicolumn{2}{|c|}{Variability} \\
+      \cline{2-5}
+      & $P(R|R)$ & $P(R|L)$ & $P(R|R)$ & $P(R|L)$ \\
+    \hline
+    Neutral      & $0.9$ & $0.7$ & $0.5$ & $0.9$ \\
+    Cryophilic   & $0.6$ & $0.2$ & $0.6$ & $0.8$ \\
+    Thermophilic & $2\ee{-3}$ & $5\ee{-3}$ & $0.1$ & $0.2$ \\
+    Saltphilic   & $0.1$ & $0.09$ & $0.8$ & $0.7$ \\
+    Saltphobic   & $0.03$ & $5\ee{-4}$ & $0.8$ & $0.1$ \\
+    \hline
+  \end{tabular}
+  \end{center}
+  %
+  \caption[P-values for differences in conditional probabilities.]{P-values for differences in conditional probabilities, computed with Z-tests.}\label{tab:condpval}
+\end{table}
+
 
 
 \subsection{Continuous cases}\label{sec:ctsresults}
@@ -520,7 +588,7 @@ Note that when we impose a restriction on the separation of reorientations, it i
     (a)\includegraphics[width=7cm]{reoangle3.eps}
     (b)\includegraphics[width=7cm]{rundur3.eps}
   \end{center}
-  \caption{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:ctsresults}
+  \caption[Normalised total correlation/mutual information (continuous).]{Normalised total correlation/mutual information in successive (a) reorientation angles and (b) run durations for worms grown at $20\dC$ on no gradient at $20\dC$, worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$ and worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$. Values have bias subtracted using the methods of appendix \ref{sec:stderr}. Error bars are one standard error, computed using the methods of appendix \ref{sec:stderr}. P-values were computed using 1000 nonparametric bootstrap resamples under the null hypothesis that successive reorientations are independent, therefore the third decimal place is untrustworthy. $N$ is the number of $r$-tuples in the sample.} \label{fig:ctsresults}
 \end{figure}
 
 
@@ -528,7 +596,7 @@ Note that when we impose a restriction on the separation of reorientations, it i
 
 \appendix\section*{Appendices}
 
-\section{Bias and standard error}\label{sec:stderr}
+\section{Bias and standard error in entropy and mutual information}\label{sec:stderr}
 
 We will follow the approach of \cite{Roulston1999}. Our situation is slightly different from that one. As all the $X_i$ have the same distribution, we will estimate $P(X)$ from the pooled data, rather that estimating the $P(X_i)$ separately. This means that our estimates may not satisfy the bounds, such as \eqref{eq:mutinfbounds}.
 
@@ -594,6 +662,73 @@ which leads to
 \end{equation}
 %
 All of these formulae are equally true if you put hats on every capital letter (except $N$).
+
+
+\section{Bias and standard error in animal-to-animal variability}\label{sec:varibias}
+
+In this appendix, we will concentrate on reorientation types. The generalisation to reorientation directions is trivial.
+
+We have:
+%
+\begin{equation}\label{eq:estdist}
+  P(\hat{p}_i|\hat{n}_i) \sim \frac{\mathrm{Binom}(\hat{n}_i,p_i)}{\hat{n}_i},
+  \qquad
+  P(\hat{n}_i) \sim \mathrm{Poisson}(r_it),
+\end{equation}
+%
+where $r_i$ is the reorientation rate of animal $i$ and $t$ is the duration of the tracks. We also define
+%
+\begin{equation}\label{eq:biasnot}
+  n_i = r_it, \qquad
+  N_0 = \sum_i n_i, \qquad
+  \epsilon_i = \frac{\hat{n}_i}{n_i}-1, \qquad
+  q_i = \frac{r_i}{\sum_j r_j} = \frac{n_i}{N_0}.
+\end{equation}
+%
+
+Expanding in $\epsilon_i$ leads to
+%
+\begin{equation}\label{eq:expandeps}
+  \begin{aligned}
+    \hat{q}_i &= q_i\brk{ 1 + \prn{\epsilon_i-\sum_jq_j\epsilon_j} -  \prn{\epsilon_i-\sum_jq_j\epsilon_j} \prn{\sum_kq_k\epsilon_k} } +\CO\prn{\epsilon_i^3}, \\
+    \hat{q}_i\hat{q}_j &= q_iq_j\brk{ 1 + \prn{\epsilon_i+\epsilon_j-2\sum_kq_k\epsilon_k} +  \prn{\epsilon_i\epsilon_j-(\sum_kq_k\epsilon_k)^2} }  +\CO\prn{\epsilon_i^3}, \\
+    \frac{1}{N} &= \frac{1}{N_0} \brk{ 1 - \prn{\sum_kq_k\epsilon_k} +  \prn{\sum_kq_k\epsilon_k}^2 } +\CO\prn{\epsilon_i^3}.
+  \end{aligned}
+\end{equation}
+%
+Using the Poisson distribution, one can show that
+%
+\begin{equation}\label{eq:expeps}
+    \E\brk{\epsilon_i} = 0, \qquad
+    \E\brk{\epsilon_i^2} = \frac{1}{n_i}, \qquad
+    \E\brk{\epsilon_i^{k+3}} = \CO\prn{\frac{1}{n_i^2}} \quad k\geq0,
+\end{equation}
+%
+and therefore
+%
+\begin{equation}\label{eq:expandepsex}
+  \begin{aligned}
+    \E\brk{\hat{q}_i} &= q_i + \CO\prn{\frac{1}{n_i^2}}, \\
+    \E\brk{\hat{q}_i\hat{q}_j} &= q_iq_j\brk{ 1 + \frac{\delta_{ij}}{n_i} -  \frac{1}{N_0}}  + \CO\prn{\frac{1}{n_i^2}}, \\
+    \E\brk{\frac{1}{N}} &= \frac{1}{N_0} \brk{ 1  +  \frac{1}{N_0} } + \CO\prn{\frac{1}{n_i^2}}.
+  \end{aligned}
+\end{equation}
+%
+
+Using the Binomial distribution, one can show that
+%
+\begin{equation}\label{eq:expi}
+  \E\brk{\hat{p}_i|\hat{n}_i} = p_i, \qquad
+  \E\brk{\hat{p}_i^2|\hat{n}_i} = p_i^2 + \frac{p_i(1-p_i)}{n_i}.
+\end{equation}
+%
+
+
+
+
+
+
+
 
 
 %\section*{Acknowledgements}
