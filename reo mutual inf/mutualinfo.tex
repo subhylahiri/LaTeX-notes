@@ -422,12 +422,12 @@ In both cases, $\bar{p}$ can be estimated by substituting \eqref{eq:varesttype} 
       & \frac{\sum_i \Omega_i}{N} \quad \text{for reorientation type,}\\
       & \frac{\sum_i R_i}{N}  \quad \text{for reorientation direction,}
        \end{aligned}\right. \\
-    \var(\hat{\bar{p}}) &\approx \frac{\bar{p}(1-\bar{p})}{N},\\
+    \var(\hat{\bar{p}}) &\approx \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N}.,\\
     \hat{\sigma}_p^2 &= \frac{N+1}{N} \sum_i\prn{ \hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \frac{\hat{q}_i(1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i}}.
   \end{aligned}
 \end{equation}
 %
-The expression for the variance of $\hat{\sigma}_p^2$ is a colossal mess. Instructions for computing it can be found in appendix \ref{sec:varibias}. We won't attempt to construct unbiased estimators for the estimator variances, instead we'll simply replace each quantity with its estimator.
+The expression for the variance of $\hat{\sigma}_p^2$ is a colossal mess. Instructions for computing it can be found in appendix \ref{sec:varibias}.
 
 As the second expression for $\hat{\bar{p}}$ doesn't rely on maintaining animal identity, we can use the full data set to estimate it. As we will use a larger data set for $\hat{\bar{p}}$ than for $\hat{\sigma}_p^2$, we ignore possible correlations in their standard errors when computing standard errors in derived quantities.
 
@@ -760,7 +760,44 @@ Luckily, this can be corrected:
 \end{equation}
 %
 
-
+To estimate the variances, we use the approach
+%
+\begin{equation}\label{eq:estvarest}
+  \var(\hat{A}) \approx \sum_i\prn{ \pdiffc{\hat{A}}{\Omega_i}^2 \var(\Omega_i) + \pdiffc{\hat{A}}{R_i}^2 \var(R_i) } = \sum_i\prn{ \pdiffc{\hat{A}}{\Omega_i}^2 \Omega_i + \pdiffc{\hat{A}}{R_i}^2 R_i }.
+\end{equation}
+%
+This relatively simple for $\hat{\bar{p}}$:
+%
+\begin{equation}\label{eq:varpbar}
+  \begin{aligned}
+    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i = \sum_i \frac{\sum_i\Omega_i}{\sum_i(\Omega_i+R_i)}, \\
+    \pdiff{\hat{\bar{p}}}{\Omega_i}  &= \frac{\sum_iR_i}{\prn{\sum_i(\Omega_i+R_i)}^2},\\
+    \pdiff{\hat{\bar{p}}}{R_i}  &= -\frac{\sum_i\Omega_i}{\prn{\sum_i(\Omega_i+R_i)}^2},\\
+    \var(\hat{\bar{p}}) &\approx \frac{\prn{\sum_i\Omega_i}\prn{\sum_iR_i}}{\prn{\sum_i(\Omega_i+R_i)}^3} = \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N}.
+  \end{aligned}
+\end{equation}
+%
+but it is much more complicated for $\hat{\sigma}_p^2$:
+%
+\begin{equation}\label{eq:varsigmap}
+  \begin{aligned}
+    \pdiff{\sigma_p^2}{\Omega_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}} 
+    \\ &+ 
+    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1} + \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
+    }\\&+ 
+    \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} (1-\hat{p}_i)} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) (1-\hat{p}_i)} {\hat{n}_i-1}
+    },\\
+    \pdiff{\sigma_p^2}{R_i} =&
+    -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
+    \\ &+
+    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1} + \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
+    }\\&+
+    \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i \hat{p}_i} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} \hat{p}_i} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) \hat{p}_i} {\hat{n}_i-1}
+    }.
+  \end{aligned}
+\end{equation}
+%
+The combined expression for $\var(\hat{\sigma}_p^2)$ is too messy to write out here.
 
 
 
