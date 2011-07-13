@@ -130,7 +130,7 @@ These probability distributions can be estimated from the frequencies in a sampl
 
 In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
 
-Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes larger turns than the others. In this situation, if the first reorientation in an $r$-tuple is large it would make it more likely that the worm in question is the large-turning one, making it more likely that the other reorientations in the $r$-tuple are large. Thus the probability distributions would not show independence even in the absence of actual causation. The same thing applies to lack of stationarity. If runs tend to get longer over time, the same issue will arise.
+Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes larger turns than the others. In this situation, if the first reorientation in an $r$-tuple is large it would make it more likely that the worm in question is the large-turning one, making it more likely that the other reorientations in the $r$-tuple are large. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and appendix \ref{sec:varibias}. The same thing applies to lack of stationarity. If runs tend to get longer over time, the same issue will arise.
 
 
 \section{Entropy and mutual information}\label{sec:entropy}
@@ -246,7 +246,7 @@ In general, we can write
 
 \subsection{Markov processes}\label{sec:markov}
 
-If the process is Markovian, \ie one reorientation/run is only affected by the previous reorientation/run and not any earlier ones, then $P(X_3 \vert X_1,X_2)$ is independent of $X_1$, and is the same function as $P(X_2 \vert X_1)$. Therefore
+If the process is Markovian (in the discrete sense), \ie one reorientation/run is only affected by the previous reorientation/run and not any earlier ones, then $P(X_3 \vert X_1,X_2)$ is independent of $X_1$, and is the same function as $P(X_2 \vert X_1)$. Therefore
 %
 \begin{equation}\label{eq:tripvspair}
   \begin{aligned}
@@ -350,7 +350,7 @@ which vanishes when $\sigma_p=0$.
 
 \section{Practical issues}\label{sec:practical}
 
-\subsection{Correcting systematic errors}\label{sec:syscorr}
+\subsection{Correcting systematic errors in entropy and mutual information}\label{sec:syscorr}
 
 We will compute the quantities defined in the previous section by estimating the probability distributions, $P_1(X_i)$ and $P_r(X_1,\ldots,X_r)$ from the relative frequencies in sample sequences of reorientations. As all the $X_i$ have the same marginal distribution, we will estimate $P_1(X)$ from the pooled data, rather that estimating the $P_1(X_i)$ separately.
 
@@ -666,7 +666,7 @@ All of these formulae are equally true if you put hats on every capital letter (
 
 \section{Bias and standard error in animal-to-animal variability}\label{sec:varibias}
 
-In this appendix, we will concentrate on reorientation types. The generalisation to reorientation directions is trivial.
+In this appendix, we will concentrate on reorientation types. The generalisation to reorientation directions is trivial. Our approach is the same as that of \cite{Roulston1999}.
 
 We have:
 %
