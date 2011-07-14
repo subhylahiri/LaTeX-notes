@@ -61,7 +61,7 @@
   {\bfseries}%theorem head font
   {}%theorem head punctuation
   {\newline}%space after head
-  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}:}%head spec
+  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}: }%head spec
 %
 \theoremstyle{slplain}
 \newtheorem{thm}{Theorem}
@@ -475,7 +475,7 @@ then
 %
 As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
 
-\begin{thm}[Consistency of estimators \eqref{eq:wienerest}] \label{th:wienercons}
+\begin{thm}[Consistency of estimators \eqref{eq:wienerest}]
   The covariance of the estimators \eqref{eq:wienerest} vanishes as the sample size goes to infinity:
   %
   \begin{equation}\label{eq:wienercons}
@@ -483,6 +483,7 @@ As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
   \end{equation}
   %
   As we have already showed that they are unbiased, this is sufficient for consistency.
+\label{th:wienercons}
 \end{thm}
 %
 We will need to use an identity from Sidney Coleman:
@@ -665,7 +666,8 @@ where $s(t)$ is Gaussian white noise of power $\sigma^2$.
 
 The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability distributions that we will not know in an experimental situation. We have to estimate it from the results of an experiment.
 
-Suppose we present the system with zero-mean Gaussian white noise of power $\sigma^2$ over a time period $T$, and we see that events take place at times $(t_1,\ldots,t_n)$. The obvious choice of estimator is
+
+Suppose we are in the same situation as in \sref{sec:wienerest}: we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$, we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we see that events take place at times $(t_1,\ldots,t_n) \in [0,T]$. The obvious choice of estimator is
 %
 \begin{equation}\label{eq:ratewienerest}
   \begin{aligned}
