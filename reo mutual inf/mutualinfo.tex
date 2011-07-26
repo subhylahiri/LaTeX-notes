@@ -443,6 +443,25 @@ The results of this analysis for worms without any stimulus is shown in \fref{fi
   The red shaded region is $\pm$ the amount of animal-to-animal variability needed to explain the difference, $\hat{\sigma}_p$ \eqref{eq:variests}. }\label{fig:variability}
 \end{figure}
 
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|r|l|l|}
+      \hline
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Assay & Type & Direction \\
+    \hline
+     Neutral      & $0$ & $0.02$  \\
+     Cryophilic   & $4\ee{-14}$ & $3\ee{-4}$  \\
+     Thermophilic & $0$ & $9\ee{-7}$ \\
+     Saltphilic   & $0$ & $5\ee{-5}$ \\
+     Saltphobic   & $0$ & $6\ee{-12}$ \\
+     \hline
+    \end{tabular}
+  \end{center}
+  \caption[P-values for variability]{P-values for variability, \ie the likelihood of observing at least the spread seen in \fref{fig:variability} assuming no animal-to-animal variability. Computed with a $\chi^2$ test, \ie the binomial distribution was approximated by a Gaussian.}\label{tab:varipval}
+\end{table}
+
+
 
 \section{Results}\label{sec:results}
 
@@ -783,10 +802,10 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
 %
 \begin{equation}\label{eq:varsigmap}
   \begin{aligned}
-    \pdiff{\sigma_p^2}{\Omega_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}} 
-    \\ &+ 
+    \pdiff{\sigma_p^2}{\Omega_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
+    \\ &+
     \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1} + \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
-    }\\&+ 
+    }\\&+
     \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} (1-\hat{p}_i)} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) (1-\hat{p}_i)} {\hat{n}_i-1}
     },\\
     \pdiff{\sigma_p^2}{R_i} =&
