@@ -1,0 +1,129 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      3567,        120]
+NotebookOptionsPosition[      3038,         97]
+NotebookOutlinePosition[      3404,        113]
+CellTagsIndexPosition[      3361,        110]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$Assumptions", "=", 
+   RowBox[{"C", ">", "0"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521465086209875*^9, 3.5214651008598957`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", 
+   RowBox[{" ", 
+    RowBox[{
+     SuperscriptBox["2", 
+      RowBox[{"k", "/", "2"}]], 
+     RowBox[{"Gamma", "[", 
+      RowBox[{"k", "/", "2"}], "]"}]}]}]], 
+  RowBox[{
+   SubsuperscriptBox["\[Integral]", "C", "\[Infinity]"], 
+   RowBox[{
+    SuperscriptBox["x", 
+     RowBox[{
+      RowBox[{"k", "/", "2"}], "-", "1"}]], 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "x"}], "/", "2"}]], 
+    RowBox[{"\[DifferentialD]", "x"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.521464887573897*^9, 3.5214648937582507`*^9}, {
+  3.521465059929839*^9, 3.5214650720198555`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"Gamma", "[", 
+   RowBox[{
+    FractionBox["k", "2"], ",", 
+    FractionBox["C", "2"]}], "]"}], 
+  RowBox[{"Gamma", "[", 
+   FractionBox["k", "2"], "]"}]]], "Output",
+ CellChangeTimes->{
+  3.5214648964474044`*^9, {3.521465076179861*^9, 3.5214651039098997`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", "428.2420"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"d", "=", "255"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5214642421402187`*^9, 3.521464259819759*^9}, 
+   3.521465662455304*^9, {3.5214660826772184`*^9, 3.521466118347267*^9}, {
+   3.5214663038296695`*^9, 3.5214663273697023`*^9}, {3.521466558872088*^9, 
+   3.5214665932121353`*^9}, {3.521467006006239*^9, 3.521467064369193*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"p", "=", 
+  RowBox[{"N", "[", 
+   FractionBox[
+    RowBox[{"Gamma", "[", 
+     RowBox[{
+      FractionBox["d", "2"], ",", 
+      FractionBox["c", "2"]}], "]"}], 
+    RowBox[{"Gamma", "[", 
+     FractionBox["d", "2"], "]"}]], "]"}]}]], "Input",
+ CellChangeTimes->{{3.521464264598032*^9, 3.521464376822172*^9}, 
+   3.5214644586122847`*^9, {3.5214646222736464`*^9, 3.521464629276949*^9}, {
+   3.521465020899785*^9, 3.521465028359795*^9}}],
+
+Cell[BoxData["6.18748670611118`*^-11"], "Output",
+ CellChangeTimes->{
+  3.5214643813921785`*^9, 3.5214644603622875`*^9, 3.5214646319371014`*^9, 
+   3.521465030219798*^9, 3.5214656774653254`*^9, {3.5214660977272387`*^9, 
+   3.5214661247354937`*^9}, {3.521466314489684*^9, 3.5214663308097067`*^9}, {
+   3.5214665848721237`*^9, 3.5214665985321426`*^9}, {3.521467041869162*^9, 
+   3.5214670702994175`*^9}}]
+}, Open  ]]
+},
+WindowSize->{607, 750},
+WindowMargins->{{Automatic, 231}, {Automatic, 60}},
+Magnification->1.5,
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 170, 4, 43, "Input"],
+Cell[CellGroupData[{
+Cell[740, 28, 636, 20, 74, "Input"],
+Cell[1379, 50, 299, 9, 86, "Output"]
+}, Open  ]],
+Cell[1693, 62, 440, 8, 71, "Input"],
+Cell[CellGroupData[{
+Cell[2158, 74, 459, 12, 101, "Input"],
+Cell[2620, 88, 402, 6, 45, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
