@@ -568,8 +568,51 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
   \end{tabular}
   \end{center}
   %
-  \caption[P-values for differences in conditional probabilities.]{P-values for differences in conditional probabilities for (a) reorientation type and (b) reorientation direction, computed with Z-tests.}\label{tab:condpval}
+  \caption[P-values for differences in conditional probabilities.]{P-values for differences in conditional probabilities for (a) reorientation type and (b) reorientation direction (data in \fref{fig:binaryresults}), computed with Z-tests.}\label{tab:condpval}
 \end{table}
+
+
+\subsection{The effect of reorientation type on reorientation direction}\label{sec:dirvstype}
+
+\begin{figure}
+\begin{center}
+  (a)\includegraphics[width=7cm]{cond_dir_vs_type_(neutral).eps}\\
+  (b)\includegraphics[width=7cm]{cond_dir_vs_type_(cryophilic).eps}
+  (c)\includegraphics[width=7cm]{cond_dir_vs_type_(thermophilic).eps}\\
+  (d)\includegraphics[width=7cm]{cond_dir_vs_type_(saltphilic).eps}
+  (e)\includegraphics[width=7cm]{cond_dir_vs_type_(saltphobic).eps}
+\end{center}
+  %\input{.TpX}
+  \caption[Conditional probabilities for reorientation direction restricted to certain reorientation types.]{Conditional probabilities for reorientation direction restricted to certain reorientation types for
+  (a) worms grown at $20\dC$ on no gradient at $20\dC$,
+  (b) worms grown at $15\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
+  (c) worms grown at $25\dC$ on spatial gradient from $18-23\dC$ over $22\cm$,
+  (d) worms grown on $50\mM$ salt on spatial gradient from $0-50\mM$ over $22\cm$,
+  (e) worms grown on $50\mM$ salt on spatial gradient from $50-100\mM$ over $22\cm$.}\label{fig:dirvstype}
+\end{figure}
+
+\begin{table}
+  %
+  \begin{center}
+  \begin{tabular}{|r|l|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{2}{*}{Assay} & \multicolumn{2}{|c|}{Omega} & \multicolumn{2}{|c|}{Reversal-Omega} \\
+      \cline{2-5}
+      & $P(R|R)$ & $P(R|L)$ & $P(R|R)$ & $P(R|L)$ \\
+    \hline
+    Neutral      & $0.01$ & $0.09$ & $0.004$ & $0.2$ \\
+    Cryophilic   & $0.95$ & $0.1$ & $0.3$ & $0.05$ \\
+    Thermophilic & $0.004$ & $0.002$ & $0.4$ & $0.99$ \\
+    Saltphilic   & $6\ee{-10}$ & $8\ee{-5}$ & $0.8$ & $0.3$ \\
+    Saltphobic   & $2\ee{-4}$ & $2\ee{-7}$ & $2\ee{-6}$ & $0.02$ \\
+    \hline
+  \end{tabular}
+  \end{center}
+  %
+  \caption[P-values for differences in conditional probabilities for reorientation direction restricted to certain reorientation types]{P-values for difference between marginal and conditional probabilities for reorientation direction restricted to certain reorientation types (data in \fref{fig:dirvstype}), computed with Z-tests.}\label{tab:dirvstype}
+\end{table}
+
 
 
 

@@ -51,9 +51,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{abstract}
-  Supplementary info
-\end{abstract}
+%\begin{abstract}
+%  Supplementary info
+%\end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +71,11 @@ Consider a sequence of two successive reorientations. The values of a particular
 %In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
 
 Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes a greater fraction of turns than the others. In this situation, if the first reorientation in a pair is a turn it would make it more likely that the worm in question is the large-turning one, making it more likely that the next reorientation is a turn. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and appendix \ref{sec:varibias}.
+
+\section{Measuring probabilities}\label{sec:measureprobs}
+
+Each track consists of a series of runs and reorientations. Within each track, all non-overlapping pairs of reorientation such that each reorientation type was either \emph{turn} or \emph{reversal-turn} were found. The number of pairs of type (\emph{turn},\emph{turn}), (\emph{turn},\emph{reversal-turn}), (\emph{reversal-turn},\emph{turn}) and (\emph{reversal-turn},\emph{reversal-turn}) were counted. The joint probabilities were computed by dividing these counts by their sum. Marginal and conditional probabilities were then computed in the usual way.
+
 
 \section{Effect of animal-to-animal variability}\label{sec:variability}
 
@@ -108,7 +113,7 @@ Then, using Bayes' theorem
 For pairs of successive reorientations, we use the notation
 %
 \begin{equation}\label{eq:varipairnot}
-  P(\text{next}=a|\text{prev}=b) = P(a|b) 
+  P(\text{next}=a|\text{prev}=b) = P(a|b)
 %  , \qquad
 %  P(\text{prev}=b \cap \text{next}=a) = P(b,a)
   .
@@ -273,7 +278,7 @@ Luckily, this can be corrected:
 %
 \begin{equation}\label{eq:sigest4}
 \begin{aligned}&
-  \E\brk{\frac{N+1}{N}\prn{\sum_i\hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \sum_i \frac{\hat{q}_i (1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i-1} } \middle|\hat{n}_i} 
+  \E\brk{\frac{N+1}{N}\prn{\sum_i\hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \sum_i \frac{\hat{q}_i (1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i-1} } \middle|\hat{n}_i}
   \phantom{\sum_i q_i p_i^2 - \prn{\sum_i q_ip_i}} \\
 &\begin{aligned}
   &= \frac{N+1}{N}\prn{\sum_i \hat{q}_i p_i^2 - \prn{\sum_i \hat{q}_ip_i}^2} ,\\
@@ -318,7 +323,7 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
     \pdiff{\sigma_p^2}{R_i} =&
     -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
     \\ &+
-    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1} 
+    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
     \right.\\&\phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}}}+\left.
     \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
     }\\&+
