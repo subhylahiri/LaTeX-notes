@@ -66,11 +66,11 @@ As a worm navigates, it performs a sequence of turns. When turns occur sufficien
 
 Consider a sequence of two successive reorientations. The values of a particular characteristic of these reorientations is a pair of outcomes: $(X_1,X_2)$. We are asking whether or not $P(X_2|X_1) = P(X_2) \; \forall (X_1,X_2)$.
 
-%These probability distributions can be estimated from the frequencies in a sample sequence. However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in appendix \ref{sec:stderr}.
+%These probability distributions can be estimated from the frequencies in a sample sequence. However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in \ref{sec:stderr}.
 %
 %In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
 
-Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes a greater fraction of turns than the others. In this situation, if the first reorientation in a pair is a turn it would make it more likely that the worm in question is the turn-favoring one, making it more likely that the next reorientation is a turn. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and appendix \ref{sec:varibias}.
+Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes a greater fraction of turns than the others. In this situation, if the first reorientation in a pair is a turn it would make it more likely that the worm in question is the turn-favoring one, making it more likely that the next reorientation is a turn. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and \ref{sec:varibias}.
 
 \section{Measuring probabilities}\label{sec:measureprobs}
 
@@ -122,14 +122,34 @@ For pairs of successive reorientations, we use the notation
 %
 We can calculate conditional probabilities for next reorientation, given previous reorientation
 %
-\begin{equation}\label{eq:varicond}
+\begin{equation}\label{eq:varicondgen}
   \begin{aligned}
-    P(+|+) &= \sum_i P(+|i)P(i|+) = \bar{p} + \frac{\sigma_p^2}{\bar{p}}, \\
-    P(+|-) &= \sum_i P(+|i)P(i|-) = \bar{p} - \frac{\sigma_p^2}{1-\bar{p}}, \\
-    P(-|+) &= \sum_i P(-|i)P(i|+) = 1-\bar{p} - \frac{\sigma_p^2}{\bar{p}}, \\
-    P(-|-) &= \sum_i P(-|i)P(i|-) =1- \bar{p} + \frac{\sigma_p^2}{1-\bar{p}}.
+    P(a|b) &= \sum_i P(a,i|b)
+      = \sum_i P(a|i,b)P(i|b)
+      = \sum_i P(a|i)P(i|b),
   \end{aligned}
 \end{equation}
+%
+where we assumed that there is no memory, and that animal-to-animal variability is the only effect, in going from the second expression to the third. This gives
+%
+\begin{equation}\label{eq:varicond}
+  \begin{aligned}
+    P(+|+) &= \bar{p} + \frac{\sigma_p^2}{\bar{p}}, &
+    P(+|-) &= \bar{p} - \frac{\sigma_p^2}{1-\bar{p}}, \\
+    P(-|+) &= 1-\bar{p} - \frac{\sigma_p^2}{\bar{p}}, &\qquad
+    P(-|-) &= 1- \bar{p} + \frac{\sigma_p^2}{1-\bar{p}}.
+  \end{aligned}
+\end{equation}
+%
+%%
+%\begin{equation}\label{eq:varicond}
+%  \begin{aligned}
+%    P(+|+) &= \sum_i P(+|i)P(i|+) = \bar{p} + \frac{\sigma_p^2}{\bar{p}}, \\
+%    P(+|-) &= \sum_i P(+|i)P(i|-) = \bar{p} - \frac{\sigma_p^2}{1-\bar{p}}, \\
+%    P(-|+) &= \sum_i P(-|i)P(i|+) = 1-\bar{p} - \frac{\sigma_p^2}{\bar{p}}, \\
+%    P(-|-) &= \sum_i P(-|i)P(i|-) =1- \bar{p} + \frac{\sigma_p^2}{1-\bar{p}}.
+%  \end{aligned}
+%\end{equation}
 %
 %and the joint probabilities of previous and next reorientations
 %%
@@ -145,7 +165,7 @@ We can calculate conditional probabilities for next reorientation, given previou
 
 \section{Estimating animal-to-animal variability}\label{sec:variest}
 
-Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions (a problem that does not affect $\bar{p}$, see \eqref{eq:variests} below). What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We also only consider the first $20\mins$ of each track (whilst this reduces the amount of data, it makes it possible to estimate bias and standard error, see appendix \ref{sec:varibias}). We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
+Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions (a problem that does not affect $\bar{p}$, see \eqref{eq:variests} below). What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We also only consider the first $20\mins$ of each track (whilst this reduces the amount of data, it makes it possible to estimate bias and standard error, see \ref{sec:varibias}). We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
 
 For each track, we count the number of turns in each track, $T_i$, and the number of reversal-turns, $R_i$.
 %
@@ -167,7 +187,7 @@ For each track, we count the number of turns in each track, $T_i$, and the numbe
 %\end{equation}
 %%
 
-We can estimate $\bar{p}$ by substituting \eqref{eq:varesttype} into \eqref{eq:varinot}. However, estimating $\sigma_p^2$ is more complicated, as the variance of the sample also receives contributions from the Binomial statistics of each track. In appendix \ref{sec:varibias}, we discuss the construction of approximately unbiased estimators and their variance. The result is
+We can estimate $\bar{p}$ by substituting \eqref{eq:varesttype} into \eqref{eq:varinot}. However, estimating $\sigma_p^2$ is more complicated, as the variance of the sample also receives contributions from the Binomial statistics of each track. In \ref{sec:varibias}, we discuss the construction of approximately unbiased estimators and their variance. The result is
 %
 \begin{equation}\label{eq:variests}
   \begin{aligned}
@@ -183,13 +203,14 @@ We can estimate $\bar{p}$ by substituting \eqref{eq:varesttype} into \eqref{eq:v
   \end{aligned}
 \end{equation}
 %
-The expressions for the partial derivatives of $\hat{\sigma}_p^2$ are a colossal mess. They can be found in appendix \ref{sec:varibias}, \eqref{eq:varsigmap}.
+The expressions for the partial derivatives of $\hat{\sigma}_p^2$ are a colossal mess. They can be found in \ref{sec:varibias}, \eqref{eq:varsigmap}.
 
 As the second expression for $\hat{\bar{p}}$ doesn't rely on maintaining animal identity, we can use the full data set to estimate it. As we will use a larger data set for $\hat{\bar{p}}$ than for $\hat{\sigma}_p^2$, we ignore possible correlations in their standard errors when computing standard errors in derived quantities.
 
 \appendix
+\renewcommand{\thesection}{Appendix \Alph{section}}
 
-\section{Bias and standard error in animal-to-animal variability}\label{sec:varibias}
+\section{Bias and standard error}\label{sec:varibias}
 
 In this appendix, we will remove bias and calculate variance for estimators of the mean probability of a turn and the weighted variance \eqref{eq:varinot}. Our approach is similar to that of \cite{Roulston1999}.
 
@@ -335,7 +356,7 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
 %
 The combined expression for $\var(\hat{\sigma}_p^2)$ is too messy to write out here.
 
-Clearly $\var(\hat{\bar{p}})\to0$ as $N\to\infty$. This is more than sufficient to establish consistency. For $\hat{\sigma}_p^2$, it is a little more work. Let $M$ be the number of animals that make at least one reorientation. Note that $N>M$. We have
+Clearly $\var(\hat{\bar{p}})\to0$ as $N\to\infty$. We can show that this is also true for $\hat{\sigma}_p^2$. Let $M$ be the number of animals that make at least one reorientation. Note that $N>M$. We have
 %
 \begin{equation}\label{eq:orderNM}
   \begin{aligned}
@@ -362,7 +383,7 @@ Then
   \var(\hat{\sigma}_p^2) \sim \CO(M)\CO(N^{-2})\CO(N/M) \sim \CO(N^{-1}).
 \end{equation}
 %
-Thus $\var(\hat{\sigma}_p^2)\to0$ as $N\to\infty$ as well, which is more than sufficient to establish consistency.
+Thus $\var(\hat{\sigma}_p^2)\to0$ as $N\to\infty$ as well as $\var(\hat{\bar{p}})$, which is more than sufficient to establish consistency.
 
 
 
