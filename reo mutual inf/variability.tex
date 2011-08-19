@@ -62,7 +62,7 @@
 
 \section{Reorientation sequences}\label{sec:reoseq}
 
-As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations.
+As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations. We focus on the types of turn only, and we restrict attention to the two most frequent types: \emph{turn} and \emph{reversal-turn}.
 
 Consider a sequence of two successive reorientations. The values of a particular characteristic of these reorientations is a pair of outcomes: $(X_1,X_2)$. We are asking whether or not $P(X_2|X_1) = P(X_2) \; \forall (X_1,X_2)$.
 
@@ -70,17 +70,17 @@ Consider a sequence of two successive reorientations. The values of a particular
 %
 %In principle we should look at all the characteristics together. However, increasing the dimensionality of the data at each reorientation increases the number of bins used, which in turn increases the number of samples needed. Therefore, we will have to be satisfied with looking at each characteristic separately.
 
-Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes a greater fraction of turns than the others. In this situation, if the first reorientation in a pair is a turn it would make it more likely that the worm in question is the large-turning one, making it more likely that the next reorientation is a turn. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and appendix \ref{sec:varibias}.
+Note that this method can confuse animal-to-animal variability with causation. \Eg suppose that one of the worms makes a greater fraction of turns than the others. In this situation, if the first reorientation in a pair is a turn it would make it more likely that the worm in question is the turn-favoring one, making it more likely that the next reorientation is a turn. Thus the probability distributions would not show independence even in the absence of actual causation. We will discuss the effect of animal-to-animal variability quantitatively in \sref{sec:variability} and show how to measure the amount of variability in \sref{sec:variest} and appendix \ref{sec:varibias}.
 
 \section{Measuring probabilities}\label{sec:measureprobs}
 
-Each track consists of a series of runs and reorientations. Within each track, all non-overlapping pairs of reorientation such that each reorientation type was either \emph{turn} or \emph{reversal-turn} were found. The number of pairs of type (\emph{turn},\emph{turn}), (\emph{turn},\emph{reversal-turn}), (\emph{reversal-turn},\emph{turn}) and (\emph{reversal-turn},\emph{reversal-turn}) were counted. The joint probabilities were computed by dividing these counts by their sum. Marginal and conditional probabilities were then computed in the usual way.
+Each track consists of a series of runs and reorientations. Within each track, all non-overlapping pairs of reorientation such that each reorientation type was either \emph{turn} or \emph{reversal-turn} were found. The number of pairs of type (\emph{turn},\emph{turn}), (\emph{turn},\emph{reversal-turn}), (\emph{reversal-turn},\emph{turn}) and (\emph{reversal-turn},\emph{reversal-turn}) were counted. The joint probabilities were computed by dividing these counts by their sum. Marginal and conditional probabilities were then computed in the usual way. Standard errors in these probabilities are computed assuming these counts have a binomial distribution.
 
 Note that all probabilities are actually conditional on the reorientations being either of type \emph{turn} or \emph{reversal-turn}.
 
 \section{Effect of animal-to-animal variability}\label{sec:variability}
 
-In this section we will look at the effect that animal-to-animal variability can have on conditional probabilities in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In our specific case these two outcomes will be the two most important reorientation types (omega or reversal-omega). We will assume that animal-to-animal variability is the only effect and that there is no memory
+In this section we will look at the effect that animal-to-animal variability can have on conditional probabilities in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In our specific case these two outcomes will be the two most important reorientation types (turn or reversal-turn). We will assume that animal-to-animal variability is the only effect and that there is no memory
 
 Label the individual worms with $i=1\ldots N$. Then, for a single reorientation
 %
@@ -147,13 +147,13 @@ We can calculate conditional probabilities for next reorientation, given previou
 
 Estimating $\sigma_p$ in \eqref{eq:varinot} is tricky, as we can't keep track of animal identity during collisions (a problem that does not affect $\bar{p}$, see \eqref{eq:variests} below). What we will do is to restrict attention to those tracks that start during the first $20\mins$ and are at least $20\mins$ long. This ensures that each animal is sampled at most once and that we have a decent amount of data for each animal. We also only consider the first $20\mins$ of each track (whilst this reduces the amount of data, it makes it possible to estimate bias and standard error, see appendix \ref{sec:varibias}). We will then assume that the estimate for $\sigma_p$ applies to the whole experiment. Whilst the turning rates do change during the experiment, we only care about the ratio of turning rates between different animals, which we will assume remains constant.
 
-For each track, we count the number of omegas in each track, $\Omega_i$, and the number of reversal-omegas, $R_i$.
+For each track, we count the number of turns in each track, $T_i$, and the number of reversal-turns, $R_i$.
 %
 \begin{equation}\label{eq:varesttype}
-  \hat{n}_i = \Omega_i+R_i, \qquad
+  \hat{n}_i = T_i+R_i, \qquad
   N = \sum_i \hat{n}_i, \qquad
   \hat{q}_i = \frac{\hat{n}_i}{N}, \qquad
-  \hat{p}_i = \frac{\Omega_i}{\hat{n}_i}.
+  \hat{p}_i = \frac{T_i}{\hat{n}_i}.
 \end{equation}
 %
 
@@ -173,13 +173,13 @@ We can estimate $\bar{p}$ by substituting \eqref{eq:varesttype} into \eqref{eq:v
   \begin{aligned}
     \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i
 %       =\left\{\begin{aligned}
-%      & \frac{\sum_i \Omega_i}{N} \quad \text{for reorientation type,}\\
+%      & \frac{\sum_i T_i}{N} \quad \text{for reorientation type,}\\
 %      & \frac{\sum_i R_i}{N}  \quad \text{for reorientation direction,}
 %       \end{aligned}\right. \\
-        = \frac{\sum_i \Omega_i}{N},\\
+        = \frac{\sum_i T_i}{N},\\
     \var(\hat{\bar{p}}) &\approx \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N},\\
     \hat{\sigma}_p^2 &= \frac{N+1}{N} \sum_i\prn{ \hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \frac{\hat{q}_i(1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i}},\\
-    \var(\hat{\sigma}_p^2) &\approx \sum_i\prn{ \pdiffc{\hat{\sigma}_p^2}{\Omega_i}^2 \Omega_i + \pdiffc{\hat{\sigma}_p^2}{R_i}^2 R_i }.
+    \var(\hat{\sigma}_p^2) &\approx \sum_i\prn{ \pdiffc{\hat{\sigma}_p^2}{T_i}^2 T_i + \pdiffc{\hat{\sigma}_p^2}{R_i}^2 R_i }.
   \end{aligned}
 \end{equation}
 %
@@ -191,7 +191,7 @@ As the second expression for $\hat{\bar{p}}$ doesn't rely on maintaining animal 
 
 \section{Bias and standard error in animal-to-animal variability}\label{sec:varibias}
 
-In this appendix, we will concentrate on reorientation types. The generalisation to reorientation directions is trivial. Our approach is the same as that of \cite{Roulston1999}.
+In this appendix, we will remove bias and calculate variance for estimators of the mean probability of a turn and the weighted variance \eqref{eq:varinot}. Our approach is similar to that of \cite{Roulston1999}.
 
 We have:
 %
@@ -293,8 +293,8 @@ To estimate the variances, we use the approach
 %
 \begin{equation}\label{eq:estvarest}
 \begin{aligned}
-  \var(\hat{A}) &\approx \sum_i\prn{ \pdiffc{\hat{A}}{\Omega_i}^2 \var(\Omega_i) + \pdiffc{\hat{A}}{R_i}^2 \var(R_i) }
-  \\&= \sum_i\prn{ \pdiffc{\hat{A}}{\Omega_i}^2 \Omega_i + \pdiffc{\hat{A}}{R_i}^2 R_i }.
+  \var(\hat{A}) &\approx \sum_i\prn{ \pdiffc{\hat{A}}{T_i}^2 \var(T_i) + \pdiffc{\hat{A}}{R_i}^2 \var(R_i) }
+  \\&= \sum_i\prn{ \pdiffc{\hat{A}}{T_i}^2 T_i + \pdiffc{\hat{A}}{R_i}^2 R_i }.
 \end{aligned}
 \end{equation}
 %
@@ -302,10 +302,10 @@ This relatively simple for $\hat{\bar{p}}$:
 %
 \begin{equation}\label{eq:varpbar}
   \begin{aligned}
-    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i = \sum_i \frac{\sum_i\Omega_i}{\sum_i(\Omega_i+R_i)}, \\
-    \pdiff{\hat{\bar{p}}}{\Omega_i}  &= \frac{\sum_iR_i}{\prn{\sum_i(\Omega_i+R_i)}^2},\\
-    \pdiff{\hat{\bar{p}}}{R_i}  &= -\frac{\sum_i\Omega_i}{\prn{\sum_i(\Omega_i+R_i)}^2},\\
-    \var(\hat{\bar{p}}) &\approx \frac{\prn{\sum_i\Omega_i}\prn{\sum_iR_i}}{\prn{\sum_i(\Omega_i+R_i)}^3} = \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N}.
+    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i = \frac{\sum_iT_i}{\sum_i(T_i+R_i)}, \\
+    \pdiff{\hat{\bar{p}}}{T_i}  &= \frac{\sum_iR_i}{\prn{\sum_i(T_i+R_i)}^2},\\
+    \pdiff{\hat{\bar{p}}}{R_i}  &= -\frac{\sum_iT_i}{\prn{\sum_i(T_i+R_i)}^2},\\
+    \var(\hat{\bar{p}}) &\approx \frac{\prn{\sum_iT_i}\prn{\sum_iR_i}}{\prn{\sum_i(T_i+R_i)}^3} = \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N}.
   \end{aligned}
 \end{equation}
 %
@@ -313,11 +313,11 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
 %
 \begin{equation}\label{eq:varsigmap}
   \begin{aligned}
-    \pdiff{\sigma_p^2}{\Omega_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
+    \pdiff{\sigma_p^2}{T_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
     \\ &+
     \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
     \right.\\&\phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}}}+\left.
-    \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
+    \prn{\sum_j \frac{q_j(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
     }\\&+
     \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} (1-\hat{p}_i)} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) (1-\hat{p}_i)} {\hat{n}_i-1}
     },\\
@@ -326,7 +326,7 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
     \\ &+
     \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
     \right.\\&\phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}}}+\left.
-    \prn{\sum_j \frac{(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
+    \prn{\sum_j \frac{q_j(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
     }\\&+
     \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i \hat{p}_i} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} \hat{p}_i} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) \hat{p}_i} {\hat{n}_i-1}
     }.
@@ -335,6 +335,34 @@ but it is much more complicated for $\hat{\sigma}_p^2$:
 %
 The combined expression for $\var(\hat{\sigma}_p^2)$ is too messy to write out here.
 
+Clearly $\var(\hat{\bar{p}})\to0$ as $N\to\infty$. This is more than sufficient to establish consistency. For $\hat{\sigma}_p^2$, it is a little more work. Let $M$ be the number of animals that make at least one reorientation. Note that $N>M$. We have
+%
+\begin{equation}\label{eq:orderNM}
+  \begin{aligned}
+    q_i &\sim \CO(M^{-1}),
+    & \sum_i &\sim \CO(M), \\
+    p_i &\sim \CO(1),
+    & \hat{n}_i,T_i,R_i &\sim \CO(N/M).
+  \end{aligned}
+\end{equation}
+%
+then, we have
+%
+\begin{equation}\label{eq:coefforder}
+  \begin{aligned}
+    \pdiff{\sigma_p^2}{T_i},\pdiff{\sigma_p^2}{R_i}  \sim&\,
+    \CO(N^{-2}) + \CO(1)\CO(M^{-1})\CO(M/N) \\&+ \CO(N^{-1})\prn{\CO(1) + \CO(M)\CO(M^{-1})\CO(M/N)} \\&+ \CO(1)\CO(M^{-1})\CO(M/N)\\
+      \sim&\, \CO(N^{-1}).
+  \end{aligned}
+\end{equation}
+%
+Then
+%
+\begin{equation}\label{eq:ordervarvarp}
+  \var(\hat{\sigma}_p^2) \sim \CO(M)\CO(N^{-2})\CO(N/M) \sim \CO(N^{-1}).
+\end{equation}
+%
+Thus $\var(\hat{\sigma}_p^2)\to0$ as $N\to\infty$ as well, which is more than sufficient to establish consistency.
 
 
 
