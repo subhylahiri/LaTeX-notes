@@ -64,7 +64,7 @@
 
 As a worm navigates, it performs a sequence of turns. When turns occur sufficiently close to each other, they are grouped into a reorientation event. These reorientations have several characteristics, \eg the types of turn of which it is composed, the difference in heading direction before and after, the duration of the run leading into it. We wish to know if the characteristics of one reorientation are independent of the characteristics of previous reorientations. We focus on the types of turn only, and we restrict attention to the two most frequent types: \emph{turn} and \emph{reversal-turn}.
 
-Consider a sequence of two successive reorientations. The values of a particular characteristic of these reorientations is a pair of outcomes: $(X_1,X_2)$. We are asking whether or not $P(X_2|X_1) = P(X_2) \; \forall (X_1,X_2)$.
+Consider a sequence of two successive reorientations. The characteristics of these reorientations form a pair of outcomes: $(X_1,X_2)$. We are asking whether or not $P(X_2|X_1) = P(X_2) \; \forall (X_1,X_2)$.
 
 %These probability distributions can be estimated from the frequencies in a sample sequence. However, as a consequence of finite sample size, this process has both systematic and random errors. We will look at several methods for removing systematic errors in \sref{sec:syscorr} and one method for estimating random errors in \ref{sec:stderr}.
 %
@@ -80,7 +80,7 @@ Note that all probabilities are actually conditional on the reorientations being
 
 \section{Effect of animal-to-animal variability}\label{sec:variability}
 
-In this section we will look at the effect that animal-to-animal variability can have on conditional probabilities in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In our specific case these two outcomes will be the two most important reorientation types (turn or reversal-turn). We will assume that animal-to-animal variability is the only effect and that there is no memory
+In this section we will look at the effect that animal-to-animal variability can have on conditional probabilities in the case of binary output, \ie the characteristics of each reorientation are reduced to two possible outcomes which we will call $\{+,-\}$. In our specific case these two outcomes will be the two most important reorientation types (\emph{turn} or \emph{reversal-turn}). We will assume that animal-to-animal variability is the only effect and that there is no memory
 
 Label the individual worms with $i=1\ldots M$. Then, for a single reorientation
 %
@@ -94,7 +94,7 @@ The prior probability that a reorientation was from a particular animal, $q_i$, 
 %
 \begin{equation}\label{eq:varinot}
   \bar{p} = \sum_i q_i p_i, \qquad
-  \sigma_p = \sqrt{\sum_i q_i(p_i-\bar{p})^2}.
+  \sigma_p^2 = {\sum_i q_i(p_i-\bar{p})^2}.
 \end{equation}
 %
 So that
@@ -191,14 +191,17 @@ We can estimate $\bar{p}$ by substituting \eqref{eq:varesttype} into \eqref{eq:v
 %
 \begin{equation}\label{eq:variests}
   \begin{aligned}
-    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i
+    \hat{\bar{p}} &%= \sum_i \hat{q}_i \hat{p}_i
 %       =\left\{\begin{aligned}
 %      & \frac{\sum_i T_i}{N} \quad \text{for reorientation type,}\\
 %      & \frac{\sum_i R_i}{N}  \quad \text{for reorientation direction,}
 %       \end{aligned}\right. \\
-        = \frac{\sum_i T_i}{N},\\
-    \var(\hat{\bar{p}}) &\approx \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N},\\
-    \hat{\sigma}_p^2 &= \frac{N+1}{N} \sum_i\prn{ \hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \frac{\hat{q}_i(1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i}},\\
+        = \frac{\sum_i T_i}{N},
+        &
+    \hat{\sigma}_p^2 &= \frac{N+1}{N} \sum_i\prn{ \hat{q}_i(\hat{p}_i-\hat{\bar{p}})^2 - \frac{\hat{q}_i(1-\hat{q}_i)\hat{p}_i(1-\hat{p}_i)}{\hat{n}_i}},
+    \\
+    \var(\hat{\bar{p}}) &\approx \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N},
+    &\qquad
     \var(\hat{\sigma}_p^2) &\approx \sum_i\prn{ \pdiffc{\hat{\sigma}_p^2}{T_i}^2 T_i + \pdiffc{\hat{\sigma}_p^2}{R_i}^2 R_i }.
   \end{aligned}
 \end{equation}
@@ -217,7 +220,7 @@ In this appendix, we will remove bias and calculate variance for estimators of t
 We have:
 %
 \begin{equation}\label{eq:estdist}
-  P(\hat{p}_i|\hat{n}_i) \sim \frac{\mathrm{Binom}(\hat{n}_i,p_i)}{\hat{n}_i},
+  P(\hat{p}_i|\hat{n}_i) \sim \frac{\mathrm{Binomial}(\hat{n}_i,p_i)}{\hat{n}_i},
   \qquad
   P(\hat{n}_i) \sim \mathrm{Poisson}(r_it),
 \end{equation}
@@ -274,7 +277,7 @@ The obvious estimator for $\bar{p}$ works just fine:
 \begin{equation}\label{eq:pbarest}
   \E\brk{\sum_i\hat{q}_i\hat{p}_i\middle|\hat{n}_i} = \sum_i \hat{q}_ip_i,
   \qquad
-  \E\brk{\sum_i\hat{q}_ip_i} + \CO\prn{\frac{1}{n_i^2}} = \sum_iq_ip_i = \bar{p} + \CO\prn{\frac{1}{n_i^2}}.
+  \E\brk{\sum_i\hat{q}_ip_i}  = \sum_iq_ip_i + \CO\prn{\frac{1}{n_i^2}} = \bar{p} + \CO\prn{\frac{1}{n_i^2}}.
 \end{equation}
 %
 
@@ -323,9 +326,9 @@ This relatively simple for $\hat{\bar{p}}$:
 %
 \begin{equation}\label{eq:varpbar}
   \begin{aligned}
-    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i = \frac{\sum_iT_i}{\sum_i(T_i+R_i)}, \\
-    \pdiff{\hat{\bar{p}}}{T_i}  &= \frac{\sum_iR_i}{\prn{\sum_i(T_i+R_i)}^2},\\
-    \pdiff{\hat{\bar{p}}}{R_i}  &= -\frac{\sum_iT_i}{\prn{\sum_i(T_i+R_i)}^2},\\
+    \hat{\bar{p}} &= \sum_i \hat{q}_i \hat{p}_i = \frac{\sum_iT_i}{\sum_i(T_i+R_i)}, &
+    \pdiff{\hat{\bar{p}}}{T_i}  &= \frac{\sum_iR_i}{\prn{\sum_i(T_i+R_i)}^2},\\&&
+    \pdiff{\hat{\bar{p}}}{R_i}  &= -\frac{\sum_iT_i}{\prn{\sum_i(T_i+R_i)}^2},\\&&
     \var(\hat{\bar{p}}) &\approx \frac{\prn{\sum_iT_i}\prn{\sum_iR_i}}{\prn{\sum_i(T_i+R_i)}^3} = \frac{\hat{\bar{p}}(1-\hat{\bar{p}})}{N}.
   \end{aligned}
 \end{equation}
@@ -333,23 +336,24 @@ This relatively simple for $\hat{\bar{p}}$:
 but it is much more complicated for $\hat{\sigma}_p^2$:
 %
 \begin{equation}\label{eq:varsigmap}
+    \pdiff{\hat{\sigma}_p^2}{T_i} = A_i+ B_i(1-\hat{p}_i),
+    \qquad
+    \pdiff{\hat{\sigma}_p^2}{R_i} = A_i+ B_i \hat{p}_i,
+\end{equation}
+%
+where
+%
+\begin{equation}\label{eq:varisigmacoeffs}
   \begin{aligned}
-    \pdiff{\sigma_p^2}{T_i} =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
+    A_i =& -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
     \\ &+
-    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
-    \right.\\&\phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}}}+\left.
+    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - \Bigl(\sum_j \hat{q}_j\hat{p}_j^2\Bigr) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
+    \right.\\&
+    \phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2}
+    +\left.
     \prn{\sum_j \frac{q_j(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
-    }\\&+
-    \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} (1-\hat{p}_i)} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) (1-\hat{p}_i)} {\hat{n}_i-1}
     },\\
-    \pdiff{\sigma_p^2}{R_i} =&
-    -\frac{\hat{\sigma}_p^2}{N(N+1)} + \frac{N+1}{N} \prn{\frac{\hat{q}_i (1-\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {(\hat{n}_i-1)^2}}
-    \\ &+
-    \frac{N+1}{N^2} \prn{ \hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2) - 2 \hat{p}_i\hat{\bar{p}} + 2 \hat{\bar{p}}^2 - \frac{(1-2\hat{q}_i) \hat{p}_i (1-\hat{p}_i)} {\hat{n}_i-1}
-    \right.\\&\phantom{\prn{\frac{N+1}{N^2}}\hat{p}_i^2 - (\sum_j \hat{q}_j\hat{p}_j^2)- 2 \hat{p}_i\hat{\bar{p}}}+\left.
-    \prn{\sum_j \frac{q_j(1-2\hat{q}_j) \hat{p}_j (1-\hat{p}_j)} {\hat{n}_j-1} }
-    }\\&+
-    \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i \hat{p}_i} {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} \hat{p}_i} {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) \hat{p}_i} {\hat{n}_i-1}
+    B_i =&\, \frac{N+1}{N} \prn{  \frac{2\hat{q}_i \hat{p}_i } {\hat{n}_i} - \frac{2\hat{q}_i \hat{\bar{p}} } {\hat{n}_i} -  \frac{\hat{q}_i(1-\hat{q}_i) (1-2\hat{p}_i) } {\hat{n}_i-1}
     }.
   \end{aligned}
 \end{equation}
@@ -371,7 +375,7 @@ then, we have
 %
 \begin{equation}\label{eq:coefforder}
   \begin{aligned}
-    \pdiff{\sigma_p^2}{T_i},\pdiff{\sigma_p^2}{R_i}  \sim&\,
+    \smash{\pdiff{\sigma_p^2}{T_i},\pdiff{\sigma_p^2}{R_i}  } \sim&\,
     \CO(N^{-2}) + \CO(1)\CO(M^{-1})\CO(M/N) \\&+ \CO(N^{-1})\prn{\CO(1) + \CO(M)\CO(M^{-1})\CO(M/N)} \\&+ \CO(1)\CO(M^{-1})\CO(M/N)\\
       \sim&\, \CO(N^{-1}).
   \end{aligned}
