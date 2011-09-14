@@ -360,13 +360,13 @@ where
 %
 The combined expression for $\var(\hat{\sigma}_p^2)$ is too messy to write out here.
 
-Clearly $\var(\hat{\bar{p}})\to0$ as $N\to\infty$. We can show that this is also true for $\hat{\sigma}_p^2$. Let $M$ be the number of animals that make at least one reorientation. Note that $N>M$. We have
+Clearly our estimate of $\var(\hat{\bar{p}})\to0$ as $N\to\infty$. We can show that this is also true for $\hat{\sigma}_p^2$. Let $M$ be the number of animals that make at least one reorientation. Note that $N>M$. We have
 %
 \begin{equation}\label{eq:orderNM}
   \begin{aligned}
-    q_i &\sim \CO(M^{-1}),
+    \hat{q}_i &\sim \CO(M^{-1}),
     & \sum_i &\sim \CO(M), \\
-    p_i &\sim \CO(1),
+    \hat{p}_i &\sim \CO(1),
     & \hat{n}_i,T_i,R_i &\sim \CO(N/M).
   \end{aligned}
 \end{equation}
@@ -375,8 +375,15 @@ then, we have
 %
 \begin{equation}\label{eq:coefforder}
   \begin{aligned}
-    \smash{\pdiff{\sigma_p^2}{T_i},\pdiff{\sigma_p^2}{R_i}  } \sim&\,
-    \CO(N^{-2}) + \CO(1)\CO(M^{-1})\CO(M/N) \\&+ \CO(N^{-1})\prn{\CO(1) + \CO(M)\CO(M^{-1})\CO(M/N)} \\&+ \CO(1)\CO(M^{-1})\CO(M/N)\\
+%    \smash{\pdiff{\sigma_p^2}{T_i},\pdiff{\sigma_p^2}{R_i}  } \sim&\,
+%    \CO(N^{-2}) + \CO(1)\CO(M^{-1})\CO(M/N) \\&+ \CO(N^{-1})\prn{\CO(1) + \CO(M)\CO(M^{-1})\CO(M/N)} \\&+ \CO(1)\CO(M^{-1})\CO(M/N)\\
+%      \sim&\, \CO(N^{-1}).
+    A_i \sim&\,
+    \CO(N^{-2}) + \CO(1)\CO(M^{-1})\CO(M/N)
+    \\&
+    + \CO(N^{-1})\prn{\CO(1) + \CO(M)\CO(M^{-1})\CO(M/N)}
+    \\ \sim&\, \CO(N^{-1}),\\
+    B_i \sim&\, \CO(1)\CO(M^{-1})\CO(M/N)\\
       \sim&\, \CO(N^{-1}).
   \end{aligned}
 \end{equation}
@@ -387,7 +394,7 @@ Then
   \var(\hat{\sigma}_p^2) \sim \CO(M)\CO(N^{-2})\CO(N/M) \sim \CO(N^{-1}).
 \end{equation}
 %
-Thus $\var(\hat{\sigma}_p^2)\to0$ as $N\to\infty$ as well as $\var(\hat{\bar{p}})$, which is more than sufficient to establish consistency.
+Thus our estimate of $\var(\hat{\sigma}_p^2)\to0$ as $N\to\infty$ as well as our estimate of $\var(\hat{\bar{p}})$. In addition to the biases vanishing as $t\to\infty$, this suggests that our estimators are consistent.
 
 
 
