@@ -916,7 +916,7 @@ This implies that the process is lumpable to a two state system (see \sref{sec:l
 \end{multline}
 %
 which leads to the initial SNR %curve
-\footnote{Note that including the dropped factors in \eqref{eq:noisepm} would only change this to 
+\footnote{Note that including the dropped factors in \eqref{eq:noisepm} would only change this to
 %$\SNR(t) = \sqrt{N (4f^+f^-)} \,\e^{-rt}$,
 $\SNR(0) \leq \sqrt{N (4f^+f^-)}$,
 which would have no effect on what follows.}
@@ -1346,7 +1346,7 @@ These were shown by finding allowed perturbations that increase the area.
 %In the third case, we can then apply the perturbation \eqref{eq:shortcutderiv} to remove all the shortcuts.
 %Either this, or the first case, results in a multi-state topology, possibly disconnected or without the full set of states.
 
-This leaves two possibilities for the maximum area Markov chain. 
+This leaves two possibilities for the maximum area Markov chain.
 Either there is no degeneracy and no shortcuts, which implies the Multi-state topology that we'll discuss in \sref{sec:multistate}, or there is some degeneracy, which would allow shortcuts provided that they do not bypass an entire degenerate set (see \eqref{eq:shortcutarea}).
 
 Degeneracy tends to be very delicate. It is usually hard to arrange without some symmetry relating degenerate state. Such a symmetry would imply lumpability (see \sref{sec:lump}). The lumped chain would not have any shortcuts, as an entire degenerate set cannot be bypassed. As this lumped chain has the same area (see \sref{sec:SNRlump}), we would need only consider the multi-state topology.
@@ -1371,7 +1371,7 @@ It saturates various inequalities:
         \fptb_{ij},  &\text{if}\quad i \leq j \leq k \quad\text{or}\quad i \geq j \geq k,\\
         -\fptb_{ji}, &\text{if}\quad j \leq i \leq k \quad\text{or}\quad j \geq i \geq k,\\
       \end{cases} \\
-    \eq_i \W^F_{ij} \prn{\fptb_{ij}+\fptb_{ji}} &= 1 \quad\text{if}\quad i=j\pm1,
+    r\eq_i \W^F_{ij} \prn{\fptb_{ij}+\fptb_{ji}} &= 1 \quad\text{if}\quad i=j\pm1,
   \end{aligned}
 \end{equation}
 %
@@ -1394,10 +1394,10 @@ This allows us to calculate the $c_k$'s:
   ,\\
   c_{k+1} - c_k =&\, \prn{\fpt_{k,k+1}+\fpt_{k+1,k}} \prn{\frac{\eq_{k}\W^F_{k,k+1}}{f^+}+\frac{\eq_{k+1}\W^F_{k+1,k}}{f^-}}
     =%\\=&\,
-    \frac{1}{f^+f^-},\\
+    \frac{1}{rf^+f^-},\\
   \sum_k c_k \eq_k =&\, \sum_{ij} \eq_i q_{ij} (\eta-\eta) = 0,\\
 %  \implies c_k =&\, \frac{\prn{k-\frac{n+1}{2}} - \sum_j\prn{j-\frac{n+1}{2}}\eq_j}{f^+f^-},
-  \implies c_k =&\, \frac{k - \sum_j j\eq_j}{f^+f^-},
+  \implies c_k =&\, \frac{k - \sum_j j\eq_j}{rf^+f^-},
 \end{aligned}
 \end{equation}
 %
@@ -1405,8 +1405,8 @@ where we used \eqref{eq:multistateineq} to derive the first two equations respec
 %
 \begin{equation}\label{eq:multistatearea}
  % A = 2\sqrt{N} \sum_k \brk{\prn{k-\frac{n+1}{2}} - \sum_j\prn{j-\frac{n+1}{2}}\eq_j} \eq_k \w_k.
-  A = 2\sqrt{N} \sum_k \brk{k - \sum_j j\eq_j} \eq_k \w_k
-    = 2\sqrt{N} \sum_k \abs{k - \sum_j j\eq_j} \eq_k ,
+  A = \frac{2\sqrt{N}}{r} \sum_k \brk{k - \sum_j j\eq_j} \eq_k \w_k
+    = \frac{2\sqrt{N}}{r} \sum_k \abs{k - \sum_j j\eq_j} \eq_k ,
 \end{equation}
 %
 where we used $\w_k=\sgn(c_k)$, as discussed after \eqref{eq:areacoeffs}.
@@ -1457,17 +1457,17 @@ where we used $\w_k=\sgn(c_k)$, as discussed after \eqref{eq:areacoeffs}.
 First let us maximise \eqref{eq:multistatearea} at fixed $\eq_\pm = \sum_k \eq_k \prn{\frac{1\pm\w_k}{2}}$.
 Clearly this will happen when we put all of the probability at the ends: $\eq_1=\eq_-$ and $\eq_n=\eq_+$ are the only non-zero $\eq_k$.
 This gives an area of
-\footnote{Note that including the dropped factors in \eqref{eq:noisepm} would only change this to $A \leq \sqrt{N(4\eq_1\eq_n)}(n-1)$, which would have no effect on what follows.}
+\footnote{Note that including the dropped factors in \eqref{eq:noisepm} would only change this to $A \leq \sqrt{N(4\eq_1\eq_n)}(n-1)/r$, which would have no effect on what follows.}
 
 %
 \begin{equation}\label{eq:multistateextarea}
-  A \leq \sqrt{N}(n-1)\prn{4\eq_1\eq_n}.
+  A \leq \frac{\sqrt{N}}{r}(n-1)\prn{4\eq_1\eq_n}.
 \end{equation}
 %
 This is maximised at $\eq_1=\eq_n=\half$:
 %
 \begin{equation}\label{eq:maxarea}
-  A \leq \sqrt{N}(n-1).
+  A \leq \frac{\sqrt{N}}{r}(n-1).
 \end{equation}
 %
 Note that this is not an ergodic chain, the two states at each end are absorbing.
