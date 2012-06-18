@@ -33,7 +33,7 @@
 \usepackage[pdftex,bookmarks]{hyperref}
 \else
 \usepackage[hypertex]{hyperref}
-\DeclareGraphicsRule{.png}{eps}{.bb}{}
+%\DeclareGraphicsRule{.png}{eps}{.bb}{}
 \fi
 %
 % >> Only for drafts! <<
@@ -49,8 +49,8 @@
 \input{newsymb.tex}
 
 \DeclareMathOperator{\cum}{cum}
-\DeclareMathOperator{\bias}{Bias}
-\DeclareMathOperator{\var}{Var}
+%\DeclareMathOperator{\bias}{Bias}
+%\DeclareMathOperator{\var}{Var}
 \newcommand{\tk}{\tilde c}
 \newcommand{\mh}{\hat\mu}
 \newcommand{\sh}{\hat{s}}
@@ -241,6 +241,80 @@ This estimator is unbiased and consistent, as above. However it is not invariant
 %
 Not that both the estimators for the mean \eqref{eq:meanest} and its standard error \eqref{eq:stderr} are invariant under the rescaling \eqref{eq:rescale}. These are the only two fully meaningful formulae in the section.
 
+\section{One sample T-test}\label{sec:ttestone}
+
+In this section we will assume that all cumulants except for the first two vanish, \ie that the distributions are normal
+%
+\begin{equation}\label{eq:scalednormal}
+  x_i \sim \text{N}\prn{\mu,\frac{\sigma^2}{w_i}}. 
+\end{equation}
+%
+We wish to test the hypothesis that the mean is equal to some value, $\mu_0$. Let
+%
+\begin{equation}\label{eq:stdvars}
+  z_i \equiv \frac{\sqrt{w_i}}{\sigma}(x_i-\mu_0),
+  \qquad
+  Z = \sum_i z_i^2.
+\end{equation}
+%
+Under the null hypothesis that $\mu=\mu_0$,
+%
+\begin{equation}\label{eq:stddists}
+  z_i \sim \text{N}(0,1),
+  \qquad
+  Z \sim \chi^2_N.
+\end{equation}
+%
+We can rewrite $Z$ as
+%
+\begin{equation}\label{eq:cochranversion}
+  \begin{aligned}
+    Z &= \frac{1}{\sigma^2} \sum_i w_i (x_i - \mu_0)^2 \\
+      &= \frac{1}{\sigma^2} \sum_i w_i (x_i - \mh + \mh - \mu_0)^2 \\
+      &= \frac{1}{\sigma^2} \sum_i w_i \brk{(x_i - \mh)^2 + (\mh - \mu_0)^2} \\
+      &= \prn{\frac{\sum_i w_i}{\sigma^2}}  \brk{(N-1)\delta\mh^2 + (\mh - \mu_0)^2}.
+  \end{aligned}
+\end{equation}
+%
+This can be rewritten back in terms of the $z_i$ as
+%
+\begin{equation}\label{eq:cochrancoeffs}
+  \begin{aligned}
+    \prn{\frac{\sum_i w_i}{\sigma^2}}  (N-1)\delta\mh^2 &= \sum_{ij} S_{ij} z_i z_j, 
+    &\qquad
+     S_{ij} &= \delta_{ij} - \frac{\sqrt{w_i w_j}}{\sum_k w_k}, \\
+    \prn{\frac{\sum_i w_i}{\sigma^2}}  (\mh - \mu_0)^2  &= \sum_{ij} M_{ij} z_i z_j,
+    &\qquad
+     M_{ij} &= \frac{\sqrt{w_i w_j}}{\sum_k w_k}.
+  \end{aligned}
+\end{equation}
+%
+We can see that $M_{ij}$ is the projection operator onto a vector of the square root of the weights and $S_{ij}$ is the perpendicular projection operator, therefore
+%
+\begin{equation}\label{eq:cochranrank}
+  \rank(S_{ij}) = N-1, \qquad \rank(M_{ij}) = 1.
+\end{equation}
+%
+By Cochran's theorem \cite{Cochran:1934},
+%
+\begin{equation}\label{eq:cochrandist}
+  \begin{aligned}
+    \prn{\frac{\sum_i w_i}{\sigma^2}}  (N-1)\delta\mh^2 &\sim \chi^2_{N-1}, \\
+    \prn{\frac{\sum_i w_i}{\sigma^2}}  (\mh - \mu_0)^2  &\sim \chi^2_{1},
+  \end{aligned}
+\end{equation}
+%
+and these two quantities are independent. This allows us to conclude that
+%
+\begin{equation}\label{eq:Tstats}
+  \begin{aligned}
+    t^2 &\equiv \frac{(\mh - \mu_0)^2}{\delta\mh^2} &&\sim \text{F}_{1,N-1}, \\
+    t   &\equiv \frac{\mh - \mu_0}{\delta\mh}       &&\sim \text{T}_{N-1}.
+  \end{aligned}
+\end{equation}
+%
+Therefore, we can do one sample T-tests in the same way as usual.
+
 
 
 
@@ -259,7 +333,7 @@ Not that both the estimators for the mean \eqref{eq:meanest} and its standard er
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\bibliographystyle{utcaps_sl}
-%\bibliography{qft,string,adscft,gr,maths}
+\bibliographystyle{utcaps_sl}
+\bibliography{maths}
 
 \end{document}

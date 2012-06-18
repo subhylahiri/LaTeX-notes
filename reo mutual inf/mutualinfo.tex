@@ -594,23 +594,65 @@ We only looked at the cases $r=2$ (pairs of consecutive reorientations). The res
 \begin{table}
   %
   \begin{center}
-  \begin{tabular}{|r|l|l|l|l|}
+  \begin{tabular}{|r|l|l|l|}
     \hline
     % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-    \multirow{2}{*}{Assay} & \multicolumn{2}{|c|}{Omega} & \multicolumn{2}{|c|}{Reversal-Omega} \\
-      \cline{2-5}
-      & $P(R|R)$ & $P(R|L)$ & $P(R|R)$ & $P(R|L)$ \\
+    \multirow{2}{*}{Assay} & \multicolumn{3}{|c|}{Turn, Turn} \\
+      \cline{2-4}
+      & $P(R)/P(R|R)$ & $P(R)/P(R|L)$ & $P(R|R)/P(R|L)$ \\
     \hline
-    Neutral      & $0.01$ & $0.09$ & $0.004$ & $0.2$ \\
-    Cryophilic   & $0.95$ & $0.1$ & $0.3$ & $0.05$ \\
-    Thermophilic & $0.004$ & $0.002$ & $0.4$ & $0.99$ \\
-    Saltphilic   & $6\ee{-10}$ & $8\ee{-5}$ & $0.8$ & $0.3$ \\
-    Saltphobic   & $2\ee{-4}$ & $2\ee{-7}$ & $2\ee{-6}$ & $0.02$ \\
+    Neutral      & $0.01$ & $0.09$ & $6\ee{-4}$ \\
+    Cryophilic   & $0.95$ & $0.1$ & $0.2$ \\
+    Thermophilic & $0.004$ & $0.002$ & $1\ee{-7}$ \\
+    Saltphilic   & $6\ee{-10}$ & $8\ee{-5}$ & $4\ee{-17}$ \\
+    Saltphobic   & $2\ee{-4}$ & $2\ee{-7}$ & $4\ee{-13}x$ \\
+    \hline
+  \end{tabular}
+  \begin{tabular}{|r|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{2}{*}{Assay} & \multicolumn{3}{|c|}{Rev-Turn, Rev-Turn} \\
+      \cline{2-4}
+      & $P(R)/P(R|R)$ & $P(R)/P(R|L)$ & $P(R|R)/P(R|L)$ \\
+    \hline
+    Neutral      & $0.004$ & $0.2$ & $6\ee{-4}$ \\
+    Cryophilic   & $0.3$ & $0.05$ & $0.01$ \\
+    Thermophilic & $0.4$ & $0.99$ & $0.44$ \\
+    Saltphilic   & $2\ee{-6}$ & $0.3$ & $2\ee{-6}$ \\
+    Saltphobic   & $0.05$ & $0.02$ & $6\ee{-4}$ \\
+    \hline
+  \end{tabular}
+  \begin{tabular}{|r|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{2}{*}{Assay} & \multicolumn{3}{|c|}{Turn, Rev-Turn} \\
+      \cline{2-4}
+      & $P(R)/P(R|R)$ & $P(R)/P(R|L)$ & $P(R|R)/P(R|L)$ \\
+    \hline
+    Neutral      & $0.8$ & $0.8$ & $0.6$ \\
+    Cryophilic   & $-$ & $-$ & $-$ \\
+    Thermophilic & $0.6$ & $0.5$ & $0.2$ \\
+    Saltphilic   & $-$ & $-$ & $-$ \\
+    Saltphobic   & $-$ & $-$ & $-$ \\
+    \hline
+  \end{tabular}
+  \begin{tabular}{|r|l|l|l|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \multirow{2}{*}{Assay} & \multicolumn{3}{|c|}{Rev-Turn, Turn} \\
+      \cline{2-4}
+      & $P(R)/P(R|R)$ & $P(R)/P(R|L)$ & $P(R|R)/P(R|L)$ \\
+    \hline
+    Neutral      & $0.8$ & $0.7$ & $0.5$ \\
+    Cryophilic   & $-$ & $-$ & $-$ \\
+    Thermophilic & $0.7$ & $0.7$ & $0.5$ \\
+    Saltphilic   & $-$ & $-$ & $-$ \\
+    Saltphobic   & $-$ & $-$ & $-$ \\
     \hline
   \end{tabular}
   \end{center}
   %
-  \caption[P-values for differences in conditional probabilities for reorientation direction restricted to certain reorientation types]{P-values for difference between marginal and conditional probabilities for reorientation direction restricted to certain reorientation types (data in \fref{fig:dirvstype}), computed with Z-tests.}\label{tab:dirvstype}
+  \caption[P-values for differences in conditional probabilities for reorientation direction restricted to certain reorientation types]{P-values for difference between marginal and conditional probabilities for reorientation direction restricted to certain reorientation types (data in \fref{fig:dirvstype}), computed with two-tailed Z-tests.}\label{tab:dirvstype}
 \end{table}
 
 
