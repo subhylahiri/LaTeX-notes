@@ -1,0 +1,267 @@
+% -*- TeX -*- -*- UK -*-
+% ----------------------------------------------------------------
+% arXiv Paper ************************************************
+%
+% Subhaneil Lahiri's template
+%
+% Before submitting:
+%    Comment out hyperref
+%    Comment out showkeys
+%    Replace \input{mydefs.tex} with its contents
+%       or include mydefs.tex in zip/tar file
+%    Replace \input{newsymb.tex} with its contents
+%       or include newsymb.tex in zip/tar file
+%    Put this file, the .bbl file, any picture or
+%       other additional files and natbib.sty
+%       file in a zip/tar file
+%
+% **** -----------------------------------------------------------
+\documentclass[12pt]{article}
+% Preamble:
+%\usepackage{a4wide}
+\usepackage[centertags]{amsmath}
+%\usepackage{ams} for finding documentation only
+\usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage[sort&compress,numbers]{natbib}
+%\usepackage{citeB}
+\usepackage{ifpdf}
+\usepackage{graphicx}
+%\usepackage{graphics} for finding documentation only
+%\usepackage{xcolor}
+%\usepackage{pgf}
+\usepackage{epstopdf}
+\epstopdfsetup{update,suffix=-generated}
+\ifpdf
+ \usepackage[pdftex,bookmarks,bookmarksopen,pdfstartview=FitH]{hyperref}
+ \epstopdfDeclareGraphicsRule{.svg}{pdf}{.pdf}{%
+ "C:/Program Files/Inkscape/inkscape" -f #1 -D -A \OutputFile
+ }
+\else
+ \usepackage[hypertex]{hyperref}
+ %\DeclareGraphicsRule{.png}{eps}{.bb}{}
+\fi
+%
+% >> Only for drafts! <<
+\usepackage[notref,notcite]{showkeys}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\numberwithin{equation}{section}
+%\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+% New commands etc.
+\input{mydefs.tex}
+\input{newsymb.tex}
+%matrices
+\newcommand{\inv}{^{-1}}
+\newcommand{\dg}{^\dagger}
+\newcommand{\trans}{^\mathrm{T}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\omb}{\overline{\omega}}
+% ----------------------------------------------------------------
+%\usepackage{amsthm}
+%\newtheoremstyle{sldefinition}%
+%  {3pt}%space above
+%  {3pt}%space below
+%  {}%body font
+%  {}%indent amount
+%  {\bfseries}%theorem head font
+%  {}%theorem head punctuation
+%  {\newline}%space after head
+%  {\thmname{#1}\thmnumber{ #2}:{\bfseries\thmnote{ #3}}}%head spec
+%\newtheoremstyle{slplain}%
+%  {3pt}%space above
+%  {3pt}%space below
+%  {}%body font
+%  {}%indent amount
+%  {\bfseries}%theorem head font
+%  {}%theorem head punctuation
+%  {\newline}%space after head
+%  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}: }%head spec
+%%
+%\theoremstyle{slplain}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{cor}[thm]{Corollary}
+%%
+%\theoremstyle{sldefinition}
+%\newtheorem{defn}{Definition}
+%%
+%\theoremstyle{remark}
+%\newtheorem*{notn}{Notation}
+%\newtheorem*{rem}{Remark}
+% ----------------------------------------------------------------
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title info:
+\title{Illusions of criticality in high-dimensional autoregressive models}
+%
+% Author List:
+%
+\author{Subhaneil Lahiri and Surya Ganguli
+%
+}
+
+\begin{document}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}
+  We look at the eigenvalue spectrum of high-dimensional autoregressive models when applied to white-noise.
+\end{abstract}
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of Article:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The problem}\label{sec:theprob}
+
+Consider a model of the following type
+%
+\begin{equation}\label{eq:model}
+  x(t+1) = A x(t) + \text{noise},
+\end{equation}
+%
+where $x(t)$ is an $N$-element vector and $A$ is an $N\times N$ matrix.
+
+Suppose we have a sample of $P$ consecutive times, so $x$ is an $N\times P$ matrix.
+We can perform a least-squares estimate of $A$ by minimising
+%
+\begin{equation}\label{eq:minL}
+  L = \half\sum_{i,\mu} \prn{ x_{i\mu+1} - \sum_j A_{ij} x_{j\mu} }^2 = \half\Tr \prn{xU-Ax}\prn{xU-Ax}\trans,
+\end{equation}
+%
+where $U$ is a shift matrix.
+It will be useful to use periodic boundary conditions in time, \ie $x_{iP+1}\sim x_{i1}$,
+as this will make $U$ orthogonal:
+%
+\begin{equation}\label{eq:Udef}
+  U_{\mu\nu} = \delta_{\mu\nu+1} + \delta_{\mu1}\delta_{\nu P}.
+\end{equation}
+%
+The estimate of $A$ is then
+%
+\begin{equation}\label{eq:Aest}
+  A = \prn{xUx\trans}\prn{xx\trans}\inv.
+\end{equation}
+%
+
+Suppose we attempted this analysis in a situation where there really is no structure,
+\ie when $x(t)$ is white noise.
+Then the true optimal $A$ would be 0.
+However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
+
+We will look at the average eigenvalue distribution:
+%
+\begin{equation}\label{eq:eigdist}
+  \rho(\omega) = \av{\rho_A(\omega)}_x,
+  \qquad
+  \rho_A = \sum_{i=1}^N \delta(\omega-\lambda_i),
+\end{equation}
+%
+where $\lambda_i$ are the eigenvalues of $A$ in \eqref{eq:Aest} and
+the components of $x$ are iid gaussian random variables with mean 0 and variance 1.
+
+Following \cite{Sommers1988asymmetric}, this can be computed from a potential:
+%
+\begin{equation}\label{eq:potential}
+  \rho_A(\omega) = -\nabla^2 \Phi_A(\omega),
+  \qquad
+  \Phi_A(\omega) = -\frac{1}{4\pi N} \ln\det \brk{(\omb-A\trans)(\omega-A)}.
+\end{equation}
+%
+We define a partition function
+%
+\begin{equation}\label{eq:partfn}
+  \Phi_A(\omega) = \frac{1}{4\pi N} \ln Z_A(\omega),
+  \qquad
+  Z_A(\omega) = \det \brk{(\omb-A\trans)(\omega-A)}\inv.
+\end{equation}
+%
+The problem is now to compute $\av{\ln Z_A(\omega)}_z$.
+
+%\subsection*{Acknowledgements}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Appendices}
+\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Complex Gaussian integrals}\label{sec:compgauss}
+
+Note that if we write $z=x+\ir y$, then $\dz\dzb = 2\dx\dy$.
+Let $H$ be a positive-definite, $N\times N$ Hermitian matrix.
+Consider an integral  of the form
+%
+\begin{equation*}
+  \int \prn{\prod_i\dz_i\dzb_i} \exp\prn{-z\dg H z}.
+\end{equation*}
+%
+We can diagonalise $H$ with a unitary change of variables:
+%
+\begin{equation}\label{eq:compgausint}
+\begin{aligned}
+  \int \prn{\prod_i\dz_i\dzb_i} \exp\prn{-z\dg H z} &=
+    \prod_i \int \dz_i\dzb_i\, \exp\prn{-\lambda_i \abs{z_i}^2} \\
+    &= \prod_i \int \dx_i\dy_i\, 2\exp\prn{-\lambda_i \prn{x_i^2+y_i^2}} \\
+    &= \prod_i \frac{2\pi}{\lambda_i}\\
+    &= \frac{(2\pi)^N}{\det H}.
+\end{aligned}
+\end{equation}
+%
+
+The proper normalisation for a gaussian distribution is
+%
+\begin{equation}\label{eq:compgaussnorm}
+  P(z,z\dg)\dz\dz\dg = \prn{\prod_i\frac{\dz_i\dzb_i}{2\pi}} \frac{\exp\prn{-z\dg C\inv z}}{\det C}.
+\end{equation}
+%
+By completing the square, we can see that
+%
+\begin{equation}\label{eq:compgausslin}
+  \av{\exp\prn{\zeta\dg z + z\dg\zeta}} = \exp\prn{\zeta\dg C\zeta}.
+\end{equation}
+%
+Taking partial derivatives \wrt $\zeta_i$ and $\bar{\zeta}_i$, we find
+%
+\begin{equation}\label{eq:compgauscov}
+  \av{zz\dg} = C.
+\end{equation}
+%
+
+Now consider an integral of the form
+%
+\begin{equation}\label{eq:compgaussquad}
+\begin{aligned}
+  \av{\exp\prn{-z\dg A z}} &=
+    \int \prn{\prod_i\frac{\dz_i\dzb_i}{2\pi}}\frac{\exp\prn{-z\dg (C\inv+A) z}}{\det C} \\
+    &= \prn{\det C\det\prn{C\inv+A}}\inv \\
+    &= \det\prn{I+CA}\inv.
+\end{aligned}
+\end{equation}
+%
+
+\section{Contour integrals}\label{sec:contourints}
+
+Consider an integral of the form
+%
+\begin{equation}\label{eq:contourint}
+  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta),
+\end{equation}
+%
+where the contour is the unit circle in a counter-clockwise direction.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{utcaps_sl}
+\bibliography{maths,qft,neuro}
+
+\end{document}
