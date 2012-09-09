@@ -30,17 +30,26 @@
 %\usepackage{graphics} for finding documentation only
 %\usepackage{xcolor}
 %\usepackage{pgf}
+\graphicspath{{figs/}}
+\usepackage{adjustbox}
+\newcommand{\aligntop}[1]{\adjustbox{valign=t}{#1}}
 \usepackage{epstopdf}
 \epstopdfsetup{update,suffix=-generated}
 \ifpdf
  \usepackage[pdftex,bookmarks,bookmarksopen,pdfstartview=FitH]{hyperref}
  \epstopdfDeclareGraphicsRule{.svg}{pdf}{.pdf}{%
- "C:/Program Files/Inkscape/inkscape" -f #1 -D -A \OutputFile
+ "C:/Program Files (x86)/Inkscape/inkscape" -f #1 -D -A \OutputFile
  }
 \else
  \usepackage[hypertex]{hyperref}
  %\DeclareGraphicsRule{.png}{eps}{.bb}{}
 \fi
+%
+\usepackage{paralist}
+\newenvironment{myenuma}{\begin{inparaenum}[(a)]}{\end{inparaenum}}
+\newenvironment{myenumi}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
+\newenvironment{myenumA}{\begin{inparaenum}[\bfseries A.]}{\end{inparaenum}}
+\newenvironment{myenumI}{\begin{inparaenum}[\bfseries I.]}{\end{inparaenum}}
 %
 % >> Only for drafts! <<
 \usepackage[notref,notcite]{showkeys}
@@ -59,37 +68,6 @@
 \newcommand{\trans}{^\mathrm{T}}
 \newcommand{\I}{\mathbf{I}}
 \newcommand{\omb}{\overline{\omega}}
-% ----------------------------------------------------------------
-%\usepackage{amsthm}
-%\newtheoremstyle{sldefinition}%
-%  {3pt}%space above
-%  {3pt}%space below
-%  {}%body font
-%  {}%indent amount
-%  {\bfseries}%theorem head font
-%  {}%theorem head punctuation
-%  {\newline}%space after head
-%  {\thmname{#1}\thmnumber{ #2}:{\bfseries\thmnote{ #3}}}%head spec
-%\newtheoremstyle{slplain}%
-%  {3pt}%space above
-%  {3pt}%space below
-%  {}%body font
-%  {}%indent amount
-%  {\bfseries}%theorem head font
-%  {}%theorem head punctuation
-%  {\newline}%space after head
-%  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}: }%head spec
-%%
-%\theoremstyle{slplain}
-%\newtheorem{thm}{Theorem}
-%\newtheorem{cor}[thm]{Corollary}
-%%
-%\theoremstyle{sldefinition}
-%\newtheorem{defn}{Definition}
-%%
-%\theoremstyle{remark}
-%\newtheorem*{notn}{Notation}
-%\newtheorem*{rem}{Remark}
 % ----------------------------------------------------------------
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -196,6 +174,7 @@ The problem is now to compute $\av{\ln Z_A(\omega)}_z$.
 
 \section{Complex Gaussian integrals}\label{sec:compgauss}
 
+First, Let's get all of the factors of 2 straight.
 Note that if we write $z=x+\ir y$, then $\dz\dzb = 2\dx\dy$.
 Let $H$ be a positive-definite, $N\times N$ Hermitian matrix.
 Consider an integral  of the form
@@ -248,15 +227,99 @@ Now consider an integral of the form
 \end{equation}
 %
 
-\section{Contour integrals}\label{sec:contourints}
 
-Consider an integral of the form
+\section{Contour integrals for determinants}\label{sec:contourints}
+
+In evaluating determinants, we will come across contour integrals of the form
 %
 \begin{equation}\label{eq:contourint}
   I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta),
 \end{equation}
 %
 where the contour is the unit circle in a counter-clockwise direction.
+The contour might not be closed because of the branch cut.
+We choose the branch of the logarithm so that
+%
+\begin{equation}\label{eq:branch}
+  \arg\prn{\frac{\zeta-z}{z}} \in [0,2\pi],
+\end{equation}
+%
+and we define $\theta=\arg z$. The branch cut is shown in \fref{fig:contours}.
+
+\begin{figure}
+ \begin{center}
+ \begin{myenuma}
+  \item\aligntop{\includegraphics[width=5cm]{contout.svg}}\label{fig:contout}
+  \hspace{1cm}
+  \item\aligntop{\includegraphics[width=5cm]{contin.svg}}\label{fig:contin}
+ \end{myenuma}
+ \end{center}
+  \caption{Contours used to evaluate \eqref{eq:contourint}, (\ref{fig:contout}) when $\abs{z}>1$, (\ref{fig:contin}) when $\abs{z}<1$.}\label{fig:contours}
+\end{figure}
+
+If $\abs{z}>1$, we can use the contour $C_1$ in \fref{fig:contours}(\ref{fig:contout}).
+Using the residue theorem:
+%
+\begin{equation}\label{eq:intout}
+  I(z) = \frac{1}{2\pi\ir}\int_{C_1} \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z.
+\end{equation}
+%
+
+If $\abs{z}>1$, we can use the contour $C_2$ in \fref{fig:contours}(\ref{fig:contin}):
+%
+\begin{equation}\label{eq:contout}
+C_2: \quad
+  \begin{aligned}
+    \zeta &= \e^{\ir\phi},                             & \phi &\in [\theta+\delta,\theta+2\pi-\delta], \\
+    \zeta &= \e^{\ir(\theta+2\pi-\delta)}+xz\prn{1-\e^{\ir(2\pi-\delta)}},
+                                                       & x    &\in [0,1], \\
+    \zeta &= z - x \e^{\ir(\theta+2\pi-\delta)}, \quad & x    &\in [\abs{z}-1,-\epsilon], \\
+    \zeta &= z + \epsilon\e^{-\ir\phi},                & \phi &\in [-\theta-2\pi+\delta,-\theta-\delta], \\
+    \zeta &= z + x \e^{\ir(\theta+\delta)},          & x    &\in [\epsilon,1-\abs{z}.] \\
+    \zeta &= \e^{\ir(\theta+\delta)}+(1-x)z\prn{1-\e^{\ir\delta}},
+                                                       & x    &\in [0,1], \\
+  \end{aligned}
+\end{equation}
+%
+Using the residue theorem:
+%
+\begin{equation}\label{eq:intin}
+  \frac{1}{2\pi\ir}\int_{C_2} \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z.
+\end{equation}
+%
+If we let $\delta,\epsilon\to0$, the second, fourth and sixth parts of the contour integral vanish, and the first part gives $I(z)$ in \eqref{eq:contourint}.
+We're left with
+%
+\begin{equation}\label{eq:intinlim}
+  \begin{aligned}
+    \ln z &= I(z)
+           -\frac{1}{2\pi\ir} \int_{\abs{z}-1}^{0} \frac{\e^{\ir\theta}\dx}{z-x\e^{\ir\theta}} \ln\prn{x\e^{\ir(\theta+2\pi)}}
+           +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\e^{\ir\theta}\dx}{z+x\e^{\ir\theta}} \ln\prn{-x\e^{\ir\theta}}  \\
+      &= I(z)
+           -\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir(\theta+2\pi)}}
+           +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir\theta}}  \\
+      &= I(z) - \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x}  \\
+      &= I(z) + \ln\abs{z}.
+  \end{aligned}
+\end{equation}
+%
+
+Therefore:
+%
+\begin{equation}\label{eq:countourintresult}
+  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z - [\ln\abs{z}]_-,
+\end{equation}
+%
+where $[x]_\pm = x \theta(\pm x)$ and $\theta(x)$ is the Heaviside step function.
+
+
+\section{The quadratic function $\Gamma(\zeta)$}\label{sec:Gamma}
+
+
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
