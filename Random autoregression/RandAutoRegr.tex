@@ -17,57 +17,34 @@
 %
 % **** -----------------------------------------------------------
 \documentclass[12pt]{article}
-% Preamble:
-%\usepackage{a4wide}
-\usepackage[centertags]{amsmath}
-%\usepackage{ams} for finding documentation only
-\usepackage{amssymb}
-%\usepackage{amsthm}
-\usepackage[sort&compress,numbers]{natbib}
-%\usepackage{citeB}
-\usepackage{ifpdf}
-\usepackage{graphicx}
-%\usepackage{graphics} for finding documentation only
-%\usepackage{xcolor}
-%\usepackage{pgf}
-\graphicspath{{figs/}}
-\usepackage{adjustbox}
-\newcommand{\aligntop}[1]{\adjustbox{valign=t}{#1}}
-\usepackage{epstopdf}
-\epstopdfsetup{update,suffix=-generated}
-\ifpdf
- \usepackage[pdftex,bookmarks,bookmarksopen,pdfstartview=FitH]{hyperref}
- \epstopdfDeclareGraphicsRule{.svg}{pdf}{.pdf}{%
- "C:/Program Files (x86)/Inkscape/inkscape" -f #1 -D -A \OutputFile
- }
-\else
- \usepackage[hypertex]{hyperref}
- %\DeclareGraphicsRule{.png}{eps}{.bb}{}
-\fi
 %
-\usepackage{paralist}
-\newenvironment{myenuma}{\begin{inparaenum}[(a)]}{\end{inparaenum}}
-\newenvironment{myenumi}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
-\newenvironment{myenumA}{\begin{inparaenum}[\bfseries A.]}{\end{inparaenum}}
-\newenvironment{myenumI}{\begin{inparaenum}[\bfseries I.]}{\end{inparaenum}}
+% Preamble:
+\input{sl_preamble.tex}
+\input{sl_graphics_preamble.tex}
+\graphicspath{{figs/}}
 %
 % >> Only for drafts! <<
 \usepackage[notref,notcite]{showkeys}
+%
 % ----------------------------------------------------------------
-\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
-\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
 %\numberwithin{equation}{section}
 %\renewcommand{\baselinestretch}{1.5}
 % ----------------------------------------------------------------
 % New commands etc.
-\input{mydefs.tex}
-\input{newsymb.tex}
+\input{sl_definitions.tex}
+\input{sl_symbols.tex}
 %matrices
 \newcommand{\inv}{^{-1}}
 \newcommand{\dg}{^\dagger}
 \newcommand{\trans}{^\mathrm{T}}
 \newcommand{\I}{\mathbf{I}}
 \newcommand{\omb}{\overline{\omega}}
+\newcommand{\dw}{\dr w}
+\newcommand{\dwb}{\dr\overline{w}}
+\newcommand{\du}{\dr u}
+\newcommand{\dub}{\dr\bar{u}}
+\newcommand{\dv}{\dr v}
+\newcommand{\dvb}{\dr\bar{v}}
 % ----------------------------------------------------------------
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,10 +86,10 @@ Consider a model of the following type
 where $x(t)$ is an $N$-element vector and $A$ is an $N\times N$ matrix.
 
 Suppose we have a sample of $P$ consecutive times, so $x$ is an $N\times P$ matrix.
-We can perform a least-squares estimate of $A$ by minimising
+We can perform a least-squares estimate of $A$ by minimising the quantity
 %
 \begin{equation}\label{eq:minL}
-  L = \half\sum_{i,\mu} \prn{ x_{i\mu+1} - \sum_j A_{ij} x_{j\mu} }^2 = \half\Tr \prn{xU-Ax}\prn{xU-Ax}\trans,
+  \half\sum_{i,\mu} \prn{ x_{i\mu+1} - \sum_j A_{ij} x_{j\mu} }^2 = \half\Tr \prn{xU-Ax}\prn{xU-Ax}\trans,
 \end{equation}
 %
 where $U$ is a shift matrix.
@@ -162,7 +139,72 @@ We define a partition function
   Z_A(\omega) = \det \brk{(\omb-A\trans)(\omega-A)}\inv.
 \end{equation}
 %
-The problem is now to compute $\av{\ln Z_A(\omega)}_z$.
+The problem is now to compute $\av{\ln Z_A(\omega)}_x$.
+
+
+
+\section{Simplified derivation}\label{sec:simplederiv}
+
+In this section, we will present a simplified version of the derivation.
+We will make two simplifying assumptions.
+
+First, we will treat $x$ as annealed, rather than quenched, disorder:
+%
+\begin{equation}\label{eq:annealed}
+  \av{\ln Z_A(\omega)}_x = \ln\av{Z_A(\omega)}_x.
+\end{equation}
+%
+We will justify this assumption in \sref{sec:replicader} using the replica trick.
+We will see that, with a replica symmetric ansatz, the saddle point has zero off-diagonal replica overlaps.
+This means that there is no coupling between the replicas, which produces identical results to the annealed calculation.
+
+Second, we will assume factorisation of an expectation value:
+%
+\begin{equation}\label{eq:factorass}
+  \av{\det(xx\trans)^2\cdots}_x = \av{\det(xx\trans)^2}_x \av{\cdots}_x .
+\end{equation}
+%
+This will also be justified, in the large $N$ limit, in \sref{sec:replicader}.
+
+We start with the representation of the determinant in \eqref{eq:compgausint}.
+However, the matrix in \eqref{eq:partfn} is not positive-definite when $\omb$ is equal to one of the eigenvalues.
+We can fix this by adding $\epsilon^2I$ and letting $\epsilon\to0$ at the end.
+%
+\begin{equation}\label{eq:partfnintz}
+\begin{aligned}
+  Z_A(\omega) &= \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
+    -z\dg (\omb-A\trans)(\omega-A) z - \epsilon^2 z\dg z} .%\\
+%    &=  \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
+%    -z\dg (xx\trans)\inv x(\omb-U)x\trans x(\omega-U)x\trans (xx\trans)\inv z
+%    - \epsilon^2 z\dg z}. \\
+\end{aligned}
+\end{equation}
+%
+Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variables $z=(xx\trans)w/P$.
+%
+\begin{equation}\label{eq:partfnintw}
+\begin{aligned}
+  Z_A(\omega) =&\, \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} 
+    \\&\quad\exp\prn{
+    -\frac{1}{P^2} w\dg x(\omb-U)x\trans x(\omega-U)x\trans w - \frac{\epsilon^2}{P^2} w\dg xx\trans xx\trans w} .%\\
+\end{aligned}
+\end{equation}
+%
+We now take advantage of \eqref{eq:compgausslin} by introducing two standard complex Gaussian random vectors ($C=I$ in \eqref{eq:compgaussnorm}), $u$ and $v$:
+%
+\begin{equation}\label{eq:partfnintwuv}
+\begin{aligned}
+  Z_A(\omega) =&\, \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir S}}_{u,v},\\
+  S =&\,
+    \frac{ w\dg x(\omb-U)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w}{P} .%\\
+\end{aligned}
+\end{equation}
+%
+
+
+\section{Full, replica-tastic derivation}\label{sec:replicader}
+
+
 
 %\subsection*{Acknowledgements}
 
@@ -196,7 +238,7 @@ We can diagonalise $H$ with a unitary change of variables:
 \end{equation}
 %
 
-The proper normalisation for a gaussian distribution is
+The proper normalisation for a Gaussian distribution is
 %
 \begin{equation}\label{eq:compgaussnorm}
   P(z,z\dg)\dz\dz\dg = \prn{\prod_i\frac{\dz_i\dzb_i}{2\pi}} \frac{\exp\prn{-z\dg C\inv z}}{\det C}.
@@ -292,14 +334,14 @@ We're left with
 %
 \begin{equation}\label{eq:intinlim}
   \begin{aligned}
-    \ln z &= I(z)
-           -\frac{1}{2\pi\ir} \int_{\abs{z}-1}^{0} \frac{\e^{\ir\theta}\dx}{z-x\e^{\ir\theta}} \ln\prn{x\e^{\ir(\theta+2\pi)}}
+    \ln z =&\, I(z)
+           -\frac{1}{2\pi\ir} \int_{\abs{z}-1}^{0} \frac{\e^{\ir\theta}\dx}{z-x\e^{\ir\theta}} \ln\prn{x\e^{\ir(\theta+2\pi)}} %\\&
            +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\e^{\ir\theta}\dx}{z+x\e^{\ir\theta}} \ln\prn{-x\e^{\ir\theta}}  \\
-      &= I(z)
-           -\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir(\theta+2\pi)}}
+      =&\, I(z)
+           -\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir(\theta+2\pi)}} %\\&
            +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir\theta}}  \\
-      &= I(z) - \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x}  \\
-      &= I(z) + \ln\abs{z}.
+      =&\, I(z) - \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x}  \\
+      =&\, I(z) + \ln\abs{z}.
   \end{aligned}
 \end{equation}
 %
@@ -307,16 +349,74 @@ We're left with
 Therefore:
 %
 \begin{equation}\label{eq:countourintresult}
-  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z - [\ln\abs{z}]_-,
+  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta) 
+   = \ln z - [\ln\abs{z}]_-
+   = \ir \arg z + [\ln\abs{z}]_+,
 \end{equation}
 %
 where $[x]_\pm = x \theta(\pm x)$ and $\theta(x)$ is the Heaviside step function.
 
 
-\section{The quadratic function $\Gamma(\zeta)$}\label{sec:Gamma}
+\section{The quadratic function \texorpdfstring{$\Gamma(\zeta)$}{Gamma(zeta)}}\label{sec:Gamma}
 
+In evaluating determinants in \sref{sec:simplederiv} and \sref{sec:replicader}, we come across the function
+%
+\begin{equation}\label{eq:Gammadef}
+  \Gamma(\zeta) = (\alpha^2+\epsilon^2rt)\zeta + rs(\omb\zeta-1)(\omega-\zeta) = - rs\omb (\zeta-\zeta_+) (\zeta-\zeta_-).
+\end{equation}
+%
+We will collect some useful features of $\zeta_\pm$ here.
 
+First, by comparing the two forms of $\Gamma(\zeta)$, we see that:
+%
+\begin{align}
+\label{eq:zpzm}
+  \zeta_+ \zeta_- &= \frac{\omega}{\omb},\\
+  \label{eq:zppzm}
+  \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}{rs\omb},\\
+  \label{eq:Gprime}
+  \Gamma'(\zeta_\pm) = \mp rs\omb(\zeta_+ - \zeta_-),
+\end{align}
+%
+and \eqref{eq:zpzm} tells us that $\abs{\zeta_+} \abs{\zeta_-}=1$.
+Solving the equation $\Gamma(\zeta_\pm)=0$ gives
+%
+\begin{align}
+\label{eq:zetapm}
+  \zeta_\pm &= \frac{ \alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2
+     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
+       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
+\label{eq:zpmzm}
+  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
+       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
+\label{eq:Gprimesol}
+  \Gamma'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
+       - 4(rs)^2\abs{\omega}^2}.
+\end{align}
+%
+Differentiating the equation $\Gamma(\zeta_\pm)=0$ gives
+%
+\begin{align}
+\label{eq:dzpmdr}
+  \pdiff{\zeta_\pm}{r} &=
+    -\frac{\epsilon^2t\zeta_\pm + s(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{\Gamma'(\zeta_\pm)}
+    &&= \frac{\alpha^2\zeta_\pm}{r\Gamma'(\zeta_\pm)},\\
+\label{eq:dzpmds}
+  \pdiff{\zeta_\pm}{s} &=
+    -\frac{r(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{\Gamma'(\zeta_\pm)}
+    &&= \frac{(\alpha^2+\epsilon^2rt)\zeta_\pm}{s\Gamma'(\zeta_\pm)},\\
+\label{eq:dzpmdt}
+  \pdiff{\zeta_\pm}{r} &=
+    -\frac{\epsilon^2r\zeta_\pm}{\Gamma'(\zeta_\pm)}.
+\end{align}
+%
 
+It will also de helpful to note that
+%
+\begin{equation}\label{eqdabsz}
+  \frac{\dr\abs{\zeta_\pm}}{\abs{\zeta_\pm}} = \Re\prn{\frac{\dr\zeta_\pm}{\zeta_\pm}}.
+\end{equation}
+%
 
 
 
