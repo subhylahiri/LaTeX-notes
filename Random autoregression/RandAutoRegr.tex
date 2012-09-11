@@ -122,6 +122,8 @@ We will look at the average eigenvalue distribution:
 %
 where $\lambda_i$ are the eigenvalues of $A$ in \eqref{eq:Aest} and
 the components of $x$ are iid gaussian random variables with mean 0 and variance 1.
+This quantity is most relevant in the limit of large $N$ and $P$.
+We will keep the quantity $\alpha=P/N$ fixed in this limit.
 
 Following \cite{Sommers1988asymmetric}, this can be computed from a potential:
 %
@@ -146,25 +148,17 @@ The problem is now to compute $\av{\ln Z_A(\omega)}_x$.
 \section{Simplified derivation}\label{sec:simplederiv}
 
 In this section, we will present a simplified version of the derivation.
-We will make two simplifying assumptions.
+We will make the following simplifying assumption.
 
-First, we will treat $x$ as annealed, rather than quenched, disorder:
+At some point, we will treat $x$ as annealed, rather than quenched, disorder:
 %
 \begin{equation}\label{eq:annealed}
-  \av{\ln Z_A(\omega)}_x = \ln\av{Z_A(\omega)}_x.
+  \av{\ln (\cdots)}_x = \ln\av{\cdots}_x.
 \end{equation}
 %
 We will justify this assumption in \sref{sec:replicader} using the replica trick.
 We will see that, with a replica symmetric ansatz, the saddle point has zero off-diagonal replica overlaps.
 This means that there is no coupling between the replicas, which produces identical results to the annealed calculation.
-
-Second, we will assume factorisation of an expectation value:
-%
-\begin{equation}\label{eq:factorass}
-  \av{\det(xx\trans)^2\cdots}_x = \av{\det(xx\trans)^2}_x \av{\cdots}_x .
-\end{equation}
-%
-This will also be justified, in the large $N$ limit, in \sref{sec:replicader}.
 
 We start with the representation of the determinant in \eqref{eq:compgausint}.
 However, the matrix in \eqref{eq:partfn} is not positive-definite when $\omb$ is equal to one of the eigenvalues.
@@ -184,9 +178,10 @@ Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variabl
 %
 \begin{equation}\label{eq:partfnintw}
 \begin{aligned}
-  Z_A(\omega) =&\, \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} 
-    \\&\quad\exp\prn{
-    -\frac{1}{P^2} w\dg x(\omb-U)x\trans x(\omega-U)x\trans w - \frac{\epsilon^2}{P^2} w\dg xx\trans xx\trans w} .%\\
+  Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
+    \\
+  F &=
+     w\dg x(\omb-U\trans)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
@@ -194,12 +189,165 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 %
 \begin{equation}\label{eq:partfnintwuv}
 \begin{aligned}
-  Z_A(\omega) =&\, \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir S}}_{u,v},\\
-  S =&\,
-    \frac{ w\dg x(\omb-U)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w}{P} .%\\
+  Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
+  F' &=
+    w\dg x(\omb-U\trans)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
+
+Over most of the integration domain, we expect the real inner products ($w\dg w, u\dg u,\ldots$) will be $\CO(N)$, whereas the complex inner products ($w\dg u, w\trans w,\ldots$) will be $\CO(\sqrt{N})$.
+We define some new variables, $\rho,\sigma \text{ and } \tau$, which are zero mean Gaussian random vectors:
+%
+\begin{equation}\label{eq:rstdef}
+\begin{aligned}
+  \rho &= x\trans w ,
+    & \av{\bar{\rho}_\mu \rho_\nu}_x &= Nr\delta_{\mu\nu} ,
+    & r&=\frac{w\dg w}{N}, \\
+  \sigma &= x\trans u ,
+    & \av{\bar{\sigma}_\mu \sigma_\nu}_x &= Ns\delta_{\mu\nu} ,
+    & s&=\frac{u\dg u}{N}, \\
+  \tau &= x\trans v,
+    & \av{\bar{\tau}_\mu \tau_\nu}_x &= Nt\delta_{\mu\nu},
+    & t&=\frac{v\dg v}{N}, \\
+\end{aligned}
+\end{equation}
+%
+with all other covariances negligible in the large $N$ limit.
+We can now write
+%
+\begin{equation}\label{eq:potwuv}
+\begin{aligned}
+  \av{\ln Z_A(\omega)}_x =&\,  2\av{\ln\det(xx\trans)}_x 
+  \\&+ 
+          \av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{\xi} ,
+  \\ \text{where}\quad
+  \xi =&\, \begin{pmatrix}
+           \rho \\
+           \sigma \\
+           \tau \\
+         \end{pmatrix},
+ \\
+  A =&\, -\frac{\ir}{P}
+       \begin{pmatrix}
+         0        & \omb-U\trans & \epsilon \\
+         \omega-U & 0            & 0 \\
+         \epsilon & 0            & 0 \\
+       \end{pmatrix}.
+\end{aligned}
+\end{equation}
+%
+As we only care about the part of $\Phi$ that depends on $\omega$, we can ignore the first term.
+We will simplify the second term using \eqref{eq:annealed} and the relation
+%
+\begin{equation}\label{eq:spherical}
+  \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} } f(r) = \frac{N^N}{\Gamma(N)} \intd{r} r^{N-1} f(r),
+\end{equation}
+%
+along with similar ones for $u$ and $v$, to get
+%
+\begin{equation}\label{eq:phiintsimple}
+\begin{aligned}
+  \Phi &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
+      (rst)^N\e^{-N(s+t)} \av{\e^{-\xi\dg A \xi}}_\xi\\
+      &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
+      \,\frac{\exp[N(\ln(rst)-s-t)]}{\det(I+CA)},\\
+  \text{where}\quad
+  C &= N\begin{pmatrix}
+         r & 0 & 0 \\
+         0 & s & 0 \\
+         0 & 0 & t \\
+       \end{pmatrix}.
+\end{aligned}
+\end{equation}
+%
+
+As $U$ is unitary, all the blocks in these matrices commute.
+Therefore, we can evaluate the determinant with some help from \cite{silvester2000determinants}.
+Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$:
+%
+\begin{equation}\label{eq:detsimple}
+\begin{aligned}
+  \ln\det(I+CA) &= \ln\det\brk{\frac{1}{\alpha^3}
+       \begin{pmatrix}
+         \alpha           & -\ir r(\omb-U\trans) & -\ir\epsilon r \\
+         -\ir s(\omega-U) & \alpha               & 0 \\
+         -\ir\epsilon t   & 0                    & \alpha \\
+       \end{pmatrix}}\\
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2rt + rs(\omb-U\trans)(\omega-U)}{\alpha^2}}\\
+     &= \sum_{k=0}^{P-1} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} {\alpha^2}}\\
+     &= \frac{P}{2\pi} \intd[_0^{2\pi}]{\phi} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})} {\alpha^2}}\\
+     &= \frac{P}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} \, \ln \brk{\frac{G(\zeta)}{\alpha^2\zeta}},
+\end{aligned}
+\end{equation}
+%
+$(C\inv+A)$ IS NON-NORMAL!
+where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
+The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
+
+If we factor $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
+From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will ie inside the contour.
+We find that
+%
+\begin{equation}\label{eq:detsimpleresult}
+\begin{aligned}
+  \ln\det(I+CA) &= \text{const.} + P[\ln(-rs\omb) + \ln\zeta_+ + \ln\zeta_- - \ln(\min\abs{\zeta_\pm})]   \\
+   &= \text{const.} + P\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}.
+\end{aligned}
+\end{equation}
+%
+
+Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and $t$ in \eqref{eq:phiintsimple}, which becomes exact in the limit of large $N$ and $P$, we find
+%
+\begin{equation}\label{eq:phisaddlesimple}
+  \Phi = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
+\end{equation}
+%
+One can show that (see \sref{sec:replicader}) the maximum occurs with
+%
+\begin{equation}\label{eq:saddleOe}
+  r \sim \CO(\epsilon\inv),
+  \qquad
+  s \sim \CO(\epsilon),
+  \qquad
+  t \sim \CO(1),
+  \qquad
+  rs \sim \CO(1).
+\end{equation}
+%
+If we take $\epsilon\to0$, we find that $\Phi$ depends on $r$, $s$ and $t$ in the combinations $rs$ and $t$:
+%
+\begin{equation}\label{eq:phimaxsimple}
+\begin{aligned}
+  \Phi &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
+  \pdiff{\Phi}{(rs)} &= \frac{1-\alpha}{rs} + \alpha\Re\prn{\frac{\alpha^2}{rs G'(\min\abs{\zeta_\pm})}} ,\\
+  \pdiff{\Phi}{t}&= \frac{1}{t} - 1 .
+\end{aligned}
+\end{equation}
+%
+These equations require
+%
+\begin{equation}\label{eq:saddlereq}
+  \abs{\zeta_-}<1,
+  \qquad
+  [\alpha^2+rs(1+\abs{\omega}^2)]^2 > 4(rs)^2\abs{\omega}^2,
+\end{equation}
+%
+in which case
+%
+\begin{equation}\label{eq:saddlesol}
+\begin{aligned}
+  t &=1, \\
+  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)(1+\abs{\omega}^2) \pm \sqrt{ (\alpha-1)^2(1+\abs{\omega}^2)^2 - (2\alpha-1)(1-\abs{\omega}^2)^2 } }}{(\alpha-1)(1-\abs{\omega}^2)^2},\\
+  \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
+ \Phi &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
+\end{aligned}
+\end{equation}
+%
+
+
+
+
 
 
 \section{Full, replica-tastic derivation}\label{sec:replicader}
@@ -268,6 +416,7 @@ Now consider an integral of the form
 \end{aligned}
 \end{equation}
 %
+ONLY WORKS IF $(C\inv+A)$ IS POS DEF, OR AT LEAST NORMAL!
 
 
 \section{Contour integrals for determinants}\label{sec:contourints}
@@ -349,7 +498,7 @@ We're left with
 Therefore:
 %
 \begin{equation}\label{eq:countourintresult}
-  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta) 
+  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta)
    = \ln z - [\ln\abs{z}]_-
    = \ir \arg z + [\ln\abs{z}]_+,
 \end{equation}
@@ -357,61 +506,61 @@ Therefore:
 where $[x]_\pm = x \theta(\pm x)$ and $\theta(x)$ is the Heaviside step function.
 
 
-\section{The quadratic function \texorpdfstring{$\Gamma(\zeta)$}{Gamma(zeta)}}\label{sec:Gamma}
+\section{The quadratic function \texorpdfstring{$G(\zeta)$}{G(zeta)}}\label{sec:Gamma}
 
 In evaluating determinants in \sref{sec:simplederiv} and \sref{sec:replicader}, we come across the function
 %
 \begin{equation}\label{eq:Gammadef}
-  \Gamma(\zeta) = (\alpha^2+\epsilon^2rt)\zeta + rs(\omb\zeta-1)(\omega-\zeta) = - rs\omb (\zeta-\zeta_+) (\zeta-\zeta_-).
+  G(\zeta) = (\alpha^2+\epsilon^2rt)\zeta + rs(\omb\zeta-1)(\omega-\zeta) = - rs\omb (\zeta-\zeta_+) (\zeta-\zeta_-).
 \end{equation}
 %
 We will collect some useful features of $\zeta_\pm$ here.
 
-First, by comparing the two forms of $\Gamma(\zeta)$, we see that:
+First, by comparing the two forms of $G(\zeta)$, we see that:
 %
 \begin{align}
 \label{eq:zpzm}
   \zeta_+ \zeta_- &= \frac{\omega}{\omb},\\
   \label{eq:zppzm}
-  \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}{rs\omb},\\
+  \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}{rs\omb},\\
   \label{eq:Gprime}
-  \Gamma'(\zeta_\pm) = \mp rs\omb(\zeta_+ - \zeta_-),
+  G'(\zeta_\pm) = \mp rs\omb(\zeta_+ - \zeta_-),
 \end{align}
 %
 and \eqref{eq:zpzm} tells us that $\abs{\zeta_+} \abs{\zeta_-}=1$.
-Solving the equation $\Gamma(\zeta_\pm)=0$ gives
+Solving the equation $G(\zeta_\pm)=0$ gives
 %
 \begin{align}
-\label{eq:zetapm}
-  \zeta_\pm &= \frac{ \alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2
-     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
-       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
-\label{eq:zpmzm}
-  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
-       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
+%\label{eq:zetapm}
+%  \zeta_\pm &= \frac{ \alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2
+%     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
+%       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
+%\label{eq:zpmzm}
+%  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
+%       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
 \label{eq:Gprimesol}
-  \Gamma'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
+  G'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
        - 4(rs)^2\abs{\omega}^2}.
 \end{align}
 %
-Differentiating the equation $\Gamma(\zeta_\pm)=0$ gives
+Differentiating the equation $G(\zeta_\pm)=0$ gives
 %
 \begin{align}
 \label{eq:dzpmdr}
   \pdiff{\zeta_\pm}{r} &=
-    -\frac{\epsilon^2t\zeta_\pm + s(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{\Gamma'(\zeta_\pm)}
-    &&= \frac{\alpha^2\zeta_\pm}{r\Gamma'(\zeta_\pm)},\\
+    -\frac{\epsilon^2t\zeta_\pm + s(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{G'(\zeta_\pm)}
+    &&= \frac{\alpha^2\zeta_\pm}{rG'(\zeta_\pm)},\\
 \label{eq:dzpmds}
   \pdiff{\zeta_\pm}{s} &=
-    -\frac{r(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{\Gamma'(\zeta_\pm)}
-    &&= \frac{(\alpha^2+\epsilon^2rt)\zeta_\pm}{s\Gamma'(\zeta_\pm)},\\
+    -\frac{r(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{G'(\zeta_\pm)}
+    &&= \frac{(\alpha^2+\epsilon^2rt)\zeta_\pm}{sG'(\zeta_\pm)},\\
 \label{eq:dzpmdt}
   \pdiff{\zeta_\pm}{r} &=
-    -\frac{\epsilon^2r\zeta_\pm}{\Gamma'(\zeta_\pm)}.
+    -\frac{\epsilon^2r\zeta_\pm}{G'(\zeta_\pm)}.
 \end{align}
 %
 
-It will also de helpful to note that
+It will also be helpful to note that
 %
 \begin{equation}\label{eqdabsz}
   \frac{\dr\abs{\zeta_\pm}}{\abs{\zeta_\pm}} = \Re\prn{\frac{\dr\zeta_\pm}{\zeta_\pm}}.
