@@ -19,6 +19,7 @@
 \documentclass[12pt]{article}
 %
 % Preamble:
+\usepackage{a4wide}
 \input{sl_preamble.tex}
 \input{sl_graphics_preamble.tex}
 \graphicspath{{figs/}}
@@ -196,7 +197,7 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 \end{equation}
 %
 
-Over most of the integration domain, we expect the real inner products ($w\dg w, u\dg u,\ldots$) will be $\CO(N)$, whereas the complex inner products ($w\dg u, w\trans w,\ldots$) will be $\CO(\sqrt{N})$.
+Over most of the integration domain, we expect the real inner products ($w\dg w$,$u\dg u$,\ldots) will be $\CO(N)$, whereas the complex inner products ($w\dg u$,$w\trans w$,\ldots) will be $\CO(\sqrt{N})$.
 We define some new variables, $\rho,\sigma \text{ and } \tau$, which are zero mean Gaussian random vectors:
 %
 \begin{equation}\label{eq:rstdef}
@@ -218,9 +219,9 @@ We can now write
 %
 \begin{equation}\label{eq:potwuv}
 \begin{aligned}
-  \av{\ln Z_A(\omega)}_x =&\,  2\av{\ln\det(xx\trans)}_x 
-  \\&+ 
-          \av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{\xi} ,
+  \av{\ln Z_A(\omega)}_x =&\,  2\av{\ln\det(xx\trans)}_x
+  \\&+
+          \av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{x} ,
   \\ \text{where}\quad
   \xi =&\, \begin{pmatrix}
            \rho \\
@@ -233,12 +234,17 @@ We can now write
          0        & \omb-U\trans & \epsilon \\
          \omega-U & 0            & 0 \\
          \epsilon & 0            & 0 \\
+       \end{pmatrix},\\
+  \av{\xi\xi\dg}_x &=  C = N\begin{pmatrix}
+         r & 0 & 0 \\
+         0 & s & 0 \\
+         0 & 0 & t \\
        \end{pmatrix}.
 \end{aligned}
 \end{equation}
 %
 As we only care about the part of $\Phi$ that depends on $\omega$, we can ignore the first term.
-We will simplify the second term using \eqref{eq:annealed} and the relation
+We will simplify the second term using \eqref{eq:annealed}, \eqref{eq:compgaussquad} and the relation
 %
 \begin{equation}\label{eq:spherical}
   \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} } f(r) = \frac{N^N}{\Gamma(N)} \intd{r} r^{N-1} f(r),
@@ -248,16 +254,10 @@ along with similar ones for $u$ and $v$, to get
 %
 \begin{equation}\label{eq:phiintsimple}
 \begin{aligned}
-  \Phi &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
-      (rst)^N\e^{-N(s+t)} \av{\e^{-\xi\dg A \xi}}_\xi\\
+  \Phi(\omega) &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
+      (rst)^N\e^{-N(s+t)} \av{\e^{-\xi\dg A \xi}}_x\\
       &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
-      \,\frac{\exp[N(\ln(rst)-s-t)]}{\det(I+CA)},\\
-  \text{where}\quad
-  C &= N\begin{pmatrix}
-         r & 0 & 0 \\
-         0 & s & 0 \\
-         0 & 0 & t \\
-       \end{pmatrix}.
+      \,\frac{\exp[N(\ln(rst)-s-t)]}{\det(I+CA)}.
 \end{aligned}
 \end{equation}
 %
@@ -300,10 +300,10 @@ We find that
 Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and $t$ in \eqref{eq:phiintsimple}, which becomes exact in the limit of large $N$ and $P$, we find
 %
 \begin{equation}\label{eq:phisaddlesimple}
-  \Phi = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
+  \Phi(\omega) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
 \end{equation}
 %
-One can show that (see \sref{sec:replicader}) the maximum occurs with
+One can show that (see \sref{sec:replicader}) the maximum has
 %
 \begin{equation}\label{eq:saddleOe}
   r \sim \CO(\epsilon\inv),
@@ -319,13 +319,13 @@ If we take $\epsilon\to0$, we find that $\Phi$ depends on $r$, $s$ and $t$ in th
 %
 \begin{equation}\label{eq:phimaxsimple}
 \begin{aligned}
-  \Phi &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
+  \Phi(\omega) &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
   \pdiff{\Phi}{(rs)} &= \frac{1-\alpha}{rs} + \alpha\Re\prn{\frac{\alpha^2}{rs G'(\min\abs{\zeta_\pm})}} ,\\
   \pdiff{\Phi}{t}&= \frac{1}{t} - 1 .
 \end{aligned}
 \end{equation}
 %
-These equations require
+Setting these derivatives to zero requires
 %
 \begin{equation}\label{eq:saddlereq}
   \abs{\zeta_-}<1,
@@ -340,7 +340,7 @@ in which case
   t &=1, \\
   rs &= \frac{\alpha^2 \brk{ -(\alpha-1)(1+\abs{\omega}^2) \pm \sqrt{ (\alpha-1)^2(1+\abs{\omega}^2)^2 - (2\alpha-1)(1-\abs{\omega}^2)^2 } }}{(\alpha-1)(1-\abs{\omega}^2)^2},\\
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
- \Phi &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
+ \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
 \end{aligned}
 \end{equation}
 %
@@ -353,12 +353,267 @@ in which case
 \section{Full, replica-tastic derivation}\label{sec:replicader}
 
 
+The starting point for this version of the derivation will be \eqref{eq:partfnintwuv} and \eqref{eq:potwuv}:
+%
+\begin{equation}\label{eq:phiint}
+  \begin{aligned}
+    \Phi(\omega) &= \text{const.} + \frac{1}{4\pi N} \av{\ln \widetilde{Z}}_x, \\
+    \widetilde{Z} &= \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-F''}, \\
+    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\trans)x\trans u + \epsilon w\dg xx\trans v + \text{c.c.} }.
+  \end{aligned}
+\end{equation}
+%
+We will use the replica trick., \ie we rewrite the logarithm as
+%
+\begin{equation}\label{eq:replicatrick}
+  \ln \widetilde{Z} = \left. \pdiff{( \widetilde{Z}^n )}{n}\right\rvert_{n=0}. 
+\end{equation}
+%
+For integer $n$, we can compute $\widetilde{Z}^n$ by creating $n$ replicas of the system,
+We then let $n\to0$ after averaging over $x$.
+We index these replicas with $a,b=1,\ldots,n$:
+%
+\begin{equation}\label{eq:phirep}
+    \begin{aligned}
+    \Phi(\omega) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}\av{
+       \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} } \e^{-F'''}
+       }_x\right\rvert_{n=0}, \\
+    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\trans)x\trans u_a + \epsilon w_a\dg xx\trans v_a + \text{c.c.} }.
+  \end{aligned}
+\end{equation}
+%
+
+Over most of the integration domain, we expect the Hermitian overlaps ($w_a\dg w_b, u_a\dg u_b,\ldots$) will be $\CO(N)$, whereas the non-Hermitian overlaps ($w_a\dg u_b, w_a\trans w_b,\ldots$) will be $\CO(\sqrt{N})$.
+We define some new variables, $\rho_a,\sigma_a \text{ and } \tau_a$, which are zero mean Gaussian random vectors:
+%
+\begin{equation}\label{eq:reprstdef}
+\begin{aligned}
+  \rho_a &= x\trans w_a ,
+    & \av{\bar{\rho}_{\mu a} \rho_{\nu b}}_x &= N\delta_{\mu\nu}R_{ab} ,
+    & R_{ab}&=\frac{w_a\dg w_b}{N}, \\
+  \sigma_a &= x\trans u_a ,
+    & \av{\bar{\sigma}_{\mu a} \sigma_{\nu b}}_x &= N\delta_{\mu\nu}S_{ab} ,
+    & S_{ab}&=\frac{u_a\dg u_b}{N}, \\
+  \tau_a &= x\trans v_a,
+    & \av{\bar{\tau}_{\mu a} \tau_{\nu b}}_x &= N\delta_{\mu\nu}T_{ab},
+    & T_{ab}&=\frac{v_a\dg v_b}{N}, \\
+\end{aligned}
+\end{equation}
+%
+with all other covariances negligible in the large $N$ limit.
+%
+\begin{equation}\label{eq:phirepxi}
+    \begin{aligned}
+    \Phi(\omega) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}
+       \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} }
+       \av{\e^{-N\Tr(S+T) - \xi\dg A \xi}}_x
+       \right\rvert_{n=0}, \\
+     &= \frac{1}{4\pi N}  \left.\pdiff{}{n}
+       \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} }
+       \e^{-NE(R,S,T)}
+       \right\rvert_{n=0}, 
+\end{aligned}
+\end{equation}
+%
+where
+%
+\begin{equation}\label{eq:overlapenergy}
+\begin{aligned}
+  E(R,S,T) &= \Tr(S+T) + \frac{1}{N} \ln \det (I+CA),\\
+  \xi &= \begin{pmatrix}
+           \rho \\
+           \sigma \\
+           \tau \\
+         \end{pmatrix},
+ \\
+  A &= -\frac{\ir}{P}
+       \begin{pmatrix}
+         0        & \omb-U\trans & \epsilon \\
+         \omega-U & 0            & 0 \\
+         \epsilon & 0            & 0 \\
+       \end{pmatrix}\otimes I,\\
+  \av{\xi\xi\dg}_x &=  C = N I\otimes
+       \begin{pmatrix}
+         R & 0 & 0 \\
+         0 & S & 0 \\
+         0 & 0 & T \\
+       \end{pmatrix}.  \end{aligned}
+\end{equation}
+%
+
+It will be helpful to separate the integrals over $w,u\text{ and }v$ into an integral over values of $w,u\text{ and }v$ with the same overlap and an integral over values of the overlap.
+This can be done by inserting factors like the following into the integral:
+%
+\begin{equation}\label{eq:overlapdelta}
+  \int \dr R_{ab} N^{n^2} \delta (N R_{ab} - w_a\dg w_b ) = 1.
+\end{equation}
+%
+We define
+%
+\begin{equation}\label{eq:overlapentropy}
+  S(R) = \frac{1}{N} \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} } 
+  N^{n^2} \delta (N R_{ab} - w_a\dg w_b )
+   = \ln\det R + \text{const.}
+\end{equation}
+%
+with the final expression valid in the large $N$ limit.
+Then \eqref{eq:phirepxi} reduces to
+%
+\begin{equation}\label{eq:phioverlap}
+  \Phi(\omega) = \frac{1}{4\pi N}  \left.\pdiff{}{n}
+       \int \dr R_{ab} \dr S_{ab} \dr T_{ab} 
+       \,\e^{-N(E(R,S,T)-S(R)-S(S)-S(T))}
+       \right\rvert_{n=0}.
+\end{equation}
+%
+We will perform this integral in the large $N$ limit with the saddle point method.
+
+We make the following, replica-symmetric ans\"atze for the saddle-point:
+%
+\begin{equation}\label{eq:RSansatze}
+  R_{ab} = r_0\delta_{ab} + r_1,
+  \qquad
+  S_{ab} = s_0\delta_{ab} + s_1,
+  \qquad
+  T_{ab} = t_0\delta_{ab} + t_1.
+\end{equation}
+%
+A matrix of this form has $(n-1)$ eigenvalues equal to $r_0$ and one eigenvalue equal to $(r_0+nr_1)$.
+Therefore,
+%
+\begin{equation}\label{eq:RSentropy}
+  S(R) = \ln\det R = (n-1)\ln r_0 + \ln(r_0 +n r_1) = n\ln r_0 + \frac{nr_1}{r_0} + \CO(n^2).
+\end{equation}
+%
+The replica symmetric form of $R,S<,T$ and the unitarity of $U$ means that all the blocks in \eqref{eq:overlapenergy} commute.
+Then, according to \cite{silvester2000determinants},
+%
+\begin{equation}\label{eq:detrep}
+\begin{aligned}
+  \ln\det(I+CA) &=  \ln\det\brk{\frac{1}{\alpha^3}
+       \begin{pmatrix}
+         \alpha                   & -\ir (\omb-U\trans) \otimes R & -\ir\epsilon I\otimes R \\
+         -\ir (\omega-U)\otimes S & \alpha                        & 0 \\
+         -\ir\epsilon I\otimes T  & 0                             & \alpha \\
+       \end{pmatrix}}\\
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2I\otimes RT + (\omb-U\trans)(\omega-U)\otimes RS}{\alpha^2}}.
+\end{aligned}
+\end{equation}
+%
+Note that
+%
+\begin{equation}\label{eq:overlapprod}
+  (RS)_{ab} = r_0s_0 \delta_{ab} + r_0 s_1 + r_1 s_0 + \CO(n),
+\end{equation}
+%
+and similar for $RT$, so these will have a similar eigenvalue structure to $R$, with the same eigenvectors.
+Also, the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$.
+Therefore:
+%
+\begin{equation}\label{eq:detrepints}
+\begin{aligned}
+  \ln\det(I+CA) &=  \sum_{k=0}^{P-1} 
+    n \left\{
+      \ln\brk{ \frac{\alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} {\alpha^2}}
+    \right.\\
+    &\qquad\quad \left.+
+      \frac{ \epsilon^2 (r_0t_1+r_1t_0) + (r_0s_1+r_1s_0) (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} { \alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} 
+    \right\}\\
+   &\qquad +\CO(n^2)\\
+    &= \frac{nP}{2\pi} \intd[_0^{2\pi}]{\phi} \left\{
+     \ln\brk{ \frac{\alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})} {\alpha^2}}
+    \right.\\
+    &\qquad\quad \left.+
+      \frac{ \epsilon^2 (r_0t_1+r_1t_0) + (r_0s_1+r_1s_0) (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})} { \alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})}
+    \right\}\\
+    &= \frac{nP}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} \left\{ \ln \brk{\frac{G(\zeta)}{\alpha^2\zeta}}
+    \right.\\
+    &\qquad\quad \left.+
+      \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)}
+    \right\},
+\end{aligned}
+\end{equation}
+%
+where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
+The first integral was computed in \eqref{eq:detsimpleresult}.
+The second can be computed with the residue theorem.
+The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour \eqref{eq:zppzm}.
+%
+\begin{multline}\label{eq:repcontoutint}
+  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} 
+    \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)} \\
+    \begin{aligned}
+      &= \frac{(r_0s_1+r_1s_0)(-\omega)}{G(0)}
+      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta_\pm + (r_0s_1+r_1s_0) (\omb\zeta_\pm-1) (\omega-\zeta_\pm)} {\zeta_\pm G'(\zeta_\pm)} \\
+      &= \frac{r_0s_1+r_1s_0}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_\pm)}}
+      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_\pm)} .
+    \end{aligned}
+\end{multline}
+%
+
+Combining all of this gives:
+%
+\begin{equation}\label{eq:phimaxrep}
+\begin{aligned}
+  \Phi(\omega) =\, \frac{1}{4\pi} \max_{r_{0,1},s_{0,1},t_{0,1}}& \left\{
+    \ln(r_0s_0t_0) + \frac{r_1}{r_0} + \frac{s_1}{s_0} + \frac{t_1}{t_0} 
+    -(s_0 + s_1 + t_0 + t_1) 
+    \right.\\&\left.
+    - \alpha\ln\prn{-\frac{r_0s_0\omega}{\abs{\zeta_\pm}}}
+    - \frac{\alpha(r_0s_1+r_1s_0)}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_\pm)}}
+    \right.\\&\left.
+    - \frac{ \alpha\epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_\pm)}
+    \right\}.
+\end{aligned}
+\end{equation}
+%
+The maximum can be found by setting to zero the following derivatives
+%
+\begin{equation}\label{eq:phidiff0}
+\begin{aligned}
+  \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_\pm)},  \\
+  \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon r_0 t_0 )}{s_0G'(\zeta_\pm)},  \\
+  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)}, 
+\end{aligned}
+\end{equation}
+%
+as well as
+%
+\begin{equation}\label{eq:phidiff1}
+\begin{aligned}
+  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} - \ir\alpha\Im\brk{\frac{\alpha^2}{r_0G'(\zeta_\pm)}} 
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} - \ir\alpha\Im\brk{\frac{\alpha^2\epsilon r_0 t_0}{s_0G'(\zeta_\pm)}}
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} + \ir\alpha\Im\brk{\frac{\epsilon^2r_0}{G'(\zeta_\pm)}}
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
+\end{aligned}
+\end{equation}
+%
+Looking at the expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$, we see that the imaginary parts above will vanish, provided that $r,s\text{ and }t$ are real and the argument of the square root is positive.
+Therefore the saddle-point will have $r_1=s_1=t_1=0$.
+This justifies the annealed assumption in \eqref{eq:annealed}.
+
+Solving \eqref{eq:phidiff0} gives
+%
+\begin{equation}\label{eq:repsaddlesol}
+\begin{aligned}
+  s_0 &= \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2}, \qquad
+  t_0 &= 1 - s_0,\qquad
+  G'(\zeta_\pm) &= \frac{\alpha^3}{\alpha-1}.
+\end{aligned}
+\end{equation}
+%
+Expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$ tells us that it must be $\zeta_-$ that lies inside the unit circle.
+Solving for $r_0$ is a mess, but we can see that no solutions exist for $v<\CO(\epsilon\inv)$ or $v>\CO(\epsilon\inv)$ as $\epsilon\to0$.
+Combined with \eqref{eq:repsaddlesol}, this justifies \eqref{eq:saddleOe}.
+
 
 %\subsection*{Acknowledgements}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Appendices}
+\subsection*{Appendices}\addtocontents{toc}{\bigskip \textbf{Appendices:}\par}%\addcontentsline{toc}{section}{Appendices:}
 \appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -366,7 +621,8 @@ in which case
 
 First, Let's get all of the factors of 2 straight.
 Note that if we write $z=x+\ir y$, then $\dz\dzb = 2\dx\dy$.
-Let $H$ be a positive-definite, $N\times N$ Hermitian matrix.
+Let $H$ be a positive-definite, $N\times N$ Hermitian matrix
+(or just a normal matrix whose eigenvalues have positive real parts).
 Consider an integral  of the form
 %
 \begin{equation*}
@@ -417,6 +673,36 @@ Now consider an integral of the form
 \end{equation}
 %
 ONLY WORKS IF $(C\inv+A)$ IS POS DEF, OR AT LEAST NORMAL!
+
+Does it matter if the matrix is normal?
+Suppose we diagonalise with a non-unitary transformation.
+What Jacobian factor would we pick up?
+%
+\begin{equation*}
+\begin{aligned}
+  \begin{aligned}
+    z'   &= Sz, \\
+    \zb' &=S\inv\zb,
+  \end{aligned}
+  &\implies
+  \begin{aligned}
+    x' &= \frac{z'+\zb'}{2}    = \frac{S+S\inv}{2}x - \frac{S-S\inv}{2\ir}y, \\
+    y' &= \frac{z'-\zb'}{2\ir} = \frac{S-S\inv}{2\ir}x - \frac{S+S\inv}{2}y,
+  \end{aligned}
+  \\ &
+  \begin{aligned}
+  \implies  \det J &= \det\begin{pmatrix}
+                    \frac{S+S\inv}{2}    & -\frac{S-S\inv}{2\ir} \\
+                    \frac{S-S\inv}{2\ir} & \frac{S+S\inv}{2} \\
+                  \end{pmatrix}
+     \\
+     &= \det \brk{\prn{\frac{S+S\inv}{2}}^2-\prn{\frac{S-S\inv}{2\ir}}^2}\\
+     &=\det S S\inv = 1.
+  \end{aligned}
+\end{aligned}
+\end{equation*}
+%
+The change in contours can be undone, as the integrand is analytic in $x$ and $y$.
 
 
 \section{Contour integrals for determinants}\label{sec:contourints}
@@ -539,7 +825,7 @@ Solving the equation $G(\zeta_\pm)=0$ gives
 %  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
 %       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
 \label{eq:Gprimesol}
-  G'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
+  G'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}^2
        - 4(rs)^2\abs{\omega}^2}.
 \end{align}
 %
