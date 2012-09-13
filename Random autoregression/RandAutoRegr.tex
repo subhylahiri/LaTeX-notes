@@ -46,6 +46,8 @@
 \newcommand{\dub}{\dr\bar{u}}
 \newcommand{\dv}{\dr v}
 \newcommand{\dvb}{\dr\bar{v}}
+\newcommand{\opo}{\prn{1+\abs{\omega}^2}}
+\newcommand{\omo}{\prn{1-\abs{\omega}^2}}
 % ----------------------------------------------------------------
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,7 +184,7 @@ Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variabl
   Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
     \\
   F &=
-     w\dg x(\omb-U\trans)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
+     w\dg x(\omb-U\dg)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
@@ -192,7 +194,7 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 \begin{aligned}
   Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
   F' &=
-    w\dg x(\omb-U\trans)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
+    w\dg x(\omb-U\dg)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
@@ -231,7 +233,7 @@ We can now write
  \\
   A =&\, -\frac{\ir}{P}
        \begin{pmatrix}
-         0        & \omb-U\trans & \epsilon \\
+         0        & \omb-U\dg & \epsilon \\
          \omega-U & 0            & 0 \\
          \epsilon & 0            & 0 \\
        \end{pmatrix},\\
@@ -270,11 +272,11 @@ Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$
 \begin{aligned}
   \ln\det(I+CA) &= \ln\det\brk{\frac{1}{\alpha^3}
        \begin{pmatrix}
-         \alpha           & -\ir r(\omb-U\trans) & -\ir\epsilon r \\
+         \alpha           & -\ir r(\omb-U\dg) & -\ir\epsilon r \\
          -\ir s(\omega-U) & \alpha               & 0 \\
          -\ir\epsilon t   & 0                    & \alpha \\
        \end{pmatrix}}\\
-     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2rt + rs(\omb-U\trans)(\omega-U)}{\alpha^2}}\\
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2rt + rs(\omb-U\dg)(\omega-U)}{\alpha^2}}\\
      &= \sum_{k=0}^{P-1} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} {\alpha^2}}\\
      &= \frac{P}{2\pi} \intd[_0^{2\pi}]{\phi} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})} {\alpha^2}}\\
      &= \frac{P}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} \, \ln \brk{\frac{G(\zeta)}{\alpha^2\zeta}},
@@ -285,7 +287,7 @@ $(C\inv+A)$ IS NON-NORMAL!
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
 The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
 
-If we factor $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
+If we factorise $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
 From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will ie inside the contour.
 We find that
 %
@@ -303,7 +305,7 @@ Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and
   \Phi(\omega) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
 \end{equation}
 %
-One can show that (see \sref{sec:replicader}) the maximum has
+One can show that (see \sref{sec:replicader}, in particular \eqref{eq:repsaddlesol} and \eqref{eq:rOe}) the maximum has
 %
 \begin{equation}\label{eq:saddleOe}
   r \sim \CO(\epsilon\inv),
@@ -330,7 +332,7 @@ Setting these derivatives to zero requires
 \begin{equation}\label{eq:saddlereq}
   \abs{\zeta_-}<1,
   \qquad
-  [\alpha^2+rs(1+\abs{\omega}^2)]^2 > 4(rs)^2\abs{\omega}^2,
+  [\alpha^2+rs\opo]^2 > 4(rs)^2\abs{\omega}^2,
 \end{equation}
 %
 in which case
@@ -338,7 +340,7 @@ in which case
 \begin{equation}\label{eq:saddlesol}
 \begin{aligned}
   t &=1, \\
-  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)(1+\abs{\omega}^2) \pm \sqrt{ (\alpha-1)^2(1+\abs{\omega}^2)^2 - (2\alpha-1)(1-\abs{\omega}^2)^2 } }}{(\alpha-1)(1-\abs{\omega}^2)^2},\\
+  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 - (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
 \end{aligned}
@@ -359,14 +361,14 @@ The starting point for this version of the derivation will be \eqref{eq:partfnin
   \begin{aligned}
     \Phi(\omega) &= \text{const.} + \frac{1}{4\pi N} \av{\ln \widetilde{Z}}_x, \\
     \widetilde{Z} &= \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-F''}, \\
-    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\trans)x\trans u + \epsilon w\dg xx\trans v + \text{c.c.} }.
+    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\dg)x\trans u + \epsilon w\dg xx\trans v + \text{c.c.} }.
   \end{aligned}
 \end{equation}
 %
 We will use the replica trick., \ie we rewrite the logarithm as
 %
 \begin{equation}\label{eq:replicatrick}
-  \ln \widetilde{Z} = \left. \pdiff{( \widetilde{Z}^n )}{n}\right\rvert_{n=0}. 
+  \ln \widetilde{Z} = \left. \pdiff{( \widetilde{Z}^n )}{n}\right\rvert_{n=0}.
 \end{equation}
 %
 For integer $n$, we can compute $\widetilde{Z}^n$ by creating $n$ replicas of the system,
@@ -378,7 +380,7 @@ We index these replicas with $a,b=1,\ldots,n$:
     \Phi(\omega) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}\av{
        \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} } \e^{-F'''}
        }_x\right\rvert_{n=0}, \\
-    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\trans)x\trans u_a + \epsilon w_a\dg xx\trans v_a + \text{c.c.} }.
+    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\dg)x\trans u_a + \epsilon w_a\dg xx\trans v_a + \text{c.c.} }.
   \end{aligned}
 \end{equation}
 %
@@ -411,7 +413,7 @@ with all other covariances negligible in the large $N$ limit.
      &= \frac{1}{4\pi N}  \left.\pdiff{}{n}
        \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} }
        \e^{-NE(R,S,T)}
-       \right\rvert_{n=0}, 
+       \right\rvert_{n=0},
 \end{aligned}
 \end{equation}
 %
@@ -428,7 +430,7 @@ where
  \\
   A &= -\frac{\ir}{P}
        \begin{pmatrix}
-         0        & \omb-U\trans & \epsilon \\
+         0        & \omb-U\dg & \epsilon \\
          \omega-U & 0            & 0 \\
          \epsilon & 0            & 0 \\
        \end{pmatrix}\otimes I,\\
@@ -451,7 +453,7 @@ This can be done by inserting factors like the following into the integral:
 We define
 %
 \begin{equation}\label{eq:overlapentropy}
-  S(R) = \frac{1}{N} \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} } 
+  S(R) = \frac{1}{N} \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} }
   N^{n^2} \delta (N R_{ab} - w_a\dg w_b )
    = \ln\det R + \text{const.}
 \end{equation}
@@ -461,7 +463,7 @@ Then \eqref{eq:phirepxi} reduces to
 %
 \begin{equation}\label{eq:phioverlap}
   \Phi(\omega) = \frac{1}{4\pi N}  \left.\pdiff{}{n}
-       \int \dr R_{ab} \dr S_{ab} \dr T_{ab} 
+       \int \dr R_{ab} \dr S_{ab} \dr T_{ab}
        \,\e^{-N(E(R,S,T)-S(R)-S(S)-S(T))}
        \right\rvert_{n=0}.
 \end{equation}
@@ -492,11 +494,11 @@ Then, according to \cite{silvester2000determinants},
 \begin{aligned}
   \ln\det(I+CA) &=  \ln\det\brk{\frac{1}{\alpha^3}
        \begin{pmatrix}
-         \alpha                   & -\ir (\omb-U\trans) \otimes R & -\ir\epsilon I\otimes R \\
+         \alpha                   & -\ir (\omb-U\dg) \otimes R & -\ir\epsilon I\otimes R \\
          -\ir (\omega-U)\otimes S & \alpha                        & 0 \\
          -\ir\epsilon I\otimes T  & 0                             & \alpha \\
        \end{pmatrix}}\\
-     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2I\otimes RT + (\omb-U\trans)(\omega-U)\otimes RS}{\alpha^2}}.
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2I\otimes RT + (\omb-U\dg)(\omega-U)\otimes RS}{\alpha^2}}.
 \end{aligned}
 \end{equation}
 %
@@ -512,12 +514,12 @@ Therefore:
 %
 \begin{equation}\label{eq:detrepints}
 \begin{aligned}
-  \ln\det(I+CA) &=  \sum_{k=0}^{P-1} 
+  \ln\det(I+CA) &=  \sum_{k=0}^{P-1}
     n \left\{
       \ln\brk{ \frac{\alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} {\alpha^2}}
     \right.\\
     &\qquad\quad \left.+
-      \frac{ \epsilon^2 (r_0t_1+r_1t_0) + (r_0s_1+r_1s_0) (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} { \alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} 
+      \frac{ \epsilon^2 (r_0t_1+r_1t_0) + (r_0s_1+r_1s_0) (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} { \alpha^2+\epsilon^2r_0t_0 + r_0s_0 (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})}
     \right\}\\
    &\qquad +\CO(n^2)\\
     &= \frac{nP}{2\pi} \intd[_0^{2\pi}]{\phi} \left\{
@@ -540,7 +542,7 @@ The second can be computed with the residue theorem.
 The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour \eqref{eq:zppzm}.
 %
 \begin{multline}\label{eq:repcontoutint}
-  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} 
+  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}
     \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)} \\
     \begin{aligned}
       &= \frac{(r_0s_1+r_1s_0)(-\omega)}{G(0)}
@@ -556,8 +558,8 @@ Combining all of this gives:
 \begin{equation}\label{eq:phimaxrep}
 \begin{aligned}
   \Phi(\omega) =\, \frac{1}{4\pi} \max_{r_{0,1},s_{0,1},t_{0,1}}& \left\{
-    \ln(r_0s_0t_0) + \frac{r_1}{r_0} + \frac{s_1}{s_0} + \frac{t_1}{t_0} 
-    -(s_0 + s_1 + t_0 + t_1) 
+    \ln(r_0s_0t_0) + \frac{r_1}{r_0} + \frac{s_1}{s_0} + \frac{t_1}{t_0}
+    -(s_0 + s_1 + t_0 + t_1)
     \right.\\&\left.
     - \alpha\ln\prn{-\frac{r_0s_0\omega}{\abs{\zeta_\pm}}}
     - \frac{\alpha(r_0s_1+r_1s_0)}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_\pm)}}
@@ -569,32 +571,15 @@ Combining all of this gives:
 %
 The maximum can be found by setting to zero the following derivatives
 %
-\begin{equation}\label{eq:phidiff0}
+\begin{equation}\label{eq:phidiff1}
 \begin{aligned}
   \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_\pm)},  \\
   \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon r_0 t_0 )}{s_0G'(\zeta_\pm)},  \\
-  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)}, 
+  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)},
 \end{aligned}
 \end{equation}
 %
-as well as
-%
-\begin{equation}\label{eq:phidiff1}
-\begin{aligned}
-  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} - \ir\alpha\Im\brk{\frac{\alpha^2}{r_0G'(\zeta_\pm)}} 
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} - \ir\alpha\Im\brk{\frac{\alpha^2\epsilon r_0 t_0}{s_0G'(\zeta_\pm)}}
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} + \ir\alpha\Im\brk{\frac{\epsilon^2r_0}{G'(\zeta_\pm)}}
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
-\end{aligned}
-\end{equation}
-%
-Looking at the expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$, we see that the imaginary parts above will vanish, provided that $r,s\text{ and }t$ are real and the argument of the square root is positive.
-Therefore the saddle-point will have $r_1=s_1=t_1=0$.
-This justifies the annealed assumption in \eqref{eq:annealed}.
-
-Solving \eqref{eq:phidiff0} gives
+Solving these equations gives
 %
 \begin{equation}\label{eq:repsaddlesol}
 \begin{aligned}
@@ -605,15 +590,46 @@ Solving \eqref{eq:phidiff0} gives
 \end{equation}
 %
 Expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$ tells us that it must be $\zeta_-$ that lies inside the unit circle.
-Solving for $r_0$ is a mess, but we can see that no solutions exist for $v<\CO(\epsilon\inv)$ or $v>\CO(\epsilon\inv)$ as $\epsilon\to0$.
+Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO(\epsilon\inv)$ or $r_0>\CO(\epsilon\inv)$ as $\epsilon\to0$, as the last equation would reduce to
+\begin{equation}\label{eq:rOe}
+\begin{aligned}
+  r_0 &\sim \CO(\epsilon^{-1+\delta})
+   \implies & 
+   \alpha^2 &= \frac{\alpha^3}{\alpha-1}, \\
+  r_0 &\sim \CO(\epsilon^{-1-\delta})
+   \implies &
+   \frac{(\alpha-1)\omo^2\epsilon^2r_0^2}{\alpha^2} &= \frac{\alpha^3}{\alpha-1}. \\
+\end{aligned}
+\end{equation}
+%
 Combined with \eqref{eq:repsaddlesol}, this justifies \eqref{eq:saddleOe}.
+
+We must also set to zero the following derivatives
+%
+\begin{equation}\label{eq:phidiff0}
+\begin{aligned}
+  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} - \ir\alpha\Im\brk{\frac{\alpha^2}{r_0G'(\zeta_\pm)}}
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} - \ir\alpha\Im\brk{\frac{\alpha^2\epsilon r_0 t_0}{s_0G'(\zeta_\pm)}}
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} + \ir\alpha\Im\brk{\frac{\epsilon^2r_0}{G'(\zeta_\pm)}}
+  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
+\end{aligned}
+\end{equation}
+%
+Looking at \eqref{eq:repsaddlesol} and \eqref{eq:saddlesol}, we see that $r_0,s_0,t_0\text{ and }G'(\zeta_\pm)$ are all real.
+Therefore imaginary parts above will vanish, and the saddle-point will have $r_1=s_1=t_1=0$.
+This justifies the annealed assumption in \eqref{eq:annealed}.
+
 
 
 %\subsection*{Acknowledgements}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Appendices}\addtocontents{toc}{\bigskip \textbf{Appendices:}\par}%\addcontentsline{toc}{section}{Appendices:}
+\subsection*{Appendices}
+\addtocontents{toc}{\bigskip \textbf{Appendices:}\par}
+%\addcontentsline{toc}{section}{Appendices:}
 \appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -731,7 +747,7 @@ and we define $\theta=\arg z$. The branch cut is shown in \fref{fig:contours}.
   \item\aligntop{\includegraphics[width=5cm]{contin.svg}}\label{fig:contin}
  \end{myenuma}
  \end{center}
-  \caption{Contours used to evaluate \eqref{eq:contourint}, (\ref{fig:contout}) when $\abs{z}>1$, (\ref{fig:contin}) when $\abs{z}<1$.}\label{fig:contours}
+  \caption{Contours used to evaluate \eqref{eq:contourint}, (\ref{fig:contout}) when $\abs{z}>1$, (\ref{fig:contin}) when $\abs{z}<1$. Branch cut indicated by dashed line.}\label{fig:contours}
 \end{figure}
 
 If $\abs{z}>1$, we can use the contour $C_1$ in \fref{fig:contours}(\ref{fig:contout}).
@@ -742,7 +758,7 @@ Using the residue theorem:
 \end{equation}
 %
 
-If $\abs{z}>1$, we can use the contour $C_2$ in \fref{fig:contours}(\ref{fig:contin}):
+If $\abs{z}<1$, we can use the contour $C_2$ in \fref{fig:contours}(\ref{fig:contin}):
 %
 \begin{equation}\label{eq:contout}
 C_2: \quad
@@ -808,7 +824,7 @@ First, by comparing the two forms of $G(\zeta)$, we see that:
 \label{eq:zpzm}
   \zeta_+ \zeta_- &= \frac{\omega}{\omb},\\
   \label{eq:zppzm}
-  \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}{rs\omb},\\
+  \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs\opo}{rs\omb},\\
   \label{eq:Gprime}
   G'(\zeta_\pm) = \mp rs\omb(\zeta_+ - \zeta_-),
 \end{align}
@@ -822,28 +838,30 @@ Solving the equation $G(\zeta_\pm)=0$ gives
 %     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
 %       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
 %\label{eq:zpmzm}
-%  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}
+%  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs\opo}
 %       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
 \label{eq:Gprimesol}
-  G'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega}^2)}^2
+  G'(\zeta_\pm) &= \mp\sqrt{\brk{\alpha^2+\epsilon^2rt + rs\opo}^2
        - 4(rs)^2\abs{\omega}^2}.
 \end{align}
 %
 Differentiating the equation $G(\zeta_\pm)=0$ gives
 %
-\begin{align}
-\label{eq:dzpmdr}
+\begin{equation}\label{eq:dzpmdrst}
+\begin{aligned}
+%\label{eq:dzpmdr}
   \pdiff{\zeta_\pm}{r} &=
     -\frac{\epsilon^2t\zeta_\pm + s(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{G'(\zeta_\pm)}
     &&= \frac{\alpha^2\zeta_\pm}{rG'(\zeta_\pm)},\\
-\label{eq:dzpmds}
+%\label{eq:dzpmds}
   \pdiff{\zeta_\pm}{s} &=
     -\frac{r(\omb\zeta_\pm-1)(\omega-\zeta_\pm)}{G'(\zeta_\pm)}
     &&= \frac{(\alpha^2+\epsilon^2rt)\zeta_\pm}{sG'(\zeta_\pm)},\\
-\label{eq:dzpmdt}
+%\label{eq:dzpmdt}
   \pdiff{\zeta_\pm}{r} &=
     -\frac{\epsilon^2r\zeta_\pm}{G'(\zeta_\pm)}.
-\end{align}
+\end{aligned}
+\end{equation}
 %
 
 It will also be helpful to note that
