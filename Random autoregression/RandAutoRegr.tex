@@ -340,7 +340,7 @@ in which case
 \begin{equation}\label{eq:saddlesol}
 \begin{aligned}
   t &=1, \\
-  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 - (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
+  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
 \end{aligned}
@@ -542,7 +542,7 @@ The second can be computed with the residue theorem.
 The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour \eqref{eq:zppzm}.
 %
 \begin{multline}\label{eq:repcontoutint}
-  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}
+  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}\,
     \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)} \\
     \begin{aligned}
       &= \frac{(r_0s_1+r_1s_0)(-\omega)}{G(0)}
@@ -569,13 +569,13 @@ Combining all of this gives:
 \end{aligned}
 \end{equation}
 %
-The maximum can be found by setting to zero the following derivatives
+To find the maximum, we must set to zero the following derivatives
 %
 \begin{equation}\label{eq:phidiff1}
 \begin{aligned}
   \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_\pm)},  \\
   \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon r_0 t_0 )}{s_0G'(\zeta_\pm)},  \\
-  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)},
+  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)}.
 \end{aligned}
 \end{equation}
 %
@@ -826,7 +826,7 @@ First, by comparing the two forms of $G(\zeta)$, we see that:
   \label{eq:zppzm}
   \zeta_+ + \zeta_- &= \frac{\alpha^2+\epsilon^2rt + rs\opo}{rs\omb},\\
   \label{eq:Gprime}
-  G'(\zeta_\pm) = \mp rs\omb(\zeta_+ - \zeta_-),
+  G'(\zeta_\pm) &= \mp rs\omb(\zeta_+ - \zeta_-),
 \end{align}
 %
 and \eqref{eq:zpzm} tells us that $\abs{\zeta_+} \abs{\zeta_-}=1$.
