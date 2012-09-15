@@ -159,11 +159,11 @@ The result will be:
 \begin{aligned}
 %\begin{align}
 %\label{eq:rssol}
-  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
+  q &= \frac{\brk{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{\omo^2},\\
 %\label{eq:zmsol}
-  \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
+  \zeta_- &= \frac{1+\abs{\omega}^2-q\inv}{2\omb},\\
 %\label{eq:phisol}
-  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
+  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
 %\end{align}
 \end{aligned}
 \end{equation}
@@ -188,7 +188,7 @@ First, $\alpha\to1$:
 %
 \begin{equation}\label{eq:rszmphiato1}
 \begin{aligned}
-  rs &\to \frac{1}{(\alpha-1)\omoa},\\
+  q &\to \frac{1}{\omoa},\\
   \implies\zeta_- &\to \frac{\opo-\omoa}{2\omb} =
      \begin{cases}
        \omega &\text{for } \abs{\omega}<1,\\
@@ -216,9 +216,9 @@ Therefore:
 Now, $\alpha\to\infty$:
 %
 \begin{equation}\label{eq:rsatoinfty}
-  rs =
-  \frac{\alpha}{1+\abs{\omega}^2} \brk{1 + \frac{1+4\abs{\omega}^2+\abs{\omega}^4}{\alpha\opo^2}
-       + \frac{1+6\abs{\omega}^2+18\abs{\omega}^4+6\abs{\omega}^6+\abs{\omega}^8}{\alpha^2\opo^4}
+  q =
+  \frac{1}{1+\abs{\omega}^2} \brk{1 + \frac{2\abs{\omega}^ 2}{\alpha\opo^2}
+       + \frac{8\abs{\omega}^4}{\alpha^2\opo^4}
        + \CO(\alpha^{-3})},
 \end{equation}
 %
