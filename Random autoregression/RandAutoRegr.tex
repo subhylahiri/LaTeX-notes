@@ -47,8 +47,10 @@
 \newcommand{\dub}{\dr\bar{u}}
 \newcommand{\dv}{\dr v}
 \newcommand{\dvb}{\dr\bar{v}}
+\newcommand{\oa}{\abs{\omega}^2}
 \newcommand{\opo}{\prn{1+\abs{\omega}^2}}
 \newcommand{\omo}{\prn{1-\abs{\omega}^2}}
+\newcommand{\omoa}{\abs{1-\abs{\omega}^2}}
 % ----------------------------------------------------------------
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,9 +121,9 @@ However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
 We will look at the average eigenvalue distribution:
 %
 \begin{equation}\label{eq:eigdist}
-  \rho(\omega) = \av{\rho_A(\omega)}_x,
+  \rho(\omega,\omb) = \av{\rho_A(\omega,\omb)}_x,
   \qquad
-  \rho_A = \sum_{i=1}^N \delta(\omega-\lambda_i),
+  \rho_A(\omega,\omb) = \sum_{i=1}^N \delta^{(2)}(\omega-\lambda_i),
 \end{equation}
 %
 where $\lambda_i$ are the eigenvalues of $A$ in \eqref{eq:Aest} and
@@ -132,20 +134,20 @@ We will keep the quantity $\alpha=P/N$ fixed in this limit.
 Following \cite{Sommers1988asymmetric}, this can be computed from a potential:
 %
 \begin{equation}\label{eq:potential}
-  \rho_A(\omega) = -\nabla^2 \Phi_A(\omega),
+  \rho_A(\omega,\omb) = -\nabla^2 \Phi_A(\omega,\omb),
   \qquad
-  \Phi_A(\omega) = -\frac{1}{4\pi N} \ln\det \brk{(\omb-A\trans)(\omega-A)}.
+  \Phi_A(\omega,\omb) = -\frac{1}{4\pi N} \ln\det \brk{(\omb-A\trans)(\omega-A)}.
 \end{equation}
 %
 We define a partition function
 %
 \begin{equation}\label{eq:partfn}
-  \Phi_A(\omega) = \frac{1}{4\pi N} \ln Z_A(\omega),
+  \Phi_A(\omega,\omb) = \frac{1}{4\pi N} \ln Z_A(\omega,\omb),
   \qquad
-  Z_A(\omega) = \det \brk{(\omb-A\trans)(\omega-A)}\inv.
+  Z_A(\omega,\omb) = \det \brk{(\omb-A\trans)(\omega-A)}\inv.
 \end{equation}
 %
-The problem is now to compute $\av{\ln Z_A(\omega)}_x$.
+The problem is now to compute $\av{\ln Z_A(\omega,\omb)}_x$.
 
 
 \section{The solution}\label{sec:solution}
@@ -153,63 +155,51 @@ The problem is now to compute $\av{\ln Z_A(\omega)}_x$.
 In \sref{sec:simplederiv} we will present a simplified derivation and in \sref{sec:replicader} we will fill in the gaps and justify the assumptions used in \sref{sec:replicader}.
 The result will be:
 %
-%\begin{equation}\label{eq:phisol}
-%\begin{aligned}
-\begin{align}
-\label{eq:rssol}
-  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
-\label{eq:zmsol}
+\begin{equation}\label{eq:phisol}
+\begin{aligned}
+%\begin{align}
+%\label{eq:rssol}
+  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
+%\label{eq:zmsol}
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
-\label{eq:phisol}
-  \Phi(\omega) &= \frac{1}{4\pi}\max_\pm\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
-\end{align}
-%\end{aligned}
-%\end{equation}
-%
-subject to the restriction
-%
-\begin{align}%\label{eq:phisolreq}
-%\label{eq:rsreq}
-%  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
-%  \\
-\label{eq:zmreq}
-  \abs{\zeta_-} &\leq 1,
-\end{align}
+%\label{eq:phisol}
+  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
+%\end{align}
+\end{aligned}
+\end{equation}
+%%
+%subject to the restriction
+%%
+%\begin{align}%\label{eq:phisolreq}
+%%\label{eq:rsreq}
+%%  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
+%%  \\
+%\label{eq:zmreq}
+%  \abs{\zeta_-} &\leq 1,
+%\end{align}
 %
 The imaginary part of $\Phi$ is harmonic, and will therefore not contribute to the density \eqref{eq:potential}.
 This means that everything has a rotation symmetry.
 
-Can we have a crossover between the two choices in \eqref{eq:rssol} as $\omega$ varies?
-This would require a point where the two solutions are equal:
-%
-\begin{equation}\label{eq:rsdegenerate}
-\begin{aligned}
-  (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 &=0, \\
-  \implies \abs{\omega}^2 &= \frac{-(\alpha^2-4\alpha+2) \pm (\alpha-1)\sqrt{1-2\alpha}}{\alpha^2}.
-\end{aligned}
-\end{equation}
-%
-This is only possible at $\alpha=1$.
 
-Let's look at two interesting limits. 
+Let's look at two interesting limits.
 
 First, $\alpha\to1$:
 %
-\begin{equation}\label{eq:rszmato1}
+\begin{equation}\label{eq:rszmphiato1}
 \begin{aligned}
-  rs &\to \pm\frac{1}{(\alpha-1)\omo},\\
-  \implies\zeta_- &\to \frac{\opo\mp\omo}{2\omb} =  \quad\omega \quad\text{or}\quad \frac{1}{\omb},
+  rs &\to \frac{1}{(\alpha-1)\omoa},\\
+  \implies\zeta_- &\to \frac{\opo-\omoa}{2\omb} =
+     \begin{cases}
+       \omega &\text{for } \abs{\omega}<1,\\
+       \frac{1}{\omb} &\text{for } \abs{\omega}>1.\\
+     \end{cases}\\
+  \implies\Phi &\to
+     \begin{cases}
+       0 &\text{for } \abs{\omega}<1,\\
+       -\frac{\ln\abs{\omega}}{2\pi} &\text{for } \abs{\omega}>1.\\
+     \end{cases}
 \end{aligned}
-\end{equation}
-%
-with the first choice satisfying \eqref{eq:zmreq} for $\abs{\omega}<1$ and the other for $\abs{\omega}>1$,
-%
-\begin{equation}\label{eq:phiato1}
-  \implies\Phi \to 
-  \begin{cases}
-    0 &\text{for } \abs{\omega}<1,\\
-    -\frac{\ln\abs{\omega}}{2\pi} &\text{for } \abs{\omega}>1.\\
-  \end{cases}
 \end{equation}
 %
 This is harmonic everywhere except $\abs{\omega}=1$.
@@ -217,7 +207,7 @@ Applying Gauss' law to a circular loop of radius greater than 1, centred at the 
 Therefore:
 %
 \begin{equation}\label{eq:rhoato1}
-  \rho(\omega) \to \frac{\delta(\abs{\omega}-1)}{2\pi}
+  \rho(\omega,\omb) \to \frac{\delta(\abs{\omega}-1)}{2\pi}
   \quad\text{as}\quad \alpha\to1.
 \end{equation}
 %
@@ -225,33 +215,31 @@ Therefore:
 
 Now, $\alpha\to\infty$:
 %
-\begin{multline}\label{eq:rsatoinfty}
-  rs = -\frac{2\alpha^2\opo}{\omo^2} + \CO(\alpha)
-  \quad\text{or}\quad \\
+\begin{equation}\label{eq:rsatoinfty}
+  rs =
   \frac{\alpha}{1+\abs{\omega}^2} \brk{1 + \frac{1+4\abs{\omega}^2+\abs{\omega}^4}{\alpha\opo^2}
        + \frac{1+6\abs{\omega}^2+18\abs{\omega}^4+6\abs{\omega}^6+\abs{\omega}^8}{\alpha^2\opo^4}
        + \CO(\alpha^{-3})},
-\end{multline}
+\end{equation}
 %
 which leads to
 %
 \begin{equation}\label{eq:zmatoinfty}
-  \zeta_- = \frac{1+\abs{\omega}^2}{2\omb}
-  \quad\text{or}\quad 
-  \frac{\omega}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})},
+  \zeta_- =
+  \frac{\omega}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})}.
 \end{equation}
 %
-only the second of which satisfies \eqref{eq:zmreq}. With this choice for both \eqref{eq:rsatoinfty} and \eqref{eq:zmatoinfty}:
+%which satisfies \eqref{eq:zmreq} everywhere.
+Dropping (infinite) constants:
 %
 \begin{equation}\label{eq:phiatoinfty}
-  \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}),
+  \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}).
 \end{equation}
 %
-in which we have dropped (infinite) constants.
 This results in
 %
 \begin{equation}\label{eq:rhoatoinfty}
-  \rho(\omega) \to \frac{1}{\pi\opo^2}
+  \rho(\omega,\omb) \to \frac{1}{\pi\opo^2}
   \quad\text{as}\quad
   \alpha\to\infty.
 \end{equation}
@@ -263,9 +251,7 @@ This should be a delta function at zero.
 \section{Simplified derivation}\label{sec:simplederiv}
 
 In this section, we will present a simplified version of the derivation.
-We will make the following simplifying assumption.
-
-At some point, we will treat $x$ as annealed, rather than quenched, disorder:
+We will make the following simplifying assumption: at some point, we will treat $x$ as annealed, rather than quenched, disorder:
 %
 \begin{equation}\label{eq:annealed}
   \av{\ln (\cdots)}_x = \ln\av{\cdots}_x.
@@ -281,7 +267,7 @@ We can fix this by adding $\epsilon^2I$ and letting $\epsilon\to0$ at the end.
 %
 \begin{equation}\label{eq:partfnintz}
 \begin{aligned}
-  Z_A(\omega) &= \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
+  Z_A(\omega,\omb) &= \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
     -z\dg (\omb-A\trans)(\omega-A) z - \epsilon^2 z\dg z} .%\\
 %    &=  \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
 %    -z\dg (xx\trans)\inv x(\omb-U)x\trans x(\omega-U)x\trans (xx\trans)\inv z
@@ -293,7 +279,7 @@ Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variabl
 %
 \begin{equation}\label{eq:partfnintw}
 \begin{aligned}
-  Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
+  Z_A(\omega,\omb) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
     \\
   F &=
      w\dg x(\omb-U\dg)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
@@ -304,7 +290,7 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 %
 \begin{equation}\label{eq:partfnintwuv}
 \begin{aligned}
-  Z_A(\omega) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
+  Z_A(\omega,\omb) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
   F' &=
     w\dg x(\omb-U\dg)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
 \end{aligned}
@@ -333,7 +319,7 @@ We can now write
 %
 \begin{equation}\label{eq:potwuv}
 \begin{aligned}
-  \av{\ln Z_A(\omega)}_x =&\,  2\av{\ln\det(xx\trans)}_x
+  \av{\ln Z_A(\omega,\omb)}_x =&\,  2\av{\ln\det(xx\trans)}_x
   \\&+
           \av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{x} ,
   \\ \text{where}\quad
@@ -368,13 +354,14 @@ along with similar ones for $u$ and $v$, to get
 %
 \begin{equation}\label{eq:phiintsimple}
 \begin{aligned}
-  \Phi(\omega) &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
+  \Phi(\omega,\omb) &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
       (rst)^N\e^{-N(s+t)} \av{\e^{-\xi\dg A \xi}}_x\\
       &= \text{const.} + \frac{1}{4\pi N} \ln \int \frac{\dr r}{r} \frac{\dr s}{s} \frac{\dr t}{t}
       \,\frac{\exp[N(\ln(rst)-s-t)]}{\det(I+CA)}.
 \end{aligned}
 \end{equation}
 %
+$(C\inv+A)$ IS NON-NORMAL!
 
 As $U$ is unitary, all the blocks in these matrices commute.
 Therefore, we can evaluate the determinant with some help from \cite{silvester2000determinants}.
@@ -395,7 +382,6 @@ Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$
 \end{aligned}
 \end{equation}
 %
-$(C\inv+A)$ IS NON-NORMAL!
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
 The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
 
@@ -414,7 +400,7 @@ We find that
 Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and $t$ in \eqref{eq:phiintsimple}, which becomes exact in the limit of large $N$ and $P$, we find
 %
 \begin{equation}\label{eq:phisaddlesimple}
-  \Phi(\omega) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
+  \Phi(\omega,\omb) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
 \end{equation}
 %
 One can show that (see \sref{sec:replicader}, in particular \eqref{eq:repsaddlesol} and \eqref{eq:rOe}) the maximum has
@@ -433,13 +419,21 @@ If we take $\epsilon\to0$, we find that $\Phi$ depends on $r$, $s$ and $t$ in th
 %
 \begin{equation}\label{eq:phimaxsimple}
 \begin{aligned}
-  \Phi(\omega) &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
+  \Phi(\omega,\omb) &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
   \pdiff{\Phi}{(rs)} &= \frac{1-\alpha}{rs} + \alpha\Re\prn{\frac{\alpha^2}{rs G'(\min\abs{\zeta_\pm})}} ,\\
   \pdiff{\Phi}{t}&= \frac{1}{t} - 1 .
 \end{aligned}
 \end{equation}
 %
-Setting these derivatives to zero requires
+Setting these derivatives to zero gives
+%
+\begin{equation}\label{eq:saddlecond}
+  t=1,
+  \qquad
+  G'(\zeta_\pm)=\frac{\alpha^3}{\alpha-1},
+\end{equation}
+%
+which can be solved for $rs$ provided that
 %
 \begin{equation}\label{eq:saddlereq}
   \abs{\zeta_-}\leq1,
@@ -447,17 +441,31 @@ Setting these derivatives to zero requires
 %
 in which case
 %
-\begin{equation}\label{eq:saddlesol}
+\begin{equation}\label{eq:saddlesolrs}
 \begin{aligned}
-  t &=1, \\
   rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
-  \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
- \Phi(\omega) &= \frac{1}{4\pi}\max_\pm\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}.
 \end{aligned}
 \end{equation}
 %
-
-
+Using \eqref{eq:zppzm} and \eqref{eq:Gprime}
+%
+\begin{equation}\label{eq:saddlesolzm}
+\begin{aligned}
+  \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
+\end{aligned}
+\end{equation}
+%
+and \eqref{eq:saddlereq} requires that we pick the positive root for $rs$.
+Furthermore, with this choice, \eqref{eq:saddlereq} is satisfied everywhere.
+Finally
+%
+\begin{equation}\label{eq:saddlesol}
+\begin{aligned}
+ \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}.
+\end{aligned}
+\end{equation}
+%
+This will simplify if expressed in terms of $q=(\alpha-1)rs/\alpha^2$.
 
 
 
@@ -469,9 +477,9 @@ The starting point for this version of the derivation will be \eqref{eq:partfnin
 %
 \begin{equation}\label{eq:phiint}
   \begin{aligned}
-    \Phi(\omega) &= \text{const.} + \frac{1}{4\pi N} \av{\ln \widetilde{Z}}_x, \\
+    \Phi(\omega,\omb) &= \text{const.} + \frac{1}{4\pi N} \av{\ln \widetilde{Z}}_x, \\
     \widetilde{Z} &= \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-F''}, \\
-    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\dg)x\trans u + \epsilon w\dg xx\trans v + \text{c.c.} }.
+    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\dg)x\trans u + \epsilon w\dg xx\trans v + (\text{c.c.}) }.
   \end{aligned}
 \end{equation}
 %
@@ -487,10 +495,10 @@ We index these replicas with $a,b=1,\ldots,n$:
 %
 \begin{equation}\label{eq:phirep}
     \begin{aligned}
-    \Phi(\omega) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}\av{
+    \Phi(\omega,\omb) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}\av{
        \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} } \e^{-F'''}
        }_x\right\rvert_{n=0}, \\
-    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\dg)x\trans u_a + \epsilon w_a\dg xx\trans v_a + \text{c.c.} }.
+    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\dg)x\trans u_a + \epsilon w_a\dg xx\trans v_a + (\text{c.c.}) }.
   \end{aligned}
 \end{equation}
 %
@@ -516,7 +524,7 @@ with all other covariances negligible in the large $N$ limit.
 %
 \begin{equation}\label{eq:phirepxi}
     \begin{aligned}
-    \Phi(\omega) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}
+    \Phi(\omega,\omb) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}
        \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} }
        \av{\e^{-N\Tr(S+T) - \xi\dg A \xi}}_x
        \right\rvert_{n=0}, \\
@@ -572,7 +580,7 @@ with the final expression valid in the large $N$ limit.
 Then \eqref{eq:phirepxi} reduces to
 %
 \begin{equation}\label{eq:phioverlap}
-  \Phi(\omega) = \frac{1}{4\pi N}  \left.\pdiff{}{n}
+  \Phi(\omega,\omb) = \frac{1}{4\pi N}  \left.\pdiff{}{n}
        \int \dr R_{ab} \dr S_{ab} \dr T_{ab}
        \,\e^{-N(E(R,S,T)-S(R)-S(S)-S(T))}
        \right\rvert_{n=0}.
@@ -649,7 +657,7 @@ Therefore:
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
 The first integral was computed in \eqref{eq:detsimpleresult}.
 The second can be computed with the residue theorem.
-The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour \eqref{eq:zppzm}.
+The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour (see \eqref{eq:zppzm}).
 %
 \begin{multline}\label{eq:repcontoutint}
   \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}\,
@@ -667,7 +675,7 @@ Combining all of this gives:
 %
 \begin{equation}\label{eq:phimaxrep}
 \begin{aligned}
-  \Phi(\omega) =\, \frac{1}{4\pi} \max_{r_{0,1},s_{0,1},t_{0,1}}& \left\{
+  \Phi(\omega,\omb) =\, \frac{1}{4\pi} \max_{r_{0,1},s_{0,1},t_{0,1}}& \left\{
     \ln(r_0s_0t_0) + \frac{r_1}{r_0} + \frac{s_1}{s_0} + \frac{t_1}{t_0}
     -(s_0 + s_1 + t_0 + t_1)
     \right.\\&\left.
@@ -727,7 +735,7 @@ We must also set to zero the following derivatives
 \end{aligned}
 \end{equation}
 %
-Looking at \eqref{eq:repsaddlesol} and \eqref{eq:saddlesol}, we see that $r_0,s_0,t_0\text{ and }G'(\zeta_\pm)$ are all real.
+Looking at \eqref{eq:repsaddlesol} and \eqref{eq:saddlesolrs}, we see that $r_0,s_0,t_0\text{ and }G'(\zeta_\pm)$ are all real.
 Therefore imaginary parts above will vanish, and the saddle-point will have $r_1=s_1=t_1=0$.
 This justifies the annealed assumption in \eqref{eq:annealed}.
 
