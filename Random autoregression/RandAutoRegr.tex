@@ -40,6 +40,7 @@
 \newcommand{\trans}{^\mathrm{T}}
 \newcommand{\I}{\mathbf{I}}
 \newcommand{\omb}{\overline{\omega}}
+\newcommand{\bt}{\overline{\tau}}
 \newcommand{\dw}{\dr w}
 \newcommand{\dwb}{\dr\overline{w}}
 \newcommand{\du}{\dr u}
@@ -147,6 +148,120 @@ We define a partition function
 The problem is now to compute $\av{\ln Z_A(\omega)}_x$.
 
 
+\section{The solution}\label{sec:solution}
+
+In \sref{sec:simplederiv} we will present a simplified derivation and in \sref{sec:replicader} we will fill in the gaps and justify the assumptions used in \sref{sec:replicader}.
+The result will be:
+%
+%\begin{equation}\label{eq:phisol}
+%\begin{aligned}
+\begin{align}
+\label{eq:rssol}
+  rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
+\label{eq:zmsol}
+  \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
+\label{eq:phisol}
+  \Phi(\omega) &= \frac{1}{4\pi}\max_\pm\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
+\end{align}
+%\end{aligned}
+%\end{equation}
+%
+subject to the restrictions
+%
+\begin{align}%\label{eq:phisolreq}
+\label{eq:rsreq}
+  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
+  \\
+\label{eq:zmreq}
+  \abs{\zeta_-} &\leq 1,
+\end{align}
+%
+The imaginary part of $\Phi$ is harmonic, and will therefore not contribute to the density \eqref{eq:potential}.
+This means that everything has a rotation symmetry.
+
+Can we have a crossover between the two choices in \eqref{eq:rssol} as $\omega$ varies?
+This would require a point where the two solutions are equal:
+%
+\begin{equation}\label{eq:rsdegenerate}
+\begin{aligned}
+  (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 &=0, \\
+  \implies \abs{\omega}^2 &= \frac{-(\alpha^2-4\alpha+2) \pm (\alpha-1)\sqrt{1-2\alpha}}{\alpha^2}.
+\end{aligned}
+\end{equation}
+%
+This is only possible at $\alpha=1$.
+
+Let's look at two interesting limits. 
+
+First, $\alpha\to1$:
+%
+\begin{equation}\label{eq:rsato1}
+  rs \to \pm\frac{1}{(\alpha-1)\omo},
+\end{equation}
+%
+which always satisfies \eqref{eq:rsreq},
+%
+\begin{equation}\label{eq:zmato1}
+  \implies\zeta_- \to \frac{\opo\mp\omo}{2\omb} =  \quad\omega \quad\text{or}\quad \frac{1}{\omb},
+\end{equation}
+%
+with the first choice satisfying \eqref{eq:zmreq} for $\abs{\omega}<1$ and the other for $\abs{\omega}>1$,
+%
+\begin{equation}\label{eq:phiato1}
+  \implies\Phi \to 
+  \begin{cases}
+    0 &\text{for } \abs{\omega}<1,\\
+    -\frac{\ln\abs{\omega}}{2\pi} &\text{for } \abs{\omega}>1.\\
+  \end{cases}
+\end{equation}
+%
+This is harmonic everywhere except $\abs{\omega}=1$.
+Applying Gauss' law to a circular loop of radius greater than 1, centred at the origin, tells us that the total charge enclosed is 1.
+Therefore:
+%
+\begin{equation}\label{eq:rhoato1}
+  \rho(\omega) \to \frac{\delta(\abs{\omega}-1)}{2\pi}
+  \quad\text{as}\quad \alpha\to1.
+\end{equation}
+%
+
+
+Now, $\alpha\to\infty$:
+%
+\begin{multline}\label{eq:rsatoinfty}
+  rs = -\frac{2\alpha^2\opo}{\omo^2} + \CO(\alpha)
+  \quad\text{or}\quad \\
+  \frac{\alpha}{1+\abs{\omega}^2} \brk{1 + \frac{1+4\abs{\omega}^2+\abs{\omega}^4}{\alpha\opo^2}
+       + \frac{1+6\abs{\omega}^2+18\abs{\omega}^4+6\abs{\omega}^6+\abs{\omega}^8}{\alpha^2\opo^4}
+       + \CO(\alpha^{-3})},
+\end{multline}
+%
+both of which satisfy \eqref{eq:rsreq},
+%
+\begin{equation}\label{eq:zmatoinfty}
+  \implies \zeta_- = \frac{1+\abs{\omega}^2}{2\omb}
+  \quad\text{or}\quad 
+  \frac{\omega}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})},
+\end{equation}
+%
+only the second of which satisfies \eqref{eq:zmreq}
+%
+\begin{equation}\label{eq:phiatoinfty}
+  \implies \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}),
+\end{equation}
+%
+in which we have dropped (infinite) constants.
+This results in
+%
+\begin{equation}\label{eq:rhoatoinfty}
+  \rho(\omega) \to \frac{1}{\pi\opo^2}
+  \quad\text{as}\quad
+  \alpha\to\infty.
+\end{equation}
+%
+This should be a delta function at zero.
+
+
 
 \section{Simplified derivation}\label{sec:simplederiv}
 
@@ -205,13 +320,13 @@ We define some new variables, $\rho,\sigma \text{ and } \tau$, which are zero me
 \begin{equation}\label{eq:rstdef}
 \begin{aligned}
   \rho &= x\trans w ,
-    & \av{\bar{\rho}_\mu \rho_\nu}_x &= Nr\delta_{\mu\nu} ,
+    & \av{\br_\mu \rho_\nu}_x &= Nr\delta_{\mu\nu} ,
     & r&=\frac{w\dg w}{N}, \\
   \sigma &= x\trans u ,
-    & \av{\bar{\sigma}_\mu \sigma_\nu}_x &= Ns\delta_{\mu\nu} ,
+    & \av{\bs_\mu \sigma_\nu}_x &= Ns\delta_{\mu\nu} ,
     & s&=\frac{u\dg u}{N}, \\
   \tau &= x\trans v,
-    & \av{\bar{\tau}_\mu \tau_\nu}_x &= Nt\delta_{\mu\nu},
+    & \av{\bt_\mu \tau_\nu}_x &= Nt\delta_{\mu\nu},
     & t&=\frac{v\dg v}{N}, \\
 \end{aligned}
 \end{equation}
@@ -330,9 +445,9 @@ If we take $\epsilon\to0$, we find that $\Phi$ depends on $r$, $s$ and $t$ in th
 Setting these derivatives to zero requires
 %
 \begin{equation}\label{eq:saddlereq}
-  \abs{\zeta_-}<1,
+  \abs{\zeta_-}\leq1,
   \qquad
-  [\alpha^2+rs\opo]^2 > 4(rs)^2\abs{\omega}^2,
+  [\alpha^2+rs\opo]^2 \geq 4(rs)^2\abs{\omega}^2,
 \end{equation}
 %
 in which case
@@ -342,8 +457,14 @@ in which case
   t &=1, \\
   rs &= \frac{\alpha^2 \brk{ -(\alpha-1)\opo \pm \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{(\alpha-1)\omo^2},\\
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
- \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}
+ \Phi(\omega) &= \frac{1}{4\pi}\max_\pm\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}.
 \end{aligned}
+\end{equation}
+%
+With the aid of this expression for $rs$, the second condition \eqref{eq:saddlereq} reduces to
+%
+\begin{equation}\label{eq:rsreqsimple}
+  rs \leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
 \end{equation}
 %
 
@@ -594,7 +715,7 @@ Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO
 \begin{equation}\label{eq:rOe}
 \begin{aligned}
   r_0 &\sim \CO(\epsilon^{-1+\delta})
-   \implies & 
+   \implies &
    \alpha^2 &= \frac{\alpha^3}{\alpha-1}, \\
   r_0 &\sim \CO(\epsilon^{-1-\delta})
    \implies &
