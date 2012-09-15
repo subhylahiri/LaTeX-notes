@@ -166,12 +166,12 @@ The result will be:
 %\end{aligned}
 %\end{equation}
 %
-subject to the restrictions
+subject to the restriction
 %
 \begin{align}%\label{eq:phisolreq}
-\label{eq:rsreq}
-  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
-  \\
+%\label{eq:rsreq}
+%  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
+%  \\
 \label{eq:zmreq}
   \abs{\zeta_-} &\leq 1,
 \end{align}
@@ -195,14 +195,11 @@ Let's look at two interesting limits.
 
 First, $\alpha\to1$:
 %
-\begin{equation}\label{eq:rsato1}
-  rs \to \pm\frac{1}{(\alpha-1)\omo},
-\end{equation}
-%
-which always satisfies \eqref{eq:rsreq},
-%
-\begin{equation}\label{eq:zmato1}
-  \implies\zeta_- \to \frac{\opo\mp\omo}{2\omb} =  \quad\omega \quad\text{or}\quad \frac{1}{\omb},
+\begin{equation}\label{eq:rszmato1}
+\begin{aligned}
+  rs &\to \pm\frac{1}{(\alpha-1)\omo},\\
+  \implies\zeta_- &\to \frac{\opo\mp\omo}{2\omb} =  \quad\omega \quad\text{or}\quad \frac{1}{\omb},
+\end{aligned}
 \end{equation}
 %
 with the first choice satisfying \eqref{eq:zmreq} for $\abs{\omega}<1$ and the other for $\abs{\omega}>1$,
@@ -236,18 +233,18 @@ Now, $\alpha\to\infty$:
        + \CO(\alpha^{-3})},
 \end{multline}
 %
-both of which satisfy \eqref{eq:rsreq},
+which leads to
 %
 \begin{equation}\label{eq:zmatoinfty}
-  \implies \zeta_- = \frac{1+\abs{\omega}^2}{2\omb}
+  \zeta_- = \frac{1+\abs{\omega}^2}{2\omb}
   \quad\text{or}\quad 
   \frac{\omega}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})},
 \end{equation}
 %
-only the second of which satisfies \eqref{eq:zmreq}
+only the second of which satisfies \eqref{eq:zmreq}. With this choice for both \eqref{eq:rsatoinfty} and \eqref{eq:zmatoinfty}:
 %
 \begin{equation}\label{eq:phiatoinfty}
-  \implies \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}),
+  \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}),
 \end{equation}
 %
 in which we have dropped (infinite) constants.
@@ -446,8 +443,6 @@ Setting these derivatives to zero requires
 %
 \begin{equation}\label{eq:saddlereq}
   \abs{\zeta_-}\leq1,
-  \qquad
-  [\alpha^2+rs\opo]^2 \geq 4(rs)^2\abs{\omega}^2,
 \end{equation}
 %
 in which case
@@ -459,12 +454,6 @@ in which case
   \zeta_- &= \frac{1+\abs{\omega}^2}{2\omb} - \frac{\alpha^2}{2(\alpha-1)\omb rs},\\
  \Phi(\omega) &= \frac{1}{4\pi}\max_\pm\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}.
 \end{aligned}
-\end{equation}
-%
-With the aid of this expression for $rs$, the second condition \eqref{eq:saddlereq} reduces to
-%
-\begin{equation}\label{eq:rsreqsimple}
-  rs \leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
 \end{equation}
 %
 
