@@ -47,7 +47,8 @@
 \newcommand{\dub}{\dr\bar{u}}
 \newcommand{\dv}{\dr v}
 \newcommand{\dvb}{\dr\bar{v}}
-\newcommand{\oa}{\abs{\omega}^2}
+\newcommand{\oa}{\abs{\omega}}
+\newcommand{\oas}{\abs{\omega}^2}
 \newcommand{\opo}{\prn{1+\abs{\omega}^2}}
 \newcommand{\omo}{\prn{1-\abs{\omega}^2}}
 \newcommand{\omoa}{\abs{1-\abs{\omega}^2}}
@@ -179,7 +180,14 @@ The result will be:
 %\end{align}
 %
 The imaginary part of $\Phi$ is harmonic, and will therefore not contribute to the density \eqref{eq:potential}.
-This means that everything has a rotation symmetry.
+This means that it has a rotation symmetry.
+We can express it in terms of
+%
+\begin{equation}\label{eq:radialrho}
+  \rho(\oa) = \int \rho(\omega,\omb)\oa\dr\phi = 2\pi\oa\rho(\omega,\omb) 
+   = \pdiff{}{\oa}\prn{\oa\pdiff{(2\pi\Phi)}{\oa}}.
+\end{equation}
+%
 
 
 Let's look at two interesting limits.
@@ -207,7 +215,7 @@ Applying Gauss' law to a circular loop of radius greater than 1, centred at the 
 Therefore:
 %
 \begin{equation}\label{eq:rhoato1}
-  \rho(\omega,\omb) \to \frac{\delta(\abs{\omega}-1)}{2\pi}
+  \rho(\oa) \to \delta(\abs{\omega}-1)
   \quad\text{as}\quad \alpha\to1.
 \end{equation}
 %
@@ -239,12 +247,12 @@ Dropping (infinite) constants:
 This results in
 %
 \begin{equation}\label{eq:rhoatoinfty}
-  \rho(\omega,\omb) \to \frac{1}{\pi\opo^2}
+  \rho(\oa) \to \frac{2\oa}{\opo^2}
   \quad\text{as}\quad
   \alpha\to\infty.
 \end{equation}
 %
-This should be a delta function at zero.
+This should be $\delta(\oa)$.
 
 
 
@@ -259,10 +267,10 @@ We will make the following simplifying assumption: at some point, we will treat 
 %
 We will justify this assumption in \sref{sec:replicader} using the replica trick.
 We will see that, with a replica symmetric ansatz, the saddle point has zero off-diagonal replica overlaps.
-This means that there is no coupling between the replicas, which produces identical results to the annealed calculation.
+This means that there is no coupling between the replicas so it gives identical results to the annealed calculation.
 
 We start with the representation of the determinant in \eqref{eq:compgausint}.
-However, the matrix in \eqref{eq:partfn} is not positive-definite when $\omb$ is equal to one of the eigenvalues.
+However, the matrix in \eqref{eq:partfn} is not positive-definite when $\omega$ is equal to one of the eigenvalues.
 We can fix this by adding $\epsilon^2I$ and letting $\epsilon\to0$ at the end.
 %
 \begin{equation}\label{eq:partfnintz}
@@ -687,7 +695,7 @@ Combining all of this gives:
 \end{aligned}
 \end{equation}
 %
-To find the maximum, we must set to zero the following derivatives
+To find the maximum, we must set the following derivatives to zero
 %
 \begin{equation}\label{eq:phidiff1}
 \begin{aligned}
@@ -700,15 +708,13 @@ To find the maximum, we must set to zero the following derivatives
 Solving these equations gives
 %
 \begin{equation}\label{eq:repsaddlesol}
-\begin{aligned}
-  s_0 &= \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2}, \qquad
-  t_0 &= 1 - s_0,\qquad
-  G'(\zeta_\pm) &= \frac{\alpha^3}{\alpha-1}.
-\end{aligned}
+  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2}, \qquad
+  t_0 = 1 - s_0,\qquad
+  G'(\zeta_\pm) = \frac{\alpha^3}{\alpha-1}.
 \end{equation}
 %
 Expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$ tells us that it must be $\zeta_-$ that lies inside the unit circle.
-Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO(\epsilon\inv)$ or $r_0>\CO(\epsilon\inv)$ as $\epsilon\to0$, as the last equation would reduce to
+Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO(\epsilon\inv)$ or $r_0>\CO(\epsilon\inv)$ as $\epsilon\to0$, because the last equation would reduce to
 \begin{equation}\label{eq:rOe}
 \begin{aligned}
   r_0 &\sim \CO(\epsilon^{-1+\delta})
@@ -722,7 +728,7 @@ Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO
 %
 Combined with \eqref{eq:repsaddlesol}, this justifies \eqref{eq:saddleOe}.
 
-We must also set to zero the following derivatives
+We must also set the following derivatives to zero
 %
 \begin{equation}\label{eq:phidiff0}
 \begin{aligned}
