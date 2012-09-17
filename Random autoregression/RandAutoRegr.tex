@@ -707,18 +707,18 @@ To find the maximum, we must set the following derivatives to zero
 %
 \begin{equation}\label{eq:phidiff1}
 \begin{aligned}
-  \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_\pm)},  \\
-  \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon r_0 t_0 )}{s_0G'(\zeta_\pm)},  \\
-  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_\pm)}.
+  \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_<)},  \\
+  \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon^2 r_0 t_0 )}{s_0G'(\zeta_<)},  \\
+  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_<)}.
 \end{aligned}
 \end{equation}
 %
 Solving these equations gives
 %
 \begin{equation}\label{eq:repsaddlesol}
-  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2}, \qquad
+  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2+(\alpha-1)\epsilon^2r_0}, \qquad
   t_0 = 1 - s_0,\qquad
-  G'(\zeta_\pm) = \frac{\alpha^3}{\alpha-1}.
+  G'(\zeta_<) = \frac{\alpha^3}{\alpha-1}.
 \end{equation}
 %
 Expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$ tells us that it must be $\zeta_-$ that lies inside the unit circle.
@@ -730,7 +730,7 @@ Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO
    \alpha^2 &= \frac{\alpha^3}{\alpha-1}, \\
   r_0 &\sim \CO(\epsilon^{-1-\delta})
    \implies &
-   \frac{(\alpha-1)\omo^2\epsilon^2r_0^2}{\alpha^2} &= \frac{\alpha^3}{\alpha-1}. \\
+   \frac{(\alpha-1)\omo^2\epsilon^2r_0^2}{\alpha^2+(\alpha-1)\epsilon^2r_0} &= \frac{\alpha^3}{\alpha-1}. \\
 \end{aligned}
 \end{equation}
 %
@@ -755,10 +755,7 @@ This justifies the annealed assumption in \eqref{eq:annealed}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Appendices}
-\addtocontents{toc}{\bigskip \textbf{Appendices:}\par}
-%\addcontentsline{toc}{section}{Appendices:}
-\appendix
+\startappendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Complex Gaussian integrals}\label{sec:compgauss}
