@@ -390,9 +390,6 @@ Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$
 \end{equation}
 %
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
-%The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
-
-If we factorise $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
 From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will ie inside the contour.
 We define:
 %
@@ -404,6 +401,8 @@ We define:
   \abs{\zeta_<} \leq 1.
 \end{equation}
 %
+
+If we factorise $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
 We find that
 %
 \begin{equation}\label{eq:detsimpleresult}
@@ -499,13 +498,13 @@ The starting point for this version of the derivation will be \eqref{eq:partfnin
   \end{aligned}
 \end{equation}
 %
-We will use the replica trick., \ie we rewrite the logarithm as
+We will use the replica trick, \ie we rewrite the logarithm as
 %
 \begin{equation}\label{eq:replicatrick}
   \ln \widetilde{Z} = \left. \pdiff{( \widetilde{Z}^n )}{n}\right\rvert_{n=0}.
 \end{equation}
 %
-For integer $n$, we can compute $\widetilde{Z}^n$ by creating $n$ replicas of the system,
+For integer $n$, we can compute $\widetilde{Z}^n$ by creating $n$ replicas of the system.
 We then let $n\to0$ after averaging over $x$.
 We index these replicas with $a,b=1,\ldots,n$:
 %
@@ -677,7 +676,7 @@ The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of t
 Using the definitions \eqref{eq:zetainout},
 %
 \begin{multline}\label{eq:repcontoutint}
-  \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}\,
+  \int \frac{\dr\zeta}{2\pi\ir\,\zeta}\,
     \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)} \\
     \begin{aligned}
       &= \frac{(r_0s_1+r_1s_0)(-\omega)}{G(0)}
@@ -852,89 +851,93 @@ The change in contours can be undone, as the integrand is analytic in $x$ and $y
 
 \section{Contour integrals for determinants}\label{sec:contourints}
 
-In evaluating determinants, we will come across contour integrals of the form
+In evaluating determinants in \sref{sec:simplederiv}, we will come across contour integrals of the form
 %
 \begin{equation}\label{eq:contourint}
-  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta),
+  I(\zeta_\gtrless) = \oint_C \frac{\dr\zeta}{2\pi\ir\,\zeta} \, \ln\prn{\frac{\gamma(\zeta_>-\zeta)(\zeta-\zeta_<)}{\zeta}},
 \end{equation}
 %
-where the contour is the unit circle in a counter-clockwise direction.
-The contour might not be closed because of the branch cut.
+where the contour is the unit circle in a counter-clockwise direction and $\abs{\zeta_\gtrless}\gtrless1$.
 We choose the branch of the logarithm so that
 %
 \begin{equation}\label{eq:branch}
-  \arg\prn{\frac{\zeta-z}{z}} \in [0,2\pi],
+  \arg\prn{\frac{\zeta-\zeta_<}{\zeta_<}},\arg\prn{\frac{\zeta}{\zeta_<}} \in [0,2\pi],
 \end{equation}
 %
-and we define $\theta=\arg z$. The branch cut is shown in \fref{fig:contours}.
+and we define $\theta=\arg z$. 
+The branch cut at $\zeta=\zeta_>$ will not matter.
+The branch cuts and contour are shown in \fref{fig:contours}(\ref{fig:branches}).
 
 \begin{figure}
  \begin{center}
  \begin{myenuma}
-  \item\aligntop{\includegraphics[width=5cm]{contout.svg}}\label{fig:contout}
-  \hspace{1cm}
-  \item\aligntop{\includegraphics[width=5cm]{contin.svg}}\label{fig:contin}
+  \item\aligntop{\includegraphics[width=4cm]{branches.svg}}\label{fig:branches}
+  \hspace{0.5cm}
+  \item\aligntop{\includegraphics[width=4cm]{contout.svg}}\label{fig:contout}
+  \hspace{0.5cm}
+  \item\aligntop{\includegraphics[width=4cm]{contin.svg}}\label{fig:contin}
  \end{myenuma}
  \end{center}
-  \caption{Contours used to evaluate \eqref{eq:contourint}, (\ref{fig:contout}) when $\abs{z}>1$, (\ref{fig:contin}) when $\abs{z}<1$. Branch cut indicated by dashed line.}\label{fig:contours}
+  \caption{(\ref{fig:branches}) Contours used to evaluate \eqref{eq:contourint} and and branch cuts \eqref{eq:branch}.
+  (\ref{fig:contout}) contour used with singularities at $\zeta_>$. 
+  (\ref{fig:contin}) contour used with singularities at $\zeta_<,0$.
+  Branch cuts indicated by dashed line. 
+  Poles and branch points indicated by crosses.}\label{fig:contours}
 \end{figure}
 
-If $\abs{z}>1$, we can use the contour $C_1$ in \fref{fig:contours}(\ref{fig:contout}).
+We write
+%
+\begin{equation}\label{eq:contoursplit}
+  I(\zeta_\gtrless) = \oint_C \frac{\dr\zeta}{2\pi\ir\,\zeta}\, \ln\gamma(\zeta_>-\zeta) + \oint_C \frac{\dr\zeta}{2\pi\ir\,\zeta}\, \ln\prn{\frac{\zeta-\zeta_<}{\zeta}},
+\end{equation}
+%
+
+For the first part, we can use the original contour $C$ as in \fref{fig:contours}(\ref{fig:contout}).
 Using the residue theorem:
 %
 \begin{equation}\label{eq:intout}
-  I(z) = \frac{1}{2\pi\ir}\int_{C_1} \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z.
+  \int \frac{\dr\zeta}{2\pi\ir\,\zeta}\, \ln\gamma(\zeta_>-\zeta) = \ln \gamma\zeta_>.
 \end{equation}
 %
 
-If $\abs{z}<1$, we can use the contour $C_2$ in \fref{fig:contours}(\ref{fig:contin}):
+For the second part, we can deform the contour to $C'$ as in \fref{fig:contours}(\ref{fig:contin}):
 %
 \begin{equation}\label{eq:contout}
-C_2: \quad
+C': \quad
   \begin{aligned}
-    \zeta &= \e^{\ir\phi},                             & \phi &\in [\theta+\delta,\theta+2\pi-\delta], \\
-    \zeta &= \e^{\ir(\theta+2\pi-\delta)}+xz\prn{1-\e^{\ir(2\pi-\delta)}},
-                                                       & x    &\in [0,1], \\
-    \zeta &= z - x \e^{\ir(\theta+2\pi-\delta)}, \quad & x    &\in [\abs{z}-1,-\epsilon], \\
-    \zeta &= z + \epsilon\e^{-\ir\phi},                & \phi &\in [-\theta-2\pi+\delta,-\theta-\delta], \\
-    \zeta &= z + x \e^{\ir(\theta+\delta)},          & x    &\in [\epsilon,1-\abs{z}.] \\
-    \zeta &= \e^{\ir(\theta+\delta)}+(1-x)z\prn{1-\e^{\ir\delta}},
-                                                       & x    &\in [0,1], \\
+    \zeta &= \epsilon\e^{\ir\phi},                         & \phi &\in [\theta,\theta+2\pi], \\
+    \zeta &= x \e^{\ir(\theta+2\pi)},                      & x    &\in [\epsilon,\abs{\zeta_<}-\epsilon], \\
+    \zeta &= \zeta_< + \epsilon\e^{\ir\phi},               & \phi &\in [\theta-\pi,\theta+\pi], \\
+    \zeta &= (\abs{\zeta_<}-x) \e^{\ir(\theta+2\pi)},\quad & x    &\in [\epsilon,\abs{\zeta_<}-\epsilon]. \\
   \end{aligned}
 \end{equation}
 %
-Using the residue theorem:
+The integral over the third part vanishes as $\epsilon\to0$. 
+The second and fourth would cancel if not for the discontinuity in the logarithm.
+This leaves:
 %
 \begin{equation}\label{eq:intin}
-  \frac{1}{2\pi\ir}\int_{C_2} \frac{\dr\zeta}{\zeta} \ln(z-\zeta) = \ln z.
-\end{equation}
-%
-If we let $\delta,\epsilon\to0$, the second, fourth and sixth parts of the contour integral vanish, and the first part gives $I(z)$ in \eqref{eq:contourint}.
-We're left with
-%
-\begin{equation}\label{eq:intinlim}
-  \begin{aligned}
-    \ln z =&\, I(z)
-           -\frac{1}{2\pi\ir} \int_{\abs{z}-1}^{0} \frac{\e^{\ir\theta}\dx}{z-x\e^{\ir\theta}} \ln\prn{x\e^{\ir(\theta+2\pi)}} %\\&
-           +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\e^{\ir\theta}\dx}{z+x\e^{\ir\theta}} \ln\prn{-x\e^{\ir\theta}}  \\
-      =&\, I(z)
-           -\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir(\theta+2\pi)}} %\\&
-           +\frac{1}{2\pi\ir} \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x} \ln\prn{-x\e^{\ir\theta}}  \\
-      =&\, I(z) - \int_{0}^{1-\abs{z}} \frac{\dx}{\abs{z}+x}  \\
-      =&\, I(z) + \ln\abs{z}.
-  \end{aligned}
+\begin{aligned}
+  \oint_{C'} \frac{\dr\zeta}{2\pi\ir\,\zeta}\, \ln\prn{\frac{\zeta-\zeta_<}{\zeta}}
+    &= \int_{\theta}^{\theta+2\pi}\frac{\dr\phi}{2\pi} \ln\prn{\frac{\epsilon\e^{\ir\phi}-\zeta_<}{\epsilon\e^{\ir\phi}}}
+     + \int_{\epsilon}^{\abs{\zeta_<}-\epsilon} \frac{\dx}{2\pi\ir\,x} \operatorname{disc}\ln\prn{\frac{x\e^{\ir\theta}-\zeta_<}{x\e^{\ir(\theta+2\pi)}}}\\
+    &= \ln\prn{\frac{\e^{\ir\pi}\zeta_<}{\epsilon}}
+     -  \int_{\theta}^{\theta+2\pi} \frac{\ir\phi\,\dr\phi}{2\pi} 
+     - \int_{\epsilon}^{\abs{\zeta_<}} \frac{\dx}{x}\\
+    &= \ln\prn{\frac{\e^{\ir\pi}\zeta_<}{\epsilon}}
+     - \ir(\theta+\pi)
+     - \ln\prn{\frac{\abs{\zeta_<}}{\epsilon}}\\
+    &= 0.
+\end{aligned}
 \end{equation}
 %
 
 Therefore:
 %
 \begin{equation}\label{eq:countourintresult}
-  I(z) = \frac{1}{2\pi\ir}\int \frac{\dr\zeta}{\zeta} \ln(z-\zeta)
-   = \ln z - [\ln\abs{z}]_-
-   = \ir \arg z + [\ln\abs{z}]_+,
+  I(\zeta_\gtrless) = \ln\gamma\zeta_>.
 \end{equation}
 %
-where $[x]_\pm = x \theta(\pm x)$ and $\theta(x)$ is the Heaviside step function.
 
 
 \section{The quadratic function \texorpdfstring{$G(\zeta)$}{G(zeta)}}\label{sec:Gamma}
@@ -993,13 +996,6 @@ Differentiating the equation $G(\zeta_\pm)=0$ gives
 \end{equation}
 %
 
-It will also be helpful to note that
-%
-\begin{equation}\label{eqdabsz}
-  \frac{\dr\abs{\zeta_\pm}}{\abs{\zeta_\pm}} = \Re\prn{\frac{\dr\zeta_\pm}{\zeta_\pm}}.
-\end{equation}
-%
-
 
 
 
@@ -1007,6 +1003,6 @@ It will also be helpful to note that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{utcaps_sl}
-\bibliography{maths,qft,neuro}
+\bibliography{maths,neuro}
 
 \end{document}
