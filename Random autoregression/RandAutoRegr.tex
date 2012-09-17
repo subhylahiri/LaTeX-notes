@@ -154,17 +154,17 @@ The problem is now to compute $\av{\ln Z_A(\omega,\omb)}_x$.
 \section{The solution}\label{sec:solution}
 
 In \sref{sec:simplederiv} we will present a simplified derivation and in \sref{sec:replicader} we will fill in the gaps and justify the assumptions used in \sref{sec:replicader}.
-The result will be:
+The result from \eqref{eq:saddlesol}, with some constant pieces dropped, will be:
 %
 \begin{equation}\label{eq:phisol}
 \begin{aligned}
 %\begin{align}
 %\label{eq:rssol}
-  q &= \frac{\brk{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }}{\omo^2},\\
+  q &= \frac{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }{\omo^2},\\
 %\label{eq:zmsol}
   \zeta_- &= \frac{1+\abs{\omega}^2-q\inv}{2\omb},\\
 %\label{eq:phisol}
-  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\abs{\frac{\omega}{\zeta_-}}} -\ir\alpha\arg(-\omega)},
+  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\frac{\omega}{\zeta_-}} },
 %\end{align}
 \end{aligned}
 \end{equation}
@@ -179,12 +179,11 @@ The result will be:
 %  \abs{\zeta_-} &\leq 1,
 %\end{align}
 %
-The imaginary part of $\Phi$ is harmonic, and will therefore not contribute to the density \eqref{eq:potential}.
-This means that it has a rotation symmetry.
-We can express it in terms of
+The potential has a rotation symmetry.
+Therefore, we can express the eigenvalue density in terms of
 %
 \begin{equation}\label{eq:radialrho}
-  \rho(\oa) = \int \rho(\omega,\omb)\oa\dr\phi = 2\pi\oa\rho(\omega,\omb) 
+  \rho(\oa) = \int \rho(\omega,\omb)\oa\dr\phi = 2\pi\oa\rho(\omega,\omb)
    = \pdiff{}{\oa}\prn{\oa\pdiff{(2\pi\Phi)}{\oa}}.
 \end{equation}
 %
@@ -391,16 +390,25 @@ Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$
 \end{equation}
 %
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
-The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
+%The denominator of the logarithm contributes a factor that is independent of $\omega$, which can be safely ignored.
 
 If we factorise $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
 From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will ie inside the contour.
+We define:
+%
+\begin{equation}\label{eq:zetainout}
+  \brc{\zeta_>,\zeta_<} = \brc{\zeta_+,\zeta_-},
+  \qquad
+  \abs{\zeta_>} \geq 1,
+  \qquad
+  \abs{\zeta_<} \leq 1.
+\end{equation}
+%
 We find that
 %
 \begin{equation}\label{eq:detsimpleresult}
 \begin{aligned}
-  \ln\det(I+CA) &= \text{const.} + P[\ln(-rs\omb) + \ln\zeta_+ + \ln\zeta_- - \ln(\min\abs{\zeta_\pm})]   \\
-   &= \text{const.} + P\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}.
+  \ln\det(I+CA) &= P\ln\prn{\frac{rs\omb\zeta_>}{\alpha^2}} = P\ln\prn{\frac{rs\omega}{\alpha^2\zeta_<}}.
 \end{aligned}
 \end{equation}
 %
@@ -408,7 +416,7 @@ We find that
 Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and $t$ in \eqref{eq:phiintsimple}, which becomes exact in the limit of large $N$ and $P$, we find
 %
 \begin{equation}\label{eq:phisaddlesimple}
-  \Phi(\omega,\omb) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{-\frac{rs\omega}{\min\abs{\zeta_\pm}}}}.
+  \Phi(\omega,\omb) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{\frac{rs\omega}{\alpha^2\zeta_<}}}.
 \end{equation}
 %
 One can show that (see \sref{sec:replicader}, in particular \eqref{eq:repsaddlesol} and \eqref{eq:rOe}) the maximum has
@@ -427,8 +435,8 @@ If we take $\epsilon\to0$, we find that $\Phi$ depends on $r$, $s$ and $t$ in th
 %
 \begin{equation}\label{eq:phimaxsimple}
 \begin{aligned}
-  \Phi(\omega,\omb) &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{-\frac{\omega}{\min\abs{\zeta_\pm}}}}\\
-  \pdiff{\Phi}{(rs)} &= \frac{1-\alpha}{rs} + \alpha\Re\prn{\frac{\alpha^2}{rs G'(\min\abs{\zeta_\pm})}} ,\\
+  \Phi(\omega,\omb) &= \frac{1}{4\pi} \max_{rs,t} \brk{ (1-\alpha)\ln(rs)+\ln t - t -\alpha\ln\prn{\frac{\omega}{\alpha^2\zeta_<}}}\\
+  \pdiff{\Phi}{(rs)} &= \frac{1-\alpha}{rs} + \frac{\alpha^3}{rs G'(\zeta_<)} ,\\
   \pdiff{\Phi}{t}&= \frac{1}{t} - 1 .
 \end{aligned}
 \end{equation}
@@ -465,11 +473,11 @@ Using \eqref{eq:zppzm} and \eqref{eq:Gprime}
 %
 and \eqref{eq:saddlereq} requires that we pick the positive root for $rs$.
 Furthermore, with this choice, \eqref{eq:saddlereq} is satisfied everywhere.
-Finally
+Finally, dropping some constant pieces,
 %
 \begin{equation}\label{eq:saddlesol}
 \begin{aligned}
- \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{-\frac{\omega}{\abs{\zeta_-}}}}.
+ \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln(rs) -\alpha\ln\prn{\frac{\omega}{\zeta_<}} }.
 \end{aligned}
 \end{equation}
 %
@@ -666,15 +674,16 @@ where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqr
 The first integral was computed in \eqref{eq:detsimpleresult}.
 The second can be computed with the residue theorem.
 The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour (see \eqref{eq:zppzm}).
+Using the definitions \eqref{eq:zetainout},
 %
 \begin{multline}\label{eq:repcontoutint}
   \frac{1}{2\pi\ir} \int \frac{\dr\zeta}{\zeta}\,
     \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta + (r_0s_1+r_1s_0) (\omb\zeta-1) (\omega-\zeta)} {G(\zeta)} \\
     \begin{aligned}
       &= \frac{(r_0s_1+r_1s_0)(-\omega)}{G(0)}
-      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta_\pm + (r_0s_1+r_1s_0) (\omb\zeta_\pm-1) (\omega-\zeta_\pm)} {\zeta_\pm G'(\zeta_\pm)} \\
-      &= \frac{r_0s_1+r_1s_0}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_\pm)}}
-      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_\pm)} .
+      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)\zeta_< + (r_0s_1+r_1s_0) (\omb\zeta_<-1) (\omega-\zeta_<)} {\zeta_< G'(\zeta_<)} \\
+      &= \frac{r_0s_1+r_1s_0}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_<)}}
+      + \frac{ \epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_<)} .
     \end{aligned}
 \end{multline}
 %
@@ -687,10 +696,10 @@ Combining all of this gives:
     \ln(r_0s_0t_0) + \frac{r_1}{r_0} + \frac{s_1}{s_0} + \frac{t_1}{t_0}
     -(s_0 + s_1 + t_0 + t_1)
     \right.\\&\left.
-    - \alpha\ln\prn{-\frac{r_0s_0\omega}{\abs{\zeta_\pm}}}
-    - \frac{\alpha(r_0s_1+r_1s_0)}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_\pm)}}
+    - \alpha\ln\prn{\frac{r_0s_0\omega}{\alpha^2\zeta_<}}
+    - \frac{\alpha(r_0s_1+r_1s_0)}{r_0s_0}\prn{1-\frac{\alpha^2+\epsilon^2r_0t_0} {G'(\zeta_<)}}
     \right.\\&\left.
-    - \frac{ \alpha\epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_\pm)}
+    - \frac{ \alpha\epsilon^2 (r_0t_1+r_1t_0)} {G'(\zeta_<)}
     \right\}.
 \end{aligned}
 \end{equation}
@@ -732,17 +741,13 @@ We must also set the following derivatives to zero
 %
 \begin{equation}\label{eq:phidiff0}
 \begin{aligned}
-  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} - \ir\alpha\Im\brk{\frac{\alpha^2}{r_0G'(\zeta_\pm)}}
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} - \ir\alpha\Im\brk{\frac{\alpha^2\epsilon r_0 t_0}{s_0G'(\zeta_\pm)}}
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} + \ir\alpha\Im\brk{\frac{\epsilon^2r_0}{G'(\zeta_\pm)}}
-  +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
+  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
 \end{aligned}
 \end{equation}
 %
-Looking at \eqref{eq:repsaddlesol} and \eqref{eq:saddlesolrs}, we see that $r_0,s_0,t_0\text{ and }G'(\zeta_\pm)$ are all real.
-Therefore imaginary parts above will vanish, and the saddle-point will have $r_1=s_1=t_1=0$.
+Therefore the saddle-point will have $r_1=s_1=t_1=0$.
 This justifies the annealed assumption in \eqref{eq:annealed}.
 
 
