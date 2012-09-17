@@ -164,7 +164,7 @@ The result from \eqref{eq:saddlesol}, with some constant pieces dropped, will be
 %\label{eq:zmsol}
   \zeta_- &= \frac{1+\abs{\omega}^2-q\inv}{2\omb},\\
 %\label{eq:phisol}
-  \Phi(\omega) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\frac{\omega}{\zeta_-}} },
+  \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\frac{\omega}{\zeta_-}} },
 %\end{align}
 \end{aligned}
 \end{equation}
@@ -376,7 +376,7 @@ Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$
 %
 \begin{equation}\label{eq:detsimple}
 \begin{aligned}
-  \ln\det(I+CA) &= \ln\det\brk{\frac{1}{\alpha^3}
+  \ln\det(I+CA) &= \ln\det\brk{\frac{1}{\alpha}
        \begin{pmatrix}
          \alpha           & -\ir r(\omb-U\dg) & -\ir\epsilon r \\
          -\ir s(\omega-U) & \alpha               & 0 \\
@@ -625,7 +625,7 @@ Then, according to \cite{silvester2000determinants},
 %
 \begin{equation}\label{eq:detrep}
 \begin{aligned}
-  \ln\det(I+CA) &=  \ln\det\brk{\frac{1}{\alpha^3}
+  \ln\det(I+CA) &=  \ln\det\brk{\frac{1}{\alpha}
        \begin{pmatrix}
          \alpha                   & -\ir (\omb-U\dg) \otimes R & -\ir\epsilon I\otimes R \\
          -\ir (\omega-U)\otimes S & \alpha                        & 0 \\
@@ -792,7 +792,7 @@ The proper normalisation for a Gaussian distribution is
 By completing the square, we can see that
 %
 \begin{equation}\label{eq:compgausslin}
-  \av{\exp\prn{\zeta\dg z + z\dg\zeta}} = \exp\prn{\zeta\dg C\zeta}.
+  \av{\exp\prn{\zeta\dg z \pm z\dg\zeta}} = \exp\prn{\pm\zeta\dg C\zeta}
 \end{equation}
 %
 Taking partial derivatives \wrt $\zeta_i$ and $\bar{\zeta}_i$, we find
@@ -910,18 +910,19 @@ C': \quad
 \end{equation}
 %
 The integral over the third part vanishes as $\epsilon\to0$. 
-The second and fourth would cancel if not for the discontinuity in the logarithm.
+The second and fourth parts would cancel, if not for the discontinuity in the logarithm of the denominator
+(the logarithm of the numerator has no discontinuity, due to \eqref{eq:branch}).
 This leaves:
 %
 \begin{equation}\label{eq:intin}
 \begin{aligned}
   \oint_{C'} \frac{\dr\zeta}{2\pi\ir\,\zeta}\, \ln\prn{\frac{\zeta-\zeta_<}{\zeta}}
     &= \int_{\theta}^{\theta+2\pi}\frac{\dr\phi}{2\pi} \ln\prn{\frac{\epsilon\e^{\ir\phi}-\zeta_<}{\epsilon\e^{\ir\phi}}}
-     + \int_{\epsilon}^{\abs{\zeta_<}-\epsilon} \frac{\dx}{2\pi\ir\,x} \operatorname{disc}\ln\prn{\frac{x\e^{\ir\theta}-\zeta_<}{x\e^{\ir(\theta+2\pi)}}}\\
+     + \int_{\epsilon}^{\abs{\zeta_<}-\epsilon} \frac{\dx}{2\pi\ir\,x} \operatorname{disc}\ln\prn{\frac{1}{\zeta}}\\
     &= \ln\prn{\frac{\e^{\ir\pi}\zeta_<}{\epsilon}}
      -  \int_{\theta}^{\theta+2\pi} \frac{\ir\phi\,\dr\phi}{2\pi} 
      - \int_{\epsilon}^{\abs{\zeta_<}} \frac{\dx}{x}\\
-    &= \ln\prn{\frac{\e^{\ir\pi}\zeta_<}{\epsilon}}
+    &= \ln\prn{\frac{\zeta_<}{\epsilon}} +\ir\pi
      - \ir(\theta+\pi)
      - \ln\prn{\frac{\abs{\zeta_<}}{\epsilon}}\\
     &= 0.
