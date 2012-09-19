@@ -164,27 +164,11 @@ The result from \eqref{eq:saddlesol}, with some constant pieces dropped, will be
 %
 \begin{equation}\label{eq:phisol}
 \begin{aligned}
-%\begin{align}
-%\label{eq:rssol}
   q &= \frac{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }{\omo^2},\\
-%\label{eq:zmsol}
-  \zeta_- &= \frac{1+\abs{\omega}^2-q\inv}{2\omb},\\
-%\label{eq:phisol}
-  \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q -\alpha\ln\prn{\frac{\omega}{\zeta_-}} },
-%\end{align}
+  \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q +\alpha\ln\prn{\frac{1+\abs{\omega}^2-q\inv}{2\oas}} },
 \end{aligned}
 \end{equation}
-%%
-%subject to the restriction
-%%
-%\begin{align}%\label{eq:phisolreq}
-%%\label{eq:rsreq}
-%%  rs &\leq \frac{\alpha^2(2\alpha^3-2\alpha+1)}{2(\alpha+1)(\alpha-1)^3\opo}.
-%%  \\
-%\label{eq:zmreq}
-%  \abs{\zeta_-} &\leq 1,
-%\end{align}
-%
+
 The potential has a rotation symmetry.
 Therefore, we can express the eigenvalue density in terms of
 %
@@ -202,10 +186,10 @@ First, $\alpha\to1$:
 \begin{equation}\label{eq:rszmphiato1}
 \begin{aligned}
   q &\to \frac{1}{\omoa},\\
-  \implies\zeta_- &\to \frac{\opo-\omoa}{2\omb} =
+  \implies1+\abs{\omega}^2-q\inv &\to \opo-\omoa =
      \begin{cases}
-       \omega &\text{for } \abs{\omega}<1,\\
-       \frac{1}{\omb} &\text{for } \abs{\omega}>1.\\
+       2\oas &\text{for } \abs{\omega}<1,\\
+       2 &\text{for } \abs{\omega}>1.\\
      \end{cases}\\
   \implies\Phi &\to
      \begin{cases}
@@ -238,8 +222,8 @@ Now, $\alpha\to\infty$:
 which leads to
 %
 \begin{equation}\label{eq:zmatoinfty}
-  \zeta_- =
-  \frac{\omega}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})}.
+  1+\abs{\omega}^2-q\inv =
+  \frac{2\oas}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})}.
 \end{equation}
 %
 %which satisfies \eqref{eq:zmreq} everywhere.
