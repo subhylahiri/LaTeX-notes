@@ -110,14 +110,20 @@ as this will make $U$ orthogonal:
 The estimate of $A$ is then
 %
 \begin{equation}\label{eq:Aest}
-  A = \prn{xUx\trans}\prn{xx\trans}\inv.
+  A = \prn{xUx\trans}\prn{xx\trans}\inv = xUx^*,
 \end{equation}
 %
+where $x^*$ is the pseudoinverse of $x$.
 
 Suppose we attempted this analysis in a situation where there really is no structure,
 \ie when $x(t)$ is white noise.
 Then the true optimal $A$ would be 0.
 However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
+
+Moreover if $P=N$, generically $x$ will be invertible, so $x^*=x\inv$.
+This would mean that \eqref{eq:Aest} is a similarity transform of $U$, and will therefore have the same eigenvalues: $\exp(2\pi\ir k/P)$ for $k\in\Z_P$.
+We would be fooled into thinking the system was critical (eigenvalues of absolute value 1) when in reality there is only noise.
+This raises the question, how large must $\alpha=P/N$ be to avoid this problem? 
 
 We will look at the average eigenvalue distribution:
 %
@@ -130,7 +136,7 @@ We will look at the average eigenvalue distribution:
 where $\lambda_i$ are the eigenvalues of $A$ in \eqref{eq:Aest} and
 the components of $x$ are iid gaussian random variables with mean 0 and variance 1.
 This quantity is most relevant in the limit of large $N$ and $P$.
-We will keep the quantity $\alpha=P/N$ fixed in this limit.
+We will keep $\alpha$ fixed in this limit.
 
 Following \cite{Sommers1988asymmetric}, this can be computed from a potential:
 %
@@ -861,7 +867,7 @@ We choose the branch of the logarithm so that
   \arg\prn{\frac{\zeta-\zeta_<}{\zeta_<}},\arg\prn{\frac{\zeta}{\zeta_<}} \in [0,2\pi],
 \end{equation}
 %
-and we define $\theta=\arg z$. 
+and we define $\theta=\arg z$.
 The branch cut at $\zeta=\zeta_>$ will not matter.
 The branch cuts and contour are shown in \fref{fig:contours}(\ref{fig:branches}).
 
@@ -876,9 +882,9 @@ The branch cuts and contour are shown in \fref{fig:contours}(\ref{fig:branches})
  \end{myenuma}
  \end{center}
   \caption{(\ref{fig:branches}) Contours used to evaluate \eqref{eq:contourint} and and branch cuts \eqref{eq:branch}.
-  (\ref{fig:contout}) contour used with singularities at $\zeta_>$. 
+  (\ref{fig:contout}) contour used with singularities at $\zeta_>$.
   (\ref{fig:contin}) contour used with singularities at $\zeta_<,0$.
-  Branch cuts indicated by dashed line. 
+  Branch cuts indicated by dashed line.
   Poles and branch points indicated by crosses.}\label{fig:contours}
 \end{figure}
 
@@ -909,7 +915,7 @@ C': \quad
   \end{aligned}
 \end{equation}
 %
-The integral over the third part vanishes as $\epsilon\to0$. 
+The integral over the third part vanishes as $\epsilon\to0$.
 The second and fourth parts would cancel, if not for the discontinuity in the logarithm of the denominator
 (the logarithm of the numerator has no discontinuity, due to \eqref{eq:branch}).
 This leaves:
@@ -920,7 +926,7 @@ This leaves:
     &= \int_{\theta}^{\theta+2\pi}\frac{\dr\phi}{2\pi} \ln\prn{\frac{\epsilon\e^{\ir\phi}-\zeta_<}{\epsilon\e^{\ir\phi}}}
      + \int_{\epsilon}^{\abs{\zeta_<}-\epsilon} \frac{\dx}{2\pi\ir\,x} \operatorname{disc}\ln\prn{\frac{1}{\zeta}}\\
     &= \ln\prn{\frac{\e^{\ir\pi}\zeta_<}{\epsilon}}
-     -  \int_{\theta}^{\theta+2\pi} \frac{\ir\phi\,\dr\phi}{2\pi} 
+     -  \int_{\theta}^{\theta+2\pi} \frac{\ir\phi\,\dr\phi}{2\pi}
      - \int_{\epsilon}^{\abs{\zeta_<}} \frac{\dx}{x}\\
     &= \ln\prn{\frac{\zeta_<}{\epsilon}} +\ir\pi
      - \ir(\theta+\pi)
