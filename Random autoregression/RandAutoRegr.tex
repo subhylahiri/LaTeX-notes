@@ -113,7 +113,7 @@ The estimate of $A$ is then
   A = \prn{xUx\trans}\prn{xx\trans}\inv = xUx^*,
 \end{equation}
 %
-where $x^*$ is the pseudoinverse of $x$.
+where $x^*$ is the pseudoinverse of $x$, \ie $xx^*=I$.
 
 Suppose we attempted this analysis in a situation where there really is no structure,
 \ie when $x(t)$ is white noise.
@@ -123,7 +123,7 @@ However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
 Moreover if $P=N$, generically $x$ will be invertible, so $x^*=x\inv$.
 This would mean that \eqref{eq:Aest} is a similarity transform of $U$, and will therefore have the same eigenvalues: $\exp(2\pi\ir k/P)$ for $k\in\Z_P$.
 We would be fooled into thinking the system was critical (eigenvalues of absolute value 1) when in reality there is only noise.
-This raises the question, how large must $\alpha=P/N$ be to avoid this problem? 
+This raises the question, how large must $\alpha=P/N$ be to avoid this problem?
 
 We will look at the average eigenvalue distribution:
 %
@@ -174,7 +174,7 @@ Therefore, we can express the eigenvalue density in terms of
 %
 \begin{equation}\label{eq:radialrho}
   \rho(\oa) = \int \rho(\omega,\omb)\oa\dr\phi = 2\pi\oa\rho(\omega,\omb)
-   = \pdiff{}{\oa}\prn{\oa\pdiff{(2\pi\Phi)}{\oa}}.
+   = -\pdiff{}{\oa}\prn{\oa\pdiff{(2\pi\Phi)}{\oa}}.
 \end{equation}
 %
 
@@ -276,7 +276,7 @@ Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variabl
 %
 \begin{equation}\label{eq:partfnintw}
 \begin{aligned}
-  Z_A(\omega,\omb) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
+  Z_A(\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
     \\
   F &=
      w\dg x(\omb-U\dg)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
@@ -287,7 +287,7 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 %
 \begin{equation}\label{eq:partfnintwuv}
 \begin{aligned}
-  Z_A(\omega,\omb) &= \det(xx\trans)^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
+  Z_A(\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
   F' &=
     w\dg x(\omb-U\dg)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
 \end{aligned}
@@ -316,9 +316,9 @@ We can now write
 %
 \begin{equation}\label{eq:potwuv}
 \begin{aligned}
-  \av{\ln Z_A(\omega,\omb)}_x =&\,  2\av{\ln\det(xx\trans)}_x
-  \\&+
-          \av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{x} ,
+  \av{\ln Z_A(\omega,\omb)}_x =&\,  2\av{\ln\det\prn{\frac{xx\trans}{P}}}_x
+  \\&
+        +\av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{x} ,
   \\ \text{where}\quad
   \xi =&\, \begin{pmatrix}
            \rho \\
@@ -341,7 +341,7 @@ We can now write
 \end{equation}
 %
 As we only care about the part of $\Phi$ that depends on $\omega$, we can ignore the first term.
-We will simplify the second term using \eqref{eq:annealed}, \eqref{eq:compgaussquad} and the relation
+We will simplify the second term using the assumption \eqref{eq:annealed}, the identity \eqref{eq:compgaussquad} and the relation
 %
 \begin{equation}\label{eq:spherical}
   \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} } f(r) = \frac{N^N}{\Gamma(N)} \intd{r} r^{N-1} f(r),
@@ -392,7 +392,7 @@ We define:
 \end{equation}
 %
 
-If we factorise $G(\zeta)$, we get some contour integrals of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
+If we factorise $G(\zeta)$, this contour integral is of the form discussed in \sref{sec:contourints}, the result of which appears in \eqref{eq:countourintresult}.
 We find that
 %
 \begin{equation}\label{eq:detsimpleresult}
@@ -610,7 +610,7 @@ Therefore,
   S(R) = \ln\det R = (n-1)\ln r_0 + \ln(r_0 +n r_1) = n\ln r_0 + \frac{nr_1}{r_0} + \CO(n^2).
 \end{equation}
 %
-The replica symmetric form of $R,S<,T$ and the unitarity of $U$ means that all the blocks in \eqref{eq:overlapenergy} commute.
+The replica symmetric form of $R,S,T$ and the unitarity of $U$ means that all the blocks in \eqref{eq:overlapenergy} commute.
 Then, according to \cite{silvester2000determinants},
 %
 \begin{equation}\label{eq:detrep}
@@ -706,9 +706,11 @@ To find the maximum, we must set the following derivatives to zero
 Solving these equations gives
 %
 \begin{equation}\label{eq:repsaddlesol}
-  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2+(\alpha-1)\epsilon^2r_0}, \qquad
-  t_0 = 1 - s_0,\qquad
-  G'(\zeta_<) = \frac{\alpha^3}{\alpha-1}.
+  G'(\zeta_<) = \frac{\alpha^3}{\alpha-1},
+  \qquad
+  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2+(\alpha-1)\epsilon^2r_0}, 
+  \qquad
+  t_0 = 1 - s_0.
 \end{equation}
 %
 Expression \eqref{eq:Gprimesol} for $G'(\zeta_\pm)$ tells us that it must be $\zeta_-$ that lies inside the unit circle.
@@ -953,10 +955,10 @@ and \eqref{eq:zpzm} tells us that $\abs{\zeta_+} \abs{\zeta_-}=1$.
 Solving the equation $G(\zeta_\pm)=0$ gives
 %
 \begin{align}
-%\label{eq:zetapm}
-%  \zeta_\pm &= \frac{ \alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2
-%     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
-%       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
+\label{eq:zetapm}
+  \zeta_\pm &= \frac{ \alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2
+     \pm \sqrt{\brk{\alpha^2+\epsilon^2rt + rs(1+\abs{\omega})^2}
+       - 4(rs)^2\abs{\omega}^2} }{2rs\omb},\\
 %\label{eq:zpmzm}
 %  \zeta_+ - \zeta_- &= \frac{\sqrt{\brk{\alpha^2+\epsilon^2rt + rs\opo}
 %       - 4(rs)^2\abs{\omega}^2} }{rs\omb},\\
