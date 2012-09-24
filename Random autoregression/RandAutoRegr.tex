@@ -164,17 +164,24 @@ The result from \eqref{eq:saddlesol}, with some constant pieces dropped, will be
 %
 \begin{equation}\label{eq:phisol}
 \begin{aligned}
-  q &= \frac{ -(\alpha-1)\opo + \sqrt{ (\alpha-1)^2\opo^2 + (2\alpha-1)\omo^2 } }{\omo^2},\\
+  q &= \frac{ \sqrt{\alpha^2\opo^2 - 4(2\alpha-1)\oas} - (\alpha-1)\opo }{\omo^2},\\
   \Phi(\omega,\omb) &= \frac{1}{4\pi}\brk{ (1-\alpha)\ln q +\alpha\ln\prn{\frac{1+\abs{\omega}^2-q\inv}{2\oas}} },
 \end{aligned}
 \end{equation}
 
 The potential has a rotation symmetry.
-Therefore, we can express the eigenvalue density in terms of
+Therefore, we can express the eigenvalue density in terms of the radial density
 %
 \begin{equation}\label{eq:radialrho}
   \rho(\oa) = \int \rho(\omega,\omb)\oa\dr\phi = 2\pi\oa\rho(\omega,\omb)
    = -\pdiff{}{\oa}\prn{\oa\pdiff{(2\pi\Phi)}{\oa}}.
+\end{equation}
+%
+We find
+%
+\begin{equation}\label{eq:radialrhosol}
+\rho(\oa) = 
+  \frac{2 (\alpha-1) \oa q}{\sqrt{\alpha^2\opo^2 - 4(2\alpha-1)\oas}}.
 \end{equation}
 %
 
@@ -226,8 +233,7 @@ which leads to
   \frac{2\oas}{\alpha\opo} \brk{1 + \frac{2\abs{\omega}^2}{\alpha\opo^2} + \CO(\alpha^{-2})}.
 \end{equation}
 %
-%which satisfies \eqref{eq:zmreq} everywhere.
-Dropping (infinite) constants:
+Dropping constants:
 %
 \begin{equation}\label{eq:phiatoinfty}
   \Phi = -\frac{\ln\opo}{4\pi} + \CO(\alpha^{-1}).
@@ -708,7 +714,7 @@ Solving these equations gives
 \begin{equation}\label{eq:repsaddlesol}
   G'(\zeta_<) = \frac{\alpha^3}{\alpha-1},
   \qquad
-  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2+(\alpha-1)\epsilon^2r_0}, 
+  s_0 = \frac{(\alpha-1)\epsilon^2r_0}{\alpha^2+(\alpha-1)\epsilon^2r_0},
   \qquad
   t_0 = 1 - s_0.
 \end{equation}
