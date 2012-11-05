@@ -180,7 +180,7 @@ Therefore, we can express the eigenvalue density in terms of the radial density
 We find
 %
 \begin{equation}\label{eq:radialrhosol}
-\rho(\oa) = 
+\rho(\oa) =
   \frac{2 (\alpha-1) \oa q}{\sqrt{\alpha^2\opo^2 - 4(2\alpha-1)\oas}}.
 \end{equation}
 %
@@ -705,11 +705,23 @@ To find the maximum, we must set the following derivatives to zero
 \begin{aligned}
   \pdiff{(4\pi\Phi)}{r_1} &= \frac{1}{r_0} - \frac{\alpha}{r_0} + \frac{\alpha^3}{r_0G'(\zeta_<)},  \\
   \pdiff{(4\pi\Phi)}{s_1} &= \frac{1}{s_0} - 1 - \frac{\alpha}{s_0} + \frac{\alpha(\alpha^2+\epsilon^2 r_0 t_0 )}{s_0G'(\zeta_<)},  \\
-  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_<)}.
+  \pdiff{(4\pi\Phi)}{t_1} &= \frac{1}{t_0} - 1 - \frac{\alpha\epsilon^2r_0}{G'(\zeta_<)},
 \end{aligned}
 \end{equation}
 %
-Solving these equations gives
+as well as
+%
+\begin{equation}\label{eq:phidiff0}
+\begin{aligned}
+  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
+  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
+\end{aligned}
+\end{equation}
+%
+This has the solution $r_1=s_1=t_1=0$,
+which justifies the annealed assumption in \eqref{eq:annealed}.
+Solving \eqref{eq:phidiff1} gives
 %
 \begin{equation}\label{eq:repsaddlesol}
   G'(\zeta_<) = \frac{\alpha^3}{\alpha-1},
@@ -734,18 +746,6 @@ Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO
 %
 Combined with \eqref{eq:repsaddlesol}, this justifies \eqref{eq:saddleOe}.
 
-We must also set the following derivatives to zero
-%
-\begin{equation}\label{eq:phidiff0}
-\begin{aligned}
-  \pdiff{(4\pi\Phi)}{r_0} &= \pdiff{(4\pi\Phi)}{r_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{s_0} &= \pdiff{(4\pi\Phi)}{s_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1,  \\
-  \pdiff{(4\pi\Phi)}{t_0} &= \pdiff{(4\pi\Phi)}{t_1} +(\cdots)r_1+(\cdots)s_1+(\cdots)t_1.
-\end{aligned}
-\end{equation}
-%
-Therefore the saddle-point will have $r_1=s_1=t_1=0$.
-This justifies the annealed assumption in \eqref{eq:annealed}.
 
 
 
