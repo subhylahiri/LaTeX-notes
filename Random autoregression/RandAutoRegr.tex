@@ -39,6 +39,8 @@
 \newcommand{\dg}{^\dagger}
 \newcommand{\trans}{^\mathrm{T}}
 \newcommand{\I}{\mathbf{I}}
+\newcommand{\shift}{\mathcal{S}}
+\newcommand{\aest}{\hat{A}}
 \newcommand{\omb}{\overline{\omega}}
 \newcommand{\bt}{\overline{\tau}}
 \newcommand{\dw}{\dr w}
@@ -96,21 +98,21 @@ Suppose we have a sample of $P$ consecutive times, so $x$ is an $N\times P$ matr
 We can perform a least-squares estimate of $A$ by minimising the quantity
 %
 \begin{equation}\label{eq:minL}
-  \half\sum_{i,\mu} \prn{ x_{i\mu+1} - \sum_j A_{ij} x_{j\mu} }^2 = \half\Tr \prn{xU-Ax}\prn{xU-Ax}\trans,
+  \half\sum_{i,\mu} \prn{ x_{i\mu+1} - \sum_j \aest_{ij} x_{j\mu} }^2 = \half\Tr \prn{x\shift-\aest x}\prn{x\shift-\aest x}\trans,
 \end{equation}
 %
-where $U$ is a shift matrix.
+where $\shift$ is a shift matrix.
 It will be useful to use periodic boundary conditions in time, \ie $x_{iP+1}\sim x_{i1}$,
-as this will make $U$ orthogonal:
+as this will make $\shift$ orthogonal:
 %
 \begin{equation}\label{eq:Udef}
-  U_{\mu\nu} = \delta_{\mu\nu+1} + \delta_{\mu1}\delta_{\nu P}.
+  \shift_{\mu\nu} = \delta_{\mu\nu+1} + \delta_{\mu1}\delta_{\nu P}.
 \end{equation}
 %
 The estimate of $A$ is then
 %
 \begin{equation}\label{eq:Aest}
-  A = \prn{xUx\trans}\prn{xx\trans}\inv = xUx^*,
+  \aest = \prn{x\shift x\trans}\prn{xx\trans}\inv = x\shift x^*,
 \end{equation}
 %
 where $x^*$ is the pseudoinverse of $x$, \ie $xx^*=I$.
@@ -121,19 +123,19 @@ Then the true optimal $A$ would be 0.
 However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
 
 Moreover if $P=N$, generically $x$ will be invertible, so $x^*=x\inv$.
-This would mean that \eqref{eq:Aest} is a similarity transform of $U$, and will therefore have the same eigenvalues: $\exp(2\pi\ir k/P)$ for $k\in\Z_P$.
+This would mean that \eqref{eq:Aest} is a similarity transform of $\shift$, and will therefore have the same eigenvalues: $\exp(2\pi\ir k/P)$ for $k\in\Z_P$.
 We would be fooled into thinking the system was critical (eigenvalues of absolute value 1) when in reality there is only noise.
 This raises the question, how large must $\alpha=P/N$ be to avoid this problem?
 
 We will look at the average eigenvalue distribution:
 %
 \begin{equation}\label{eq:eigdist}
-  \rho(\omega,\omb) = \av{\rho_A(\omega,\omb)}_x,
+  \rho(\omega,\omb) = \av{\rho_{\aest} (\omega,\omb)}_x,
   \qquad
-  \rho_A(\omega,\omb) = \sum_{i=1}^N \delta^{(2)}(\omega-\lambda_i),
+  \rho_{\aest}(\omega,\omb) = \sum_{i=1}^N \delta^{(2)}(\omega-\lambda_i),
 \end{equation}
 %
-where $\lambda_i$ are the eigenvalues of $A$ in \eqref{eq:Aest} and
+where $\lambda_i$ are the eigenvalues of $\aest$ in \eqref{eq:Aest} and
 the components of $x$ are iid gaussian random variables with mean 0 and variance 1.
 This quantity is most relevant in the limit of large $N$ and $P$.
 We will keep $\alpha$ fixed in this limit.
@@ -141,20 +143,20 @@ We will keep $\alpha$ fixed in this limit.
 Following \cite{Sommers1988asymmetric}, this can be computed from a potential:
 %
 \begin{equation}\label{eq:potential}
-  \rho_A(\omega,\omb) = -\nabla^2 \Phi_A(\omega,\omb),
+  \rho_{\aest}(\omega,\omb) = -\nabla^2 \Phi_{\aest} (\omega,\omb),
   \qquad
-  \Phi_A(\omega,\omb) = -\frac{1}{4\pi N} \ln\det \brk{(\omb-A\trans)(\omega-A)}.
+  \Phi_{\aest} (\omega,\omb) = -\frac{1}{4\pi N} \ln\det \brk{(\omb-\aest \trans)(\omega-\aest )}.
 \end{equation}
 %
 We define a partition function
 %
 \begin{equation}\label{eq:partfn}
-  \Phi_A(\omega,\omb) = \frac{1}{4\pi N} \ln Z_A(\omega,\omb),
+  \Phi_{\aest} (\omega,\omb) = \frac{1}{4\pi N} \ln Z_{\aest} (\omega,\omb),
   \qquad
-  Z_A(\omega,\omb) = \det \brk{(\omb-A\trans)(\omega-A)}\inv.
+  Z_{\aest} (\omega,\omb) = \det \brk{(\omb-\aest \trans)(\omega-\aest )}\inv.
 \end{equation}
 %
-The problem is now to compute $\av{\ln Z_A(\omega,\omb)}_x$.
+The problem is now to compute $\av{\ln Z_{\aest} (\omega,\omb)}_x$.
 
 
 \section{The solution}\label{sec:solution}
@@ -270,22 +272,22 @@ We can fix this by adding $\epsilon^2I$ and letting $\epsilon\to0$ at the end.
 %
 \begin{equation}\label{eq:partfnintz}
 \begin{aligned}
-  Z_A(\omega,\omb) &= \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
-    -z\dg (\omb-A\trans)(\omega-A) z - \epsilon^2 z\dg z} .%\\
+  Z_{\aest} (\omega,\omb) &= \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
+    -z\dg (\omb-\aest \trans)(\omega-\aest ) z - \epsilon^2 z\dg z} .%\\
 %    &=  \int \prod_i\frac{\dz_i\dzb_i}{2\pi} \exp\prn{
-%    -z\dg (xx\trans)\inv x(\omb-U)x\trans x(\omega-U)x\trans (xx\trans)\inv z
+%    -z\dg (xx\trans)\inv x(\omb-\shift)x\trans x(\omega-\shift)x\trans (xx\trans)\inv z
 %    - \epsilon^2 z\dg z}. \\
 \end{aligned}
 \end{equation}
 %
-Looking at the expression \eqref{eq:Aest} for $A$, we make the change of variables $z=(xx\trans)w/P$.
+Looking at the expression \eqref{eq:Aest} for $\aest $, we make the change of variables $z=(xx\trans)w/P$.
 %
 \begin{equation}\label{eq:partfnintw}
 \begin{aligned}
-  Z_A(\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
+  Z_{\aest} (\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi}\e^{-F/P^2}
     \\
   F &=
-     w\dg x(\omb-U\dg)x\trans x(\omega-U)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
+     w\dg x(\omb-\shift\dg)x\trans x(\omega-\shift)x\trans w + \epsilon^2 w\dg xx\trans xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
@@ -293,9 +295,9 @@ We now take advantage of \eqref{eq:compgausslin} by introducing two standard com
 %
 \begin{equation}\label{eq:partfnintwuv}
 \begin{aligned}
-  Z_A(\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
+  Z_{\aest} (\omega,\omb) &= \det\prn{\frac{xx\trans}{P}}^2 \int \prod_i\frac{\dw_i\dwb_i}{2\pi} \av{\e^{\ir F'/P}}_{u,v},\\
   F' &=
-    w\dg x(\omb-U\dg)x\trans u + u\dg x(\omega-U)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
+    w\dg x(\omb-\shift\dg)x\trans u + u\dg x(\omega-\shift)x\trans w + \epsilon w\dg xx\trans v + \epsilon v\dg xx\trans w .%\\
 \end{aligned}
 \end{equation}
 %
@@ -322,9 +324,9 @@ We can now write
 %
 \begin{equation}\label{eq:potwuv}
 \begin{aligned}
-  \av{\ln Z_A(\omega,\omb)}_x =&\,  2\av{\ln\det\prn{\frac{xx\trans}{P}}}_x
+  \av{\ln Z_{\aest} (\omega,\omb)}_x =&\,  2\av{\ln\det\prn{\frac{xx\trans}{P}}}_x
   \\&
-        +\av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A \xi} }_{x} ,
+        +\av{\ln\int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-N(s+t)-\xi\dg A  \xi} }_{x} ,
   \\ \text{where}\quad
   \xi =&\, \begin{pmatrix}
            \rho \\
@@ -334,8 +336,8 @@ We can now write
  \\
   A =&\, -\frac{\ir}{P}
        \begin{pmatrix}
-         0        & \omb-U\dg & \epsilon \\
-         \omega-U & 0            & 0 \\
+         0        & \omb-\shift\dg & \epsilon \\
+         \omega-\shift & 0            & 0 \\
          \epsilon & 0            & 0 \\
        \end{pmatrix},\\
   \av{\xi\xi\dg}_x &=  C = N\begin{pmatrix}
@@ -366,19 +368,19 @@ along with similar ones for $u$ and $v$, to get
 %
 $(C\inv+A)$ IS NON-NORMAL!
 
-As $U$ is unitary, all the blocks in these matrices commute.
+As $\shift$ is unitary, all the blocks in these matrices commute.
 Therefore, we can evaluate the determinant with some help from \cite{silvester2000determinants}.
-Also noting that the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$:
+Also noting that the eigenvalues of $\shift$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$:
 %
 \begin{equation}\label{eq:detsimple}
 \begin{aligned}
   \ln\det(I+CA) &= \ln\det\brk{\frac{1}{\alpha}
        \begin{pmatrix}
-         \alpha           & -\ir r(\omb-U\dg) & -\ir\epsilon r \\
-         -\ir s(\omega-U) & \alpha               & 0 \\
+         \alpha           & -\ir r(\omb-\shift\dg) & -\ir\epsilon r \\
+         -\ir s(\omega-\shift) & \alpha               & 0 \\
          -\ir\epsilon t   & 0                    & \alpha \\
        \end{pmatrix}}\\
-     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2rt + rs(\omb-U\dg)(\omega-U)}{\alpha^2}}\\
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2rt + rs(\omb-\shift\dg)(\omega-\shift)}{\alpha^2}}\\
      &= \sum_{k=0}^{P-1} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-2\pi\ir k/P}) (\omega-\e^{2\pi\ir k/P})} {\alpha^2}}\\
      &= \frac{P}{2\pi} \intd[_0^{2\pi}]{\phi} \ln\brk{ \frac{\alpha^2+\epsilon^2rt + rs (\omb-\e^{-\ir\phi}) (\omega-\e^{\ir\phi})} {\alpha^2}}\\
      &= \frac{P}{2\pi\ir} \int \frac{\dr\zeta}{\zeta} \, \ln \brk{\frac{G(\zeta)}{\alpha^2\zeta}},
@@ -490,7 +492,7 @@ The starting point for this version of the derivation will be \eqref{eq:partfnin
   \begin{aligned}
     \Phi(\omega,\omb) &= \text{const.} + \frac{1}{4\pi N} \av{\ln \widetilde{Z}}_x, \\
     \widetilde{Z} &= \int \prod_i\brk{ \frac{\dw_i\dwb_i}{2\pi} \frac{\du_i\dub_i}{2\pi} \frac{\dv_i\dvb_i}{2\pi} } \e^{-F''}, \\
-    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-U\dg)x\trans u + \epsilon w\dg xx\trans v + (\text{c.c.}) }.
+    F'' &=  u\dg u + v\dg v -\frac{\ir}{P}\brk{ w\dg x(\omb-\shift\dg)x\trans u + \epsilon w\dg xx\trans v + (\text{c.c.}) }.
   \end{aligned}
 \end{equation}
 %
@@ -509,7 +511,7 @@ We index these replicas with $a,b=1,\ldots,n$:
     \Phi(\omega,\omb) &= \frac{1}{4\pi N}  \left.\pdiff{}{n}\av{
        \int \prod_{ia}\brk{ \frac{\dw_{ia}\dwb_{ia}}{2\pi} \frac{\du_{ia}\dub_{ia}}{2\pi} \frac{\dv_{ia}\dvb_{ia}}{2\pi} } \e^{-F'''}
        }_x\right\rvert_{n=0}, \\
-    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-U\dg)x\trans u_a + \epsilon w_a\dg xx\trans v_a + (\text{c.c.}) }.
+    F''' &= \sum_a  u_a\dg u_a + v_a\dg v_a -\frac{\ir}{P}\brk{ w_a\dg x(\omb-\shift\dg)x\trans u_a + \epsilon w_a\dg xx\trans v_a + (\text{c.c.}) }.
   \end{aligned}
 \end{equation}
 %
@@ -559,8 +561,8 @@ where
  \\
   A &= -\frac{\ir}{P}
        \begin{pmatrix}
-         0        & \omb-U\dg & \epsilon \\
-         \omega-U & 0            & 0 \\
+         0        & \omb-\shift\dg & \epsilon \\
+         \omega-\shift & 0            & 0 \\
          \epsilon & 0            & 0 \\
        \end{pmatrix}\otimes I,\\
   \av{\xi\xi\dg}_x &=  C = N I\otimes
@@ -616,18 +618,18 @@ Therefore,
   S(R) = \ln\det R = (n-1)\ln r_0 + \ln(r_0 +n r_1) = n\ln r_0 + \frac{nr_1}{r_0} + \CO(n^2).
 \end{equation}
 %
-The replica symmetric form of $R,S,T$ and the unitarity of $U$ means that all the blocks in \eqref{eq:overlapenergy} commute.
+The replica symmetric form of $R,S,T$ and the unitarity of $\shift$ means that all the blocks in \eqref{eq:overlapenergy} commute.
 Then, according to \cite{silvester2000determinants},
 %
 \begin{equation}\label{eq:detrep}
 \begin{aligned}
   \ln\det(I+CA) &=  \ln\det\brk{\frac{1}{\alpha}
        \begin{pmatrix}
-         \alpha                   & -\ir (\omb-U\dg) \otimes R & -\ir\epsilon I\otimes R \\
-         -\ir (\omega-U)\otimes S & \alpha                        & 0 \\
+         \alpha                   & -\ir (\omb-\shift\dg) \otimes R & -\ir\epsilon I\otimes R \\
+         -\ir (\omega-\shift)\otimes S & \alpha                        & 0 \\
          -\ir\epsilon I\otimes T  & 0                             & \alpha \\
        \end{pmatrix}}\\
-     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2I\otimes RT + (\omb-U\dg)(\omega-U)\otimes RS}{\alpha^2}}.
+     &= \ln\det\brk{\frac{\alpha^2+\epsilon^2I\otimes RT + (\omb-\shift\dg)(\omega-\shift)\otimes RS}{\alpha^2}}.
 \end{aligned}
 \end{equation}
 %
@@ -638,7 +640,7 @@ Note that
 \end{equation}
 %
 and similar for $RT$, so these will have a similar eigenvalue structure to $R$, with the same eigenvectors.
-Also, the eigenvalues of $U$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$.
+Also, the eigenvalues of $\shift$ are $\exp(2\pi\ir k/P)$, with $k\in\Z_P$.
 Therefore:
 %
 \begin{equation}\label{eq:detrepints}
@@ -747,7 +749,47 @@ Solving for $r_0$ is a mess, but we can see that no solutions exist for $r_0<\CO
 Combined with \eqref{eq:repsaddlesol}, this justifies \eqref{eq:saddleOe}.
 
 
+\section{Relation to canonical angles}\label{sec:canonang}
 
+What would happen if we replaced the shift matrix, $\shift$, with some other unitary matrix?
+Looking at \eqref{eq:detsimple} or \eqref{eq:detrepints}, we see that it is only the eigenvalue density of $\shift$ that matters.
+Therefore, any unitary matrix with eigenvalue uniformly distributed around the unit circle would lead the the same eigenvalue distribution for $\aest$.
+Furthermore, following the argument from \eqref{eq:detsimple} to \eqref{eq:phisaddlesimple}, or from \eqref{eq:detrepints} to \eqref{eq:phimaxrep}, we see that the eigenvalue distribution of $\aest$ depends linearly on the eigenvalue density of $\shift$.
+Therefore, if $\shift$ were chosen randomly we would just use the mean eigenvalue distribution of a random unitary matrix.
+As this is uniformly distributed around the unit circle, this would also lead the the same eigenvalue distribution for $\aest$.
+
+Now, let us introduce the singular-value-decomposition of $x$:
+%
+\begin{equation}\label{eq:svd}
+  x = UDV\trans,
+\end{equation}
+%
+where $U$ is an $N\times N$ orthogonal matrix, $D$ is an $N\times N$ diagonal matrix and $V$ is an $N\times P$ row-orthogonal matrix:
+%
+\begin{equation}\label{eq:svdorth}
+  UU\trans = U\trans U = VV\trans = \I.
+\end{equation}
+%
+We can write \eqref{eq:Aest} as
+%
+\begin{equation}\label{eq:Aestsvd}
+\begin{aligned}
+  \aest &= UDV\trans\shift VDU\trans (UDV\trans VDU\trans)\inv \\
+   &= UDV\trans\shift VDU\trans UD^{-2}U\trans \\
+   &= UDV\trans\shift VD\inv U\trans \\
+   &= (UD)(V\trans\shift V)(UD)\inv.
+\end{aligned}
+\end{equation}
+%
+Thus, $\aest$ is similar to $V\trans\shift V$, and therefore has the same eigenvalues.
+Now, $V$ is a random $N\times P$ row-orthogonal matrix.
+If $\shift$ is chosen randomly, $V'=\shift V$ is another random $N\times P$ row-orthogonal matrix, independent of $V$.
+
+We can think of $V$ and $V'$ as basis vectors for $N$-dimensional subspaces of a $P$-dimensional space and $V\trans\shift V=V\trans V'$ as the matrix of inner-products of these vectors.
+The singular values of this matrix are known as the canonical angles.
+They are used in high-dimensional data-analysis and the case of two random, independent subspaces is an important null-model.
+
+In our case, however, we are interested in the eigenvalues, not the singular values.
 
 %\subsection*{Acknowledgements}
 
