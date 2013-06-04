@@ -118,8 +118,8 @@ The estimate of $A$ is then
 where $x^*$ is the pseudoinverse of $x$, \ie $xx^*=I$.
 
 Suppose we attempted this analysis in a situation where there really is no structure,
-\ie when $x(t)$ is white noise.
-Then the true optimal $A$ would be 0.
+\ie when $A=0$ and $x(t)$ is just white noise.
+For large enough $P$, we should get $\aest=0$.
 However, with finite $P$ the estimate \eqref{eq:Aest} will not be zero.
 
 Moreover if $P=N$, generically $x$ will be invertible, so $x^*=x\inv$.
@@ -388,7 +388,7 @@ Also noting that the eigenvalues of $\shift$ are $\exp(2\pi\ir k/P)$, with $k\in
 \end{equation}
 %
 where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
-From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will ie inside the contour.
+From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will lie inside the contour.
 We define:
 %
 \begin{equation}\label{eq:zetainout}
