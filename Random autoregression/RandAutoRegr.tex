@@ -161,7 +161,7 @@ The problem is now to compute $\av{\ln Z_{\aest} (\omega,\omb)}_x$.
 
 \section{The solution}\label{sec:solution}
 
-In \sref{sec:simplederiv} we will present a simplified derivation and in \sref{sec:replicader} we will fill in the gaps and justify the assumptions used in \sref{sec:replicader}.
+In \autoref{sec:simplederiv} we will present a simplified derivation and in \autoref{sec:replicader} we will fill in the gaps and justify the assumptions used in \autoref{sec:simplederiv}.
 The result from \eqref{eq:saddlesol}, with some constant pieces dropped, will be:
 %
 \begin{equation}\label{eq:phisol}
@@ -262,7 +262,7 @@ We will make the following simplifying assumption: at some point, we will treat 
   \av{\ln (\cdots)}_x = \ln\av{\cdots}_x.
 \end{equation}
 %
-We will justify this assumption in \sref{sec:replicader} using the replica trick.
+We will justify this assumption in \autoref{sec:replicader} using the replica trick.
 We will see that, with a replica symmetric ansatz, the saddle point has zero off-diagonal replica overlaps.
 This means that there is no coupling between the replicas so it gives identical results to the annealed calculation.
 
@@ -387,7 +387,7 @@ Also noting that the eigenvalues of $\shift$ are $\exp(2\pi\ir k/P)$, with $k\in
 \end{aligned}
 \end{equation}
 %
-where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
+where the function $G(\zeta)$ is defined in \autoref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
 From \eqref{eq:zpzm}, we know that only one of the zeros of $G(\zeta)$ will lie inside the contour.
 We define:
 %
@@ -416,7 +416,7 @@ Now, if we use the saddle-point approximation of the integrals over $r$, $s$ and
   \Phi(\omega,\omb) = \frac{1}{4\pi} \max_{r,s,t} \brk{ \ln(rst) - s - t -\alpha\ln\prn{\frac{rs\omega}{\alpha^2\zeta_<}}}.
 \end{equation}
 %
-One can show that (see \sref{sec:replicader}, in particular \eqref{eq:repsaddlesol} and \eqref{eq:rOe}) the maximum has
+One can show that (see \autoref{sec:replicader}, in particular \eqref{eq:repsaddlesol} and \eqref{eq:rOe}) the maximum has
 %
 \begin{equation}\label{eq:saddleOe}
   r \sim \CO(\epsilon\inv),
@@ -667,7 +667,7 @@ Therefore:
 \end{aligned}
 \end{equation}
 %
-where the function $G(\zeta)$ is defined in \sref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
+where the function $G(\zeta)$ is defined in \autoref{sec:Gamma}, in particular \eqref{eq:Gammadef}.
 The first integral was computed in \eqref{eq:detsimpleresult}.
 The second can be computed with the residue theorem.
 The integrand has poles at $\zeta\in\brc{0,\zeta_+,\zeta_-}$, with only one of the last two lying inside the contour (see \eqref{eq:zppzm}).
@@ -888,7 +888,7 @@ The change in contours can be undone, as the integrand is analytic in $x$ and $y
 
 \section{Contour integrals for determinants}\label{sec:contourints}
 
-In evaluating determinants in \sref{sec:simplederiv}, we will come across contour integrals of the form
+In evaluating determinants in \autoref{sec:simplederiv}, we will come across contour integrals of the form
 %
 \begin{equation}\label{eq:contourint}
   I(\zeta_\gtrless) = \oint_C \frac{\dr\zeta}{2\pi\ir\,\zeta} \, \ln\prn{\frac{\gamma(\zeta_>-\zeta)(\zeta-\zeta_<)}{\zeta}},
@@ -903,7 +903,7 @@ We choose the branch of the logarithm so that
 %
 and we define $\theta=\arg z$.
 The branch cut at $\zeta=\zeta_>$ will not matter.
-The branch cuts and contour are shown in \fref{fig:contours}(\ref{fig:branches}).
+The branch cuts and contour are shown in \autoref{fig:contours}(\ref{fig:branches}).
 
 \begin{figure}
  \begin{center}
@@ -929,7 +929,7 @@ We write
 \end{equation}
 %
 
-For the first part, we can use the original contour $C$ as in \fref{fig:contours}(\ref{fig:contout}).
+For the first part, we can use the original contour $C$ as in \autoref{fig:contours}(\ref{fig:contout}).
 Using the residue theorem:
 %
 \begin{equation}\label{eq:intout}
@@ -937,7 +937,7 @@ Using the residue theorem:
 \end{equation}
 %
 
-For the second part, we can deform the contour to $C'$ as in \fref{fig:contours}(\ref{fig:contin}):
+For the second part, we can deform the contour to $C'$ as in \autoref{fig:contours}(\ref{fig:contin}):
 %
 \begin{equation}\label{eq:contout}
 C': \quad
@@ -945,7 +945,7 @@ C': \quad
     \zeta &= \epsilon\e^{\ir\phi},                         & \phi &\in [\theta,\theta+2\pi], \\
     \zeta &= x \e^{\ir(\theta+2\pi)},                      & x    &\in [\epsilon,\abs{\zeta_<}-\epsilon], \\
     \zeta &= \zeta_< + \epsilon\e^{\ir\phi},               & \phi &\in [\theta-\pi,\theta+\pi], \\
-    \zeta &= (\abs{\zeta_<}-x) \e^{\ir(\theta+2\pi)},\quad & x    &\in [\epsilon,\abs{\zeta_<}-\epsilon]. \\
+    \zeta &= (\abs{\zeta_<}-x) \e^{\ir\theta},\quad & x    &\in [\epsilon,\abs{\zeta_<}-\epsilon]. \\
   \end{aligned}
 \end{equation}
 %
@@ -980,7 +980,7 @@ Therefore:
 
 \section{The quadratic function \texorpdfstring{$G(\zeta)$}{G(zeta)}}\label{sec:Gamma}
 
-In evaluating determinants in \sref{sec:simplederiv} and \sref{sec:replicader}, we come across the function
+In evaluating determinants in \autoref{sec:simplederiv} and \autoref{sec:replicader}, we come across the function
 %
 \begin{equation}\label{eq:Gammadef}
   G(\zeta) = (\alpha^2+\epsilon^2rt)\zeta + rs(\omb\zeta-1)(\omega-\zeta) = - rs\omb (\zeta-\zeta_+) (\zeta-\zeta_-).
