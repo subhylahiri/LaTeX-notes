@@ -18,34 +18,17 @@
 % **** -----------------------------------------------------------
 \documentclass[12pt]{article}
 % Preamble:
-\usepackage{a4wide}
-\usepackage[centertags]{amsmath}
-\usepackage{amssymb}
-%\usepackage{amsthm}
-\usepackage[sort&compress,numbers]{natbib}
-%\usepackage{citeB}
-\usepackage{ifpdf}
-%\usepackage{graphicx}
-%\usepackage{graphics} for finding documentation only
-%\usepackage{xcolor}
-%\usepackage{pgf}
-\ifpdf
-\usepackage[pdftex,bookmarks]{hyperref}
-\else
-\usepackage[hypertex]{hyperref}
-\fi
+\input{sl_preamble.tex}
 %
 % >> Only for drafts! <<
 \usepackage[notref,notcite]{showkeys}
 % ----------------------------------------------------------------
-\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
-\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
 %\numberwithin{equation}{section}
 %\renewcommand{\baselinestretch}{1.5}
 % ----------------------------------------------------------------
 % New commands etc.
-\input{mydefs.tex}
-\input{newsymb.tex}
+\input{sl_definitions.tex}
+\input{sl_symbols.tex}
 \newcommand{\tloc}{\mathcal{T}}
 \newcommand{\floc}{\mathcal{F}}
 \newcommand{\eloc}{\mathcal{E}}
@@ -61,6 +44,8 @@
 \newcommand{\tc}{\mathcal{T_\mathrm{c}}}
 %\newcommand{\rz}{\rho_0}
 \newcommand{\rc}{\rho_\mathrm{c}}
+\newcommand{\ec}{s_\mathrm{c}}
+\newcommand{\sic}{\sigma_\mathrm{c}}
 \newcommand{\cs}{c_\mathrm{s}}
 \newcommand{\vint}{\int_\Gamma\!\dr^{d-1}x}
 \newcommand{\aint}{\int_{\p\Gamma}\!\!\dr^{d-2}x}
@@ -518,10 +503,12 @@ Therefore, using \eqref{surftherm:eq} and \eqref{rotvelder:eq},
 This means that \eqref{surfbc:eq} and \eqref{surfchbc:eq} reduce to
 %
 \begin{equation}\label{rotsurfbc:eq}
-  \ploc|_{f=0} = \sigma \Theta + (\sigma_E-\sigma)n\cdt a.
+  \ploc|_{f=0} = \sigma \Theta + (\sigma_E-\sigma)n\cdt a = \nabla\cdt(n\sigma),
 \end{equation}
-%
-As the pressure is determined by \eqref{rotsol:eq}, this provides a differential equation that determines allowed positions of surfaces. Demanding that the surface has no conical singularities turns out to provide enough boundary conditions to determine the position of the surface completely (up to discrete choices) in terms of the parameters $\Omega_a$, $T$ and $\mg_i$.
+%\
+where, for tha last expression, we defined $n$ off the surface such that $n\cdt\nabla n=0$, as in \sref{sec:extrinsic}.
+As the pressure is determined by \eqref{rotsol:eq}, this provides a differential equation that determines allowed positions of surfaces. 
+Demanding that the surface has no conical singularities turns out to provide enough boundary conditions to determine the position of the surface completely (up to discrete choices) in terms of the parameters $\Omega_a$, $T$ and $\mg_i$.
 
 \subsection{Thermodynamics of solutions}\label{sec:rottherm}
 
@@ -628,11 +615,11 @@ where $\hat{n}$ is a unit normal vector pointing into the initial fluid and out 
   \dr\brk{\aint\,\sigma}_f= \dvint, \nabla\cdt(\sigma\tilde{n}),
 \end{equation*}
 %
-As the region of integration is already infinitesimal, we can replace $\tilde{n}$ with the vector field $n$ described in \eqref{normoffsurf:eq}, as the difference would be infinitesimal, i.e.\ $\nabla\cdt(\sigma\tilde{n}) \to \sigma\Theta + n\cdt\sigma$.
+As the region of integration is already infinitesimal, we can replace $\tilde{n}$ with the vector field $n$ described in \eqref{normoffsurf:eq}, as the difference would be infinitesimal, i.e.\ $\nabla\cdt(\sigma\tilde{n}) \to \sigma\Theta + n\cdt\nabla\sigma$.
 Making use of \eqref{rotsigmagrad:eq}
 %
 \begin{equation*}
-  \\dr\Phi_f = \dvint\brk{\sigma\Theta + (\sigma_E-\sigma)n\cdt a - \ploc}.
+  \dr\Phi_f = \dvint\brk{\sigma\Theta + (\sigma_E-\sigma)n\cdt a - \ploc}.
 \end{equation*}
 %
 which vanishes due to \eqref{rotsurfbc:eq}.
@@ -659,6 +646,43 @@ We have seen that
 \end{equation}
 %
 and the $\Omega_a$, $T$ and $\mg_i$ are the same as those given by \eqref{rigidrot:eq} and \eqref{rotsol:eq}.
+
+
+
+\section{Determining surface tension from gravity duals}\label{sec:fromgravity}
+
+In this section we will describe how we could determine the surface tension of a fluid with a gravity dual from finite-sized plasmaball solutions, if we had them, similar to how we determine the equation of state of the fluid from black brane solutions.
+
+From \eqref{surftherm:eq}, we see that we only need to find the function $\sigma(\tloc,\ml_i)$.
+We can then determine everything else by differentiating this function.
+Suppose we had gravitational solutions for static, spherical plasmaballs.
+Then we would know how the radius of the plasmaball depends on the temperature and chemical potential (maybe only at $\ml_i=0$ for now), $r(\tloc,\ml_i)$, with negative values corresponding to inverted plasmaballs (plasmaholes?).
+For these static, spherical plasmaballs, the boundary condition \eqref{rotsurfbc:eq} reduces to
+%
+\begin{equation}\label{eq:staticbc}
+  \ploc = \frac{(d-2)\sigma}{r}.
+\end{equation}
+%
+Since we already know the functions $\ploc(\tloc,\ml_i)$ and $r(\tloc,\ml_i)$, this determines $\sigma(\tloc,\ml_i)$.
+
+This would be most useful if we could handwave our way to the general functional form, with a few constants to be determined from gravity, much like we do for the equation of state for the AdS-soliton plasma.
+We can determine two of these constants from what we already know.
+
+At the phase transition, the pressure vanishes (the free energy of the two phases are equal, but the confined phase is $\CO(N^{-2})$ compared to the deconfined phase).
+From \eqref{inttherm:eq}, near the transition temperature, $\tc$,
+%
+\begin{equation}\label{eq:neartc}
+  \ploc \sim \ec(\tloc-\tc) = \frac{\rc}{\tc}(\tloc-\tc).
+\end{equation}
+%
+Then we find that the radius behaves as
+%
+\begin{equation}\label{eqradiustc}
+  r \sim \prn{\frac{\sic\tc}{\rc}}\frac{d-2}{\tloc-\tc}, 
+\end{equation}
+%
+where the combination $\frac{\sic\tc}{\rc}$ id precisely what was determined in \cite{Aharony:2005bm}.
+Thus we know both the location of a pole in the radius function and its residue.
 
 
 
