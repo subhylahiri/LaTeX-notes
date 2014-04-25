@@ -1,0 +1,210 @@
+% ----------------------------------------------------------------
+% Article Class (This is a LaTeX2e document)  ********************
+% ----------------------------------------------------------------
+\documentclass[12pt]{article}
+\input{sl_preamble.tex}
+\input{sl_definitions.tex}
+\input{sl_symbols.tex}
+% ----------------------------------------------------------------
+\newcommand{\inv}{^{-1}}
+\newcommand{\invsq}{^{-2}}
+% ----------------------------------------------------------------
+
+\begin{document}
+
+\title{Extrinsic curvature for higher codimension}%
+\author{Subhaneil Lahiri}%
+%\address{Stanford University}%
+%\thanks{}%
+%\date{}%
+% ----------------------------------------------------------------
+\maketitle
+\begin{abstract}
+  We define scalar measures of local extrinsic curvature and scale invariant measures of global extrinsic curvature for submanifolds of $\R^n$.
+\end{abstract}
+% ----------------------------------------------------------------
+
+\section{Fundamental forms (abstract)}\label{sec:fundforms}
+
+Let $\CM$ be a submanifold of $\R^n$m and $m_1,m_2$ are points in $\CM$.
+The Grassmannian ``distance'' between these two points, $D_{III}(m_1,m_2)$, is (the sine of?) the largest principal angle between the tangent planes $T_{m_1}\CM$ and $T_{m_2}\CM$, regarded as subspaces of $T_{m_i}\R^n = \R^n$.
+This is a nonlocal measure of extrinsic curvature.
+It is related to a local measure of extrinsic curvature, the third fundamental form \cite{clarkson2008tighter}:
+%
+\begin{equation}\label{eq:grassmannian_dist}
+  D_{III}(m_1,m_2) = \int \!\!\! \sqrt{K(u(t),u(t))} \, \dr t,
+\end{equation}
+%
+where $u(t)$ is the tangent vector to the ``shortest'' path $m(t)$ from $m_1$ to $m_2$.
+
+The first fundamental form of $\CM$ is the induced metric:
+%
+\begin{equation}\label{eq:first_fund}
+  h(u,v) = \av{u,v}_\CM = \av{U,V}_{\R^n},
+\end{equation}
+%
+where $u,v$ are tangent vectors to $\CM$, $\av{\;,\;}_\CM$ is the inner product on $T_{m}\CM$, $U,V$ are the push-forwards of $u,v$ to $\R^n$ and $\av{\;,\;}_{\R^n}$ is the inner product on $\R^n$.
+The first fundamental form maps two tangent vectors of $\CM$ to a scalar.
+
+The (vector valued) second fundamental form and shape operators are defined as \cite{gallot1990riemannian}
+%
+\begin{equation}\label{eq:second fund}
+  S(u,v) = \widetilde{D}_U V - D_U V,
+  \qquad \av{S(u),v}_\CM = S(u,v), 
+\end{equation}
+%
+where $\widetilde{D}$ and $D$ are the covariant derivatives on $\R^n$ and $\CM$ respectively.
+ Wehave used the same letter for the second fundamental form and the shape operators to conserve alphabetical resources, they can be distinguished by the number of arguments.
+The second fundamental form maps two tangent vectors of $\CM$ to a tangent vector of $\R^n$.
+The shape operator maps one tangent vectors of $\CM$ to an object that is both a tangent vectors of $\CM$ and a tangent vector of $\R^n$.
+
+The third fundamental form is defined by \cite{Eschenburg2010228}
+%
+\begin{equation}\label{eq:third fund}
+  K(u,v) =  \av{ \av{S(u),S(v)}_\CM }_{\R^n}.
+\end{equation}
+%
+It maps two tangent vectors of $\CM$ to a scalar.
+
+
+\section{Constructing extrisic curvatures (concrete)}\label{sec:scalarcurv}
+
+Let $x^i$, $i=1 \ldots n$, be cartesian coordinates on $\R^n$.
+Let $\sigma^\alpha$ , $\alpha=1 \dots d$, be coordinates on $\CM$.%
+\footnote{For us, $\sigma$ parameterise translations of the image and $x$ could represent pixel values or neuron outputs.}
+As $\CM$ is not necessarily Euclidean, we will have to distinguish covariant indices (subscripts) from contravariant indices (superscripts) for Greek letters.
+We need not make this distinction for roman letters, but we will use superscripts to keep them out of the way.
+We also use the Einstein summation convention, where there is implicit summation over indices that appear twice on the same side of any equation.
+
+We parameterise $\CM$ as
+%
+\begin{equation}\label{eq:embedding}
+  \begin{aligned}
+  x^i &= \phi^i(\sigma), &
+    \qquad &\text{with} \qquad &
+      \phi^i_\alpha &= \pdiff{\phi^i}{\sigma^\alpha}, \\ 
+    &&&\text{and}&
+      \phi^i_{\alpha\beta} &=  \pdiff{{}^2\phi^i}{\sigma^\alpha\p\sigma^\beta}.
+  \end{aligned}
+\end{equation}
+%
+We can use $\phi^i_\alpha$ to push-forward vectors and pull back forms.
+
+We denote the units of $x$ and $\sigma$ by $[x]$ and $[\sigma]$ respectively.
+Then
+%
+\begin{equation}\label{eq:phiunits}
+  \brk{\phi^i} = [x],
+  \qquad
+  \brk{\phi^i_\alpha} = [x][\sigma]\inv,
+  \qquad
+  \brk{\phi^i_{\alpha\beta}} = [x][\sigma]\invsq.
+\end{equation}
+%
+This tells us how these quantities would scale if we were to rescale $x$ or $\sigma$.
+
+The induced metric and its matrix-inverse are:
+%
+\begin{equation}\label{eq:inducedmet}
+\begin{aligned}
+  h_{\alpha\beta} &= \phi^i_\alpha \phi^i_\beta, \qquad&
+  h^{\alpha\beta} &= \prn{h_{\alpha\beta}}\inv, \\
+  \brk{h_{\alpha\beta}} &= [x]^2[\sigma]\invsq, \qquad&
+  \brk{h^{\alpha\beta}} &= [x]\invsq[\sigma]^2. \\
+\end{aligned}
+\end{equation}
+%
+The inverse metric can be pushed-forward to $\R^n$:
+%
+\begin{equation}\label{eq:proj}
+  h^{ij} = \phi^i_\alpha \phi^j_\beta \, h^{\alpha\beta}, \qquad
+  \tilde{h}^{ij} = \delta^{ij} - h^{ij}, \qquad
+  \brk{h^{ij}} = \brk{ \tilde{h}^{ij}} = 1.
+\end{equation}
+%
+These are the orthogonal projection operators parallel and perpendicular to $T_m\CM$ respectively.
+
+The second fundamental form is given by:
+%
+\begin{equation}\label{eq:extcurvtensor}
+  S^i_{\alpha\beta} = \phi^i_{\alpha\beta} - \Gamma^\gamma_{\alpha\beta} \, \phi^i_\gamma
+                    = \tilde{h}^{ij} \, \phi^j_{\alpha\beta},
+  \qquad
+  \brk{S^i_{\alpha\beta}} = [x][\sigma]\invsq,
+\end{equation}
+%
+where $\Gamma^\gamma_{\alpha\beta}$ are the Christoffel symbols for the covariant derivative on $|CM$.
+
+The third fundamental form is given by:
+%
+\begin{equation}\label{eq:grassmet}
+  K_{\alpha\beta} = h^{\gamma\delta} \,  S^i_{\alpha\gamma} S^i_{\beta\delta}
+                  = h^{\gamma\delta} \, \tilde{h}^{ij} \, \phi^i_{\alpha\gamma} \phi^j_{\beta\delta}
+  \qquad
+  \brk{K_{\alpha\beta}}=[\sigma]\invsq.
+\end{equation}
+%
+If we use the special coordinate system of \cite[Appendix B]{clarkson2008tighter}, we get
+%
+\begin{equation}\label{eq:specialcoord}
+  \sigma^\alpha = x^\alpha, \quad \alpha=1\ldots d,
+  \qquad \implies \qquad
+  K_{\alpha\beta} = \sum_{i=d+1}^n \sum_{\gamma=1}^d \phi^i_{\alpha\gamma} \phi^i_{\beta\gamma},
+\end{equation}
+%
+in agreement with the expression therein.
+The Grassmanian distance between two points is
+%
+\begin{equation}\label{eq:grass_dist_explicit}
+  D_{III}(\sigma_1,\sigma_2) = \int\!\!\! \sqrt{K_{\alpha\beta} \, \dot{\sigma}^\alpha(t)\dot{\sigma}^\beta(t)}\, \dr t,
+\end{equation}
+%
+where $\sigma(t)$ is the ``shortest'' path connecting $\sigma_1$ and $\sigma_2$
+
+If we think of $K_{\alpha\beta}$ as a linear operator, it maps vectors to covectors.
+Therefore, it does not make sense to talk of its eigenvalues, as they would be coordinate dependent quantities.
+Instead, consider
+%
+\begin{equation}\label{eq:curvop}
+\begin{aligned}
+  K^\alpha\dn{\beta} &= h^{\alpha\gamma}K_{\gamma\beta},  &
+  K &= K^\alpha\dn{\alpha}, \\
+  K^\alpha\dn{\beta} \, u^\beta_{(a)} &= \lambda^{(a)}_K \, u^\alpha_{(a)}, \qquad &
+  \brk{K^\alpha\dn{\beta}} &= \brk{K} = \brk{\lambda^{(a)}_K} = [x]\invsq.
+\end{aligned}
+\end{equation}
+%
+Under a coordinate change, $K^\alpha\dn{\beta}$ undergoes a similarity transform.
+Therefore, the eigenvalues, $\lambda^{(a)}_K$, are scalars.
+
+we can use the square roots of the determinants of the first and third fundamental forms to construct invariant measures for integration over $\CM$.
+They have units:
+%
+\begin{equation}\label{eq:measure units}
+  \brk{\sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma} = [x]^d,
+  \qquad
+  \brk{\sqrt{\det K_{\alpha\beta}} \, \dr^d \sigma} = 1.
+\end{equation}
+%
+We can then construct the following global,, coordinate-invariant, dimensionless measures of extrinsic curvature:
+%
+\begin{equation}\label{eq:globalextr}
+\begin{aligned}
+  K_{(a)} &= \int_\CM \prn{\lambda^{(a)}_K}^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
+  K_{\tr} &= \int_\CM K^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma
+         = \int_\CM \prn{\sum_a \lambda^{(a)}_K}^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
+  K_{\det} &= \int_\CM \sqrt{\det K_{\alpha\beta}} \, \dr^d \sigma
+         = \int_\CM \prn{\prod_a \lambda^{(a)}_K}^{1/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma. \\
+\end{aligned}
+\end{equation}
+%
+For our case of $d=2$, the second line is the sum of the first line over $a$.
+For higher dimensional manifolds, one could come up with many other ways of combining eigenvalues in the integral.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{utcaps_sl}
+\bibliography{maths}
+
+\end{document}
+% ----------------------------------------------------------------
