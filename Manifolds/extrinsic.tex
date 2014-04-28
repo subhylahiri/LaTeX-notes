@@ -2,6 +2,7 @@
 % Article Class (This is a LaTeX2e document)  ********************
 % ----------------------------------------------------------------
 \documentclass[12pt]{article}
+\usepackage{a4wide}
 \input{sl_preamble.tex}
 \input{sl_definitions.tex}
 \input{sl_symbols.tex}
@@ -26,8 +27,8 @@
 
 \section{Fundamental forms (abstract)}\label{sec:fundforms}
 
-Let $\CM$ be a submanifold of $\R^n$m and $m_1,m_2$ are points in $\CM$.
-The Grassmannian ``distance'' between these two points, $D_{III}(m_1,m_2)$, is (the sine of?) the largest principal angle between the tangent planes $T_{m_1}\CM$ and $T_{m_2}\CM$, regarded as subspaces of $T_{m_i}\R^n = \R^n$.
+Let $\CM$ be a submanifold of $\CN$ and let $m_1,m_2$ be points in $\CM$.
+When $\CN=\R^n$, the Grassmannian ``distance'' between these two points, $D_{III}(m_1,m_2)$, is (the sine of?) the largest principal angle between the tangent planes $T_{m_1}\CM$ and $T_{m_2}\CM$, regarded as subspaces of $T_{m_1}\CN = T_{m_2}\CN = \R^n$.
 This is a nonlocal measure of extrinsic curvature.
 It is related to a local measure of extrinsic curvature, the third fundamental form \cite{clarkson2008tighter}:
 %
@@ -40,28 +41,28 @@ where $u(t)$ is the tangent vector to the ``shortest'' path $m(t)$ from $m_1$ to
 The first fundamental form of $\CM$ is the induced metric:
 %
 \begin{equation}\label{eq:first_fund}
-  h(u,v) = \av{u,v}_\CM = \av{U,V}_{\R^n},
+  h(u,v) = \av{u,v}_\CM = \av{U,V}_{\CN},
 \end{equation}
 %
-where $u,v$ are tangent vectors to $\CM$, $\av{\;,\;}_\CM$ is the inner product on $T_{m}\CM$, $U,V$ are the push-forwards of $u,v$ to $\R^n$ and $\av{\;,\;}_{\R^n}$ is the inner product on $\R^n$.
+where $u,v$ are tangent vectors to $\CM$, $\av{\;,\;}_\CM$ is the inner product on $T_{m}\CM$, $U,V$ are the push-forwards of $u,v$ to $\CN$ and $\av{\;,\;}_{\CN}$ is the inner product on $T_{m}\CN$.
 The first fundamental form maps two tangent vectors of $\CM$ to a scalar.
 
-The (vector valued) second fundamental form and shape operators are defined as \cite{gallot1990riemannian}
+The (vector-valued) second fundamental form and shape operators are defined as \cite[\S V.A]{gallot1990riemannian}
 %
 \begin{equation}\label{eq:second fund}
   S(u,v) = \widetilde{D}_U V - D_U V,
-  \qquad \av{S(u),v}_\CM = S(u,v), 
+  \qquad \av{S(u),v}_\CM = S(u,v),
 \end{equation}
 %
-where $\widetilde{D}$ and $D$ are the covariant derivatives on $\R^n$ and $\CM$ respectively.
- Wehave used the same letter for the second fundamental form and the shape operators to conserve alphabetical resources, they can be distinguished by the number of arguments.
-The second fundamental form maps two tangent vectors of $\CM$ to a tangent vector of $\R^n$.
-The shape operator maps one tangent vectors of $\CM$ to an object that is both a tangent vectors of $\CM$ and a tangent vector of $\R^n$.
+where $\widetilde{D}$ and $D$ are the covariant derivatives on $\CN$ and $\CM$ respectively.
+We have used the same letter for the second fundamental form and the shape operators to conserve alphabetical resources, they can be distinguished by the number of arguments.
+The second fundamental form maps two tangent vectors of $\CM$ to a tangent vector of $\CN$.
+The shape operator maps one tangent vectors of $\CM$ to an object that is both a tangent vectors of $\CM$ and a tangent vector of $\CN$ (perpendicular to $T_m\CM$).
 
 The third fundamental form is defined by \cite{Eschenburg2010228}
 %
 \begin{equation}\label{eq:third fund}
-  K(u,v) =  \av{ \av{S(u),S(v)}_\CM }_{\R^n}.
+  K(u,v) =  \av{ \av{S(u),S(v)}_\CM }_{\CN}.
 \end{equation}
 %
 It maps two tangent vectors of $\CM$ to a scalar.
@@ -82,13 +83,13 @@ We parameterise $\CM$ as
   \begin{aligned}
   x^i &= \phi^i(\sigma), &
     \qquad &\text{with} \qquad &
-      \phi^i_\alpha &= \pdiff{\phi^i}{\sigma^\alpha}, \\ 
+      \phi^i_\alpha &= \pdiff{\phi^i}{\sigma^\alpha}, \\
     &&&\text{and}&
       \phi^i_{\alpha\beta} &=  \pdiff{{}^2\phi^i}{\sigma^\alpha\p\sigma^\beta}.
   \end{aligned}
 \end{equation}
 %
-We can use $\phi^i_\alpha$ to push-forward vectors and pull back forms.
+We can use $\phi^i_\alpha$ to push-forward vectors and pull-back forms.
 
 We denote the units of $x$ and $\sigma$ by $[x]$ and $[\sigma]$ respectively.
 Then
@@ -122,7 +123,7 @@ The inverse metric can be pushed-forward to $\R^n$:
   \brk{h^{ij}} = \brk{ \tilde{h}^{ij}} = 1.
 \end{equation}
 %
-These are the orthogonal projection operators parallel and perpendicular to $T_m\CM$ respectively.
+These are the orthogonal projection operators parallel and perpendicular to the tangent plane of $\CM$ respectively.
 
 The second fundamental form is given by:
 %
@@ -133,7 +134,7 @@ The second fundamental form is given by:
   \brk{S^i_{\alpha\beta}} = [x][\sigma]\invsq,
 \end{equation}
 %
-where $\Gamma^\gamma_{\alpha\beta}$ are the Christoffel symbols for the covariant derivative on $|CM$.
+where $\Gamma^\gamma_{\alpha\beta}$ are the Christoffel symbols for the covariant derivative on $\CM$.
 
 The third fundamental form is given by:
 %
@@ -153,16 +154,22 @@ If we use the special coordinate system of \cite[Appendix B]{clarkson2008tighter
 \end{equation}
 %
 in agreement with the expression therein.
-The Grassmanian distance between two points is
+The Grassmanian distance between two points, \ie (the sine of?) the largest principal angle between the tangent planes to $\CM$ at $\sigma_1$ and $\sigma_2$, is given by
 %
 \begin{equation}\label{eq:grass_dist_explicit}
-  D_{III}(\sigma_1,\sigma_2) = \int\!\!\! \sqrt{K_{\alpha\beta} \, \dot{\sigma}^\alpha(t)\dot{\sigma}^\beta(t)}\, \dr t,
+\begin{aligned}
+  D_{III}(\sigma_1,\sigma_2) &= \int\!\!\! \sqrt{K_{\alpha\beta} \, \dot{\sigma}^\alpha(t)\dot{\sigma}^\beta(t)}\, \dr t %  \\
+%  &\sim \cos\inv\prn{\min\brc{\operatorname{SVD}\prn{h^{\alpha\gamma}\phi^i_\gamma(\sigma_1)\phi^i_\beta(\sigma_2)}}},
+%  \\
+\qquad
+  \brk{D_{III}}&=1,
+\end{aligned}
 \end{equation}
 %
-where $\sigma(t)$ is the ``shortest'' path connecting $\sigma_1$ and $\sigma_2$
+where $\sigma(t)$ is the ``shortest'' path from $\sigma_1$ to $\sigma_2$.
 
 If we think of $K_{\alpha\beta}$ as a linear operator, it maps vectors to covectors.
-Therefore, it does not make sense to talk of its eigenvalues, as they would be coordinate dependent quantities.
+Therefore, it does not make sense to talk of its eigenvalues as they would be coordinate dependent quantities.
 Instead, consider
 %
 \begin{equation}\label{eq:curvop}
@@ -175,9 +182,18 @@ Instead, consider
 \end{equation}
 %
 Under a coordinate change, $K^\alpha\dn{\beta}$ undergoes a similarity transform.
-Therefore, the eigenvalues, $\lambda^{(a)}_K$, are scalars.
+Therefore, the eigenvalues, $\lambda^{(a)}_K$, are scalars, as is $K$, their sum.
+In the $d=2$, $n=3$ case, the Gaussian curvature is equal to
+%
+\begin{equation}\label{eq:gausscurv}
+  \bar{K} = \sqrt{\frac{\det K_{\alpha\beta}}{\det h_{\alpha\beta}}} = \sqrt{\det K^\alpha\dn{\beta}} = \sqrt{\prod_a \lambda^{(a)}_K},
+  \qquad
+  \brk{\bar{K}} = [x]^{-d}.
+\end{equation}
+%
+This is also a scalar, as the numerator and denominator both transform with the square of the jacobian determinant under a coordinate change.
 
-we can use the square roots of the determinants of the first and third fundamental forms to construct invariant measures for integration over $\CM$.
+We can use the square roots of the determinants of the first and third fundamental forms to construct invariant measures for integration over $\CM$.
 They have units:
 %
 \begin{equation}\label{eq:measure units}
@@ -186,20 +202,22 @@ They have units:
   \brk{\sqrt{\det K_{\alpha\beta}} \, \dr^d \sigma} = 1.
 \end{equation}
 %
-We can then construct the following global,, coordinate-invariant, dimensionless measures of extrinsic curvature:
+We can then construct the following global, coordinate-invariant, dimensionless measures of extrinsic curvature:
 %
 \begin{equation}\label{eq:globalextr}
 \begin{aligned}
-  K_{(a)} &= \int_\CM \prn{\lambda^{(a)}_K}^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
-  K_{\tr} &= \int_\CM K^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma
-         = \int_\CM \prn{\sum_a \lambda^{(a)}_K}^{d/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
+  K_{(a)} &= \int_\CM \prn{\lambda^{(a)}_K}^{\frac{d}{2}} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
+  K_{\tr} &= \int_\CM K^{\frac{d}{2}} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma
+         = \int_\CM \prn{\sum_a \lambda^{(a)}_K}^{\frac{d}{2}} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma, \\
   K_{\det} &= \int_\CM \sqrt{\det K_{\alpha\beta}} \, \dr^d \sigma
-         = \int_\CM \prn{\prod_a \lambda^{(a)}_K}^{1/2} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma. \\
+         = \int_\CM \prn{\prod_a \lambda^{(a)}_K}^{\half} \sqrt{\det h_{\alpha\beta}} \, \dr^d \sigma. \\
 \end{aligned}
 \end{equation}
 %
 For our case of $d=2$, the second line is the sum of the first line over $a$.
 For higher dimensional manifolds, one could come up with many other ways of combining eigenvalues in the integral.
+The third line can be thought of as the Grassmannian volume of the submanifold.
+The fact that these quantities are dimensionless means that they are invariant under rescaling of $x$ and $\sigma$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
