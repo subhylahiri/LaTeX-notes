@@ -1,0 +1,499 @@
+% -*- TeX -*- -*- UK -*-
+% ----------------------------------------------------------------
+% !TEX program = pdflatex
+% !BIB program = bibtex
+% **** -----------------------------------------------------------
+\documentclass[11pt]{article}
+% Preamble:
+\usepackage[margin=1.5in]{geometry}
+\usepackage[UKenglish]{babel}
+\usepackage[draft]{sl-preamble}
+%
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\numberwithin{equation}{section}
+%\renewcommand{\baselinestretch}{1.5}
+% ----------------------------------------------------------------
+\crefname{assump}{assumption}{assumptions}
+\Crefname{assump}{Assumption}{Assumptions}
+\crefalias{enumi}{assump}
+% New commands etc.
+%
+\newcommand{\invd}{^{-\dag}}
+\newcommand{\invt}{^{-\mathrm{T}}}
+\newcommand{\invc}{^{-\ast}}
+\newcommand{\Gammab}{\boldsymbol{\Gamma}}
+\newcommand{\Gammap}[1][\mu]{\prn{\Gammab^{#1}}}
+\newcommand{\mud}{{\mu\dag}}
+\newcommand{\mut}{{\mu\mathrm{T}}}
+\newcommand{\muc}{{\mu\ast}}
+\renewcommand{\S}{\mathbf{S}}
+\newcommand{\T}{\mathbf{T}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\renewcommand{\C}{\mathbf{C}}
+\newcommand{\At}{\widetilde{\mathbf{A}}}
+\newcommand{\Bt}{\widetilde{\mathbf{B}}}
+\newcommand{\Ct}{\widetilde{\mathbf{C}}}
+\newcommand{\Cb}{\mathbb{C}}
+\newcommand{\sigmab}{\boldsymbol{\sigma}}
+\newcommand{\psib}{\boldsymbol{\psi}}
+%
+%================================================================================
+\begin{document}
+%================================================================================
+\title{Spinors in many dimensions}
+\author{Subhaneil Lahiri}
+\date{}
+\maketitle
+%================================================================================
+
+We're looking at representations of the Clifford algebra --- a set of matrices $\Gammab^\mu$, $\mu = 1, ..., d$, that satisfy:
+%
+\begin{equation}\label{eq:clifford}
+  \brc{ \Gammab^\mu, \Gammab^\nu } = \eta^{\mu\nu} \I,
+\end{equation}
+%
+where $\brc{ \A, \B } = \A\B + \B\A$ is the anticommutator and $\eta_{\mu\nu}$ is the Minkowski metric with diagonal elements $+1$ for $\mu \leq p$ and $-1$ for $\mu > p$. We also define $q = d - p$.
+
+Given one representation $\Gammab^\mu$, we can construct another, $\Gammab'^{\mu}$, using a similarity transform with some invertible matrix $\S$:
+%
+\begin{equation}\label{eq:similarity}
+  \Gammab'^{\mu} = \S\inv \Gammab^\mu \S.
+\end{equation}
+%
+We can then talk about similarity classes of representations.
+
+We make use of the following statements without justification:
+%
+\begin{enumerate}
+  \item When $d$ is even, there is one similarity class of irreps with dimension $2^{ \frac{d}{2} }$. \label{it:even}
+  \item When $d$ is odd, t here are two similarity class of irreps of dimension $2^{ \frac{d-1}{2} }$. \label{it:odd}
+  \item When $d$ is odd, given a representation $\brc{\Gammab^\mu}$, the representation formed by $\brc{ -\Gammab^\mu }$ lies in the other similarity class. \label{it:oddchi}
+  \item Any matrix that commutes with all of the $\Gammab^\mu$ must be proportional to the identity (otherwise its eigenspaces would be invariant subspaces). \label{it:commute}
+\end{enumerate}
+
+We use the notation $\floor{x}$ for the floor function: rounding down to the nearest integer.
+The dimensionality of the representations is then $2^{ \floor{ \frac{d}{2} } }$.
+
+\Cref{it:commute} implies that whenever two similarity transforms have the same effect, they must be proportional to each other:
+%
+\begin{equation}\label{eq:simsim}
+  \S\inv \Gammab^\mu \S = \T\inv \Gammab^\mu \T
+  \qquad
+  \begin{aligned}[t]
+     &\implies &
+     \prn{\T \S\inv} \Gammab^\mu &= \Gammab^\mu \prn{\T \S\inv}, \\
+     &\implies &
+     \T \S\inv &= \lambda \I, \\
+     &\implies &
+     \T &= \lambda \S.
+  \end{aligned}
+\end{equation}
+%
+The converse is also clearly true --- two matrices that are proportional to each other produce the same similarity transform.
+
+%-------Section------------------------------------------------------------------
+
+\section{Chirality, charge conjugation, \etc matrices}\label{sec:ccmats}
+
+
+If we have a representation $\brc{\Gammab^\mu}$ we can construct more representations with $\brc{-\Gammab^\mu}$, $\brc{\Gammab^\mud}$, $\brc{-\Gammab^\mud}$, $\brc{\Gammab^\muc}$, $\brc{-\Gammab^\muc}$, $\brc{\Gammab^\mut}$ and $\brc{-\Gammab^\mut}$.
+When $d$ is even, \cref{it:even} implies that these representations are similar to the original one.
+This means we can find matrices such that
+%
+\begin{equation}\label{eq:cccmats}
+\begin{aligned}
+  \Gammab\inv \Gammab^\mu \Gammab &= -\Gammab^\mu, &\quad
+  \A  \Gammab^\mu \A\inv  &=  \Gammab^\mud, &\quad
+  \At \Gammab^\mu \At\inv &= -\Gammab^\mud, \\ &&
+  \B\inv  \Gammab^\mu \B  &=  \Gammab^\muc, &
+  \Bt\inv \Gammab^\mu \Bt &= -\Gammab^\muc, \\ &&
+  \C  \Gammab^\mu \C\inv  &=  \Gammab^\mut, &
+  \Ct \Gammab^\mu \Ct\inv &= -\Gammab^\mut.
+\end{aligned}
+\end{equation}
+%
+Some of these matrices have names: $\Gammab$ is called the chirality matrix, either $\C$ or $\Ct$ is usually called the charge conjugation matrix, but that name would be more appropriate for $\B$ or $\Bt$.
+Note that these matrices have only been defined up to an overall scalar multiple, as in \cref{eq:simsim}.
+We will fix some of this ambiguity with normalisation conditions below.
+We have also defined $\A,\At,\C,\Ct$ in the opposite way to $\Gammab,\B,\Bt$.
+This is convenient due to the way that transposing reverses products.
+
+When $d$ is odd, \cref{it:odd,it:oddchi} imply that $\Gammab$ does not exist and exactly one of each pair $(\A, \At)$, $(\B, \Bt)$, $(\C, \Ct)$, will exist.
+The statements in the rest of this section should be prefaced with ``assuming that the matrices exist...''.
+
+These transforms are all idempotent.
+This means we can perform them twice to derive new identities:
+%
+\begin{equation*}
+\begin{gathered}
+\begin{alignedat}{5}
+  \Gammab^\mu &= -(-\Gammab^\mu) &
+        &= -(\Gammab\inv \Gammab^\mu \Gammab) &
+        &= \Gammab\inv (-\Gammab^\mu) \Gammab \\ && &&
+        &= \Gammab\invsq \Gammab^\mu \Gammab^2 &\quad
+  &\implies &
+  \Gammab^2 &= \gamma \I, \\
+  \Gammab^\mu &= \Gammap[\mud]^\dag &
+        &= (\A \Gammab^\mu \A\inv)^\dag &
+        &= \A\invd \Gammab^\mud \A^\dag \\ && &&
+%        &= \A\invd \A \Gammab^\mu \A\inv \A^\dag &
+        &= (\A\inv \A^\dag)\inv \Gammab^\mu \A\inv \A^\dag &
+  &\implies &
+  \A\inv \A^\dag &= \alpha \I,
+\end{alignedat} \\
+\begin{aligned}
+  \mathclap{\text{similarly:}} &&\qquad
+  \B \B^\ast &= \beta \I, &\qquad
+  \C\inv \C\trans &= \chi \I, \\
+  \At\inv \At^\dag &= \tilde{\alpha} \I, &
+  \Bt \Bt^\ast &= \tilde{\beta} \I, &
+  \Ct\inv \Ct\trans &= \tilde{\chi} \I.
+\end{aligned}
+\end{gathered}
+\end{equation*}
+%
+Wee are free to redefine these matrices as $\Gammab \rightarrow \lambda \Gammab, \A \rightarrow \lambda \A,$ etc.
+Under these redefinitions the scalars above transform as
+%
+\begin{equation*}
+  \gamma \rightarrow \lambda^2 \gamma, \qquad
+  \alpha \rightarrow \frac{\lambda^\ast}{\lambda} \alpha, \qquad
+  \beta \rightarrow \abs{\lambda}^2 \beta, \qquad
+  \chi \rightarrow \chi,
+\end{equation*}
+%
+with similar relations for the tilde versions.
+These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of $\alpha$ but not its magnitude, vice-versa for $\beta$, whereas $\chi$ cannot be changed at all.
+%
+\begin{equation}\label{eq:normscalar}
+  \gamma = 1, \qquad
+  \phase(\alpha) = 0, \qquad
+  \abs{\beta} = 1,
+\end{equation}
+%
+or in terms of the matrices
+%
+\begin{equation}\label{eq:normmats}
+  \Gammab^2 = \I, \qquad
+  \A\inv \A^\dag = \A \A\invd, \qquad
+  \psib^\dag \A\inv \A^\dag \psib \geq 0 \;\; \forall \, \psib, \qquad
+  \B^\ast \B^2 \B^\ast = \I.
+\end{equation}
+%
+Again, the same relations apply to the tilde versions.
+These choices do not completely eliminate the scalar ambiguity.
+For $\Gammab$ we can still use $\lambda = \pm 1$, for $\A$ any $\lambda \in \R$, for $\B$ any $\lambda$ with $\abs{\lambda} = 1$ and for $\C$ any $\lambda \in \Cb$.
+
+The transformations in \cref{eq:cccmats} can also be performed by combining two others in either order.
+We can use these combinations to find more scalars and normalisation conditions.
+First, for $\A,\B,\C$:
+%
+\begin{equation*}
+\begin{alignedat}{5}
+  \Gammab^\mud &= \Gammap[\mut]^\ast &
+    &= \C^\ast \Gammab^\muc \C\invc &
+    &= \C^\ast \B\inv \Gammab^\mu \B \C\invc &
+    &\implies &
+  \C^\ast \B\inv &= f \A, \\
+   &= \Gammap[\muc]\trans &
+    &= \B\trans \Gammab^\mut \B\invt &
+    &= \B\trans \C \Gammab^\mu \C\inv \B\invt &
+    &\implies &
+  \B\trans \C &= \tilde{f} \A. \\
+\end{alignedat}
+\end{equation*}
+%
+We can relate these scalars to the earlier ones as follows
+%
+\begin{equation*}
+\begin{alignedat}{2}
+  \A\inv &= f \B \C\invc &
+    &= \tilde{f} \C\inv \B\invt \\
+  \A^\dag &= \frac{1}{f^\ast} \B\invd \C\trans &
+    &= \frac{1}{\tilde{f}^\ast} \C^\dag \B^\ast.
+\end{alignedat}
+   \implies
+\begin{alignedat}{3}
+  \alpha \I &= \A\inv \A^\dag &
+    &= \frac{\tilde{f}}{f^\ast} \C\inv \B\invt \B\invd \C\trans &
+%      &= \frac{\tilde{f}}{f^\ast \beta} \C\inv \C\trans &
+      &= \frac{\tilde{f} \chi}{f^\ast \beta} \I, \\ &&
+    &= \frac{f}{\tilde{f}^\ast} \B \C\invc \C^\dag \B^\ast &
+%      &= \frac{f \chi^\ast}{\tilde{f}^\ast} \B \B^\ast &
+      &= \frac{f \beta \chi^\ast}{\tilde{f}^\ast} \I.
+\end{alignedat}
+\end{equation*}
+%
+So we have \( \frac{\tilde{f}}{f^\ast} = \frac{\alpha \beta}{\chi} \)
+and \( \frac{f}{\tilde{f}^\ast} = \frac{\alpha}{\beta \chi^\ast} \).
+If we take the complex-conjugate of the second equation and use the choices in \cref{eq:normscalar},
+we find that \( \frac{\tilde{f}}{f^\ast} = \frac{f^\ast}{\tilde{f}} \),
+or \( \tilde{f} = \pm f^\ast \) which implies that $\chi = \pm \alpha \beta$.
+Furthermore, under the $\C \ra \lambda \C$ ambiguity \( f \rightarrow \lambda^\ast f\),
+\(\tilde{f} \rightarrow \lambda \tilde{f} \).
+By choosing $\lambda = 1/\tilde{f}$ we set $f = \pm1$ and $\tilde{f} = 1$.
+%
+\begin{equation}\label{eq:comboABC}
+  \A = \B\trans \C = \pm \C^\ast \B\inv, \qquad
+  \chi = \pm \alpha \beta.
+\end{equation}
+%
+The first relation is a normalisation choice; the second is forced on us by \cref{eq:normscalar}.
+This reduces the scalar ambiguity to simultaneous \( \A \rightarrow r \A \), 
+\( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \) 
+with \( r, \phi \in \R \).
+We can also derive corresponding relations with two of the three matrices/scalars replaced by the tilde versions.
+%
+\begin{equation}\label{eq:ABCtildes}
+\begin{aligned}
+%  \A &= \B\trans \C = \pm \C^\ast \B\inv, &
+  \A &= \Bt\trans \Ct = \pm \Ct^\ast \Bt\inv, &\qquad
+  \At &= \B\trans \Ct = \pm \Ct^\ast \B\inv, &\qquad
+  \At &= \Bt\trans \C = \pm \C^\ast \Bt\inv, \\
+%  {\chi} &= \pm {\alpha} {\beta}, &
+  \tilde{\chi} &= \pm {\alpha} \tilde{\beta}, &
+  \tilde{\chi} &= \pm \tilde{\alpha} {\beta}, &
+  {\chi} &= \pm \tilde{\alpha} \tilde{\beta}.
+\end{aligned}
+\end{equation}
+%
+The signs in each column match.
+The first row contains normalisation choices; the second row is forced on us by \cref{eq:normscalar}.
+For odd $d$ only one of these four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible.
+
+When $d$ is even, the same approach leads to relations between tilde versions, tilde-free versions and $\Gammab$.
+We find 
+%
+\begin{equation}\label{eq:chiraltilde}
+\begin{aligned}
+  \A\inv \A^\dag = \At\inv \At^\dag &= \alpha \I,    &
+  \At &= a \Gammab^\dag \A = \frac{1}{a} \A \Gammab, &
+  \phase(\alpha) &= 0, &
+  \abs{a} &= 1, \\
+  \B \B^\ast = \pm \Bt \Bt^\ast &= \beta \I, &
+  \Bt &= b \Gammab \B = \pm \frac{1}{b} \B \Gammab^\ast,  &
+  \phase(b) &= 0, &
+  \abs{\beta} &= 1, \\
+  \C\inv \C\trans = \pm \Ct\inv \Ct\trans &= \chi \I,    &
+  \Ct &= \Gammab\trans \C = \pm \C \Gammab. &
+%  \A = \B\trans \C &= \pm \C^\ast \B\inv, &
+%  \chi &= \pm \alpha \beta,
+\end{aligned}
+\end{equation}
+%
+The signs across each row match.
+The first column is forced on us by other relations; the other columns contain normalisation choices.
+The remaining scalar ambiguities are multiplying $\Gammab,\At,\Bt,\Ct$ by $\pm1$
+and performing \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
+\( \Ct \rightarrow r\e^{\ir\phi} \Ct \) simultaneously with the transformations of $\A$, $\B$, $\C$ below \cref{eq:comboABC}.
+
+For even $d$ we can derive more relations between these scalars and signs by substituting relations from the second column of \cref{eq:chiraltilde} into \cref{eq:ABCtildes}.
+The overall result is
+%
+\begin{equation}\label{eq:constnorm}
+\begin{gathered}
+\begin{alignedat}{4}
+  \A\inv \A^\dag &= \At\inv \At^\dag &
+        &= \alpha \I, &
+    \At &= s \Gammab^\dag \A &
+        &= s \A \Gammab,
+  \\
+  \B \B^\ast &= s \Bt \Bt^\ast &
+        &= \beta \I, &
+    \Bt &= \Gammab \B &
+        &= s \B \Gammab^\ast,
+  \\
+  \C\inv \C\trans &= s \Ct\inv \Ct\trans &
+        &= \hat{s} \alpha \beta \I, &\qquad
+    \Ct &= \Gammab\trans \C &
+        &= s \C \Gammab,
+  \\
+\end{alignedat}
+\\
+\begin{alignedat}{3}
+  \A &= \B\trans \C &
+        &= \hat{s} \C^\ast \B\inv, &\qquad
+    \Gammab^2 &= \I,
+  \\
+  \A &= \Bt\trans \Ct &
+        &= \hat{s} \Ct^\ast \Bt\inv, &\qquad
+    \A\inv \A^\dag &= \A \A\invd,
+  \\
+  \At &= \B\trans \Ct &
+        &= s \hat{s} \Ct^\ast \B\inv, &\qquad
+    \psib^\dag \A\inv \A^\dag \psib &\geq 0 \;\; \forall \, \psib,
+  \\
+  \At &= \Bt\trans \C &
+        &= s \hat{s} \C^\ast \Bt\inv, &
+    \B^\ast \B^2 \B^\ast &= \I, 
+\end{alignedat}
+\\
+  \text{or}\quad
+  \phase(\alpha) = 0, \qquad
+  \abs{\beta} = 1, \qquad
+  s^2 = \hat{s}^2 = 1.
+  %s s' s'' &= 1.
+\end{gathered}
+\end{equation}
+%
+The first column is forced on us by other relations; the second column contains normalisation choices.
+For odd $d$, on each of the first three rows only one of the two left equations, and none of the right, will exist.
+Only one of the lefts of the last four rows will exist.
+
+In total, we have two undetermined signs $s$, $\hat{s}$, and one undetermined complex number $\alpha \beta$.
+For odd $d$, we can absorb $s$ into $\beta$ or $\hat{s}$.
+
+The remaining scalar ambiguities are multiplying $\Gammab,\At,\Bt,\Ct$ by $\pm1$ (for even $d$ only)
+and simultaneous \( \A \rightarrow r \A \),
+\( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \)
+\( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
+\( \Ct \rightarrow r\e^{\ir\phi} \Ct \) with \( r, \phi \in \R \) (for odd $d$ only half of these will exist).
+
+
+%-------Section------------------------------------------------------------------
+
+\section{Change of basis}\label{sec:basis}
+
+Suppose we make a change of basis for our spinors, described by a similarity transform:
+%
+\begin{equation*}
+  \Gammab'^{\mu} = \S\inv \Gammab^\mu \S.
+\end{equation*}
+%
+This new representation will have its own set of chirality/charge conjugation matrices, as in \cref{eq:cccmats}.
+How are they related to the corresponding matrices for the previous basis?
+
+Lets illustrate one of these calculations
+%
+\begin{equation*}
+\begin{gathered}
+\begin{aligned}
+  \Gammab'^\mud 
+    &= (\S\inv \Gammab^\mu \S)^\dag 
+    = \S^\dag \Gamma^\mud \S\invd 
+    = \S^\dag \A \Gammab^\mu \A\inv \S\invd 
+    = \S^\dag \A \S \Gammab^\mu \S\inv \A\inv \S\invd \\
+    &= (\S^\dag \A \S) \Gammab'^\mu (\S^\dag \A \S)\inv,
+    \qquad \implies \quad 
+    \A' \propto \S^\dag \A \S, 
+\end{aligned}
+\\
+\begin{aligned}
+  \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib 
+    &= \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib  
+     = \psib^\dag \S\inv \A\inv \S\invd \S^\dag \A^\dag \S \psib \\
+    &= \psib^\dag \S\inv \A\inv \A^\dag \S \psib 
+     = \alpha\, \psib^\dag \S\inv \S \psib 
+     = \alpha\, \psib^\dag \psib 
+     \geq 0.
+\end{aligned}
+\end{gathered}
+\end{equation*}
+%
+Once we apply our normalisation condition we find, up to a positive real scalar multiple, 
+\( \A' = \S^\dag \A \S \).
+Similar arguments give us
+%
+\begin{equation}\label{eq:ccctransform}
+\begin{aligned}
+  \Gammab' &= \S\inv \Gammab \S, &
+  \A' &= \S^\dag \A \S, &
+  \B' &= \S\inv \B \S^\ast, &
+  \C' &= \S\trans \C \S, 
+\\ &&
+  \At' &= \S^\dag \At \S, &
+  \Bt' &= \S\inv \Bt \S^\ast, &
+  \Ct' &= \S\trans \Ct \S.
+\end{aligned}
+\end{equation}
+%
+We still have the same ambiguities as at the end of the \hyperref[eq:constnorm]{last section}, but it makes sense to choose \( r \e^{\ir\phi} = 1 \).
+Regardless, we can substitute \cref{eq:ccctransform} into \cref{eq:constnorm} to compute the scalars:
+%
+\begin{equation*}
+  \alpha' = \alpha, \qquad
+  \beta' = \beta, \qquad
+  s' = s, \qquad
+  \hat{s}' = \hat{s}.
+\end{equation*}
+%
+In other words, these scalars are invariant under a change of basis and are constant throughout any similarity class of representations.
+
+Although there are two similarity classes of irreps when $d$ is odd, the same set of $\A/\At$, $\B/\Bt$, $\C/\Ct$ will work for both $\brc{\Gammab^\mu}$ and $\brc{ -\Gammab^\mu }$.
+Therefore \cref{it:oddchi} implies that both classes have the same $\alpha, \beta, s, \hat{s}$.
+
+\Cref{it:even,it:odd} imply that the only thing these constants can depend on is the space-time dimensionality, $p$ and $q$.
+In the \hyperref[sec:explicit]{next section} we will compute these quantities for one specific representation that we will construct.
+The same constants apply to all representations of that dimensionality.
+
+But before that, how should a spinor transform under this change of basis?
+The important thing is that the Dirac equation is covariant:
+%
+\begin{equation*}
+  \ir \Gammab^\mu \partial_\mu \psib = m \psib
+  \qquad \means \qquad
+  \ir \Gammab'^\mu \partial_\mu \psib' = m \psib'.  
+\end{equation*}
+%
+We can construct $\psib'$ as follows
+%
+\begin{equation*}
+\begin{aligned}
+  \ir \Gammab^\mu \partial_\mu \psib &= m \psib &
+  &\implies &
+  \ir \prn{\S \Gammab'^\mu \S\inv} \partial_\mu \psib &= m \psib \\ &&
+  &\implies &
+  \ir \Gammab'^\mu \partial_\mu \prn{\S\inv\psib} &= m \prn{\S\inv\psib} &
+  &\implies &
+  \psib' &= \S\inv \psib.
+\end{aligned}
+\end{equation*}
+%
+This means we have the following transformations:
+%
+\begin{equation}\label{eq:spinorbasis}
+  \psib' = \S\inv \psib, \qquad
+  \psib'^\dag \A' = \psib^\dag \A \S, \qquad
+  \B' \psib'^\ast = \S\inv \B \psib^\ast, \qquad
+  \psib'\transp \C' = \psib\trans \C \S,
+\end{equation}
+%
+and similar for tilde versions.
+Note that $\psib^\dag \psib$ is not an invariant quantity.
+However, with the transformations above, we can construct these invariants:
+%
+\begin{equation}\label{eq:spinorinvt}
+\begin{gathered}
+  \psib^\dag \A \psib, \qquad
+  \psib^\dag \A \B \psib^\ast, \qquad
+  \psib\trans \C \psib, \qquad
+  \psib\trans \C \B \psib^\ast, \qquad
+  \psib^\dag \A \Gammab^\mu \psib, \\
+  \psib^\dag \A \Gammab^\mu \Gammab^\nu \cdots \psib, \qquad
+  \psib^\dag \A \Gammab^\mu \Gammab^\nu \cdots \B \psib^\ast, \qquad
+  \psib\trans \C \Gammab^\mu \Gammab^\nu \cdots \Gammab \psib, \qquad
+  \ldots
+\end{gathered}
+\end{equation}
+%
+The quantity \( \psib^\dag \A \) occurs frequently enough to have its own notation \( \overline{\psib} \equiv \psib^\dag \A \).
+
+
+%-------Section------------------------------------------------------------------
+
+\section{One explicit representation}\label{sec:explicit}
+
+
+ 
+
+
+
+%================================================================================
+\bibliographystyle{utcaps_sl}
+\bibliography{journals,qft,gr,maths}
+%================================================================================
+\end{document}
+
