@@ -897,12 +897,262 @@ These results are summarised in \cref{tab:exist}.
 \end{table}
 
 
- 
+%-------Section------------------------------------------------------------------
+
+\section{Majorana, Weyl and Majorana-Weyl spinors}\label{sec:majoranaweyl}
+
+In general, the spinors that we have constructed are known as Dirac spinors.
+Depending on the dimensionality, it can be useful to split Dirac spinors into some subspaces.
+
+In even-dimensional spaces, we have $\Gammab^2 = \I$, so its eigenvalues are $\pm 1$.
+We can argue that $\tr \Gammab = 0$ using the same reasoning as for the $\Gammab^\mu$.
+Therefore, the two eigenspaces have the same dimensionality, $2^{\floor{d/2}-1}$.
+Members of the +1 eigenspace are called \emph{Weyl} or \emph{chiral spinors}, the -1 eigenspace are anti-chiral spinors.
+Any Dirac spinor can be written as the sum of its chiral and anti-chiral parts:
+%
+\begin{equation}\label{eq:Weylanti}
+  \psib_R \equiv \brkfrac{\I+\Gammab}{2} \psib,
+  \quad
+  \psib_L \equiv \brkfrac{\I-\Gammab}{2} \psib,
+  \qquad
+  \Gammab \psib_R = \psib_R,
+  \quad
+  \Gammab \psib_L = - \psib_L.
+  \quad
+  \psib = \psib_R + \psib_L,
+\end{equation}
+%
+These two subspaces are invariant under the changes of basis considered in \cref{sec:basis}.
+
+Can we impose a reality condition, like $\psib^\ast = \psib$?
+Changes of basis can be complex, so a spinor that is real in one basis will not necessarily be real in another basis.
+The problem comes from the fact that $\psib$ and $\psib^\ast$ transform differently under a change of basis.
+If we want an invariant characterisation of real spinors, we need a version of complex conjugation that transforms the same way.
+From \cref{eq:spinorbasis} we see that this is provided by \emph{charge conjugation}: \( \psib \to \B \psib^\ast \) or \( \Bt \psib^\ast \).
+We will focus on $\B$ below, but our discussion applies equally well to $\Bt$.
+
+But are there any self-conjugate spinors, \ie solutions to the condition \( \psib = \B \psib^\ast \)?
+Let's perform a consistency  check by substituting thus equation into itself
+%
+\begin{equation*}
+  \psib = \B \psib^\ast = \B (\B \psi^\ast)^\ast = \B \B^\ast \psib = \beta \psib.
+\end{equation*}
+%
+Therefore, unless $\beta = 1$ there are no self-conjugate solutions
+(you might try to get around it by using something like \( \psib = \ir \B \psib^\ast \) but, because charge conjugation is anti-linear, it doesn't work).
+Assuming either $\beta$ or $\beta$ is one, do any solutions exist?
+To answer, we can use a doubling trick where we map $\Cb^n \to \R^{2n}$.
+In block matrix format:
+%
+\begin{equation*}
+\begin{gathered}
+  \psib \to \begin{pmatrix}
+              \Re \psib \\
+              \Im \psib \\
+            \end{pmatrix}
+  \equiv    \begin{pmatrix}
+              \psib_r \\
+              \psib_i \\
+            \end{pmatrix}
+  , \qquad
+  \B \to \begin{pmatrix}
+           \Re \B & -\Im \B \\
+           \Im \B &  \Re \B \\
+         \end{pmatrix}
+  \equiv \begin{pmatrix}
+           \B_r & -\B_i \\
+           \B_i &  \B_r \\
+         \end{pmatrix}
+  , \\
+%\begin{aligned}
+  \implies
+  \B \B^\ast \to
+         \begin{pmatrix}
+           \B_r & -\B_i \\
+           \B_i &  \B_r \\
+         \end{pmatrix}
+         \begin{pmatrix}
+            \B_r & \B_i \\
+           -\B_i & \B_r \\
+         \end{pmatrix}
+  =
+         \begin{pmatrix}
+           \B_r^2 + \B_i^2 & [\B_r, \B_i]    \\
+           [\B_i, \B_r]    & \B_r^2 + \B_i^2 \\
+         \end{pmatrix}
+  =
+         \begin{pmatrix}
+           \beta \I   & \mathbf{0} \\
+           \mathbf{0} & \beta \I   \\
+         \end{pmatrix}
+  .
+%\end{aligned}
+\end{gathered}
+\end{equation*}
+%
+Multiplication of these real doubled matrices is equivalent to multiplication of the original complex matrices.
+In this language complex conjugation is a linear operation, so
+%
+\begin{equation*}
+  \B \psib \to
+         \begin{pmatrix}
+           \B_r & -\B_i \\
+           \B_i &  \B_r \\
+         \end{pmatrix}
+         \begin{pmatrix}
+           \I  & \mathbf{0} \\
+           \mathbf{0} & -\I   \\
+         \end{pmatrix}
+         \begin{pmatrix}
+           \psib_r \\
+           \psib_i \\
+         \end{pmatrix}
+  =
+         \begin{pmatrix}
+           \B_r &  \B_i \\
+           \B_i & -\B_r \\
+         \end{pmatrix}
+         \begin{pmatrix}
+           \psib_r \\
+           \psib_i \\
+         \end{pmatrix}.
+\end{equation*}
+%
+Therefore, it comes down to the eigenvalues of the operator in the final expression.
+But
+%
+\begin{equation*}
+    \begin{pmatrix}
+      \B_r &  \B_i \\
+      \B_i & -\B_r \\
+    \end{pmatrix}^2
+  =
+    \begin{pmatrix}
+      \B_r^2 + \B_i^2 & [\B_r, \B_i]    \\
+      [\B_i, \B_r]    & \B_r^2 + \B_i^2 \\
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      \beta \I   & \mathbf{0} \\
+      \mathbf{0} & \beta \I   \\
+    \end{pmatrix}.
+\end{equation*}
+%
+Therefore, when $\beta=1$ the eigenvalues must be $\pm 1$.
+Furthermore, the operator has zero trace, so both eigenspaces have half of the dimensionality of the space.
+If $\beta=-1$ but $\betat=1$, we can use $\Bt$ instead.
+
+Either way, Dirac spinors can be split into their real and imaginary parts
+%
+\begin{equation}\label{eq:majorana}
+  \psib_r = \frac{\psib + \B \psib^\ast}{2},
+  \quad
+  \psib_i = \frac{\psib - \B \psib^\ast}{2\ir},
+  \qquad
+  \psib_r = \B \psib^\ast_r,
+  \quad
+  \psib_i = \B \psib^\ast_i,
+  \quad
+  \psib = \psib_r + \ir \psib_i.
+\end{equation}
+%
+Here both $\psib_r$ and $\psib_i$ are \emph{Majorana spinors}.
+Dirac spinors have $2^{\floor{d/2}}$ \emph{complex dimensions}, so Majorana spinors have $2^{\floor{d/2}}$ \emph{real dimensions}.
+Note that anti-Majorana spinors are just Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor.
+
+If we consult \cref{tab:types}, we see that when \( p-q = 3,4,5 \pmod 8 \), neither $\beta$ nor $\betat$ is one.
+In these cases it is impossible for a spinor to be self-conjugate
+(the doubling trick doesn't help because the eigenvalues are $\pm\ir$, which are matrices in that language, not scalars).
+However, it is possible to group spinors into pairs such that
+%
+\begin{equation}\label{eq:pseudomajorana}
+  \B \psib_1^\ast = \psib_2,
+  \qquad
+  \B \psib_2^\ast = -\psib_1.
+\end{equation}
+%
+This endows spinors with a symplectic structure, like phase space in Hamiltonian mechanics.
+We can define a matrix $\Omegab$ such that $\Omegab \psib_1 = \psib_2$ and $\Omegab \psib_2 = -\psib_1$, and therefore $\Omegab^2 = - \I$.
+Then, \cref{eq:pseudomajorana} reads
+%
+\begin{equation}\label{eq:symplecticmajorana}
+  \B \psib^\ast = \Omegab \psib.
+\end{equation}
+%
+Consistency of this condition requires
+%
+\begin{equation*}
+\begin{aligned}
+  - \Omegab \B \psib^\ast &= \psib, \\
+  \Omegab^\ast \B^\ast \psib &= -\psib^\ast, \\
+  \Omegab \B \Omegab^\ast \B^\ast \psib &= - \Omegab \B \psib^\ast = \psib.
+\end{aligned}
+\end{equation*}
+%
+So we require one to be an eigenvalue of $\Omegab \B \Omegab^\ast \B^\ast$.
+If we wish to split spinors into their real and imaginary parts, we require \( \Omegab \B \Omegab^\ast \B^\ast = \I \).
+If we premultiply by $\Omegab$ and postmultiply by $\B$, we find the second of the two required properties of an $\Omegab$:
+%
+\begin{equation}\label{eq:symplectic}
+  \Omegab^2 = - \I,
+  \qquad
+  \Omegab \B = \B \Omegab^\ast.
+\end{equation}
+%
+This means that under a change of basis it transforms as $\Omegab' = \S\inv \Omegab \S$.
+If we find a suitable matrix in one representation (albeit not unique), we can find one in all others.
+For the Brauer-Weyl representation, when $\beta/\betat = -1$, $\ir\B/\ir\Bt$ has the required properties.
+It will take a different form in other representations, as they transform differently under basis changes, given by $\Omegab = \ir \B \S^\ast \S\inv$ where $\S$  generates a change of basis to the Brauer-Weyl representation.
+
+We can split Dirac spinors into their ``real'' and ``imaginary'' parts
+%
+\begin{equation}\label{eq:psedoreim}
+  \psib_r = \frac{\psib - \Omega \B \psib^\ast}{2},
+  \quad
+  \psib_i = \frac{\psib + \Omega \B \psib^\ast}{2\ir},
+  \qquad
+  \B \psib_r^\ast = \Omegab \psib_r,
+  \quad
+  \B \psib_i^\ast = \Omegab \psib_i,
+  \quad
+  \psib = \psib_r + \ir \psib_i.
+\end{equation}
+%
+Here both $\psib_r$ and $\psib_i$ are \emph{symplectic-Majorana}, \emph{pseudo-Majorana} or \emph{pseudoreal spinors}.
+Symplectic-Majorana spinors have $2^{\floor{d/2}}$ real dimensions.
+Note that, as with Majorana spinors, symplectic-anti-Majorana spinors are just symplectic-Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor either.
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{ccccl}
+  \toprule
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    $p-q \mod 8$ & $\beta$ & $\betat$ & $s_2$ & Spinor types  \\
+  \midrule
+    0 & 1  & 1  & 1  & Majorana-Weyl            \\
+    1 & -  & 1  & -  & Majorana                 \\
+    2 & -1 & 1  & -1 & Majorana, Weyl           \\
+    3 & -1 & -  & -  & Symplectic-Majorana      \\
+    4 & -1 & -1 & 1  & Symplectic-Majorana-Weyl \\
+    5 & -  & -1 & -  & Symplectic-Majorana      \\
+    6 & 1  & -1 & -1 & Majorana, Weyl           \\
+    7 & 1  & -  & -  & Majorana                 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Minimal spinor types in various dimensions.
+  Entries ``-'' indicate that the relevant matrices do not exist.
+  ``Majorana, Weyl'' indicates that Majorana spinors exist, Weyl spinors exist, but Majorana-Weyl do not.
+  If Majorana-Weyl spinors exist, then Majorana spinors and Weyl spinors also exist.
+  Similarly, if Symplectic-Majorana-Weyl spinors exist, then Symplectic-Majorana spinors and Weyl spinors also exist.
+  Dirac spinors always exist.
+  }\label{tab:types}
+\end{table}
 
 
 
 %================================================================================
-\bibliographystyle{utcaps_sl}
+\bibliographystyle{utcaps_nat}
 \bibliography{journals,qft,gr,maths}
 %================================================================================
 \end{document}
