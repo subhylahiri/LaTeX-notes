@@ -498,6 +498,404 @@ The quantity \( \psib^\dag \A \) occurs frequently enough to have its own notati
 
 \section{One explicit representation}\label{sec:explicit}
 
+We can construct the Brauer-Weyl representation \cite{brauer1935spinors} of the Clifford algebra in \cref{eq:clifford} in terms of the Pauli sigma-matrices:
+%
+\begin{equation}\label{eq:paulisigma}
+  \sigmab_1 = \begin{pmatrix}
+                0 & 1 \\
+                1 & 0 \\
+              \end{pmatrix}
+  , \qquad
+  \sigmab_2 = \begin{pmatrix}
+                0   & -\ir \\
+                \ir & 0    \\
+              \end{pmatrix}
+  , \qquad
+  \sigmab_3 = \begin{pmatrix}
+                1 & 0  \\
+                0 & -1 \\
+              \end{pmatrix}
+  , \qquad
+  \sigmab_i \sigmab_j = \delta_{ij} \I + \ir \epsilon_{ijk} \sigmab_k.
+\end{equation}
+%
+When $p=0$, we choose
+%
+\begin{equation}\label{eq:explicit}
+\begin{aligned}
+  \Gammab^{2a-1} &= \prn{\bigotimes_{k=1}^{a-1} \sigmab_3}
+                    \otimes \sigmab_1 \otimes
+                    \prn{\bigotimes_{k=1}^{\floor{\frac{d}{2}}-a} \I}, &
+    a &= 1, \ldots, \floor{\frac{d}{2}}, \\
+  \Gammab^{2a} &= \prn{\bigotimes_{k=1}^{a-1} \sigmab_3}
+                  \otimes \sigmab_2 \otimes
+                  \prn{\bigotimes_{k=1}^{\floor{\frac{d}{2}}-a} \I}, \\
+  \Gammab^d &= \bigotimes_{k=1}^{\floor{d/2}} \sigmab_3, &
+    \text{if }
+    d &= 1 \pmod 2.
+\end{aligned}
+\end{equation}
+%
+For nonzero $p$, we multiply the first $p$ matrices by $-\ir$.
+This can be realised as the Hilbert space of $\floorfrac{d}{2}$ spin-$\frac{1}{2}$ systems
+\cite{Strathdee:1987jr,strathdee1986extended}.
+
+This representation is convenient because it is systematic and each matrix is either completely real or completely imaginary --- none of them is mixed-complex.
+Similarly, each matrix is either Hermitian or anti-Hermitian, and symmetric or antisymmetric.
+Finding $\A, \B, \dots$ matrices boils down to finding matrices that commute with all matrices in each category and anticommute with all matrices in the complement.
+We can construct candidate matrices by multiplying all of the Hermitian matrices, the anti-Hermitian matrices, etc.
+
+When $d$ is even, we can use $\Gammab^{d+1}$ as $\Gammab$, so $\Gammab = \Gammab^\dag = \Gammab^\ast =\Gammab\trans$.
+For the others we consider even/odd $p,q$ separately.
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Even \texorpdfstring{$p$ and $q$}{p and q}}\label{sec:eveneven}
+
+We can choose
+%
+\begin{equation*}
+  \A = \mbigg\brk{\bigotimes_{k=1}^{p/2} \sigmab_3}
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{q/2} \I},
+  \qquad
+  \At = \mbigg\brk{\bigotimes_{k=1}^{p/2} \I}
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{q/2} \sigmab_3}.
+\end{equation*}
+%
+We can check \cref{eq:constnorm} to see that $\A^\dag = \A$ so $\alpha=1$, $\Gammab \A = \A \Gammab = \At$ so $s_1 = 1$.
+
+We can also choose
+%
+\begin{equation*}
+\begin{aligned}
+  p &= 0 \pmod 4: &
+  \B &= \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{q/4} \prn{\sigmab_1 \otimes \sigmab_2}} \\ &&
+  \Bt &= (-1)^{z} (\ir)^{d/2}
+        \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{q/4} \prn{\sigmab_2 \otimes \sigmab_1}},
+  \\
+  p &= 2 \pmod 4: &
+  \B &= (\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{q/4} \prn{\sigmab_2 \otimes \sigmab_1}} \\ &&
+  \Bt &= (-1)^{z} (-\ir)^{(d-2)/2}
+        \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{q/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+\end{aligned}
+\end{equation*}
+%
+where we are defining \( \mbig\brk{\bigotimes_{k=1}^{n+\frac{1}{2}} \prn{\mathbf{a} \otimes \mathbf{b}}}
+= \brk{\bigotimes_{k=1}^{n} \prn{\mathbf{a} \otimes \mathbf{b}}} \otimes \mathbf{a} \),
+and also $z = \floorfrac{p}{4} + \floorfrac{q}{4}$.
+
+Now, according to \cref{eq:constnorm}, $\beta$ is given by the number of $\sigmab_2$'s in $\B$.
+We find that \( \beta = (-1)^{z + pd/4} = (-1)^{\floor{(p-q+2)/4}} \).
+We can also check that $\Gammab \B = (-1)^{d/2}\B \Gammab = \Bt$, giving $s_2 = (-1)^{d/2} = (-1)^{(p-q)/2}$.
+
+We can also choose
+%
+\begin{equation*}
+  \C =  \beta \mbigg\brk{\bigotimes_{k=1}^{d/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+  \qquad
+  \Ct = (-1)^{p/2} (\ir)^{d/2}
+        \mbigg\brk{\bigotimes_{k=1}^{d/4} \prn{\sigmab_2 \otimes \sigmab_1}}.
+\end{equation*}
+%
+We can check that $\Gammab \C = (-1)^{d/2}\C \Gammab = \Ct$, giving $s_3 = s_2$.
+We also find that $\C\trans = (-1)^{\floor{d/4}} \C$, from \cref{eq:constnorm} this implies that
+\( \hat{s} = (-1)^{\floor{d/4}} \beta = (-1)^{p/2} \).
+The remaining four identities in \cref{eq:constnorm} can also be verified, leaving us with
+%
+\begin{equation}\label{eq:consteveneven}
+  p, q = 0 \pmod 2 : \quad
+  \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
+  s_2 = s_3 = (-1)^{(p-q)/2}, \quad
+  \hat{s} = (-1)^{p/2}.
+\end{equation}
+%
+with unspecified constants equal to 1.
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Odd \texorpdfstring{$p$ and $q$}{p and q}}\label{sec:oddodd}
+
+We choose
+%
+\begin{equation*}
+  \A =  \mbigg\brk{\bigotimes_{k=1}^{\floor{p/2}} \sigmab_3}
+        \otimes \sigmab_2
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \sigmab_3},
+  \qquad
+  \At = (-\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{\floor{p/2}} \I}
+        \otimes \sigmab_1
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \I}.
+\end{equation*}
+%
+We see again that $\A^\dag = \A$ and $\alpha=1$, and also $\Gammab \A = - \A \Gammab =  \At$ giving us $s_1 = -1$.
+
+We also choose
+%
+\begin{equation*}
+\begin{aligned}
+  p &= 1 \pmod 4: &
+  \B &= \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \sigmab_3 \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \\ &&
+  \Bt &= (-1)^{z} (\ir)^{\frac{d-2}{2}}
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \I \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}},
+  \\
+  p &= 3 \pmod 4: &
+  \B &= (\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \I \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \\ &&
+  \Bt &= (-1)^{z + 1} (-\ir)^{\frac{d}{2}}
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \sigmab_3 \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+\end{aligned}
+\end{equation*}
+%
+where $z = \floorfrac{p-1}{4} + \floorfrac{q-1}{4}$.
+
+We find that \( \beta = (-1)^{z + (p-1)(d-2)/4} = (-1)^{\floor{(p-q+2)/4}} \).
+We can also check that $\Gammab \B = -(-1)^{d/2}\B \Gammab = \Bt$, giving $s_2 = -(-1)^{d/2} = (-1)^{(p-q)/2}$.
+
+
+We can make almost the same choice of $\C$ as for even $p,q$
+%
+\begin{equation*}
+  \C =  (-\ir)^{\frac{d}{2}}
+        \mbigg\brk{\bigotimes_{k=1}^{d/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+  \qquad
+  \Ct = (-1)^{\floorfrac{d}{4}}
+        \mbigg\brk{\bigotimes_{k=1}^{d/4} \prn{\sigmab_2 \otimes \sigmab_1}}.
+\end{equation*}
+%
+We can check that $\Gammab \C = (-1)^{d/2}\C \Gammab = \Ct$, giving $s_3 = s_1 s_2$.
+We also find that $\C\trans = (-1)^{\floor{d/4}} \C$, from \cref{eq:constnorm} this implies that
+\( \hat{s} = (-1)^{\floor{d/4}} \beta = (-1)^{(q-1)/2} \).
+The remaining four identities in \cref{eq:constnorm} can also be verified, leaving us with
+%
+\begin{equation}\label{eq:constoddodd}
+  p, q = 1 \pmod 2 : \quad
+  \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
+  s_1 = -1, \quad
+  s_2 = -s_3 = (-1)^{\frac{p-q}{2}}, \quad
+  \hat{s} = (-1)^{\frac{q-1}{2}}.
+\end{equation}
+%
+with unspecified constants equal to 1.
+
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Even \texorpdfstring{$p$}{p}, odd \texorpdfstring{$q$}{q}}\label{sec:evenodd}
+
+We choose
+%
+\begin{equation*}
+  \A =  \mbigg\brk{\bigotimes_{k=1}^{{p/2}} \sigmab_3}
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \sigmab_3},
+\end{equation*}
+%
+The expression for $\At$ in \cref{sec:eveneven} fails to anticommute with $\Gammab^d$.
+We see that $\alpha = 1$.
+The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but we can say $s_1 = 1$.
+
+The choices of $\B$ and $\Bt$ in \cref{sec:eveneven} already have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
+If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \B = (-1)^{\floor{d/2}}\B \Gammab^d$ and $\Gammab^d \Bt = (-1)^{\floor{d/2}}\Bt \Gammab^d$, only one of which is the correct behaviour.
+We find
+%
+\begin{equation*}
+\begin{aligned}
+  p,q &= 0,1 \pmod 4: &
+  \B &= \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \\
+  p,q &= 0,3 \pmod 4: &
+  \Bt &= \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}},
+  \\
+  p,q &= 2,3 \pmod 4: &
+  \B &= (\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \\
+  p,q &= 2,1 \pmod 4: &
+  \Bt &= (-\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{p/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+\end{aligned}
+\end{equation*}
+%
+Because $s_2$ only appears with $\beta$ and $\hat{s}$ in \cref{eq:constnorm}, we can set $s_2$ to 1  with a redefinition of $\beta$ and $\hat{s}$.
+We can also check that in all four cases we can write $\beta$ in the form $\beta = (-1)^{\floor{(p-q+2)/4}}$.
+
+Similarly, the choices of $\C$ and $\Ct$ in \cref{sec:eveneven} also have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
+If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \C = (-1)^{\floor{d/2}}\C \Gammab^d$ and $\Gammab^d \Ct = (-1)^{\floor{d/2}} \Ct \Gammab^d$, only one of which is the correct behaviour.
+We find
+%
+\begin{equation*}
+\begin{aligned}
+  p+q &= 1 = q-p \pmod 4: &
+  \C &=  \beta \mbigg\brk{\bigotimes_{k=1}^{(d-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+  \\
+  p+q &= 3 = q-p \pmod 4: &
+  \Ct &= \beta \mbigg\brk{\bigotimes_{k=1}^{(d-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}}.
+\end{aligned}
+\end{equation*}
+%
+Once again, we can choose $s_3 = 1$.
+We also find that $\chi = (-1)^{\floor{(d+2)/4}}$ which implies that $\hat{s} = (-1)^{p/2}$.
+This leaves us with
+%
+\begin{equation}\label{eq:constevenodd}
+  p, q = 0,1 \pmod 2 : \quad
+  \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
+  \hat{s} = (-1)^{\frac{p}{2}}.
+\end{equation}
+%
+with unspecified constants equal to 1.
+
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Odd \texorpdfstring{$p$}{p}, even \texorpdfstring{$q$}{q}}\label{sec:oddeven}
+
+We choose
+%
+\begin{equation*}
+  \At =
+        \mbigg\brk{\bigotimes_{k=1}^{\floor{p/2}} \I}
+        \otimes \sigmab_1
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \I}.
+\end{equation*}
+%
+The expression for $\A$ in \cref{sec:oddodd} fails to commute with $\Gammab^d$.
+The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but we can say $s_1 = 1$.
+We can then see that $\alpha = 1$.
+
+The choices of $\B$ and $\Bt$ in \cref{sec:oddodd} already have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
+If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \B = -(-1)^{\floor{d/2}}\B \Gammab^d$ and $\Gammab^d \Bt = -(-1)^{\floor{d/2}}\Bt \Gammab^d$, only one of which is the correct behaviour.
+We find
+%
+\begin{equation*}
+\begin{aligned}
+  p, q &= 1, 2 \pmod 4: &
+  \B &= (\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \sigmab_3 \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-2)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \\
+  p, q &= 1, 0 \pmod 4: &
+  \Bt &=
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \I \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-2)/4} \prn{\sigmab_2 \otimes \sigmab_1}},
+  \\
+  p, q &= 3, 0 \pmod 4: &
+  \B &=
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \otimes
+        \I \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-2)/4} \prn{\sigmab_2 \otimes \sigmab_1}} \\
+  p, q &= 3, 2 \pmod 4: &
+  \Bt &= (\ir)
+        \mbigg\brk{\bigotimes_{k=1}^{(p-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}} \otimes
+        \sigmab_3 \otimes
+        \mbigg\brk{\bigotimes_{k=1}^{(q-2)/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+\end{aligned}
+\end{equation*}
+%
+We can choose $s_2 = 1$ for the same reasons as in \cref{sec:evenodd}.
+We can also check that in all four cases we can write $\beta$ in the form $\beta = (-1)^{\floor{(p-q+2)/4}}$.
+The existence of $\B$ or $\Bt$ is determined by $(d \mod 4) = (p-q \mod 4)$.
+
+Similarly, the choices of $\C$ and $\Ct$ in \cref{sec:oddodd} also have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
+If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \C = (-1)^{\floor{d/2}}\C \Gammab^d$ and $\Gammab^d \Ct = (-1)^{\floor{d/2}} \Ct \Gammab^d$, only one of which is the correct behaviour.
+We find
+%
+\begin{equation*}
+\begin{aligned}
+  p+q &= 1 = p-q \pmod 4: &
+  \C &=  \beta
+        \mbigg\brk{\bigotimes_{k=1}^{(d-1)/4} \prn{\sigmab_1 \otimes \sigmab_2}},
+  \\
+  p+q &= 3 = p-q \pmod 4: &
+  \Ct &= \beta
+        \mbigg\brk{\bigotimes_{k=1}^{(d-1)/4} \prn{\sigmab_2 \otimes \sigmab_1}}.
+\end{aligned}
+\end{equation*}
+%
+And again, we can choose $s_3 = 1$.
+We also find that $\chi = (-1)^{\floor{(d+2)/4}}$ which implies that $\hat{s} = (-1)^{q/2}$.
+This leaves us with
+%
+\begin{equation}\label{eq:constoddeven}
+  p, q = 1,0 \pmod 2 : \quad
+  \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
+  \hat{s} = (-1)^{\frac{q}{2}}.
+\end{equation}
+%
+with unspecified constants equal to 1.
+
+
+%-------Section------------------------------------------------------------------
+
+\subsection{General dimensions}\label{sec:constgendim}
+
+Now let's collect the results of the last four sections,
+\cref{eq:consteveneven,eq:constoddodd,eq:constevenodd,eq:constoddeven}.
+In all cases we found $\alpha = 1$.
+We found that $s_1 = 1$ except when $p$ and $q$ are both odd.
+This can be written as $s_1 = (-1)^{pq}$.
+We can reconstruct $\alphat = s_1 = (-1)^{pq}$.
+
+The constant $\beta$ could always be expressed as $\beta = (-1)^{\floor{(p-q+2)/4}}$.
+When $p-q$ is even, we have $s_2 = (-1)^{\frac{p-q}{2}}$, when $p-q$ is odd, we have $s_2 = 1$.
+In \cref{sec:majoranaweyl} we will see that these two constants, $\beta$ and $s_2$, are the most important and both depend only on
+\( (p - q \mod 8) \).
+We can reconstruct $\betat = s_2 \beta = (-1)^{\floor{(p-q+1)/4}}$.
+
+We found that $s_3 = s_1 s_2$ in all cases, which is equivalent to $s_3 = (-1)^{d/2}$.
+The sign $\hat{s}$ took different forms depending on $p,q \mod 2$.
+Rather than try to combine them into one formula, it is easier to reconstruct $\chi = (-1)^{\floor{d/4}}$ and $\chit = s_3 \chi = (-1)^{\floor{(d+2)/4}}$.
+
+These results are summarised in \cref{tab:exist}.
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{CAACAA}
+  \toprule
+    Matrix  & \colhead{Similarity} & \colhead{Nonexistent when\ldots} & Doubling
+                    & \colhead{Constant}                 & \colhead{Sign} \\
+  \midrule
+    \Gammab & -&\Gammab^\mu        & p\pm q &= 1 \pmod 2              & \Gammab^2
+                    & \gamma &= 1                        &                           \\
+    \A      &  &\Gammab^\mud       & p,q &= 1,0 \pmod 2               & \A\inv \A^\dag
+                    & \alpha &= 1                        &                           \\
+    \At     & -&\Gammab^\mud       & p,q &= 0,1 \pmod 2               & \At\inv \At^\dag
+                    & \alphat &= (-1)^{pq}               & s_1 &= \tilde{\alpha}     \\
+    \B      &  &\Gammab^\muc       & p-q &= 1 \pmod 4                 & \B \B^\ast
+                    & \beta &= (-1)^{\floor{(p-q+2)/4}}  &                           \\
+    \Bt     & -&\Gammab^\muc       & p-q &= 3 \pmod 4                 & \Bt \Bt^\ast
+                    & \betat &= (-1)^{\floor{(p-q+1)/4}} & s_2 &= \beta\tilde{\beta} \\
+    \C      &  &\Gammab^\mut       & p+q &= 3 \pmod 4                 & \C\inv \C\trans
+                    & \chi &= (-1)^{\floor{(p+q)/4}}     & \hat{s} &= \beta\chi      \\
+    \Ct     & -&\Gammab^\mut       & p+q &= 1 \pmod 4                 & \Ct\inv \Ct\trans
+                    & \chit &= (-1)^{\floor{(p+q+2)/4}}  & s_3 &= \chi \tilde{\chi}  \\
+  \bottomrule
+  \end{tabular}
+  \caption{Existence of chirality, charge conjugation, \etc matrices and their associated constants.
+  The second column lists the result of the matrix in the first column being used in a similarity transform on $\Gammab^\mu$.
+  The fourth column lists the matrix that performs the operation from the second column twice.
+  The result must be proportional to the identity matrix, with constant of proportionality from the fifth column.
+  The sixth column contains additional signs defined in \cref{eq:constnorm}.
+  }\label{tab:exist}
+\end{table}
+
 
  
 
