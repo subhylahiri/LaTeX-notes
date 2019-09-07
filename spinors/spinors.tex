@@ -374,7 +374,7 @@ Suppose we make a change of basis for our spinors, described by a similarity tra
   \Gammab'^{\mu} = \S\inv \Gammab^\mu \S.
 \end{equation*}
 %
-This new representation will have its own set of chirality/charge conjugation matrices, as in \cref{eq:cccmats}.
+This new representation will have its own set of chirality, charge conjugation, \etc matrices, as in \cref{eq:cccmats}.
 How are they related to the corresponding matrices for the previous basis?
 
 Lets illustrate one of these calculations
@@ -382,29 +382,29 @@ Lets illustrate one of these calculations
 \begin{equation*}
 \begin{gathered}
 \begin{aligned}
-  \Gammab'^\mud 
-    &= (\S\inv \Gammab^\mu \S)^\dag 
-    = \S^\dag \Gamma^\mud \S\invd 
-    = \S^\dag \A \Gammab^\mu \A\inv \S\invd 
+  \Gammab'^\mud
+    &= (\S\inv \Gammab^\mu \S)^\dag
+    = \S^\dag \Gamma^\mud \S\invd
+    = \S^\dag \A \Gammab^\mu \A\inv \S\invd
     = \S^\dag \A \S \Gammab^\mu \S\inv \A\inv \S\invd \\
     &= (\S^\dag \A \S) \Gammab'^\mu (\S^\dag \A \S)\inv,
-    \qquad \implies \quad 
-    \A' \propto \S^\dag \A \S, 
+    \qquad \implies \quad
+    \A' \propto \S^\dag \A \S,
 \end{aligned}
 \\
 \begin{aligned}
-  \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib 
-    &= \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib  
+  \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib
+    &= \psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \psib
      = \psib^\dag \S\inv \A\inv \S\invd \S^\dag \A^\dag \S \psib \\
-    &= \psib^\dag \S\inv \A\inv \A^\dag \S \psib 
-     = \alpha\, \psib^\dag \S\inv \S \psib 
-     = \alpha\, \psib^\dag \psib 
+    &= \psib^\dag \S\inv \A\inv \A^\dag \S \psib
+     = \alpha\, \psib^\dag \S\inv \S \psib
+     = \alpha\, \psib^\dag \psib
      \geq 0.
 \end{aligned}
 \end{gathered}
 \end{equation*}
 %
-Once we apply our normalisation condition we find, up to a positive real scalar multiple, 
+Once we apply our normalisation condition we find, up to a positive real scalar multiple,
 \( \A' = \S^\dag \A \S \).
 Similar arguments give us
 %
@@ -413,7 +413,7 @@ Similar arguments give us
   \Gammab' &= \S\inv \Gammab \S, &
   \A' &= \S^\dag \A \S, &
   \B' &= \S\inv \B \S^\ast, &
-  \C' &= \S\trans \C \S, 
+  \C' &= \S\trans \C \S,
 \\ &&
   \At' &= \S^\dag \At \S, &
   \Bt' &= \S\inv \Bt \S^\ast, &
@@ -427,14 +427,14 @@ Regardless, we can substitute \cref{eq:ccctransform} into \cref{eq:constnorm} to
 \begin{equation*}
   \alpha' = \alpha, \qquad
   \beta' = \beta, \qquad
-  s' = s, \qquad
+  s_i' = s_i, \qquad
   \hat{s}' = \hat{s}.
 \end{equation*}
 %
 In other words, these scalars are invariant under a change of basis and are constant throughout any similarity class of representations.
 
 Although there are two similarity classes of irreps when $d$ is odd, the same set of $\A/\At$, $\B/\Bt$, $\C/\Ct$ will work for both $\brc{\Gammab^\mu}$ and $\brc{ -\Gammab^\mu }$.
-Therefore \cref{it:oddchi} implies that both classes have the same $\alpha, \beta, s, \hat{s}$.
+Therefore \cref{it:oddchi} implies that both classes have the same $\alpha, \beta, s_i, \hat{s}$.
 
 \Cref{it:even,it:odd} imply that the only thing these constants can depend on is the space-time dimensionality, $p$ and $q$.
 In the \hyperref[sec:explicit]{next section} we will compute these quantities for one specific representation that we will construct.
@@ -446,7 +446,7 @@ The important thing is that the Dirac equation is covariant:
 \begin{equation*}
   \ir \Gammab^\mu \partial_\mu \psib = m \psib
   \qquad \means \qquad
-  \ir \Gammab'^\mu \partial_\mu \psib' = m \psib'.  
+  \ir \Gammab'^\mu \partial_\mu \psib' = m \psib'.
 \end{equation*}
 %
 We can construct $\psib'$ as follows
@@ -474,7 +474,8 @@ This means we have the following transformations:
 %
 and similar for tilde versions.
 Note that $\psib^\dag \psib$ is not an invariant quantity.
-However, with the transformations above, we can construct these invariants:
+However, with the transformations above, we see that $\psib$ and $\B \psib^\ast$ are contravariant and $\psib^\dag\A$ and $\psib\trans \C$ are covariant.
+We can construct these invariants:
 %
 \begin{equation}\label{eq:spinorinvt}
 \begin{gathered}
