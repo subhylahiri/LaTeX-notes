@@ -61,7 +61,10 @@ We're looking at representations of the $SO(p,q)$ Clifford algebra --- a set of 
 %
 where $\brc{ \A, \B } = \A\B + \B\A$ is the anticommutator and $\eta_{\mu\nu}$ is the Lorentz metric with diagonal elements $+1$ for $\mu \leq p$ and $-1$ for $\mu > p$. We also define $q = d - p$.
 Euclidean space is \( (p,q) = (0,d) \).
-Minkowski space is \( (p,q) = (1,d-1) \) or \( (d-1,1) \).
+Minkowski space is \( (p,q) = (1,d-1) \) or \( (d-1,1) \) depending on your conventions.
+
+We are going to be very concrete about the representations - when we say ``matrix'' we mean an actual array with numbers in it, not an abstract operator on an abstract vector space.
+Really, we are talking about a choice of basis as well as a representation.
 
 Given one representation $\Gammab^\mu$, we can construct another, $\Gammab'^{\mu}$, using a similarity transform with some invertible matrix $\S$:
 %
@@ -69,15 +72,20 @@ Given one representation $\Gammab^\mu$, we can construct another, $\Gammab'^{\mu
   \Gammab'^{\mu} = \S\inv \Gammab^\mu \S.
 \end{equation}
 %
+This can also be thought of as a change of basis, though not necessarily an orthonormal one.
 We can then talk about similarity classes of representations.
 
 We make use of the following statements without justification:
 %
 \begin{enumerate}
-  \item When $d$ is even, there is one similarity class of irreps with dimension $2^{ \frac{d}{2} }$. \label{it:even}
-  \item When $d$ is odd, there are two similarity class of irreps of dimension $2^{ \frac{d-1}{2} }$. \label{it:odd}
-  \item When $d$ is odd, given a representation $\brc{\Gammab^\mu}$, the representation formed by $\brc{ -\Gammab^\mu }$ lies in the other similarity class. \label{it:oddchi}
-  \item Any matrix that commutes with all of the $\Gammab^\mu$ must be proportional to the identity (otherwise its eigenspaces would be invariant subspaces). \label{it:commute}
+  \item When $d$ is even, there is one similarity class of irreps with dimension $2^{\frac{d}{2}}$.
+      \label{it:even}
+  \item When $d$ is odd, there are two similarity class of irreps of dimension $2^{\frac{d-1}{2}}$.
+      \label{it:odd}
+  \item When $d$ is odd, given a representation $\brc{\Gammab^\mu}$, the representation formed by $\brc{ -\Gammab^\mu }$ lies in the other similarity class.
+      \label{it:oddchi}
+  \item Any matrix that commutes with all of the $\Gammab^\mu$ must be proportional to the identity (otherwise its eigenspaces would be invariant subspaces).
+      \label{it:commute}
 \end{enumerate}
 
 We use the notation $\floor{x}$ for the floor function: rounding down to the nearest integer.
@@ -101,9 +109,9 @@ The dimensionality of the representations is then $2^{\floor{d/2}}$.
 The converse is also clearly true --- two matrices that are proportional to each other produce the same similarity transform.
 
 We can see that the gamma matrices are traceless: from \cref{eq:clifford}: \( \Gammab^{\mu2} = \eta^{\mu\mu} \I = \pm \I \).
-Pick some $\nu \neq \mu$, then \( \tr \Gammab^\mu = \eta^{\nu2} \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu \).
-Cyclicity of the trace \( \implies \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu = \tr \Gammab^\nu \Gammab^\mu \Gammab^\nu \), but \cref{eq:clifford} for $\mu \neq \nu \implies$ anti-commutation, so \( \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu = - \tr \Gammab^\nu \Gammab^\mu \Gammab^\nu \).
-
+Pick some $\nu \neq \mu$, then \( \tr \Gammab^\mu = \eta^{\nu\nu} \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu \).
+Cyclicity of the trace \( \implies \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu = \tr \Gammab^\nu \Gammab^\mu \Gammab^\nu \), but \cref{eq:clifford} for $\mu \neq \nu$ means they anticommute \( \implies \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu = - \tr \Gammab^\nu \Gammab^\mu \Gammab^\nu \).
+%Therefore \( \tr \Gammab^\mu \Gammab^\nu \Gammab^\nu = 0 \implies \tr \Gammab^\mu = 0 \).
 
 %-------Section------------------------------------------------------------------
 
@@ -126,7 +134,7 @@ This means we can find matrices such that
 \end{aligned}
 \end{equation}
 %
-Some of these matrices have names: $\Gammab$ is called the chirality matrix, either $\C$ or $\Ct$ is usually called the charge conjugation matrix, but that name would be more appropriate for $\B$ or $\Bt$.
+Some of these matrices have names: $\Gammab$ is called the chirality matrix, either $\C$ or $\Ct$ is usually called the charge conjugation matrix, although we will see in \cref{sec:majorana} that the name would be more appropriate for $\B$ or $\Bt$.
 Note that these matrices have only been defined up to an overall scalar multiple, as in \cref{eq:simsim}.
 We will fix some of this ambiguity with normalisation conditions below.
 We have also defined $\A,\At,\C,\Ct$ in the opposite way to $\Gammab,\B,\Bt$.
@@ -135,7 +143,7 @@ This is convenient due to the way that transposing reverses products.
 When $d$ is odd, \cref{it:odd,it:oddchi} imply that $\Gammab$ does not exist and exactly one of each pair $(\A, \At)$, $(\B, \Bt)$, $(\C, \Ct)$, will exist.
 The statements in the rest of this section should be prefaced with ``assuming that the matrices exist...''.
 
-These transforms are all idempotent.
+These transforms are all involutions.
 This means we can perform them twice to derive new identities:
 %
 \begin{equation*}
@@ -150,8 +158,8 @@ This means we can perform them twice to derive new identities:
   \Gammab^\mu &= \Gammap[\mud]^\dag &
         &= (\A \Gammab^\mu \A\inv)^\dag &
         &= \A\invd \Gammab^\mud \A^\dag \\ && &&
-%        &= \A\invd \A \Gammab^\mu \A\inv \A^\dag &
-        &= (\A\inv \A^\dag)\inv \Gammab^\mu \A\inv \A^\dag &
+        &= \A\invd \A \Gammab^\mu \A\inv \A^\dag \\ && &&
+        &= (\A\inv \A^\dag)\inv \Gammab^\mu (\A\inv \A^\dag) &
   &\implies &
   \A\inv \A^\dag &= \alpha \I,
 \end{alignedat} \\
@@ -177,7 +185,7 @@ Under these redefinitions the scalars above transform as
 \end{equation*}
 %
 with similar relations for the tilde versions.
-These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of $\alpha$ but not its magnitude, vice-versa for $\beta$, whereas $\chi$ cannot be changed at all.
+These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of $\alpha$ but not its magnitude, vice-versa for $\beta$, and $\chi$ cannot be changed at all.
 %
 \begin{equation}\label{eq:normscalar}
   \gamma = 1, \qquad
@@ -203,13 +211,15 @@ We can use these combinations to find more scalars and normalisation conditions.
 First, for $\A,\B,\C$:
 %
 \begin{equation*}
-\begin{alignedat}{5}
+\begin{alignedat}{6}
   \Gammab^\mud &= \Gammap[\mut]^\ast &
+    &= (\C \Gammab^\mu \C\inv)^\ast &
     &= \C^\ast \Gammab^\muc \C\invc &
     &= \C^\ast \B\inv \Gammab^\mu \B \C\invc &
     &\implies &
   \C^\ast \B\inv &= f \A, \\
-   &= \Gammap[\muc]\trans &
+    &= \Gammap[\muc]\trans &
+    &= (\B\inv \Gammab^\mu \B)\trans &
     &= \B\trans \Gammab^\mut \B\invt &
     &= \B\trans \C \Gammab^\mu \C\inv \B\invt &
     &\implies &
@@ -220,14 +230,14 @@ First, for $\A,\B,\C$:
 We can relate these scalars to the earlier ones as follows
 %
 \begin{equation*}
-\begin{alignedat}{2}
-  \A\inv &= f \B \C\invc &
-    &= \tilde{f} \C\inv \B\invt \\
+\begin{alignedat}[t]{2}
+  \A\inv &= f \, \B \, \C\invc &
+    &= \tilde{f} \C\inv \B\invt, \\
   \A^\dag &= \frac{1}{f^\ast} \B\invd \C\trans &
-    &= \frac{1}{\tilde{f}^\ast} \C^\dag \B^\ast.
+    &= \frac{1}{\tilde{f}^\ast} \C^\dag \B^\ast,
 \end{alignedat}
-   \implies
-\begin{alignedat}{3}
+   \quad\implies\quad
+\begin{alignedat}[t]{3}
   \alpha \I &= \A\inv \A^\dag &
     &= \frac{\tilde{f}}{f^\ast} \C\inv \B\invt \B\invd \C\trans &
 %      &= \frac{\tilde{f}}{f^\ast \beta} \C\inv \C\trans &
@@ -273,23 +283,23 @@ We can also derive corresponding relations with two of the three matrices/scalar
 %
 The signs in each column match.
 The first row contains normalisation choices; the second row is forced on us by \cref{eq:normscalar}.
-For odd $d$ only one of the four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible.
+For odd $d$ only one of the four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible, and we can choose to set that $f_i = 1$.
 
 When $d$ is even, the same approach leads to relations between tilde versions, tilde-free versions and $\Gammab$.
 We find
 %
 \begin{equation}\label{eq:chiraltilde}
 \begin{aligned}
-  \A\inv \A^\dag = a \At\inv \At^\dag &= \alpha \I,    &
-  \At &= \Gammab^\dag \A = a \A \Gammab, &
-  \phase(\alpha) &= 0, &
+  \A\inv \A^\dag = a \At\inv \At^\dag &= \alpha \I, &\quad
+  \At &= \Gammab^\dag \A = a \A \Gammab,            &\quad
+  \phase(\alpha) &= 0,                              &\quad
   \abs{a} &= 1, \\
-  \B \B^\ast = \pm \Bt \Bt^\ast &= \beta \I, &
-  \Bt &= b \Gammab \B = \pm \frac{1}{b} \B \Gammab^\ast,  &
-  \phase(b) &= 0, &
+  \B \B^\ast = \pm \Bt \Bt^\ast &= \beta \I,             &
+  \Bt &= b \Gammab \B = \pm \frac{1}{b} \B \Gammab^\ast, &
+  \phase(b) &= 0,                                        &
   \abs{\beta} &= 1, \\
   \C\inv \C\trans = \pm \Ct\inv \Ct\trans &= \chi \I,    &
-  \Ct &= \Gammab\trans \C = \pm \C \Gammab. &
+  \Ct &= \Gammab\trans \C = \pm \C \Gammab.              &
 %  \A = \B\trans \C &= \pm \C^\ast \B\inv, &
 %  \chi &= \pm \alpha \beta,
 \end{aligned}
@@ -359,7 +369,7 @@ For odd $d$, we can absorb the $s_i$ into $\alpha$, $\beta$ or $\hat{s}$.
 
 The remaining scalar ambiguities are multiplying $\Gammab,\At,\Bt,\Ct$ by $\pm1$ (for even $d$ only)
 and simultaneous \( \A \rightarrow r \A \),
-\( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \)
+\( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \),
 \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
 \( \Ct \rightarrow r\e^{\ir\phi} \Ct \) with \( r, \phi \in \R \) (for odd $d$ only half of these will exist).
 
@@ -541,9 +551,9 @@ This can be realised as the Hilbert space of $\floorfrac{d}{2}$ spin-$\frac{1}{2
 \cite{Strathdee:1987jr,strathdee1986extended}.
 
 This representation is convenient because it is systematic and each matrix is either completely real or completely imaginary --- none of them is mixed-complex.
-Similarly, each matrix is either Hermitian or anti-Hermitian, and symmetric or antisymmetric.
+Similarly, each matrix is either Hermitian or antihermitian, and symmetric or antisymmetric.
 Finding $\A, \B, \dots$ matrices boils down to finding matrices that commute with all matrices in each category and anticommute with all matrices in the complement.
-We can construct candidate matrices by multiplying all of the Hermitian matrices, the anti-Hermitian matrices, etc.
+We can construct candidate matrices by multiplying all of the Hermitian matrices, the antihermitian matrices, etc.
 
 When $d$ is even, we can use $\Gammab^{d+1}$ as $\Gammab$, so $\Gammab = \Gammab^\dag = \Gammab^\ast =\Gammab\trans$.
 For the others we consider even/odd $p,q$ separately.
@@ -854,7 +864,7 @@ We can reconstruct $\alphat = s_1 = (-1)^{pq}$.
 
 The constant $\beta$ could always be expressed as $\beta = (-1)^{\floor{(p-q+2)/4}}$.
 When $p-q$ is even, we have $s_2 = (-1)^{\frac{p-q}{2}}$, when $p-q$ is odd, we have $s_2 = 1$.
-In \cref{sec:majoranaweyl} we will see that these two constants, $\beta$ and $s_2$, are the most important and both depend only on
+In \cref{sec:subtypes} we will see that these two constants, $\beta$ and $s_2$, are the most important and both depend only on
 \( (p - q \mod 8) \).
 We can reconstruct $\betat = s_2 \beta = (-1)^{\floor{(p-q+1)/4}}$.
 
@@ -869,7 +879,7 @@ These results are summarised in \cref{tab:exist}.
   \centering
   \begin{tabular}{CAACAA}
   \toprule
-    Matrix  & \colhead{Similarity} & \colhead{Nonexistent when\ldots} & Doubling
+    \text{Matrix}  & \colhead{Similarity} & \colhead{Nonexistent when\ldots} & \text{Doubling}
                     & \colhead{Constant}                 & \colhead{Sign} \\
   \midrule
     \Gammab & -&\Gammab^\mu        & p\pm q &= 1 \pmod 2              & \Gammab^2
@@ -899,15 +909,47 @@ These results are summarised in \cref{tab:exist}.
 
 %-------Section------------------------------------------------------------------
 
-\section{Majorana, Weyl and Majorana-Weyl spinors}\label{sec:majoranaweyl}
+\section{Majorana, Weyl and Majorana-Weyl spinors}\label{sec:subtypes}
 
 In general, the spinors that we have constructed are known as Dirac spinors.
 Depending on the dimensionality, it can be useful to split Dirac spinors into some subspaces.
 
+
+\begin{table}
+  \centering
+  \begin{tabular}{ccccl}
+  \toprule
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    $p-q \mod 8$ & $\beta$ & $\betat$ & $s_2$ & Spinor types  \\
+  \midrule
+    0 & 1  & 1  & 1  & Majorana-Weyl            \\
+    1 & -  & 1  & -  & Majorana                 \\
+    2 & -1 & 1  & -1 & Majorana, Weyl           \\
+    3 & -1 & -  & -  & Symplectic-Majorana      \\
+    4 & -1 & -1 & 1  & Symplectic-Majorana-Weyl \\
+    5 & -  & -1 & -  & Symplectic-Majorana      \\
+    6 & 1  & -1 & -1 & Majorana, Weyl           \\
+    7 & 1  & -  & -  & Majorana                 \\
+  \bottomrule
+  \end{tabular}
+  \caption{Minimal spinor types in various dimensions.
+  Entries ``-'' indicate that the relevant matrices do not exist.
+  ``Majorana, Weyl'' indicates that Majorana spinors exist, Weyl spinors exist, but Majorana-Weyl do not.
+  If Majorana-Weyl spinors exist, then Majorana spinors and Weyl spinors also exist.
+  Similarly, if Symplectic-Majorana-Weyl spinors exist, then Symplectic-Majorana spinors and Weyl spinors also exist.
+  Dirac spinors always exist.
+  }\label{tab:types}
+\end{table}
+
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Weyl spinors}\label{sec:weyl}
+
 In even-dimensional spaces, we have $\Gammab^2 = \I$, so its eigenvalues are $\pm 1$.
 We can argue that $\tr \Gammab = 0$ using the same reasoning as for the $\Gammab^\mu$.
 Therefore, the two eigenspaces have the same dimensionality, $2^{\floor{d/2}-1}$.
-Members of the +1 eigenspace are called \emph{Weyl} or \emph{chiral spinors}, the -1 eigenspace are anti-chiral spinors.
+Members of the +1 eigenspace are called \emph{Weyl} or \emph{chiral spinors}, the -1 eigenspace are antichiral spinors.
 Any Dirac spinor can be written as the sum of its chiral and anti-chiral parts:
 %
 \begin{equation}\label{eq:Weylanti}
@@ -923,6 +965,49 @@ Any Dirac spinor can be written as the sum of its chiral and anti-chiral parts:
 \end{equation}
 %
 These two subspaces are invariant under the changes of basis considered in \cref{sec:basis}.
+We can also talk of a \emph{Weyl basis} for spinors (a distinct concept from Weyl spinors), which is a basis in which the chirality matrix takes the block form
+%
+\begin{equation}\label{eq:weylbasis}
+  \Gammab = \begin{pmatrix}
+              \I         & \mathbf{0} \\
+              \mathbf{0} & -\I        \\
+            \end{pmatrix}
+  \qquad
+  \implies
+  \qquad
+  \psib = \begin{pmatrix}
+            \psib_R \\
+            \psib_L \\
+          \end{pmatrix}
+  .
+\end{equation}
+%
+In such a basis the chiral part of a spinor is its upper half and the antichiral part its lower half.
+From \cref{eq:cccmats} only the off-diagonal blocks of the $\Gammab^\mu$ may be nonzero.
+
+Are there any chiral solutions to the Dirac equation?
+It would be necessary for both $\psib$ and $\Gammab \psib$ to be solutions:
+%
+\begin{equation*}
+  \ir \Gammab^\mu \partial_\mu \psib = m \psib
+  \quad \text{and} \quad
+  \ir \Gammab^\mu \partial_\mu (\Gammab \psib) = m (\Gammab \psib),
+  \qquad \text{but} \quad
+\begin{aligned}[t]
+  \ir \Gammab^\mu \partial_\mu (\Gammab \psib)
+    &= - \Gammab (\ir \Gammab^\mu \partial_\mu \psib) \\
+    &= - m (\Gammab \psib).
+\end{aligned}
+\end{equation*}
+%
+Therefore this is only possible when $m=0$.
+Particles with mass can still be discussed in the language of Weyl spinors, they just have to come in a chiral-antichiral pair.%
+\footnote{They could still satisfy a Majorana condition, as discussed in the next three sections}
+A \emph{single} Weyl spinor can only be used for massless particles.
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Majorana spinors}\label{sec:majorana}
 
 Can we impose a reality condition, like $\psib^\ast = \psib$?
 Changes of basis can be complex, so a spinor that is real in one basis will not necessarily be real in another basis.
@@ -931,7 +1016,8 @@ If we want an invariant characterisation of real spinors, we need a version of c
 From \cref{eq:spinorbasis} we see that this is provided by \emph{charge conjugation}: \( \psib \to \B \psib^\ast \) or \( \Bt \psib^\ast \).
 We will focus on $\B$ below, but our discussion applies equally well to $\Bt$.
 
-But are there any self-conjugate spinors, \ie solutions to the condition \( \psib = \B \psib^\ast \)?
+But are there any self-conjugate spinors, \ie solutions to the condition \( \psib = \B \psib^\ast \)?%
+\footnote{Many authors write this condition as \( \overline{\psib} = \psib\trans \C \).}
 Let's perform a consistency  check by substituting thus equation into itself
 %
 \begin{equation*}
@@ -939,7 +1025,7 @@ Let's perform a consistency  check by substituting thus equation into itself
 \end{equation*}
 %
 Therefore, unless $\beta = 1$ there are no self-conjugate solutions
-(you might try to get around it by using something like \( \psib = \ir \B \psib^\ast \) but, because charge conjugation is anti-linear, it doesn't work).
+(you might try to get around it by using something like \( \psib = \ir \B \psib^\ast \) but, because charge conjugation is antilinear, it doesn't work).
 Assuming either $\beta$ or $\beta$ is one, do any solutions exist?
 To answer, we can use a doubling trick where we map $\Cb^n \to \R^{2n}$.
 In block matrix format:
@@ -1041,6 +1127,7 @@ But
 Therefore, when $\beta=1$ the eigenvalues must be $\pm 1$.
 Furthermore, the operator has zero trace, so both eigenspaces have half of the dimensionality of the space.
 If $\beta=-1$ but $\betat=1$, we can use $\Bt$ instead.
+Consulting \cref{tab:types}, we can use $\B$ when $p-q = 0,6,7 \pmod 8$ and we can use $\Bt$ when $p-q = 0,1,2 \pmod 8$.
 
 Either way, Dirac spinors can be split into their real and imaginary parts
 %
@@ -1059,6 +1146,12 @@ Either way, Dirac spinors can be split into their real and imaginary parts
 Here both $\psib_r$ and $\psib_i$ are \emph{Majorana spinors}.
 Dirac spinors have $2^{\floor{d/2}}$ \emph{complex dimensions}, so Majorana spinors have $2^{\floor{d/2}}$ \emph{real dimensions}.
 Note that anti-Majorana spinors are just Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor.
+We can also talk of a Majorana basis for spinors (again, a distinct concept from Majorana spinors) where either $\B$ (or $\Bt$) is the identity matrix.
+In such a basis all of the $\Gammab^\mu$ are real (or all imaginary), and the condition for Majorana spinors is simply that they are real.
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Symplectic-Majorana spinors}\label{sec:symplecticmajorana}
 
 If we consult \cref{tab:types}, we see that when \( p-q = 3,4,5 \pmod 8 \), neither $\beta$ nor $\betat$ is one.
 In these cases it is impossible for a spinor to be self-conjugate
@@ -1072,83 +1165,55 @@ However, it is possible to group spinors into pairs such that
 \end{equation}
 %
 This endows spinors with a symplectic structure, like phase space in Hamiltonian mechanics.
-We can define a matrix $\Omegab$ such that $\Omegab \psib_1 = \psib_2$ and $\Omegab \psib_2 = -\psib_1$, and therefore $\Omegab^2 = - \I$.
-Then, \cref{eq:pseudomajorana} reads
+%We can define a matrix $\Omegab$ such that $\Omegab \psib_1 = \psib_2$ and $\Omegab \psib_2 = -\psib_1$, and therefore $\Omegab^2 = - \I$.
+%Then, \cref{eq:pseudomajorana} reads
+%%
+%\begin{equation}\label{eq:symplecticmajorana}
+%  \B \psib^\ast = \Omegab \psib.
+%\end{equation}
+%%
+%Consistency of this condition requires
+%%
+%\begin{equation*}
+%\begin{aligned}
+%  - \Omegab \B \psib^\ast &= \psib, \\
+%  \Omegab^\ast \B^\ast \psib &= -\psib^\ast, \\
+%  \Omegab \B \Omegab^\ast \B^\ast \psib &= - \Omegab \B \psib^\ast = \psib.
+%\end{aligned}
+%\end{equation*}
+%%
+%So we require one to be an eigenvalue of $\Omegab \B \Omegab^\ast \B^\ast$.
+%If we wish to split spinors into their real and imaginary parts, we require \( \Omegab \B \Omegab^\ast \B^\ast = \I \).
+%If we premultiply by $\Omegab$ and postmultiply by $\B$, we find the second of the two required properties of an $\Omegab$:
+%%
+%\begin{equation}\label{eq:symplectic}
+%  \Omegab^2 = - \I,
+%  \qquad
+%  \Omegab \B = \B \Omegab^\ast.
+%\end{equation}
+%%
+%This means that under a change of basis it transforms as $\Omegab' = \S\inv \Omegab \S$.
+%If we find a suitable matrix in one representation (albeit not unique), we can find one in all others.
+%For the Brauer-Weyl representation, when $\beta/\betat = -1$, $\ir\B/\ir\Bt$ has the required properties.
+%It will take a different form in other representations, as they transform differently under basis changes, given by $\Omegab = \ir \B \S^\ast \S\inv$ where $\S$  generates a change of basis to the Brauer-Weyl representation.
 %
-\begin{equation}\label{eq:symplecticmajorana}
-  \B \psib^\ast = \Omegab \psib.
-\end{equation}
-%
-Consistency of this condition requires
-%
-\begin{equation*}
-\begin{aligned}
-  - \Omegab \B \psib^\ast &= \psib, \\
-  \Omegab^\ast \B^\ast \psib &= -\psib^\ast, \\
-  \Omegab \B \Omegab^\ast \B^\ast \psib &= - \Omegab \B \psib^\ast = \psib.
-\end{aligned}
-\end{equation*}
-%
-So we require one to be an eigenvalue of $\Omegab \B \Omegab^\ast \B^\ast$.
-If we wish to split spinors into their real and imaginary parts, we require \( \Omegab \B \Omegab^\ast \B^\ast = \I \).
-If we premultiply by $\Omegab$ and postmultiply by $\B$, we find the second of the two required properties of an $\Omegab$:
-%
-\begin{equation}\label{eq:symplectic}
-  \Omegab^2 = - \I,
-  \qquad
-  \Omegab \B = \B \Omegab^\ast.
-\end{equation}
-%
-This means that under a change of basis it transforms as $\Omegab' = \S\inv \Omegab \S$.
-If we find a suitable matrix in one representation (albeit not unique), we can find one in all others.
-For the Brauer-Weyl representation, when $\beta/\betat = -1$, $\ir\B/\ir\Bt$ has the required properties.
-It will take a different form in other representations, as they transform differently under basis changes, given by $\Omegab = \ir \B \S^\ast \S\inv$ where $\S$  generates a change of basis to the Brauer-Weyl representation.
-
-We can split Dirac spinors into their ``real'' and ``imaginary'' parts
-%
-\begin{equation}\label{eq:psedoreim}
-  \psib_r = \frac{\psib - \Omega \B \psib^\ast}{2},
-  \quad
-  \psib_i = \frac{\psib + \Omega \B \psib^\ast}{2\ir},
-  \qquad
-  \B \psib_r^\ast = \Omegab \psib_r,
-  \quad
-  \B \psib_i^\ast = \Omegab \psib_i,
-  \quad
-  \psib = \psib_r + \ir \psib_i.
-\end{equation}
-%
-Here both $\psib_r$ and $\psib_i$ are \emph{symplectic-Majorana}, \emph{pseudo-Majorana} or \emph{pseudoreal spinors}.
-Symplectic-Majorana spinors have $2^{\floor{d/2}}$ real dimensions.
-Note that, as with Majorana spinors, symplectic-anti-Majorana spinors are just symplectic-Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor either.
-
-
-\begin{table}
-  \centering
-  \begin{tabular}{ccccl}
-  \toprule
-    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-    $p-q \mod 8$ & $\beta$ & $\betat$ & $s_2$ & Spinor types  \\
-  \midrule
-    0 & 1  & 1  & 1  & Majorana-Weyl            \\
-    1 & -  & 1  & -  & Majorana                 \\
-    2 & -1 & 1  & -1 & Majorana, Weyl           \\
-    3 & -1 & -  & -  & Symplectic-Majorana      \\
-    4 & -1 & -1 & 1  & Symplectic-Majorana-Weyl \\
-    5 & -  & -1 & -  & Symplectic-Majorana      \\
-    6 & 1  & -1 & -1 & Majorana, Weyl           \\
-    7 & 1  & -  & -  & Majorana                 \\
-  \bottomrule
-  \end{tabular}
-  \caption{Minimal spinor types in various dimensions.
-  Entries ``-'' indicate that the relevant matrices do not exist.
-  ``Majorana, Weyl'' indicates that Majorana spinors exist, Weyl spinors exist, but Majorana-Weyl do not.
-  If Majorana-Weyl spinors exist, then Majorana spinors and Weyl spinors also exist.
-  Similarly, if Symplectic-Majorana-Weyl spinors exist, then Symplectic-Majorana spinors and Weyl spinors also exist.
-  Dirac spinors always exist.
-  }\label{tab:types}
-\end{table}
-
+%We can split Dirac spinors into their ``real'' and ``imaginary'' parts
+%%
+%\begin{equation}\label{eq:psedoreim}
+%  \psib_r = \frac{\psib - \Omega \B \psib^\ast}{2},
+%  \quad
+%  \psib_i = \frac{\psib + \Omega \B \psib^\ast}{2\ir},
+%  \qquad
+%  \B \psib_r^\ast = \Omegab \psib_r,
+%  \quad
+%  \B \psib_i^\ast = \Omegab \psib_i,
+%  \quad
+%  \psib = \psib_r + \ir \psib_i.
+%\end{equation}
+%%
+%Here both $\psib_r$ and $\psib_i$ are \emph{symplectic-Majorana}, \emph{pseudo-Majorana} or \emph{pseudoreal spinors}.
+%Symplectic-Majorana spinors have $2^{\floor{d/2}}$ real dimensions.
+%Note that, as with Majorana spinors, symplectic-anti-Majorana spinors are just symplectic-Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor either.
 
 
 %================================================================================
