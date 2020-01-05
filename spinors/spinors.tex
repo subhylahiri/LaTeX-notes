@@ -558,50 +558,84 @@ If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm}
 %
 \begin{equation*}
 \begin{alignedat}{4}
-  \St_\Lambda &= \hat{g}_\Lambda \Gammab \S_\Lambda &
-    &= s_\Lambda \hat{g}_\Lambda \S_\Lambda \Gammab, \\
-  \A &= g_\Lambda \S_\Lambda^\dag \A \S_\Lambda &
-    &= s_1 g_\Lambda \St_\Lambda^\dag \A \St_\Lambda, &\qquad
-  \At &= s_\Lambda g_\Lambda \S_\Lambda^\dag \At \S_\Lambda &
-    &= s_1 s_\Lambda g_\Lambda \St_\Lambda^\dag \At \St_\Lambda, \\
-  \B &= \e^{\ir\phi_\Lambda} \S_\Lambda^\dag \B \S_\Lambda &
-    &= s_2 \e^{\ir\phi_\Lambda} \St_\Lambda^\dag \B \St_\Lambda, &\qquad
-  \Bt &= s_\Lambda \e^{\ir\phi_\Lambda} \S_\Lambda^\dag \Bt \S_\Lambda &
-    &= s_2 s_\Lambda \e^{\ir\phi_\Lambda} \St_\Lambda^\dag \Bt \St_\Lambda, \\
-  \C &= g_\Lambda \e^{-\ir\phi_\Lambda} \S_\Lambda^\dag \C \S_\Lambda &
-    &= s_3 g_\Lambda \e^{-\ir\phi_\Lambda} \St_\Lambda^\dag \C \St_\Lambda, &\qquad
-  \Ct &= s_\Lambda g_\Lambda \e^{-\ir\phi_\Lambda} \S_\Lambda^\dag \Ct \S_\Lambda &
-    &= s_3 s_\Lambda g_\Lambda \e^{-\ir\phi_\Lambda} \St_\Lambda^\dag \Ct \St_\Lambda,
+  h_{\Lambda,\Lambda'}^2 &= \frac{g_{\Lambda}g_{\Lambda'}}{g_{\Lambda\Lambda'}}
+    \mathrlap{\e^{\ir(\phi_{\Lambda\Lambda'} - \phi_\Lambda - \phi_{\Lambda'})}} &&&
+  \Gammab \S_\Lambda
+    &= s_\Lambda \S_\Lambda \Gammab 
+    \mathrlap{= \hat{g}_\Lambda \St_\Lambda,} \\
+  \S_\Lambda \S_{\Lambda'} 
+    &= s_{\Lambda} \hat{g}_\Lambda \hat{g}_{\Lambda'}\, \St_\Lambda \St_{\Lambda'} &
+    &= h_{\Lambda,\Lambda'}\, \S_{\Lambda\Lambda'}, &\qquad
+  \hat{g}_{\Lambda} \St_\Lambda \S_{\Lambda'} 
+    &= s_{\Lambda} \hat{g}_{\Lambda'}\, \S_\Lambda \St_{\Lambda'} &
+    &= \hat{g}_{\Lambda\Lambda'}h_{\Lambda,\Lambda'}\, \St_{\Lambda\Lambda'}, \\ 
+  \S_\Lambda^\dag \A \S_\Lambda
+    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda^\dag \A \St_\Lambda &
+    &= g_\Lambda \A, &
+  \S_\Lambda^\dag \At \S_\Lambda
+    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda^\dag \At \St_\Lambda &
+    &= s_\Lambda g_\Lambda \At, \\
+  \S_\Lambda\inv \B \S_\Lambda^\ast
+    &= \frac{s_2 \hat{g}_\Lambda^\ast}{\hat{g}_\Lambda} \,
+      \St_\Lambda\inv \B \St_\Lambda^\ast &
+    &= \e^{\ir\phi_\Lambda} \B, &
+  \S_\Lambda\inv \Bt \S_\Lambda^\ast
+    &= \frac{s_2 \hat{g}_\Lambda^\ast}{\hat{g}_\Lambda} \,
+      \St_\Lambda\inv \Bt \St_\Lambda^\ast &
+    &= s_\Lambda \e^{\ir\phi_\Lambda} \Bt, \\
+  \S_\Lambda\trans \C \S_\Lambda
+    &= s_3 \hat{g}_\Lambda^2\, \St_\Lambda\trans \C \St_\Lambda &
+    &= g_\Lambda \e^{-\ir\phi_\Lambda} \C, &
+  \S_\Lambda\trans \Ct \S_\Lambda 
+    &= s_3 \hat{g}_\Lambda^2\, \St_\Lambda\trans \Ct \St_\Lambda &
+    &= s_\Lambda g_\Lambda \e^{-\ir\phi_\Lambda} \Ct,
 \end{alignedat}
 \end{equation*}
 %
-where \(g_\Lambda\) and \(\phi_\Lambda\) are real and  \(s_\Lambda = \pm 1\).
+where \(g_\Lambda\) and \(\phi_\Lambda\) are real, the argument of the square root is positive, \(s_\Lambda = \pm 1\), and \(s_{\Lambda\Lambda'} = s_{\Lambda} s_{\Lambda'}\).
 We can use the freedom to scale \(\S_\Lambda\) to set \(g_\Lambda = \e^{\ir\phi_\Lambda} \equiv r_\Lambda = \pm 1\),
 and the freedom to scale \(\St_\Lambda\) to set \(\hat{g}_\Lambda = 1\).
 This leaves us with:
 %
 \begin{equation}\label{eq:constnormlorentz}
 \begin{alignedat}{4}
-  \St_\Lambda &= \Gammab \S_\Lambda &
-    &= s_\Lambda \S_\Lambda \Gammab, \\
-  r_\Lambda \A &= \S_\Lambda^\dag \A \S_\Lambda &
-    &= s_1 \St_\Lambda^\dag \A \St_\Lambda, &\qquad
-  r_\Lambda s_\Lambda \At &= \S_\Lambda^\dag \At \S_\Lambda &
-    &= s_1 \St_\Lambda^\dag \At \St_\Lambda, \\
-  r_\Lambda \B &= \S_\Lambda^\dag \B \S_\Lambda &
-    &= s_2 \St_\Lambda^\dag \B \St_\Lambda, &\qquad
-  r_\Lambda s_\Lambda \Bt &= \S_\Lambda^\dag \Bt \S_\Lambda &
-    &= s_2 \St_\Lambda^\dag \Bt \St_\Lambda, \\
-  \C &= \S_\Lambda^\dag \C \S_\Lambda &
-    &= s_3 \St_\Lambda^\dag \C \St_\Lambda, &\qquad
-  s_\Lambda \Ct &= \S_\Lambda^\dag \Ct \S_\Lambda &
-    &= s_3 \St_\Lambda^\dag \Ct \St_\Lambda.
+  \frac{r_{\Lambda\Lambda'}}{r_{\Lambda} r_{\Lambda'}}
+    &= \frac{s_{\Lambda\Lambda'}}{s_{\Lambda} s_{\Lambda'}} 
+    = 1, &&&
+  \Gammab \S_\Lambda 
+    &= s_\Lambda \S_\Lambda \Gammab &
+    &= \St_\Lambda, \\
+  \S_\Lambda \S_{\Lambda'} 
+    &= s_{\Lambda} \St_\Lambda \St_{\Lambda'} &
+    &= \S_{\Lambda\Lambda'}, &
+  \St_\Lambda \S_{\Lambda'}
+    &= s_{\Lambda} \S_\Lambda \St_{\Lambda'} &
+    &= \St_{\Lambda\Lambda'}, \\ 
+  \S_\Lambda^\dag \A \S_\Lambda 
+    &= s_1 \St_\Lambda^\dag \A \St_\Lambda &
+    &= r_\Lambda \A, &
+  \S_\Lambda^\dag \At \S_\Lambda 
+    &= s_1 \St_\Lambda^\dag \At \St_\Lambda &
+    &= r_\Lambda s_\Lambda \At, \\
+  \S_\Lambda\inv \B \S_\Lambda^\ast 
+    &= s_2 \St_\Lambda\inv \B \St_\Lambda^\ast &
+    &= r_\Lambda \B, &\qquad
+  \S_\Lambda\inv \Bt \S_\Lambda^\ast 
+    &= s_2 \St_\Lambda\inv \Bt \St_\Lambda^\ast &
+    &= r_\Lambda s_\Lambda \Bt, \\ 
+  \S_\Lambda\trans \C \S_\Lambda 
+    &= s_3 \St_\Lambda\trans \C \St_\Lambda &
+    &= \C, & 
+  \S_\Lambda\trans \Ct \S_\Lambda 
+    &= s_3 \St_\Lambda\trans \Ct \St_\Lambda &
+    &= s_\Lambda \Ct. 
 \end{alignedat}
 \end{equation}
 %
 The signs \(r_\Lambda\) and \(s_\Lambda\) must be constant in any connected component of the Lorentz group,
 and \(s_\Lambda\) only exists in even dimensions 
-(it can be set to 1 or absorbed into \(r_\Lambda\) in odd dimensions).
+(it can be set to 1 in odd dimensions).
+In odd dimensions, which one of \(\S_\Lambda\) or \(\St_\Lambda\) exists can also only depend on which connected component \(\Lambdab\) is in.
   
 %-------Section------------------------------------------------------------------
 
@@ -742,6 +776,45 @@ We use \(\partial_\mu\phi\) to denote the partial derivative of \(\phi\) with re
 \end{equation*}
 %
 
+%-------Section------------------------------------------------------------------
+
+\subsection{Reflections}\label{sec:reflectlorentz}
+
+Now we consider a reflection in the \(k\)'th dimension:
+%
+\begin{equation*}
+  \Lambda^\mu{}_\nu 
+    = \begin{cases}
+        -1 & \mu = \nu = k, \\
+        \delta^\mu_\nu & \text{otherwise},
+      \end{cases}
+  \qquad
+  \Gammab^\mu \S_\Lambda
+  = \begin{cases}
+    -\S_\Lambda \Gammab^\mu & \mu = k, \\
+    \S_\Lambda \Gammab^\mu & \text{otherwise},
+  \end{cases}
+  \qquad
+  \Gammab^\mu \St_\Lambda
+  = \begin{cases}
+    \St_\Lambda \Gammab^\mu & \mu = k, \\
+    -\St_\Lambda \Gammab^\mu & \text{otherwise},
+  \end{cases}
+\end{equation*}
+%
+We can see that \(\Gammab^k\) satisfies the condition for \(\St_\Lambda\).
+If we wish to satisfy the normalisation of \cref{eq:constnormlorentz},
+%
+\begin{equation}\label{eq:reflect}
+  \St_\Lambda = \sqrt{\eta_{kk}s_3}\, \Gammab^k, \qquad
+  \S_\Lambda = \sqrt{\eta_{kk}s_3}\, \Gammab \Gammab^k, \qquad
+  r_\Lambda = \eta_{kk} s_1, \qquad
+  s_\Lambda = -1, 
+\end{equation}
+%
+where the second and fourth do not exist in odd dimensions.
+
+To construct reflections in two different directions, we can multiply the reflections, which also multiplies the signs as in \cref{eq:constnormlorentz}.
 
 
 %-------Section------------------------------------------------------------------
