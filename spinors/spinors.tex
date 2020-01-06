@@ -1,7 +1,5 @@
 % -*- TeX -*- -*- UK -*-
 % ----------------------------------------------------------------
-% !TEX program = pdflatex
-% !BIB program = bibtex
 % **** -----------------------------------------------------------
 \documentclass[11pt]{article}
 % Preamble:
@@ -43,6 +41,7 @@
 \newcommand{\St}{\widetilde{\S}}
 \newcommand{\Cb}{\mathbb{C}}
 \newcommand{\sigmab}{\boldsymbol{\sigma}}
+\newcommand{\Sigmab}{\boldsymbol{\Sigma}}
 \newcommand{\psib}{\boldsymbol{\psi}}
 \newcommand{\Psib}{\boldsymbol{\Psi}}
 \newcommand{\Lambdab}{\boldsymbol{\Lambda}}
@@ -460,7 +459,10 @@ In the \hyperref[sec:explicit]{next section} we will compute these quantities fo
 The same constants apply to all representations of that dimensionality.
 
 But before that, how should a spinor transform under this change of basis?
-The important thing is that the Dirac equation is covariant:
+The important thing is that the Dirac equation%
+\footnote{The Dirac equation here, and all wave equations below assume the timelike-positive signature, \(p^2 = m^2\).
+For the spacelike-positive signature, \(p^2 = - m^2\), multiply \(m\) by \(\ir\).} 
+is covariant:
 %
 \begin{equation*}
   \ir \Gammab^\mu \partial_\mu \Psib = m \Psib
@@ -551,7 +553,7 @@ therefore, either \(\S_\Lambda\) or \(\St_\Lambda\) exists such that
 %
 In even dimensions, both must exist.
 In odd dimensions, only one can exist.
-We postpone discussion of their relation to Lorentz transformations of spinors.
+We postpone discussion of their relation to Lorentz transformations of spinors to \cref{sec:diraclorentz}.
 
 If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm} we can define a set of scalars associated with \(\Lambdab\).
 \Cref{eq:constnorm} also implies relations between these constants:
@@ -650,17 +652,17 @@ If we split \(\Lambda^\mu{}_\nu\) into \((p,q)\) blocks, \cref{eq:lorentz} means
       \Lambdab_3 & \Lambdab_4
     \end{pmatrix}
   \qquad
-\begin{aligned}[t]
+\begin{aligned}
   \Lambdab_1 \Lambdab_1\trans &= \I_p + \Lambdab_2 \Lambdab_2\trans, &
   \Lambdab_1\trans \Lambdab_1 &= \I_p + \Lambdab_3\trans \Lambdab_3, \\
   \Lambdab_4 \Lambdab_4\trans &= \I_p + \Lambdab_3 \Lambdab_3\trans, &
   \Lambdab_4\trans \Lambdab_4 &= \I_p + \Lambdab_2\trans \Lambdab_2, \\
-  \Lambdab_1 \Lambdab_3\trans &= \I_p + \Lambdab_2 \Lambdab_4\trans, &
-  \Lambdab_1\trans \Lambdab_2 &= \I_p + \Lambdab_3\trans \Lambdab_4.
+  \Lambdab_1 \Lambdab_3\trans &= \Lambdab_2 \Lambdab_4\trans, &
+  \Lambdab_1\trans \Lambdab_2 &= \Lambdab_3\trans \Lambdab_4.
 \end{aligned}
 \end{equation*}
 %
-This means that the SVDs look like
+Considering the eigenvectors of the equations in the first two rows, this means that the SVDs look like
 %
 \begin{equation*}
 \begin{aligned}
@@ -715,7 +717,7 @@ This implies that
   % \text{where }\; \Theta_{ij} &= \theta_i \delta_{ij} &
   \sgn \det \Lambdab_4 = \det{\Ub} \det{\Vb},
 \\
-\det\Lambdab = \det{\U} \det{\Ub} \det{\V} \det{\Vb} = \sgn \det \Lambdab_1 \sgn \det \Lambdab_4,
+  \det\Lambdab = \det{\U} \det{\Ub} \det{\V} \det{\Vb} = \sgn \det \Lambdab_1 \sgn \det \Lambdab_4,
 \end{lgathered}
 \end{equation}
 %
@@ -772,13 +774,115 @@ When we use notation like \(\phi(x)\) it is really shorthand for \(\phi(x^1,x^2,
 We use \(\partial_\mu\phi\) to denote the partial derivative of \(\phi\) with respect to its \(\mu\)'th argument, which may not be \(x^\mu\), e.g.
 %
 \begin{equation*}
-  \pdiff{\phi(y(x))}{x^\mu} = \pdiff{y^\nu}{x^\mu} \, \partial_\nu \phi(y).
+  \pdiff{}{x^\mu} \phi(y(x)) = \pdiff{y^\nu}{x^\mu} \, \partial_\nu \phi(y).
 \end{equation*}
 %
+Under an active Lorentz transform, a scalar field transforms as:
+%
+\begin{equation*}
+\begin{aligned}
+  \phi(x) \mapsto \phi'(x) = \phi(\Lambda\inv x)
+  \qquad \implies
+  \partial_\mu \phi(x) \mapsto \partial_\mu \phi'(x) 
+    &= \pdiff{}{x^\mu} \phi(\Lambda\inv x)
+    = \prn{\Lambda\inv}^\nu{}_\mu\, \partial_\nu \phi(\Lambda\inv x) \\
+    &= \Lambda_\mu{}^\nu \partial_\nu \phi(\Lambda\inv x), \\
+  \partial^\mu \phi' 
+    &\equiv \eta^{\mu\nu} \partial_\nu \phi'
+    = \eta^{\mu\nu} \Lambda_\nu{}^\rho\, \partial_\rho \phi \\
+    &= \eta^{\mu\nu} \Lambda_\nu{}^\rho \eta_{\rho\sigma}\, \partial^\sigma \phi 
+    = \Lambda^\mu{}_\nu \partial^\nu \phi.
+\end{aligned}
+\end{equation*}
+%
+We can see that the Klein-Gordon equation%
+\footnote{All wave equations below assume the timelike-positive signature, \(p^2 = m^2\).
+For the spacelike-positive signature, \(p^2 = - m^2\), multiply \(m\) by \(\ir\).} 
+is Lorentz invariant.
+Given any particular solution \(\prn{\partial_\mu \partial^\mu + m^2} \phi(x) = 0\):
+%
+\begin{equation}\label{eq:kleingordoninvt}
+  \partial_\mu \partial^\mu \phi' 
+    = \Lambda_\mu{}^\rho \Lambda^\mu{}_\sigma \partial_\rho \partial^\sigma \phi 
+    % = \eta^{\mu\nu} \partial_\mu \partial_\nu \phi'
+    % = \eta^{\mu\nu} \Lambda_\mu{}^\rho \Lambda_\nu{}^\sigma \partial_\rho \partial_\sigma \phi 
+    % = \eta^{\rho\sigma} \partial_\rho \partial_\sigma \phi
+    = \delta^\rho_\sigma\, \partial_\rho \partial^\sigma \phi
+    = \partial_\rho \partial^\rho \phi
+    = -m^2 \phi
+    = -m^2 \phi',
+\end{equation}
+%
+and therefore \(\phi'\) is also a solution to the Klein-Gordon equation..
+
+For a vector field, the simple transform for scalars is not enough to satisfy the massive vector wave equation.
+Given a solution, \(\partial^\mu \partial_\nu V^\nu - \partial^\nu \partial_\nu V^\mu = m^2 V^\mu\):
+%
+\begin{equation*}
+  V'^\mu(x) = V^\mu(\Lambda\inv x)
+  \implies
+  \partial^\mu \partial_\nu V'^\nu - \partial^\nu \partial_\nu V'^\mu 
+    = \Lambda^\mu{}_\rho \Lambda_\nu{}^\sigma \partial^\rho \partial_\sigma V^\nu
+      - \partial^\nu \partial_\nu V^\mu 
+    \neq m^2 V'^\mu.
+\end{equation*}
+%
+We also need to transform the spin degrees of freedom, the vector index:
+%
+\begin{equation}\label{eq:vectorcovt}
+\begin{aligned}
+  V'^\mu(x) = \Lambda^\mu{}_\nu V^\nu(\Lambda\inv x)
+  \implies
+  \partial^\mu \partial_\nu V'^\nu - \partial^\nu \partial_\nu V'^\mu 
+    &= \Lambda^\mu{}_\rho \prn{\partial^\rho \partial_\nu V^\nu
+      - \partial^\nu \partial_\nu V^\rho} \\
+    &= m^2 \Lambda^\mu{}_\rho  V^\rho
+    = m^2 V'^\mu.
+\end{aligned}
+\end{equation}
+%
+The left/right hand sides of the massive vector wave equation are not invariant under Lorentz transforms.
+But they both transform the same way, so \(V^\mu\) being a solution implies that \(V'^\mu\) is also a solution.
+In other words, the massive vector wave equation is covariant under Lorentz transforms.
 
 %-------Section------------------------------------------------------------------
 
-\subsection{Reflections}\label{sec:reflectlorentz}
+\subsection{Proper orthochronous Lorentz transforms}\label{sec:properlorentz}
+
+In this section we consider Lorentz transforms with \(\det \Lambdab = \sgn \det \Lambdab_1 \sgn \det \Lambdab_4 = 1\), \ie the \((+,+)\) component that is connected to the identity.
+For the identity transform we set \(\S_\Lambda = \I\), which clearly has \(r_\Lambda = s_\Lambda = 1\).
+This means that \(\S_\Lambda\) exists and \(r_\Lambda = s_\Lambda = 1\) throughout the \((+,+)\) component.
+In even dimensions we can also define \(\St\).
+
+Let us extend \cref{eq:lielorentz,eq:spinlorentz} to spinors:
+%
+\begin{equation}\label{eq:liespin}
+\begin{aligned}
+  \Lambda = \exp(\ir\lambdab),
+  \qquad
+  \S_\Lambda = \exp(\ir \Sigmab_\lambda)
+  \qquad \implies
+  \lambda^\mu{}_\nu \Gammab^\nu = \brk{\Gammab^\mu, \Sigmab_\lambda}.
+\end{aligned}
+\end{equation}
+%
+If we apply this to the generators in \cref{eq:genlorentz} we find
+%
+\begin{equation}\label{eq:genspin}
+  \lambda_{ab}{}^\mu{}_\nu \Gammab^\nu
+    = \ir \prn{\delta^\mu_a \Gammab_b - \delta^\mu_b \Gammab_a} 
+    = \brk{\Gammab^\mu, \Sigmab_{ab}}
+  \qquad
+  \Sigmab_{ab} = \frac{\ir}{4}\brk{\Gammab_a, \Gammab_b}.
+\end{equation}
+%
+The first equation determines \(\Sigmab_{ab}\) up to adding a multiple of the identity, corresponding to the freedom to multiply \(\S\) by a scalar.
+In \cref{eq:constnormlorentz} we chose to set \(\det \S_\Lambda = \pm 1\), which requires \(\tr \Sigmab_\lambda = 0\), which fixes the second equation in \cref{eq:genspin} as our chosen solution to the first equation.
+
+
+%-------Section------------------------------------------------------------------
+
+\subsection{Improper Lorentz transforms}\label{sec:reflectlorentz}
 
 Now we consider a reflection in the \(k\)'th dimension:
 %
@@ -815,6 +919,23 @@ If we wish to satisfy the normalisation of \cref{eq:constnormlorentz},
 where the second and fourth do not exist in odd dimensions.
 
 To construct reflections in two different directions, we can multiply the reflections, which also multiplies the signs as in \cref{eq:constnormlorentz}.
+
+In conclusion,
+%
+\begin{itemize}
+  \item In \((+,+)\), \(r_\Lambda = 1\), \(s_\Lambda = 1\), and \(\S\) exists.
+  \item In \((-,+)\), \(r_\Lambda = -s_1\), \(s_\Lambda = -1\), and \(\St\) exists.
+  \item In \((+,-)\), \(r_\Lambda = s_1\), \(s_\Lambda = -1\), and \(\St\) exists.
+  \item In \((-,-)\), \(r_\Lambda = -1\), \(s_\Lambda = 1\), and \(\S\) exists.
+\end{itemize}
+%
+In even dimensions, \(s_\Lambda = \det \Lambdab\). 
+In odd dimensions \(\det \Lambdab = 1 \implies \S\) exists, \(\det \Lambdab = -1 \implies \St\) exists.
+In any dimensions \(r_\Lambda = \theta(s_1) \sgn \det \Lambdab_1 + \theta(-s_1) \sgn \det \Lambdab_4\).
+
+In \cref{sec:constgendim} we will see that \(s_1 = (-1)^{pq}\).
+When \(p\) and \(q\) are both odd \(r_\Lambda = \sgn \det \Lambdab_4\), 
+otherwise \(r_\Lambda = \sgn \det \Lambdab_1\).
 
 
 %-------Section------------------------------------------------------------------
