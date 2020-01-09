@@ -44,10 +44,14 @@
 \newcommand{\Sigmab}{\boldsymbol{\Sigma}}
 \newcommand{\psib}{\boldsymbol{\psi}}
 \newcommand{\Psib}{\boldsymbol{\Psi}}
-\newcommand{\Lambdab}{\boldsymbol{\Lambda}}
 \newcommand{\lambdab}{\boldsymbol{\lambda}}
+\newcommand{\Lambdab}{\boldsymbol{\Lambda}}
+\newcommand{\thetab}{\boldsymbol{\theta}}
 \newcommand{\Thetab}{\boldsymbol{\Theta}}
+\newcommand{\phib}{\boldsymbol{\phi}}
+\newcommand{\Phib}{\boldsymbol{\Phi}}
 \newcommand{\Omegab}{\boldsymbol{\Omega}}
+\newcommand{\zetab}{\boldsymbol{\zeta}}
 \newcommand{\alphat}{\tilde{\alpha}}
 \newcommand{\betat}{\tilde{\beta}}
 \newcommand{\chit}{\tilde{\chi}}
@@ -516,7 +520,7 @@ We can construct these invariants:
 \end{gathered}
 \end{equation}
 %
-The quantity \( \Psib^\dag \A \) occurs frequently enough to have its own notation \( \overline{\Psib} \equiv \Psib^\dag \A \).
+The quantity \( \Psib^\dag \A \) or \( \Psib^\dag \At \) occurs frequently enough to have its own notation \( \overline{\Psib} \equiv \Psib^\dag \A \).
 
 
 %-------Section------------------------------------------------------------------
@@ -890,7 +894,7 @@ Therefore, the Lorentz transform of a spinor is
 \end{aligned}
 \end{equation}
 %
-What happens when only \(\St_\Lambda\) exists????????
+What happens when only \(\St_\Lambda\) exists???????? \(\St_\Lambda = \S_{-\Lambda}\)?
 
 Note that, according to \cref{eq:constnormlorentz}, we have
 %
@@ -905,9 +909,9 @@ Note that, according to \cref{eq:constnormlorentz}, we have
   \Psib^\dag \At &\longmapsto \Psib'^\dag \At &
     &= r_\Lambda s_\Lambda \Psib^\dag \At \S_\Lambda\inv, \\ 
   \B \Psib^\ast &\longmapsto \B \Psib'^\ast &
-    &= r_\Lambda \S_\Lambda \B \Psib, & 
+    &= r_\Lambda \S_\Lambda \B \Psib^\ast, & 
   \Bt \Psib^\ast &\longmapsto \Bt \Psib'^\ast &
-    &= r_\Lambda s_\Lambda \S_\Lambda \Bt \Psib, \\ 
+    &= r_\Lambda s_\Lambda \S_\Lambda \Bt \Psib^\ast, \\ 
   \Psib\trans \C &\longmapsto \Psib'{}\trans \C &
     &= \Psib\trans \C \S_\Lambda\inv, &
   \Psib\trans \Ct &\longmapsto \Psib'{}\trans \Ct &
@@ -946,7 +950,7 @@ Let us extend \cref{eq:lielorentz,eq:spinlorentz} to spinors:
 If we apply this to the generators in \cref{eq:genlorentz} we find
 %
 \begin{equation}\label{eq:genspin}
-  T^{ab\mu}{}_\nu \Gammab^\nu
+  L^{ab\mu}{}_\nu\, \Gammab^\nu
     = \eta^{a\mu} \Gammab^b - \eta^{b\mu} \Gammab^a 
     = \ir \brk{\Gammab^\mu, \Sigmab^{ab}},
   \qquad
@@ -968,25 +972,25 @@ Now we consider a reflection in the \(k\)'th dimension:
 \begin{equation*}
   \Lambda^\mu{}_\nu 
     = \begin{cases}
-        -1 & \mu = \nu = k, \\
-        \delta^\mu_\nu & \text{otherwise},
+        -\delta^\mu_\nu, \\
+        \delta^\mu_\nu,
       \end{cases}
-  \qquad
+  \quad
   \Gammab^\mu \S_\Lambda
   = \begin{cases}
-    -\S_\Lambda \Gammab^\mu & \mu = k, \\
-    \S_\Lambda \Gammab^\mu & \text{otherwise},
-  \end{cases}
-  \qquad
+      -\S_\Lambda \Gammab^\mu , \\
+      \S_\Lambda \Gammab^\mu ,
+    \end{cases}
+  \quad
   \Gammab^\mu \St_\Lambda
   = \begin{cases}
-    \St_\Lambda \Gammab^\mu & \mu = k, \\
-    -\St_\Lambda \Gammab^\mu & \text{otherwise},
-  \end{cases}
+      \St_\Lambda \Gammab^\mu, & \mu = k, \\
+      -\St_\Lambda \Gammab^\mu, & \text{otherwise},
+    \end{cases}
 \end{equation*}
 %
 We can see that \(\Gammab^k\) satisfies the condition for \(\St_\Lambda\).
-If we wish to satisfy the normalisation of \cref{eq:constnormlorentz},
+Applying the normalisation of \cref{eq:constnormlorentz}:
 %
 \begin{equation}\label{eq:reflect}
   \St_\Lambda = \sqrt{\eta_{kk}s_3}\, \Gammab^k, \qquad
@@ -998,16 +1002,37 @@ If we wish to satisfy the normalisation of \cref{eq:constnormlorentz},
 where the second and fourth do not exist in odd dimensions.
 
 To construct reflections in two different directions, we can multiply the reflections, which also multiplies the signs as in \cref{eq:constnormlorentz}.
+%
+\begin{gather}
+%\begin{gathered}
+  \Lambda^\mu{}_\nu 
+    = \begin{cases}
+        -\delta^\mu_\nu, \\
+        \delta^\mu_\nu,
+      \end{cases}
+  \quad
+  \Gammab^\mu \S_\Lambda
+  = \begin{cases}
+    -\S_\Lambda \Gammab^\mu, \\
+    \S_\Lambda \Gammab^\mu,
+  \end{cases}
+  \quad
+  \Gammab^\mu \St_\Lambda
+  = \begin{cases}
+    \St_\Lambda \Gammab^\mu, & \mu = k \text{ or } l, \\
+    -\St_\Lambda \Gammab^\mu, & \text{otherwise},
+  \end{cases}
+  \notag \\[0.5em] \label{eq:reflect2}
+  \S_\Lambda = \sqrt{\eta_{kk}\eta_{ll}}\, \Gammab^k \Gammab^l, \qquad
+  \St_\Lambda = \sqrt{\eta_{kk}\eta_{ll}}\, \Gammab \Gammab^k \Gammab^l, \qquad
+  r_\Lambda = \eta_{kk} \eta_{ll}, \qquad
+  s_\Lambda = 1, 
+%\end{gathered}
+\end{gather}
+%
+where the second and fourth do not exist in odd dimensions.
 
-In conclusion,
-%
-\begin{itemize}
-  \item In \((+,+)\), \(r_\Lambda = 1\), \(s_\Lambda = 1\), and \(\S\) exists.
-  \item In \((-,+)\), \(r_\Lambda = -s_1\), \(s_\Lambda = -1\), and \(\St\) exists.
-  \item In \((+,-)\), \(r_\Lambda = s_1\), \(s_\Lambda = -1\), and \(\St\) exists.
-  \item In \((-,-)\), \(r_\Lambda = -1\), \(s_\Lambda = 1\), and \(\S\) exists.
-\end{itemize}
-%
+These signs are summarised in \cref{tab:constlorentz}.
 In even dimensions, \(s_\Lambda = \det \Lambdab\). 
 In odd dimensions \(\det \Lambdab = 1 \implies \S\) exists, \(\det \Lambdab = -1 \implies \St\) exists.
 In any dimensions \(r_\Lambda = \theta(s_1) \sgn \det \Lambdab_1 + \theta(-s_1) \sgn \det \Lambdab_4\).
@@ -1015,6 +1040,21 @@ In any dimensions \(r_\Lambda = \theta(s_1) \sgn \det \Lambdab_1 + \theta(-s_1) 
 In \cref{sec:constgendim} we will see that \(s_1 = (-1)^{pq}\).
 When \(p\) and \(q\) are both odd \(r_\Lambda = \sgn \det \Lambdab_4\), 
 otherwise \(r_\Lambda = \sgn \det \Lambdab_1\).
+
+\begin{table}
+  \centering
+  \begin{tabular}{CRRRll}
+    \toprule
+    \text{Component} & r_\Lambda & s_\Lambda & r_\Lambda s_\Lambda & \(\S\) exists & \(\St\) exists \\
+    \midrule
+    (+,+) & 1    & 1  & 1    & yes        & even \(d\) \\
+    (-,+) & -s_1 & -1 & s_1  & even \(d\) & yes        \\
+    (+,-) & s_1  & -1 & -s_1 & even \(d\) & yes        \\
+    (-,-) & -1   & 1  & -1   & yes        & even \(d\) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Signs associated with improper Lorentz transforms, see \cref{eq:constnormlorentz}.}\label{tab:constlorentz}
+\end{table}
 
 
 %-------Section------------------------------------------------------------------
@@ -1251,7 +1291,7 @@ We choose
 %
 The expression for $\At$ in \cref{sec:eveneven} fails to anticommute with $\Gammab^d$.
 We see that $\alpha = 1$.
-The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but we can say $s_1 = 1$.
+The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but it will be convenient to say $s_1 = -1$.
 
 The choices of $\B$ and $\Bt$ in \cref{sec:eveneven} already have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
 If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \B = (-1)^{\floor{d/2}}\B \Gammab^d$ and $\Gammab^d \Bt = (-1)^{\floor{d/2}}\Bt \Gammab^d$, only one of which is the correct behaviour.
@@ -1314,14 +1354,15 @@ We find
 \end{equation*}
 %
 Once again, we can choose any value of $s_3$.
-We also find that we can write $\chi = (-1)^{\floor{d/4}}$ and $\chit = (-1)^{\floor{(d+2)/4}}$ which is consistent with \(s_3 = s_2\).
+We also find that we can write $\chi = (-1)^{\floor{d/4}}$ and $\chit = (-1)^{\floor{(d+2)/4}}$ which is consistent with \(s_3 = -s_2\).
 This implies that $\hat{s} = (-1)^{p/2}$.
 This leaves us with
 %
 \begin{equation}\label{eq:constevenodd}
   p, q = 0,1 \pmod 2 : \quad
   \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
-  s_2 = s_3 = (-1)^{\floorfrac{p-q}{2}} \quad
+  s_1 = -1, \quad
+  s_2 = -s_3 = (-1)^{\floorfrac{p-q}{2}} \quad
   \hat{s} = (-1)^{\frac{p}{2}}.
 \end{equation}
 %
@@ -1435,9 +1476,12 @@ with unspecified constants equal to 1.
 Now let's collect the results of the last four sections,
 \cref{eq:consteveneven,eq:constoddodd,eq:constevenodd,eq:constoddeven}.
 In all cases we found $\alpha = 1$.
-We found that $s_1 = 1$ except when $p$ and $q$ are both odd.
-This can be written as $s_1 = (-1)^{pq}$.
-We can reconstruct $\alphat = s_1 = (-1)^{pq}$.
+We found that $s_1 = 1$ except when %$p$ and $q$ are both odd.
+$q$ is odd.
+This can be written as %$s_1 = (-1)^{pq}$.
+$s_1 = (-1)^{q}$.
+We can reconstruct %$\alphat = s_1 = (-1)^{pq}$.
+$\alphat = s_1 = (-1)^{q}$.
 
 The constant $\beta$ could always be expressed as $\beta = (-1)^{\floorfrac{p-q+2}{4}}$,
 and $s_2 = (-1)^{\floorfrac{p-q}{2}}$.
@@ -1501,21 +1545,21 @@ Depending on the dimensionality, it can be useful to split Dirac spinors into so
     % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
     $p-q \mod 8$ & $\beta$ & $\betat$ & $s_2$ & Spinor types  \\
   \midrule
-    0 & 1  & 1  & 1  & Majorana-Weyl            \\
-    1 & -  & 1  & -  & Majorana                 \\
-    2 & -1 & 1  & -1 & Majorana, Weyl           \\
-    3 & -1 & -  & -  & Symplectic-Majorana      \\
-    4 & -1 & -1 & 1  & Symplectic-Majorana-Weyl \\
-    5 & -  & -1 & -  & Symplectic-Majorana      \\
-    6 & 1  & -1 & -1 & Majorana, Weyl           \\
-    7 & 1  & -  & -  & Majorana                 \\
+    0 & 1  & 1  & 1  & Majorana-Weyl        \\
+    1 & -  & 1  & -  & Majorana             \\
+    2 & -1 & 1  & -1 & Majorana, Weyl       \\
+    3 & -1 & -  & -  & Pseudo-Majorana      \\
+    4 & -1 & -1 & 1  & Pseudo-Majorana-Weyl \\
+    5 & -  & -1 & -  & Pseudo-Majorana      \\
+    6 & 1  & -1 & -1 & Majorana, Weyl       \\
+    7 & 1  & -  & -  & Majorana             \\
   \bottomrule
   \end{tabular}
   \caption{Minimal spinor types in various dimensions.
   Entries ``-'' indicate that the relevant matrices do not exist.
   ``Majorana, Weyl'' indicates that Majorana spinors exist, Weyl spinors exist, but Majorana-Weyl do not.
   If Majorana-Weyl spinors exist, then Majorana spinors and Weyl spinors also exist.
-  Similarly, if Symplectic-Majorana-Weyl spinors exist, then Symplectic-Majorana spinors and Weyl spinors also exist.
+  Similarly, if Pseudo-Majorana-Weyl spinors exist, then Pseudo-Majorana spinors and Weyl spinors also exist.
   Dirac spinors always exist.
   }\label{tab:types}
 \end{table}
@@ -1529,6 +1573,7 @@ In even-dimensional spaces, we have $\Gammab^2 = \I$, so its eigenvalues are $\p
 We can argue that $\tr \Gammab = 0$ using the same reasoning as for the $\Gammab^\mu$.
 Therefore, the two eigenspaces have the same dimensionality, $2^{\floor{d/2}-1}$.
 Members of the +1 eigenspace are called \emph{Weyl} or \emph{chiral spinors}, the -1 eigenspace are antichiral spinors.
+Whereas Dirac spinors have $2^{\floor{d/2}}$ complex dimensions, so Chiral and antichiral spinors have $2^{\floor{d/2}-1}$ complex dimensions.
 
 Is this a Lorentz invariant concept?
 Note that from \cref{eq:constnormlorentz,sec:reflectlorentz} we have \(\Gammab \S_\Lambda \Psib = \det (\Lambda)\, \S_\Lambda \Gammab \Psib\).
@@ -1601,10 +1646,10 @@ A \emph{single} Weyl spinor can only be used for massless particles.
 \subsection{Majorana spinors}\label{sec:majorana}
 
 Can we impose a reality condition, like $\Psib^\ast = \Psib$?
-Changes of basis can be complex, so a spinor that is real in one basis will not necessarily be real in another basis.
-The problem comes from the fact that $\Psib$ and $\Psib^\ast$ transform differently under a change of basis.
+Changes of basis and spinor Lorentz transforms can be complex, so a spinor that is real in one basis will not necessarily be real in another basis.
+The problem comes from the fact that $\Psib$ and $\Psib^\ast$ transform differently under a change of basis/Lorentz transform.
 If we want an invariant characterisation of real spinors, we need a version of complex conjugation that transforms the same way.
-From \cref{eq:spinorbasis} we see that this is provided by \emph{charge conjugation}: \( \Psib \to \B \Psib^\ast \) or \( \Bt \Psib^\ast \).
+From \cref{eq:spinorbasis,eq:cclorentz} we see that this is provided by \emph{charge conjugation}: \( \Psib \to \B \Psib^\ast \) or \( \Bt \Psib^\ast \).
 We will focus on $\B$ below, but our discussion applies equally well to $\Bt$.
 
 But are there any self-conjugate spinors, \ie solutions to the condition \( \Psib = \B \Psib^\ast \)?%
@@ -1623,7 +1668,8 @@ In block matrix format:
 %
 \begin{equation*}
 \begin{gathered}
-  \Psib \to \begin{pmatrix}
+  \Psib \longmapsto
+            \begin{pmatrix}
               \Re \Psib \\
               \Im \Psib \\
             \end{pmatrix}
@@ -1632,10 +1678,11 @@ In block matrix format:
               \psib_i \\
             \end{pmatrix}
   , \qquad
-  \B \to \begin{pmatrix}
-           \Re \B & -\Im \B \\
-           \Im \B &  \Re \B \\
-         \end{pmatrix}
+  \B \longmapsto 
+        \begin{pmatrix}
+          \Re \B & -\Im \B \\
+          \Im \B &  \Re \B \\
+        \end{pmatrix}
   \equiv \begin{pmatrix}
            \B_r & -\B_i \\
            \B_i &  \B_r \\
@@ -1643,7 +1690,7 @@ In block matrix format:
   , \\
 %\begin{aligned}
   \implies
-  \B \B^\ast \to
+  \B \B^\ast \longmapsto
          \begin{pmatrix}
            \B_r & -\B_i \\
            \B_i &  \B_r \\
@@ -1670,8 +1717,8 @@ In block matrix format:
 Multiplication of these real doubled matrices is equivalent to multiplication of the original complex matrices.
 In this language complex conjugation is a linear operation, so
 %
-\begin{equation*}
-  \B \Psib^\ast \to
+\begin{equation}\label{eq:doublingtrick}
+  \B \Psib^\ast \longmapsto
          \begin{pmatrix}
            \B_r & -\B_i \\
            \B_i &  \B_r \\
@@ -1694,9 +1741,9 @@ In this language complex conjugation is a linear operation, so
            \psib_i \\
          \end{pmatrix}
   \equiv \mathcal{B} \psib.
-\end{equation*}
+\end{equation}
 %
-Therefore, it comes down to the eigenvalues of the operator in the final expression.
+Therefore, it comes down to the eigenvalues of the operator \(\mathcal{B}\).
 But
 %
 \begin{equation*}
@@ -1744,20 +1791,100 @@ In such a basis all of the $\Gammab^\mu$ are real (or all imaginary), and the co
 
 %-------Section------------------------------------------------------------------
 
-\subsection{Symplectic-Majorana spinors}\label{sec:symplecticmajorana}
+\subsection{Symplectic/Pseudo-Majorana spinors}\label{sec:symplecticmajorana}
 
 If we consult \cref{tab:types}, we see that when \( p-q = 3,4,5 \pmod 8 \), neither $\beta$ nor $\betat$ is one.
-In these cases it is impossible for a spinor to be self-conjugate
-(the doubling trick doesn't help because the eigenvalues are $\pm\ir$, which are matrices in that language, not scalars).
+In these cases it is impossible for a spinor to be self-conjugate.
+The doubling trick of \cref{eq:doublingtrick} doesn't work the same way here because the eigenvalues are $\pm\ir$, which are matrices in that language, not scalars.
 However, it is possible to group spinors into pairs such that
 %
 \begin{equation}\label{eq:pseudomajorana}
-  \B \psib_1^\ast = \psib_2,
+  \psib_1 = \B \psib_2^\ast,
   \qquad
-  \B \psib_2^\ast = -\psib_1.
+  \psib_2 = - \B \psib_1^\ast.
 \end{equation}
 %
-This endows spinors with a symplectic structure, like phase space in Hamiltonian mechanics.
+This endows spinors with a symplectic structure, like the Poisson bracket for phase space in Hamiltonian mechanics.
+
+We can see this by temporarily extending the doubling trick of  of \cref{eq:doublingtrick} from \(\R^{2n}\) to \(\Cb^{2n}\).
+Then we can find a set of basis eigenvectors, \(\zetab_a,\zetab^\ast_a\), \(a = 1,\ldots,n\):
+%
+\begin{equation*}
+  \mathcal{B} \zetab_a = \ir \zetab_a,
+  \qquad
+  \mathcal{B} \zetab^\ast_a = -\ir \zetab^\ast_a.
+\end{equation*}
+%
+These vectors do not come from any spinors in \(\Cb^n\) because they are complex.
+But their real and imaginary parts, \(\thetab_a,\phi_a\), do come from spinors \(\Theta_a,\Phi_a\):
+%
+\begin{equation*}
+\begin{aligned}
+  \Thetab_a \longmapsto \thetab_a &= \frac{\zetab_a + \zetab^\ast_a}{2}, &
+    &&
+  \mathcal{B} \thetab_a &= - \phib_a, &
+    &&
+  \B \Thetab_a^\ast &= - \Phib_a, \\[-0.8em]
+  &&
+    \qquad &\smash{\implies} \qquad &
+  &&
+    \qquad &\smash{\implies} \qquad \\[-0.8em]
+  \Phib_a \longmapsto \phib_a &= \frac{\zetab - \zetab^\ast}{2\ir}, &
+    &&
+  \mathcal{B} \phib_a &= \thetab_a, &
+    &&
+  \B \Phib_a^\ast &= \Thetab_a.
+\end{aligned}
+\end{equation*}
+%
+In \(\R^{2n}\) we have \(2n\) linearly independent vectors, \(\theta_a,\phi_a\)
+(they must be linearly independent, otherwise \(\zetab_a,\zetab^\ast_a\) would not be linearly independent: any putative counterexample to one can be converted to a counterexample of the other).
+Therefore any real vector \(\psib\) can be written as a linear combination of the \(\theta_a,\phi_a\) with \emph{real} coefficients.
+Because the map between spinors in \(\Cb^n\) and vectors in \(\R^{2n}\) preserves real linear combinations, this can be carried over to any spinor \(\Psib\):
+%
+\begin{equation*}
+  \Psib = \sum_{a=1}^n x_a \Thetab_a + y_a \Phib_a
+  \qquad \longmapsto \qquad
+  \psib = \sum_{a=1}^n x_a \thetab_a + y_a \phib_a.
+\end{equation*}
+%
+We can use this two split a spinor into two parts:
+%
+\begin{equation*}
+\begin{aligned}
+  \Psib_1 = \Psib_{1x} + \Psib_{1y} = \B \Psib_2^\ast, 
+  \qquad
+  \Psib_{1x} &= \sum_a x_a \Thetab_a, &\qquad
+  \Psib_{1x} &= \B \Psib_{2y}^\ast, &\quad
+  \Psib_{1y} &= - \B \Psib_{2x}^\ast, 
+  \\
+  \Psib_{1y} &= \sum_a y_a \Phib_a, &
+  \Psib_{2y} &= - \B \Psib_{1x}^\ast, &
+  \Psib_{2x} &= \B \Psib_{1y}^\ast,
+\end{aligned}
+\end{equation*}
+%
+So any complex \(n\)-component spinor can be written as a real linear combination of \(2n\) spinors that split into two groups as in \cref{eq:pseudomajorana}.
+
+We can call the \(x\)-part a \emph{pseudo-Majorana spinor} and the \(y\)-part a pseudo-anti-Majorana spinor.
+The two are swapped by charge conjugation.
+Like Majorana spinors, pseudo-Majorana spinors have $2^{\floor{d/2}}$ \emph{real dimensions}.
+
+The split into \(\Thetab_a\) and \(\Phib_a\) is not unique.
+We could have chosen a different basis for the eigenspaces of \(\mathcal{B}\):
+%
+\begin{equation*}
+  \zetab_a' = \sum_b Q_{ab} \zetab_b
+  \quad \implies \quad
+  \Thetab_a' = \sum_b \Re Q_{ab} \Thetab_b - \Im Q_{ab} \Phib_b,
+  \quad
+  \Phib_a' = \sum_b \Im Q_{ab} \Thetab_b - \Re Q_{ab} \Phib_b.
+\end{equation*}
+%
+The operator \(\mathcal{B}\) provides a symplectic structure for \(\R^{2n}\).
+There are multiple ways to choose a set of canonical coordinates, and there are multiple ways to choose a polarisation (a split between ``coordinates'' and ``momenta'') in symplectic geometry.
+
+
 %We can define a matrix $\Omegab$ such that $\Omegab \psib_1 = \psib_2$ and $\Omegab \psib_2 = -\psib_1$, and therefore $\Omegab^2 = - \I$.
 %Then, \cref{eq:pseudomajorana} reads
 %%
