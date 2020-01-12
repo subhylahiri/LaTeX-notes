@@ -543,7 +543,142 @@ This means that the inverse transforms are given by
 \end{equation}
 %
 
-This means that 
+%-------Section------------------------------------------------------------------
+
+\subsection{The Lorentz group}\label{sec:group}
+
+If we split \(\Lambda^\mu{}_\nu\) into \((p,q)\) blocks, \cref{eq:lorentz} means that
+%
+\begin{equation*}
+  \Lambdab = 
+    \begin{pmatrix}
+      \Lambdab_1 & \Lambdab_2 \\
+      \Lambdab_3 & \Lambdab_4
+    \end{pmatrix}
+  \qquad
+\begin{aligned}
+  \Lambdab_1 \Lambdab_1\trans &= \I_p + \Lambdab_2 \Lambdab_2\trans, &
+  \Lambdab_1\trans \Lambdab_1 &= \I_p + \Lambdab_3\trans \Lambdab_3, \\
+  \Lambdab_4 \Lambdab_4\trans &= \I_p + \Lambdab_3 \Lambdab_3\trans, &
+  \Lambdab_4\trans \Lambdab_4 &= \I_p + \Lambdab_2\trans \Lambdab_2, \\
+  \Lambdab_1 \Lambdab_3\trans &= \Lambdab_2 \Lambdab_4\trans, &
+  \Lambdab_1\trans \Lambdab_2 &= \Lambdab_3\trans \Lambdab_4.
+\end{aligned}
+\end{equation*}
+%
+Considering the eigenvectors of the equations in the first two rows, this means that the SVDs look like
+%
+\begin{equation*}
+\begin{aligned}
+  \Lambdab_1  &= \U_\parallel \cosh \Thetab\, \V\trans_\parallel 
+              +  \U_\perp \V\trans_\perp, &
+  \Lambdab_2  &= \U_\parallel \sinh \Thetab\, \Vb\trans_\parallel, \\
+  \Lambdab_3  &= \Ub_\parallel \sinh \Thetab\, \V\trans_\parallel, &
+  \Lambdab_4  &= \Ub_\parallel \cosh \Thetab\, \Vb\trans_\parallel 
+              +  \Ub_\perp \Vb\trans_\perp,
+\end{aligned}
+\end{equation*}
+%
+where \(\Thetab\) is a \(k \times k\) diagonal matrix (\(k = \min(p,q)\)), 
+\(\U_\parallel\) and \(\V_\parallel\) are \(p \times k\) submatrices of the \(p \times p\) orthogonal matrices \(\U\) and \(\V\), 
+\(\Ub_\parallel\) and \(\Vb_\parallel\) are \(q \times k\) submatrices of the \(q \times q\) orthogonal matrices \(\Ub\) and \(\Vb\), 
+and \(\U_\perp\),\(\V_\perp\)/\(\Ub_\perp\),\(\Vb_\perp\) are \(p \times (p-k)\)/\(q \times (q-k)\)  complements of the corresponding submatrices.
+One of the pairs \(\U_\perp\),\(\V_\perp\)/\(\Ub_\perp\),\(\Vb_\perp\) will be empty.
+
+If we use \(\cosh\Thetab_{rr}\) to denote  \(\cosh\Thetab\) padded with ones on the diagonal and zeroes elsewhere to make a \(r \times r\) matrix 
+and \(\sinh\Thetab_{rs}\) to denote  \(\sinh\Thetab\) padded with zeroes to make a \(r \times s\) matrix,
+we can write
+%
+\begin{equation*}
+  \Lambdab = 
+    \begin{pmatrix}
+      \U\cosh\Thetab_{pp}\V\trans & \U\sinh\Thetab_{pq}\Vb\trans \\
+      \Ub\sinh\Thetab_{qp}\V\trans & \Ub\cosh\Thetab_{qq}\Vb\trans
+    \end{pmatrix}
+  =
+    \begin{pmatrix}
+      \U & \mathbf{0} \\
+      \mathbf{0} & \Ub
+    \end{pmatrix}
+    \begin{pmatrix}
+      \cosh\Thetab_{pp} & \sinh\Thetab_{pq} \\
+      \sinh\Thetab_{qp} & \cosh\Thetab_{qq}
+    \end{pmatrix}
+    \begin{pmatrix}
+      \V\trans & \mathbf{0} \\
+      \mathbf{0} & \Vb\trans
+    \end{pmatrix}.
+\end{equation*}
+%
+This implies that
+%
+\begin{equation}\label{eq:sgnlorentz}
+\begin{lgathered}
+    \prn{\det\Lambdab_1}^2 = \prn{\det\Lambdab_4}^2 = \prod_i \cosh^2 \theta_i \geq 1,
+  \\
+  \sgn \det \Lambdab_1 = \det{\U} \det{\V},
+  \qquad
+  % \text{where }\; \Theta_{ij} &= \theta_i \delta_{ij} &
+  \sgn \det \Lambdab_4 = \det{\Ub} \det{\Vb},
+\\
+  \det\Lambdab = \det{\U} \det{\Ub} \det{\V} \det{\Vb} = \sgn \det \Lambdab_1 \sgn \det \Lambdab_4,
+\end{lgathered}
+\end{equation}
+%
+where we used the fact that the middle matrix in the first expression for \(\Lambdab\) can be permuted%
+\footnote{Each row permutation has a corresponding column permutation, so no sign change results.}
+to a block-diagonal form with blocks \(
+\begin{psmallmatrix}
+  \cosh\theta_{i} & \sinh\theta_{i} \\
+  \sinh\theta_{i} & \cosh\theta_{i}
+\end{psmallmatrix}
+\)
+and \(\I\).
+Note that the determinants of \(\Lambdab_1\) and \(\Lambdab_4\) can never pass through zero, so their signs must be constant in any connected component of \(O(p,q)\).
+
+If we send \(\theta_i \to 0\), we see that \(\Lambdab\) is continuously connected to
+\(
+\begin{psmallmatrix}
+  \U\V\trans & \mathbf{0} \\
+  \mathbf{0} & \Ub\Vb\trans
+\end{psmallmatrix}
+\),
+which is connected to the identity iff \(\sgn \det \Lambdab_1 = \sgn \det \Lambdab_4 = 1\), 
+as \(\U\), etc.\ are connected to any orthogonal matrix with the same determinant.%
+\footnote{By multiplying corresponding columns of \(\U\) and \(\V\) by \(-1\) we can change the signs of \(\det\U\) and \(\det\V\) without changing \(\Lambdab\), so it is only the product of determinants that is meaningful.}
+Therefore, the group \(O(p,q)\) has four disconnected components described by the signs of the determinants of the diagonal blocks, \(\Lambda_1\) and  \(\Lambda_4\).
+
+The \((+,+)\) component contains all transformations that can be continuously changed to reach the identity.
+All matrices in the \((-,+)\) component can be obtained by multiplying a matrix in the \((+,+)\) component by a reflection in one of the first \(p\) dimensions.
+Similarly, the \((+,-)\) is the \((+,+)\) component multiplied by a reflection in the last \(q\) dimensions and the \((-,-)\) is the \((+,+)\) component multiplied by one of each type of reflections.
+
+This means we need only consider three types of Lorentz transform: those in the \((+,+)\) component, a reflection in dimension 1, and a reflection in dimension \(p+1\).
+
+The \((+,+)\) component is generated by the Lie algebra \(so(p,q)\):
+%
+\begin{equation}\label{eq:lielorentz}
+  \Lambdab = \exp(\lambdab),
+  \qquad
+  \eta_{\mu\rho} \lambda^\rho{}_\nu +  \lambda^\rho{}_\mu \eta_{\rho\nu} = 0,
+  \quad \text{or} \quad
+  \lambda_{\mu\nu} = - \lambda_{\nu\mu}.
+\end{equation}
+%
+We can construct a basis set of generators, \(\mathbf{L}^{ab}\), as
+%
+\begin{equation}\label{eq:genlorentz}
+  L^{ab\mu}{}_\nu = \eta^{a\mu} \delta^b_\nu - \eta^{b\mu} \delta_\nu^a,
+  \qquad
+  \lambdab = \frac{\lambda_{ab}\, \mathbf{L}^{ab}}{2}.
+\end{equation}
+%
+
+%-------Section------------------------------------------------------------------
+
+
+\subsection{Associated similarity transforms}\label{sec:simlorentz}
+
+Note that a Lorentz transform on the vector \(\Gammab^\mu\) also satisfies the anticommutation relations of \cref{eq:clifford}:
 %
 \begin{equation*}
   \brc{\Lambda^\mu{}_\rho \Gammab^\rho, \Lambda^\nu{}_\sigma \Gammab^\sigma}
@@ -647,136 +782,6 @@ and \(s_\Lambda\) only exists in even dimensions
 (we can make any choice for \(s_\Lambda\)  in odd dimensions).
 In odd dimensions, which one of \(\S_\Lambda\) or \(\St_\Lambda\) exists can also only depend on which connected component \(\Lambdab\) is in.
   
-%-------Section------------------------------------------------------------------
-
-\subsection{The Lorentz group}\label{sec:group}
-
-If we split \(\Lambda^\mu{}_\nu\) into \((p,q)\) blocks, \cref{eq:lorentz} means that
-%
-\begin{equation*}
-  \Lambdab = 
-    \begin{pmatrix}
-      \Lambdab_1 & \Lambdab_2 \\
-      \Lambdab_3 & \Lambdab_4
-    \end{pmatrix}
-  \qquad
-\begin{aligned}
-  \Lambdab_1 \Lambdab_1\trans &= \I_p + \Lambdab_2 \Lambdab_2\trans, &
-  \Lambdab_1\trans \Lambdab_1 &= \I_p + \Lambdab_3\trans \Lambdab_3, \\
-  \Lambdab_4 \Lambdab_4\trans &= \I_p + \Lambdab_3 \Lambdab_3\trans, &
-  \Lambdab_4\trans \Lambdab_4 &= \I_p + \Lambdab_2\trans \Lambdab_2, \\
-  \Lambdab_1 \Lambdab_3\trans &= \Lambdab_2 \Lambdab_4\trans, &
-  \Lambdab_1\trans \Lambdab_2 &= \Lambdab_3\trans \Lambdab_4.
-\end{aligned}
-\end{equation*}
-%
-Considering the eigenvectors of the equations in the first two rows, this means that the SVDs look like
-%
-\begin{equation*}
-\begin{aligned}
-  \Lambdab_1  &= \U_\parallel \cosh \Thetab\, \V\trans_\parallel 
-              +  \U_\perp \V\trans_\perp, &
-  \Lambdab_2  &= \U_\parallel \sinh \Thetab\, \Vb\trans_\parallel, \\
-  \Lambdab_3  &= \Ub_\parallel \sinh \Thetab\, \V\trans_\parallel, &
-  \Lambdab_4  &= \Ub_\parallel \cosh \Thetab\, \Vb\trans_\parallel 
-              +  \Ub_\perp \Vb\trans_\perp,
-\end{aligned}
-\end{equation*}
-%
-where \(\Thetab\) is a \(k \times k\) diagonal matrix (\(k = \min(p,q)\)), 
-\(\U_\parallel\) and \(\V_\parallel\) are \(p \times k\) submatrices of the \(p \times p\) orthogonal matrices \(\U\) and \(\V\), 
-\(\Ub_\parallel\) and \(\Vb_\parallel\) are \(q \times k\) submatrices of the \(q \times q\) orthogonal matrices \(\Ub\) and \(\Vb\), 
-and \(\U_\perp\),\(\V_\perp\)/\(\Ub_\perp\),\(\Vb_\perp\) are \(p \times (p-k)\)/\(q \times (q-k)\)  complements of the corresponding submatrices.
-One of the pairs \(\U_\perp\),\(\V_\perp\)/\(\Ub_\perp\),\(\Vb_\perp\) will be empty.
-
-If we use \(\cosh\Thetab_{rr}\) to denote  \(\cosh\Thetab\) padded with ones on the diagonal and zeroes elsewhere to make a \(r \times r\) matrix 
-and \(\sinh\Thetab_{rs}\) to denote  \(\sinh\Thetab\) padded with zeroes to make a \(r \times s\) matrix,
-we can write
-%
-\begin{equation*}
-  \Lambdab = 
-    \begin{pmatrix}
-      \U\cosh\Thetab_{pp}\V\trans & \U\sinh\Thetab_{pq}\Vb\trans \\
-      \Ub\sinh\Thetab_{qp}\V\trans & \Ub\cosh\Thetab_{qq}\Vb\trans
-    \end{pmatrix}
-  =
-    \begin{pmatrix}
-      \U & \mathbf{0} \\
-      \mathbf{0} & \Ub
-    \end{pmatrix}
-    \begin{pmatrix}
-      \cosh\Thetab_{pp} & \sinh\Thetab_{pq} \\
-      \sinh\Thetab_{qp} & \cosh\Thetab_{qq}
-    \end{pmatrix}
-    \begin{pmatrix}
-      \V\trans & \mathbf{0} \\
-      \mathbf{0} & \Vb\trans
-    \end{pmatrix}.
-\end{equation*}
-%
-This implies that
-%
-\begin{equation}\label{eq:sgnlorentz}
-\begin{lgathered}
-    \prn{\det\Lambdab_1}^2 = \prn{\det\Lambdab_4}^2 = \prod_i \cosh^2 \theta_i \geq 1,
-  \\
-  \sgn \det \Lambdab_1 = \det{\U} \det{\V},
-  \qquad
-  % \text{where }\; \Theta_{ij} &= \theta_i \delta_{ij} &
-  \sgn \det \Lambdab_4 = \det{\Ub} \det{\Vb},
-\\
-  \det\Lambdab = \det{\U} \det{\Ub} \det{\V} \det{\Vb} = \sgn \det \Lambdab_1 \sgn \det \Lambdab_4,
-\end{lgathered}
-\end{equation}
-%
-where we used the fact that the middle matrix in the first expression for \(\Lambdab\) can be permuted%
-\footnote{Each row permutation has a corresponding column permutation, so no sign change results.}
-to a block-diagonal form with blocks \(
-\begin{psmallmatrix}
-  \cosh\theta_{i} & \sinh\theta_{i} \\
-  \sinh\theta_{i} & \cosh\theta_{i}
-\end{psmallmatrix}
-\)
-and \(\I\).
-Note that the determinants of \(\Lambdab_1\) and \(\Lambdab_4\) can never pass through zero, so their signs must be constant in any connected component of \()(p,q)\).
-
-If we send \(\theta_i \to 0\), we see that \(\Lambdab\) is continuously connected to
-\(
-\begin{psmallmatrix}
-  \U\V\trans & \mathbf{0} \\
-  \mathbf{0} & \Ub\Vb\trans
-\end{psmallmatrix}
-\),
-which is connected to the identity iff \(\sgn \det \Lambdab_1 = \sgn \det \Lambdab_4 = 1\), 
-as \(\U\), etc.\ are connected to any orthogonal matrix with the same determinant.%
-\footnote{By multiplying corresponding columns of \(\U\) and \(\V\) by \(-1\) we can change the signs of \(\det\U\) and \(\det\V\) without changing \(\Lambdab\), so it is only the product of determinants that is meaningful.}
-Therefore, the group \(O(p,q)\) has four disconnected components described by the signs of the determinants of the diagonal blocks, \(\Lambda_1\) and  \(\Lambda_4\).
-
-The \((+,+)\) component contains all transformations that can be continuously changed to reach the identity.
-All matrices in the \((-,+)\) component can be obtained by multiplying a matrix in the \((+,+)\) component by a reflection in one of the first \(p\) dimensions.
-Similarly, the \((+,-)\) is the \((+,+)\) component multiplied by a reflection in the last \(q\) dimensions and the \((-,-)\) is the \((+,+)\) component multiplied by one of each type of reflections.
-
-This means we need only consider three types of Lorentz transform: those in the \((+,+)\) component, a reflection in dimension 1, and a reflection in dimension \(p+1\).
-
-The \((+,+)\) component is generated by the Lie algebra \(so(p,q)\):
-%
-\begin{equation}\label{eq:lielorentz}
-  \Lambdab = \exp(\lambdab),
-  \qquad
-  \eta_{\mu\rho} \lambda^\rho{}_\nu +  \lambda^\rho{}_\mu \eta_{\rho\nu} = 0,
-  \quad \text{or} \quad
-  \lambda_{\mu\nu} = - \lambda_{\nu\mu}.
-\end{equation}
-%
-We can construct a basis set of generators, \(\mathbf{L}^{ab}\), as
-%
-\begin{equation}\label{eq:genlorentz}
-  L^{ab\mu}{}_\nu = \eta^{a\mu} \delta^b_\nu - \eta^{b\mu} \delta_\nu^a,
-  \qquad
-  \lambdab = \frac{\lambda_{ab}\, \mathbf{L}^{ab}}{2}.
-\end{equation}
-%
-
 %-------Section------------------------------------------------------------------
 
 \subsection{Lorentz covariance of the Dirac equation}\label{sec:diraclorentz}
@@ -1286,7 +1291,7 @@ We choose
 %
 \begin{equation*}
   \A =  \mbigg\brk{\bigotimes_{k=1}^{{p/2}} \sigmab_3}
-        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \sigmab_3},
+        \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \I},
 \end{equation*}
 %
 The expression for $\At$ in \cref{sec:eveneven} fails to anticommute with $\Gammab^d$.
@@ -1476,12 +1481,12 @@ with unspecified constants equal to 1.
 Now let's collect the results of the last four sections,
 \cref{eq:consteveneven,eq:constoddodd,eq:constevenodd,eq:constoddeven}.
 In all cases we found $\alpha = 1$.
-We found that $s_1 = 1$ except when %$p$ and $q$ are both odd.
-$q$ is odd.
-This can be written as %$s_1 = (-1)^{pq}$.
-$s_1 = (-1)^{q}$.
-We can reconstruct %$\alphat = s_1 = (-1)^{pq}$.
-$\alphat = s_1 = (-1)^{q}$.
+We found that $s_1 = 1$ except when $p$ and $q$ are both odd.
+%$q$ is odd.
+This can be written as $s_1 = (-1)^{pq}$.
+%$s_1 = (-1)^{q}$.
+We can reconstruct $\alphat = s_1 = (-1)^{pq}$.
+%$\alphat = s_1 = (-1)^{q}$.
 
 The constant $\beta$ could always be expressed as $\beta = (-1)^{\floorfrac{p-q+2}{4}}$,
 and $s_2 = (-1)^{\floorfrac{p-q}{2}}$.
@@ -1638,7 +1643,7 @@ It would be necessary for both $\Psib$ and $\Gammab \Psib$ to be solutions:
 %
 Therefore this is only possible when $m=0$.
 Particles with mass can still be discussed in the language of Weyl spinors, they just have to come in a chiral-antichiral pair.%
-\footnote{They could still satisfy a Majorana condition, as discussed in the next three sections}
+\footnote{They could still satisfy a Majorana condition, as discussed in the next two sections}
 A \emph{single} Weyl spinor can only be used for massless particles.
 
 %-------Section------------------------------------------------------------------
@@ -1786,17 +1791,92 @@ Either way, Dirac spinors can be split into their real and imaginary parts
 Here both $\psib_r$ and $\psib_i$ are \emph{Majorana spinors}.
 Dirac spinors have $2^{\floor{d/2}}$ \emph{complex dimensions}, so Majorana spinors have $2^{\floor{d/2}}$ \emph{real dimensions}.
 Note that anti-Majorana spinors are just Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor.
+
+Is this a Lorentz invariant concept?
+We need to check if the Lorentz transform of a Majorana spinor is still a Majorana spinor.
+Using \cref{eq:constnormlorentz}:
+%
+\begin{equation*}
+  \Psib = \B \Psib^\ast
+  \quad\implies\quad
+  \B \prn{\S_\Lambda \Psib}^\ast 
+    = \B \S_\Lambda^\ast \Psib^\ast 
+    = r_\Lambda \S_\Lambda \B \Psib^\ast 
+    = r_\Lambda \S_\Lambda \Psib.
+\end{equation*}
+%
+When using \(\Bt\), \(r_\Lambda\) is replaced by \(r_\Lambda s_\Lambda\).
+So Lorentz transforms with \(r_\Lambda = 1\) map Majorana spinors to Majorana spinors.
+From \cref{tab:constlorentz} we see this includes all proper orthochronous transforms, but it excludes transforms with a reflection in the first \(p\) dimensions (for even \(pq\)) or in the last \(q\) dimensions (for odd \(pq\)).
+
+If only \(\St\) exists???????????
+
+Are there any self-conjugate solutions to the Dirac equation?
+If \(\Psib\) is a solution, is \(\B \Psib^\ast\) also a solution?
+For timelike-positive signature:
+%
+\begin{equation*}
+  \ir\, \Gammab^\mu \partial_\mu \Psib = m \Psib
+  \quad\implies\quad
+  m \Bt \Psib^\ast 
+    = - \ir\, \Bt \Gammab^\muc \partial_\mu \Psib^\ast 
+    = \ir\, \Gammab^\mu \partial_\mu \prn{\Bt \Psib^\ast} 
+    = \ir\, \Gammab^\mu \partial_\mu \Psib. 
+\end{equation*}
+%
+For spacelike-positive signature:
+%
+\begin{equation*}
+  \ir\, \Gammab^\mu \partial_\mu \Psib = \ir\, m \Psib
+  \quad\implies\quad
+  - \ir\, m \B \Psib^\ast 
+    = - \ir\, \B \Gammab^\muc \partial_\mu \Psib^\ast 
+    = - \ir\, \Gammab^\mu \partial_\mu \prn{\B \Psib^\ast} 
+    = - \ir\, \Gammab^\mu \partial_\mu \Psib. 
+\end{equation*}
+%
+If we use \(\B\) with timelike-positive signature, or \(\Bt\) with spacelike-positive signature, we are off by a sign??????????
+
+
 We can also talk of a Majorana basis for spinors (again, a distinct concept from Majorana spinors) where either $\B$ (or $\Bt$) is the identity matrix.
 In such a basis all of the $\Gammab^\mu$ are real (or all imaginary), and the condition for Majorana spinors is simply that they are real.
+
+Can we combine this with \hyperref[sec:weyl]{the previous section}?
+Can a majorana spinor be chiral?
+Clearly it is necessary that a spinor and its charge conjugate  have the same chirality.
+This is sufficient to ensure that the operations of taking the chiral part in \cref{eq:Weylanti} and taking the real part in \cref{eq:majorana} commute:
+%
+\begin{equation}\label{eq:majoranaweyl}
+  \Gammab \B \Psib^\ast = \B \Gammab^\ast \Psib^\ast
+  \quad\means\quad
+  \frac{1}{2}\prn{\brkfrac{\I+\Gammab}{2} \Psib 
+    + \B \brkfrac{\I+\Gammab}{2}^{\mathrlap{\ast}} \Psib^\ast} 
+    = \brkfrac{\I+\Gammab}{2} \prnfrac{\Psib + \B \Psib^\ast}{2}.
+\end{equation}
+%
+If this is true, we could split the chiral/antichiral spinors into their real and imaginary parts, and \emph{vice versa}.
+
+Looking at \cref{eq:constnorm}, we see that \cref{eq:majoranaweyl} is equivalent to \(s_2 = 1\), whether we are using \(\B\) or \(\Bt\) for charge conjugation.
+So Majorana-Weyl spinors exist when \emph{both} \(\beta\) and \(\betat\) are 1.
+From \cref{tab:exist,tab:types}, we see that this is when \( p-q = 0 \pmod 8 \).
+
+On the other hand, when \(s_2 = -1\), the charge conjugate of a chiral spinor is an antichiral spinor.
+In such a dimensionality, when listing spinors (\eg to describe particle content, or amount of supersymmetry) we need only list the chiral spinors.
+The existence of the antichiral spinors comes automatically.
+In contrast, in dimensions where \(s_2 = 1\) we must list both the chiral and antichiral spinors separately.
+
 
 %-------Section------------------------------------------------------------------
 
 \subsection{Symplectic/Pseudo-Majorana spinors}\label{sec:symplecticmajorana}
 
+I'm not sure if I understand this section correctly.??????????????
+
 If we consult \cref{tab:types}, we see that when \( p-q = 3,4,5 \pmod 8 \), neither $\beta$ nor $\betat$ is one.
 In these cases it is impossible for a spinor to be self-conjugate.
 The doubling trick of \cref{eq:doublingtrick} doesn't work the same way here because the eigenvalues are $\pm\ir$, which are matrices in that language, not scalars.
-However, it is possible to group spinors into pairs such that
+
+However, using \(\B\) for \( p-q = 3,4 \pmod 8 \) or \(\Bt\) for \( p-q = 4,5 \pmod 8 \), it is possible to group spinors into pairs such that
 %
 \begin{equation}\label{eq:pseudomajorana}
   \psib_1 = \B \psib_2^\ast,
@@ -1854,13 +1934,15 @@ We can use this two split a spinor into two parts:
 \begin{aligned}
   \Psib_1 = \Psib_{1x} + \Psib_{1y} = \B \Psib_2^\ast, 
   \qquad
-  \Psib_{1x} &= \sum_a x_a \Thetab_a, &\qquad
-  \Psib_{1x} &= \B \Psib_{2y}^\ast, &\quad
+  \Psib_{1x} &= \sum_a x_a \Thetab_a, 
+  &\qquad
+  \Psib_{1x} &=   \B \Psib_{2y}^\ast, &\quad
   \Psib_{1y} &= - \B \Psib_{2x}^\ast, 
   \\
-  \Psib_{1y} &= \sum_a y_a \Phib_a, &
+  \Psib_{1y} &= \sum_a y_a \Phib_a, 
+  &
   \Psib_{2y} &= - \B \Psib_{1x}^\ast, &
-  \Psib_{2x} &= \B \Psib_{1y}^\ast,
+  \Psib_{2x} &=   \B \Psib_{1y}^\ast,
 \end{aligned}
 \end{equation*}
 %
@@ -1876,64 +1958,25 @@ We could have chosen a different basis for the eigenspaces of \(\mathcal{B}\):
 \begin{equation*}
   \zetab_a' = \sum_b Q_{ab} \zetab_b
   \quad \implies \quad
-  \Thetab_a' = \sum_b \Re Q_{ab} \Thetab_b - \Im Q_{ab} \Phib_b,
+  \Thetab_a' = \sum_b \Re Q_{ab}\, \Thetab_b - \Im Q_{ab}\, \Phib_b,
   \quad
-  \Phib_a' = \sum_b \Im Q_{ab} \Thetab_b - \Re Q_{ab} \Phib_b.
+  \Phib_a'   = \sum_b \Im Q_{ab}\, \Thetab_b + \Re Q_{ab}\, \Phib_b.
 \end{equation*}
 %
 The operator \(\mathcal{B}\) provides a symplectic structure for \(\R^{2n}\).
 There are multiple ways to choose a set of canonical coordinates, and there are multiple ways to choose a polarisation (a split between ``coordinates'' and ``momenta'') in symplectic geometry.
 
+A convenient basis for pseudo-majorana spinors is one where the charge conjugation matrix takes the form 
+\( \B = \begin{psmallmatrix}
+          \mathbf{0} & \I \\
+          -\I & \mathbf{0}
+        \end{psmallmatrix}\).
+Then the \(\Thetab_a\) can be the first \(\frac{n}{2}\) real and imaginary unit vectors, and the \(\Phi_a\) are the last \(\frac{n}{2}\) of them.
 
-%We can define a matrix $\Omegab$ such that $\Omegab \psib_1 = \psib_2$ and $\Omegab \psib_2 = -\psib_1$, and therefore $\Omegab^2 = - \I$.
-%Then, \cref{eq:pseudomajorana} reads
-%%
-%\begin{equation}\label{eq:symplecticmajorana}
-%  \B \psib^\ast = \Omegab \psib.
-%\end{equation}
-%%
-%Consistency of this condition requires
-%%
-%\begin{equation*}
-%\begin{aligned}
-%  - \Omegab \B \psib^\ast &= \psib, \\
-%  \Omegab^\ast \B^\ast \psib &= -\psib^\ast, \\
-%  \Omegab \B \Omegab^\ast \B^\ast \psib &= - \Omegab \B \psib^\ast = \psib.
-%\end{aligned}
-%\end{equation*}
-%%
-%So we require one to be an eigenvalue of $\Omegab \B \Omegab^\ast \B^\ast$.
-%If we wish to split spinors into their real and imaginary parts, we require \( \Omegab \B \Omegab^\ast \B^\ast = \I \).
-%If we pre-multiply by $\Omegab$ and post-multiply by $\B$, we find the second of the two required properties of an $\Omegab$:
-%%
-%\begin{equation}\label{eq:symplectic}
-%  \Omegab^2 = - \I,
-%  \qquad
-%  \Omegab \B = \B \Omegab^\ast.
-%\end{equation}
-%%
-%This means that under a change of basis it transforms as $\Omegab' = \S\inv \Omegab \S$.
-%If we find a suitable matrix in one representation (albeit not unique), we can find one in all others.
-%For the Brauer-Weyl representation, when $\beta/\betat = -1$, $\ir\B/\ir\Bt$ has the required properties.
-%It will take a different form in other representations, as they transform differently under basis changes, given by $\Omegab = \ir \B \S^\ast \S\inv$ where $\S$  generates a change of basis to the Brauer-Weyl representation.
-%
-%We can split Dirac spinors into their ``real'' and ``imaginary'' parts
-%%
-%\begin{equation}\label{eq:psedoreim}
-%  \psib_r = \frac{\psib - \Omega \B \psib^\ast}{2},
-%  \quad
-%  \psib_i = \frac{\psib + \Omega \B \psib^\ast}{2\ir},
-%  \qquad
-%  \B \psib_r^\ast = \Omegab \psib_r,
-%  \quad
-%  \B \psib_i^\ast = \Omegab \psib_i,
-%  \quad
-%  \psib = \psib_r + \ir \psib_i.
-%\end{equation}
-%%
-%Here both $\psib_r$ and $\psib_i$ are \emph{symplectic-Majorana}, \emph{pseudo-Majorana} or \emph{pseudo-real spinors}.
-%Symplectic-Majorana spinors have $2^{\floor{d/2}}$ real dimensions.
-%Note that, as with Majorana spinors, symplectic-anti-Majorana spinors are just symplectic-Majorana spinors multiplied by $\ir$, so we don't need to think of them as another type of spinor either.
+Much like \hyperref[sec:majorana]{the previous section}, when \(s_2 = 1\) and \(\beta = \betat = -1\) the chirality matrix is compatible with this symplectic charge conjugation structure.
+From \cref{tab:exist,tab:types}, we see that this is when \( p-q = 4 \pmod 8 \).
+We can create separate symplectic pairings within the space of chiral spinors and within the antichiral spinors.
+All of the statements regarding listing spinors are the same for pseudo-majorana spinors and majorana spinors.
 
 
 %================================================================================
