@@ -18,6 +18,8 @@
 \crefalias{enumi}{assump}
 % New commands etc.
 %
+\newcommand{\todo}[1]{\textcolor{purple}{TODO: #1}}
+%
 \newcommand{\invd}{^{-\dag}}
 \newcommand{\invt}{^{-\mathrm{T}}}
 \newcommand{\invc}{^{-\ast}}
@@ -93,18 +95,22 @@ We can then talk about similarity classes of representations.
 We make use of the following statements without justification:
 %
 \begin{enumerate}
+  \item Any matrix that commutes with all of the $\Gammab^\mu$ must be proportional to the identity.
+      \label{it:commute}
   \item When $d$ is even, there is one similarity class of irreps with dimension $2^{\frac{d}{2}}$.
       \label{it:even}
   \item When $d$ is odd, there are two similarity class of irreps of dimension $2^{\frac{d-1}{2}}$.
       \label{it:odd}
   \item When $d$ is odd, given a representation $\brc{\Gammab^\mu}$, the representation formed by $\brc{ -\Gammab^\mu }$ lies in the other similarity class.
       \label{it:oddchi}
-  \item Any matrix that commutes with all of the $\Gammab^\mu$ must be proportional to the identity (otherwise its eigenspaces would be invariant subspaces).
-      \label{it:commute}
 \end{enumerate}
+%
+\Cref{it:commute} follows from the definition of an irrep: if it weren't true the matrix's eigenspaces would be invariant subspaces.
+The proofs of \cref{it:even,it:odd,it:oddchi} can be found in \todo{}.
 
 We use the notation $\floor{x}$ for the floor function: rounding down to the nearest integer.
 The dimensionality of the representations is then $2^{\floor{d/2}}$.
+For any matrix operation \(s\), \eg transpose or complex conjugate, we use the notation \( \A^{-s} = \prn{\A\inv}^s = \prn{\A^s}\inv \).
 
 \Cref{it:commute} implies that whenever two similarity transforms have the same effect, they must be proportional to each other:
 %
@@ -193,6 +199,18 @@ This means we can perform them twice to derive new identities:
 \end{gathered}
 \end{equation*}
 %
+We can rewrite some of these relations, e.g., as \(\A^\dag = \alpha \At\).
+Taking the Hermitian conjugate gives \(\A = \alpha^\ast \A^\dag = \abs{\alpha}^2 \A\).
+Similar aruments tell us that
+%
+\begin{equation}\label{eq:constinvol}
+  \abs{\alpha} = 1, \qquad
+  \beta \in \R, \qquad
+  \chi^2 = 1.
+\end{equation}
+%
+This method does not lead to any constraints on \(\gamma\).
+
 We are free to redefine these matrices as $\Gammab \rightarrow \lambda \Gammab, \A \rightarrow \lambda \A,$ etc.
 Under these redefinitions the scalars above transform as
 %
@@ -205,23 +223,24 @@ Under these redefinitions the scalars above transform as
 %
 with similar relations for the tilde versions.
 These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of $\alpha$ but not its magnitude, vice-versa for $\beta$, and $\chi$ cannot be changed at all.
+Combined with \cref{eq:constinvol}, we have  
 %
 \begin{equation}\label{eq:normscalar}
   \gamma = 1, \qquad
-  \phase(\alpha) = 0, \qquad
-  \abs{\beta} = 1,
+  \alpha = 1, \qquad
+  \beta = \pm 1, \qquad
+  \chi = \pm 1.
 \end{equation}
 %
 or in terms of the matrices
 %
 \begin{equation}\label{eq:normmats}
   \Gammab^2 = \I, \qquad
-  \A\inv \A^\dag = \A \A\invd, \qquad
-  \Psib^\dag \A\inv \A^\dag \Psib \geq 0 \;\; \forall \, \Psib, \qquad
-  \B^\ast \B^2 \B^\ast = \I.
+  \A^\dag = \A  \qquad
+  \B \B^\ast \B \B^\ast = \I.
 \end{equation}
 %
-Again, the same relations apply to the tilde versions, except that in some situations it will be more convenient to choose to set \( \phase(\alphat) = \pi \).
+Again, the same relations apply to the tilde versions, except that in some situations it will be more convenient to choose to set \( \alphat = -1 \).
 These choices do not completely eliminate the scalar ambiguity.
 For $\Gammab$ we can still use $\lambda = \pm 1$, for $\A$ any $\lambda \in \R$, for $\B$ any $\lambda$ with $\abs{\lambda} = 1$ and for $\C$ any $\lambda \in \Cb$.
 
@@ -366,21 +385,21 @@ The overall result is
   \\
   \A &= \Bt\trans \Ct &
         &= s_1 \hat{s}\, \Ct^\ast \Bt\inv, &\qquad
-    \A\inv \A^\dag &= \A \A\invd,
+    \A^\dag &= \A,
   \\
   s_3 \At &= \B\trans \Ct &
         &= s_2 \hat{s}\, \Ct^\ast \B\inv, &\qquad
-    \Psib^\dag \A\inv \A^\dag \Psib &\geq 0 \;\; \forall \, \Psib,
+    \B \B^\ast \B \B^\ast &= \I,
   \\
   s_3 \At &= \Bt\trans \C &
-        &= s_3 \hat{s}\, \C^\ast \Bt\inv, &
-    \B^\ast \B^2 \B^\ast &= \I,
+        &= s_3 \hat{s}\, \C^\ast \Bt\inv, &\qquad
+    \prn{\C\trans}^2 = \C^2,
 \end{alignedat}
 \\
   \text{or}\quad
-  \phase(\alpha) = 0, \qquad
-  \abs{\beta} = 1, \qquad \text{and} \quad
-  \chi = \hat{s}\, \alpha \beta, \qquad
+  \alpha = \beta^2 = \chi^2 = 1 , \qquad 
+  \text{and} \quad
+  \chi = \hat{s}\, \beta, \qquad
   s_i^2 = s_1 s_2 s_3 = \hat{s}^2 = 1.
   %s s' s'' &= 1.
 \end{gathered}
@@ -537,7 +556,7 @@ The quantity \( \Psib^\dag \A \) or \( \Psib^\dag \At \) occurs frequently enoug
 
 \section{One explicit representation}\label{sec:explicit}
 
-We can construct the Brauer-Weyl representation \cite{brauer1935spinors} of the Clifford algebra in \cref{eq:clifford} in terms of the Pauli sigma-matrices:
+We can construct the Brauer-Weyl representation~\cite{brauer1935spinors} of the Clifford algebra in \cref{eq:clifford} in terms of the Pauli sigma-matrices:
 %
 \begin{equation}\label{eq:paulisigma}
   \sigmab_1 = \begin{pmatrix}
@@ -767,7 +786,7 @@ We choose
 %
 The expression for $\At$ in \cref{sec:eveneven} fails to anticommute with $\Gammab^d$.
 We see that $\alpha = 1$.
-The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but it will be convenient to say $s_1 = -1$.
+The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but it will be convenient to say $s_1 = \alphat = 1$.
 
 The choices of $\B$ and $\Bt$ in \cref{sec:eveneven} already have the correct (anti)commutation relations with $\Gammab^1, \ldots, \Gammab^{d-1}$.
 If we check their behaviour with $\Gammab^d$ we find that $\Gammab^d \B = (-1)^{\floor{d/2}}\B \Gammab^d$ and $\Gammab^d \Bt = (-1)^{\floor{d/2}}\Bt \Gammab^d$, only one of which is the correct behaviour.
@@ -859,6 +878,7 @@ We choose
 \end{equation*}
 %
 The expression for $\A$ in \cref{sec:oddodd} fails to commute with $\Gammab^d$.
+Clearly \(\At^\dag = \At\), so \(\alphat = 1\).
 The sign $s_1$ doesn't play a role in \cref{eq:constnorm}, but we can say $s_1 = 1$.
 We can then see that $\alpha = 1$.
 
@@ -1382,7 +1402,7 @@ Therefore, the Lorentz transform of a spinor is
 \end{aligned}
 \end{equation}
 %
-What happens when only \(\St_\Lambda\) exists???????? \(\St_\Lambda = \S_{-\Lambda}\)?
+\todo{What happens when only \(\St_\Lambda\) exists????????} \(\St_\Lambda = \S_{-\Lambda}\)?
 
 Note that, according to \cref{eq:constnormlorentz}, we have
 %
@@ -1819,7 +1839,7 @@ When using \(\Bt\), \(r_\Lambda\) is replaced by \(r_\Lambda s_\Lambda\).
 So Lorentz transforms with \(r_\Lambda = 1\) map Majorana spinors to Majorana spinors.
 From \cref{tab:constlorentz} we see this includes all proper orthochronous transforms, but it excludes transforms with a reflection in the first \(p\) dimensions (for even \(pq\)) or in the last \(q\) dimensions (for odd \(pq\)).
 
-If only \(\St\) exists???????????
+\todo{If only \(\St\) exists??????????}
 
 Are there any self-conjugate solutions to the Dirac equation?
 If \(\Psib\) is a solution, is \(\B \Psib^\ast\) also a solution?
@@ -1845,8 +1865,7 @@ For spacelike-positive signature:
     = - \ir\, \Gammab^\mu \partial_\mu \Psib. 
 \end{equation*}
 %
-If we use \(\B\) with timelike-positive signature, or \(\Bt\) with spacelike-positive signature, we are off by a sign??????????
-
+\todo{If we use \(\B\) with timelike-positive signature, or \(\Bt\) with spacelike-positive signature, we are off by a sign??????????}
 
 We can also talk of a Majorana basis for spinors (again, a distinct concept from Majorana spinors) where either $\B$ (or $\Bt$) is the identity matrix.
 In such a basis all of the $\Gammab^\mu$ are real (or all imaginary), and the condition for Majorana spinors is simply that they are real.
@@ -1880,7 +1899,7 @@ In contrast, in dimensions where \(s_2 = 1\) we must list both the chiral and an
 
 \subsection{Symplectic/Pseudo-Majorana spinors}\label{sec:symplecticmajorana}
 
-I'm not sure if I understand this section correctly.??????????????
+\todo{I'm not sure if I understand this section correctly.??????????????}
 
 If we consult \cref{tab:types}, we see that when \( p-q = 3,4,5 \pmod 8 \), neither $\beta$ nor $\betat$ is one.
 In these cases it is impossible for a spinor to be self-conjugate.
@@ -1987,8 +2006,44 @@ Much like \hyperref[sec:majorana]{the previous section}, when \(s_2 = 1\) and \(
 From \cref{tab:exist,tab:types}, we see that this is when \( p-q = 4 \pmod 8 \).
 We can create separate symplectic pairings within the space of chiral spinors and within the antichiral spinors.
 All of the statements regarding listing spinors are the same for pseudo-majorana spinors and majorana spinors.
+a
+
+%================================================================================
+\begin{appendix}
+%================================================================================
+%-------Section------------------------------------------------------------------
+
+\section{Proofs}\label{sec:proofs}
+
+We collect some of the longer proofs here.
 
 
+%-------Section------------------------------------------------------------------
+
+\subsection{Assumptions}\label{sec:assume}
+
+Here we prove \cref{it:even,it:odd,it:oddchi} from \cref{sec:clifford}.
+We focus on the Euclidean case, \(p = 0, q = d\), as the others can be constructed by multiplying the \(\Gammab^\mu\) by \(\ir\).
+
+%-------Section------------------------------------------------------------------
+
+\subsubsection{Even \texorpdfstring{\(d\)}{d}}\label{sec:evenclass}
+
+We prove that all representations are similar to each other by taking an arbitrary representation, \(\Gammab^\mu\), and constructing the similarity transform from the Brauer-Weyl representation, \(\Gammab^\mu_\text{BW}\).
+
+First construct the following matrices:
+%
+\begin{equation}\label{eq:raiselower}
+  \Gammab^a_\pm = \frac{\Gammab^{2a-1} \pm \ir \Gammab^{2a}}{2},
+  \quad a = 1,\dots,\frac{d}{2}, \qquad
+  \brc{\Gammab_+^a, \Gammab_+^b} = \brc{\Gammab_-^a, \Gammab_-^b} = m\mathbf{0},
+  \quad \brc{\Gammab_+^a, \Gammab_-^b} = \delta^{ab} \I.
+\end{equation}
+%
+
+
+%===========================================t=====================================
+\end{appendix}
 %================================================================================
 \bibliographystyle{utcaps_nat}
 \bibliography{journals,qft,gr,maths}
