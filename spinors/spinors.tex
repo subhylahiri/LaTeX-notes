@@ -6,6 +6,7 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage[UKenglish]{babel}
 \usepackage[draft,tables]{sl-preamble}
+\usepackage{xparse}
 %
 % ----------------------------------------------------------------
 \vfuzz2pt % Don't report over-full v-boxes if over-edge is small
@@ -24,7 +25,9 @@
 \newcommand{\invt}{^{-\mathrm{T}}}
 \newcommand{\invc}{^{-\ast}}
 \newcommand{\Gammab}{\boldsymbol{\Gamma}}
-\newcommand{\Gammap}[1][\mu]{\prn{\Gammab^{#1}}}
+% \newcommand{\Gammap}[1][\mu]{\prn{\Gammab^{#1}}}
+\NewDocumentCommand \Gammap { s !O{\mu} } {\prn{
+  \IfBooleanT{#1}{-}\Gammab^{#2}}}
 \newcommand{\mud}{{\mu\dag}}
 \newcommand{\mut}{{\mu\mathrm{T}}}
 \newcommand{\muc}{{\mu\ast}}
@@ -169,7 +172,7 @@ The statements in the rest of this section should be prefaced with ``assuming th
 \subsection{Involutions}\label{sec:invol}
 
 The operations in \cref{sec:ccmats} are all involutions -- their own inverses.
-This means we can perform them twice to derive new identities:
+This means we can perform them twice and use \cref{it:commute} to derive new identities:
 %
 \begin{equation*}
 \begin{gathered}
@@ -199,14 +202,14 @@ This means we can perform them twice to derive new identities:
 \end{gathered}
 \end{equation*}
 %
-We can rewrite some of these relations, e.g., as \(\A^\dag = \alpha \At\).
+We can rewrite some of these relations as, e.g., \(\A^\dag = \alpha \At\).
 Taking the Hermitian conjugate gives \(\A = \alpha^\ast \A^\dag = \abs{\alpha}^2 \A\).
 Similar aruments tell us that
 %
 \begin{equation}\label{eq:constinvol}
-  \abs{\alpha} = 1, \qquad
-  \beta \in \R, \qquad
-  \chi^2 = 1.
+  \abs{\alpha} = \abs{\alphat} = 1, \qquad
+  \beta, \betat \in \R, \qquad
+  \chi^2 = \chit^2 = 1.
 \end{equation}
 %
 This method does not lead to any constraints on \(\gamma\).
@@ -223,6 +226,7 @@ Under these redefinitions the scalars above transform as
 %
 with similar relations for the tilde versions.
 These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of $\alpha$ but not its magnitude, vice-versa for $\beta$, and $\chi$ cannot be changed at all.
+We can choose to set the phase of \(\alpha\) to zero and the magnitude of \(\beta\) to one.
 Combined with \cref{eq:constinvol}, we have  
 %
 \begin{equation}\label{eq:normscalar}
@@ -242,7 +246,7 @@ or in terms of the matrices
 %
 Again, the same relations apply to the tilde versions, except that in some situations it will be more convenient to choose to set \( \alphat = -1 \).
 These choices do not completely eliminate the scalar ambiguity.
-For $\Gammab$ we can still use $\lambda = \pm 1$, for $\A$ any $\lambda \in \R$, for $\B$ any $\lambda$ with $\abs{\lambda} = 1$ and for $\C$ any $\lambda \in \Cb$.
+For $\Gammab$ we can still use $\lambda = \pm 1$, for $\A$ any $\lambda \in \R$, for $\B$ any $\lambda$ with $\abs{\lambda} = 1$ and for $\C$ any \(\lambda \in \Cb^\ast\).
 
 %-------Section------------------------------------------------------------------
 
@@ -291,8 +295,8 @@ We can relate these scalars to the earlier ones as follows
 \end{equation*}
 %
 So we have \( \frac{\tilde{f}}{f^\ast} = \frac{\alpha \beta}{\chi} \)
-and \( \frac{f}{\tilde{f}^\ast} = \frac{\alpha}{\beta \chi^\ast} \).
-If we take the complex-conjugate of the second equation and use the choices in \cref{eq:normscalar},
+and \( \frac{\tilde{f}^\ast}{f} = \frac{\beta \chi^\ast}{\alpha} \).
+If we take the complex-conjugate of the second equation and use the results in \cref{eq:constinvol},
 we find that \( \frac{\tilde{f}}{f^\ast} = \frac{f^\ast}{\tilde{f}} \),
 or \( \tilde{f} = \pm f^\ast \) which implies that $\chi = \pm \alpha \beta$.
 Furthermore, under the $\C \ra \lambda \C$ ambiguity \( f \rightarrow \lambda^\ast f\),
@@ -304,7 +308,7 @@ By choosing $\lambda = 1/\tilde{f}$ we set $f = \pm1$ and $\tilde{f} = 1$.
   \chi = \pm \alpha \beta.
 \end{equation}
 %
-The first relation is a normalisation choice; the second is forced on us by \cref{eq:normscalar}.
+The first relation is a normalisation choice; the second is forced on us by \cref{eq:constinvol}.
 This reduces the scalar ambiguity to simultaneous \( \A \rightarrow r \A \),
 \( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \)
 with \( r, \phi \in \R \).
@@ -324,22 +328,42 @@ We can also derive corresponding relations with two of the three matrices/scalar
 \end{equation}
 %
 The signs in each column match.
-The first row contains normalisation choices; the second row is forced on us by \cref{eq:normscalar}.
+The first row contains normalisation choices; the second row is forced on us by \cref{eq:constinvol}.
 For odd $d$ only one of the four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible, and we can choose to set that $f_i = 1$.
 
-When $d$ is even, the same approach leads to relations between tilde versions, tilde-free versions and $\Gammab$.
+When $d$ is even, we can apply the same approach leads to findrelations between tilde versions, tilde-free versions and $\Gammab$.
+For example:
+%
+\begin{equation*}
+\begin{alignedat}{6}
+  -\Gammab^\mud 
+  %
+    &= -\Gammap[\mud] &
+    &= \A \Gammap*[\mu] \A\inv &
+    &= \A \Gammab\inv \Gammab^\muc \Gammab \A\inv &
+    &= \prn{\A \Gammab\inv} \Gammab^\mu \prn{\A \Gammab\inv}\inv &
+    &\implies &
+  \At &= a \A \Gammab\inv, \\
+  %
+    &= \Gammap*[\mu]^\dag &
+    &= (\Gammab\inv \Gammab^\mu \Gammab)^\dag &
+    &= \Gammab^\dag \Gammab^\mud \Gammab\invd &
+    &= \Gammab^\dag \A \Gammab^\mu \A\inv \Gammab\invd &
+    &\implies &
+  \At &= \tilde{a} \Gammab^\dag \A. \\
+\end{alignedat}
+\end{equation*}
+%
 We find
 %
 \begin{equation}\label{eq:chiraltilde}
 \begin{aligned}
   \A\inv \A^\dag = a \At\inv \At^\dag &= \alpha \I, &\quad
   \At &= \Gammab^\dag \A = a \A \Gammab,            &\quad
-  \phase(\alpha) &= 0,                              &\quad
-  \abs{a} &= 1, \\
+  \abs{a} &= 1,                                         \\
   \B \B^\ast = \pm \Bt \Bt^\ast &= \beta \I,             &
   \Bt &= b \Gammab \B = \pm \frac{1}{b} \B \Gammab^\ast, &
-  \phase(b) &= 0,                                        &
-  \abs{\beta} &= 1, \\
+  b &\in \R_+,                                       \\
   \C\inv \C\trans = \pm \Ct\inv \Ct\trans &= \chi \I,    &
   \Ct &= \Gammab\trans \C = \pm \C \Gammab.              &
 %  \A = \B\trans \C &= \pm \C^\ast \B\inv, &
@@ -354,7 +378,7 @@ and performing \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt
 \( \Ct \rightarrow r\e^{\ir\phi} \Ct \) simultaneously with the transformations of $\A$, $\B$, $\C$ below \cref{eq:comboABC}.
 
 For even $d$ we can derive more relations between these scalars and signs by substituting relations from the second column of \cref{eq:chiraltilde} into \cref{eq:ABCtildes}.
-We find that \(a = \pm 1\), \(b = 1\) and relations between the six signs above.
+We find that \(a = \pm 1\), \(b = 1\) and relations between the four signs in \cref{eq:comboABC,eq:ABCtildes} and the three signs (including \(a\)) in \cref{eq:chiraltilde} above.
 
 The overall result is
 %
@@ -417,6 +441,41 @@ and simultaneous \( \A \rightarrow r \A \),
 \( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \),
 \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
 \( \Ct \rightarrow r\e^{\ir\phi} \Ct \) with \( r, \phi \in \R \) (for odd $d$ only half of these will exist).
+
+\begin{table}
+  \centering
+  \begin{tabular}{CAAAACL}
+  \toprule
+    \text{Matrix}  & \colhead{Similarity} & \colhead{Doubling} & \colhead{Constraint} 
+        & \colhead{Normalisation} & \colhead{Ambiguity} \\
+  \midrule
+    \Gammab & -&\Gammab^\mu  &         \Gammab^2 &= \gamma \I  &               &-      &       \gamma &= 1   & \mathbb{Z}_2 \\
+    \A      &  &\Gammab^\mud &    \A\inv \A^\dag &= \alpha \I  &  \abs{\alpha} &= 1    &       \alpha &= 1   & \R \\
+    \At     & -&\Gammab^\mud &  \At\inv \At^\dag &= \alphat \I & \abs{\alphat} &= 1    &      \alphat &= s_1 & \R \\
+            &&&               \At \Gammab \A\inv &= a \I       & \alpha a^*/a' &= \alphat &         a &= s_1 & \R       & (*) \\
+            &&&          \At \A\inv \Gammab^\dag &= a' \I      &      \abs{a'} &= \abs{a} &        a' &= 1   & -        & (*) \\
+    \B      &  &\Gammab^\muc &        \B \B^\ast &= \beta \I   &         \beta &\in \R &  \abs{\beta} &= 1   & U(1) \\
+    \Bt     & -&\Gammab^\muc &      \Bt \Bt^\ast &= \betat \I  &        \betat &\in \R & \abs{\betat} &= 1   & U(1) \\
+            &&&               \Bt \B\inv \Gammab &= b \I       &  \beta b^* b' &= \betat &          b &= 1   & U(1)     & (*) \\
+            &&&          \Bt \Gammab^\ast \B\inv &= b' \I      &        b^* b' &\in \R   &         b' &= s_2 & -        & (*) \\
+    \C      &  &\Gammab^\mut &   \C\inv \C\trans &= \chit \I   &        \chi^2 &= 1    &              &-     & \Cb^\ast \\
+    \Ct     & -&\Gammab^\mut & \Ct\inv \Ct\trans &= \chit \I   &       \chit^2 &= 1    &              &-     & \Cb^\ast \\
+            &&&               \Ct \Gammab \C\inv &= c \I       & \alpha a^*/a' &= \alphat &         c &= s_3 & \Cb^\ast & (*) \\
+            &&&         \Ct \C\inv \Gammab\trans &= c' \I      &      \abs{a'} &= \abs{a} &        c' &= 1   & -        & (*) \\
+  \bottomrule
+  \end{tabular}
+  \caption{Constants associated with chirality, charge conjugation, \etc matrices.
+  The second column lists the result of the matrix in the first column being used in a similarity transform on $\Gammab^\mu$.
+  The third column lists the matrix that performs the operation from the second column twice.
+  The result must be proportional to the identity matrix. 
+  The constant of proportionality appears there.
+  The fourth column contains constraints from \cref{eq:constinvol}.
+  The fifth column contains normalisation choices from \cref{eq:normscalar}.
+  The sixth column contains the remaining scalar ambiguity that the first column may be multiplied by after imposing the fifth column.
+  For the rows marked with an asterisk: the constraints and normalisation conditions should be read together, and the scalar ambiguity is the diagonal subgroup of the previous two rows.
+  }\label{tab:exist}
+\end{table}
+
 
 
 %-------Section------------------------------------------------------------------
@@ -2036,10 +2095,22 @@ First construct the following matrices:
 \begin{equation}\label{eq:raiselower}
   \Gammab^a_\pm = \frac{\Gammab^{2a-1} \pm \ir \Gammab^{2a}}{2},
   \quad a = 1,\dots,\frac{d}{2}, \qquad
-  \brc{\Gammab_+^a, \Gammab_+^b} = \brc{\Gammab_-^a, \Gammab_-^b} = m\mathbf{0},
+  \brc{\Gammab_+^a, \Gammab_+^b} = \brc{\Gammab_-^a, \Gammab_-^b} = \mathbf{0},
   \quad \brc{\Gammab_+^a, \Gammab_-^b} = \delta^{ab} \I.
 \end{equation}
 %
+We can construct project operators for the null spaces of \(\Gammab^a_\pm\):
+%
+\begin{equation*}
+  \mathbf{P}^a_+ = \Gammab^a_+ \Gammab^a_-, \qquad
+  \mathbf{P}^a_- = \Gammab^a_- \Gammab^a_+, \qquad
+  \prn{\mathbf{P}^a_\pm}^2 = \mathbf{P}^a_\pm, \qquad
+  \mathbf{P}^a_+ + \mathbf{P}^a_- = \I, \qquad
+  \brk{\mathbf{P}^a_\pm, \mathbf{P}^b_\pm} = \mathbf{0}.
+\end{equation*}
+%
+
+
 
 
 %===========================================t=====================================
