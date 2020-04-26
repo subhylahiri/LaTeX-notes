@@ -100,7 +100,7 @@ Given one representation \(\Gammab^\mu\), we can construct another, \(\Gammab'^{
 This can also be thought of as a change of basis, though not necessarily an orthonormal one.
 We can then talk about similarity classes of representations.
 
-We make use of the following statements without justification:
+We make use of the following statements without justification here:
 %
 \begin{enumerate}
   \item Any matrix that commutes with all of the \(\Gammab^\mu\) must be proportional to the identity.
@@ -114,7 +114,7 @@ We make use of the following statements without justification:
 \end{enumerate}
 %
 \Cref{it:commute} follows from the definition of an irrep: if it weren't true the matrix's eigenspaces would be invariant subspaces.
-The proofs of \cref{it:even,it:odd,it:oddchi} can be found in \todo{}.
+The proofs of \cref{it:even,it:odd,it:oddchi} can be found in \cref{sec:assume}.
 
 We use the notation \(\floor{x}\) for the floor function: rounding down to the nearest integer.
 The dimensionality of the representations is then \(2^{\floor{d/2}}\).
@@ -701,8 +701,8 @@ When \(p=0\), we choose
 \end{equation}
 %
 For non-zero \(p\), we multiply the first \(p\) matrices by \(-\ir\).
-This can be realised as the Hilbert space of \(\floorfrac{d}{2}\) spin-\(\frac{1}{2}\) systems
-\cite{Strathdee:1987jr,strathdee1986extended}.
+This can be realised as the Hilbert space of \(\floorfrac{d}{2}\) spin-\(\frac{1}{2}\) systems, or a fermionic Fock space with \(\floorfrac{d}{2}\) single particle states,
+\cite{strathdee1986extended,Strathdee:1987jr}.
 
 This representation is convenient because it is systematic and each matrix is either completely real or completely imaginary --- none of them is mixed-complex.
 Similarly, each matrix is either Hermitian or antihermitian, and symmetric or antisymmetric.
@@ -2180,7 +2180,7 @@ We focus on the Euclidean case, \(p = 0, q = d\), as the others can be construct
 
 \subsubsection{Even \texorpdfstring{\(d\)}{d}}\label{sec:evenclass}
 
-We prove that all irreducible representations are similar to each other by taking an arbitrary representation, \(\Gammab^\mu\), and constructing the similarity transform from the Brauer-Weyl representation in \cref{eq:explicit}, \(\Gammab^\mu_\text{BW}\).
+We prove that all irreducible representations are similar to each other by taking an arbitrary irrep, \(\Gammab^\mu\), and constructing the similarity transform from the Brauer-Weyl representation in \cref{eq:explicit}, \(\Gammab^\mu_\text{BW}\).
 
 First construct the following matrices:
 %
@@ -2216,25 +2216,28 @@ The resulting vector, which we call \(\mathbf{v}_0\), lies in \(\mathcal{V}_{++\
 
 We then define
 %
-\begin{equation*}
+\begin{equation}\label{eq:BWstates}
   \mathbf{v}_k = \prod_{a=1}^{d/2} \prn{\Gamma^a_-}^{n_a} \mathbf{v}_0,
   \quad \text{where}\quad
   n_a \in \brc{0,1},
   \quad \text{and}\quad
   k = \sum_{a=1}^{d/2} n_a \, 2^{d/2 - a},
-\end{equation*}
+\end{equation}
 %
 i.e., \( n_0 n_1 \cdots n_{d/2} \) is the binary representation of \(k\).
 
 Each of the \(\mathbf{v}_k\) lies in a different one of the \(\mathcal{V}_{\pm\pm\cdots}\).
 This set of vectors spans an invariant subspace under the \(\Gammab^\mu\).
+This space cannot be reducible, as every basis vector was constructed by multiplying \(\mathbf{v}_0\) by a matrix from the Clifford algebra.
+Therefore every vector in the space spanned by the \(\mathbf{v}_k\) can be reached from \(\mathbf{v}_0\) by multiplying by a matrix from the Clifford algebra, and vice versa.
 As we are considering an irreducible representation, this must be the entire space.
 Therefore, each of the \(\mathcal{V}_{\pm\pm\cdots}\) must be one dimensional and the whole space has \(2^{d/2}\) dimensions.
+This proves half of \cref{it:even}.
 
-When using the \(\mathbf{v}_k\) as a basis, the \(\mathcal{V}_{\pm\pm\cdots}\) take the form of the Brauer-Weyl representation, \cref{eq:explicit}.
+When using the \(\mathbf{v}_k\) as a basis, the \(\Gammab^\mu\) take the form of the Brauer-Weyl representation, \cref{eq:explicit}.
 If we concatenate the \(\mathbf{v}_k\) into a matrix, \( \S = \prn{ \mathbf{v}_0 \mathbf{v}_1 \dots \mathbf{v}_{2^{d/2}-1} }\), this matrix maps that basis to our original basis:
 %
-\begin{equation}\label{eq:similarBW}
+\begin{equation}\label{eq:similarBWeven}
   \Gammab^\mu \mathbf{v}
     = \Gammab^\mu \S \mathbf{u}
     = \S \Gamma^\mu_\text{BW} \mathbf{u},
@@ -2244,6 +2247,33 @@ If we concatenate the \(\mathbf{v}_k\) into a matrix, \( \S = \prn{ \mathbf{v}_0
 %
 Thus, the arbitrary irrep we started with is similar to the Brauer-Weyl representation.
 Therefore, all irreps lie in the same similarity class when \(d\) is even.
+This proves the other half of \cref{it:even}.
+
+%-------Section------------------------------------------------------------------
+
+\subsubsection{Odd \texorpdfstring{\(d\)}{d}}\label{sec:oddclass}
+
+With the first \(d-1\) of the \(\Gammab^\mu\) we can repeat the construction of the \(\mathbf{v}_k\) from \cref{eq:BWstates}.
+Because \(\prod^{d}_{\mu = 1} \Gammab^\mu\) commutes with all of the \(\Gammab^\mu\), it must be the case that \( \Gammab^d \propto \prod^{d-1}_{\mu = 1} \Gammab^\mu \).
+Therefore, the \(\mathbf{v}_k\) span an invariant subspace in this case as well, so the dimensionn of the representation must be \(2^{(d-1)/2}\).
+This proves half of \cref{it:odd}.
+
+For \(\mu = 1,\dots,d-1\) this construction gives \( \Gammab^\mu = \S \Gamma^\mu_\text{BW} \S\inv \).
+With the condition \(\Gammap[d]^2 = \I\), there are only two possibilities for \(\mu = d\): \( \Gammab^d = \pm \S \Gamma^d_\text{BW} \S\inv \).
+There is no similarity transform that relates these two choices: such a matrix would have to commute with \(\Gammab^\mu\) for \(\mu = 1,\dots,d-1\) as well as anticommutating with \(\Gammab^d\), which would contradict the construction for even \(d\) producing an irrep.
+This proves the other half of \cref{it:odd}.
+
+However, we can use \(\Gammab^d\) in a similarity transform to map \(\Gammab^\mu \to - \Gammab^\mu\) for \(\mu = 1,\dots,d-1\).
+therefore, the two possibilities for the repreesentation we started with are
+%
+\begin{equation}\label{eq:similarBWodd}
+  \Gammab^\mu = \S \Gamma^\mu_\text{BW} \S\inv,
+  \quad \text{and}\quad
+  \Gammab^\mu = - (\S \Gammab^d_\text{BW}) \Gamma^\mu_\text{BW} (\S \Gammab^d_\text{BW})\inv.
+\end{equation}
+%
+Note that if \(\Gammab^\mu\) is of the first fform, then \(-\Gammab^\mu\) is similar to the second form, and vice versa. 
+This proves \cref{it:oddchi}.
 
 
 %===========================================t=====================================
