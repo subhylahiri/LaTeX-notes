@@ -2180,12 +2180,12 @@ We focus on the Euclidean case, \(p = 0, q = d\), as the others can be construct
 
 \subsubsection{Even \texorpdfstring{\(d\)}{d}}\label{sec:evenclass}
 
-We prove that all representations are similar to each other by taking an arbitrary representation, \(\Gammab^\mu\), and constructing the similarity transform from the Brauer-Weyl representation, \(\Gammab^\mu_\text{BW}\).
+We prove that all irreducible representations are similar to each other by taking an arbitrary representation, \(\Gammab^\mu\), and constructing the similarity transform from the Brauer-Weyl representation in \cref{eq:explicit}, \(\Gammab^\mu_\text{BW}\).
 
 First construct the following matrices:
 %
 \begin{equation}\label{eq:raiselower}
-  \Gammab^a_\pm = \frac{\Gammab^{2a-1} \pm \ir \Gammab^{2a}}{2},
+  \Gammab^a_\pm = \frac{\Gammab^{2a-1} \pm \ir \, \Gammab^{2a}}{2},
   \quad a = 1,\dots,\frac{d}{2}, \qquad
   \brc{\Gammab_+^a, \Gammab_+^b} = \brc{\Gammab_-^a, \Gammab_-^b} = \mathbf{0},
   \quad \brc{\Gammab_+^a, \Gammab_-^b} = \delta^{ab} \I.
@@ -2201,8 +2201,49 @@ We can construct project operators for the null spaces of \(\Gammab^a_\pm\):
   \brk{\mathbf{P}^a_\pm, \mathbf{P}^b_\pm} = \mathbf{0}. 
 \end{equation*}
 %
+We denote the subspaces corresponding to \(\mathbf{P}^a_\pm\) as \(\mathcal{V}^a_\pm\).
+We can see that \( \Gammab^a_+ : \mathcal{V}^a_- \longmapsto \mathcal{V}^a_+ \) and \( \Gammab^a_- : \mathcal{V}^a_+ \longmapsto \mathcal{V}^a_- \).
+Furthermore, on these domains the two maps are each others' inverses.
+Therefore, the \(\mathcal{V}^a_\pm\) are half dimensional.
 
+Because the projection operators commute, we can use \(\mathbf{P}^b_\pm\) to further subdivide \(\mathcal{V}^a_\pm\), and then further subdivide with \(\mathbf{P}^c_\pm\)\dots
+We end up with \(2^{d/2}\) subspaces, \(\mathcal{V}_{\pm\pm\cdots}\), all of equal dimensionality. 
 
+Let's start with any vector \(\mathbf{v}\). 
+If \(\Gammab^0_+ \mathbf{v} \neq \mathbf{0}\) we replace \(\mathbf{v} \to \Gammab^0_+ \mathbf{v}\).
+We then repeat the procedure with \(\Gammab^1_+,\Gammab^2_+,\dots\).
+The resulting vector, which we call \(\mathbf{v}_0\), lies in \(\mathcal{V}_{++\cdots+}\).
+
+We then define
+%
+\begin{equation*}
+  \mathbf{v}_k = \prod_{a=1}^{d/2} \prn{\Gamma^a_-}^{n_a} \mathbf{v}_0,
+  \quad \text{where}\quad
+  n_a \in \brc{0,1},
+  \quad \text{and}\quad
+  k = \sum_{a=1}^{d/2} n_a \, 2^{d/2 - a},
+\end{equation*}
+%
+i.e., \( n_0 n_1 \cdots n_{d/2} \) is the binary representation of \(k\).
+
+Each of the \(\mathbf{v}_k\) lies in a different one of the \(\mathcal{V}_{\pm\pm\cdots}\).
+This set of vectors spans an invariant subspace under the \(\Gammab^\mu\).
+As we are considering an irreducible representation, this must be the entire space.
+Therefore, each of the \(\mathcal{V}_{\pm\pm\cdots}\) must be one dimensional and the whole space has \(2^{d/2}\) dimensions.
+
+When using the \(\mathbf{v}_k\) as a basis, the \(\mathcal{V}_{\pm\pm\cdots}\) take the form of the Brauer-Weyl representation, \cref{eq:explicit}.
+If we concatenate the \(\mathbf{v}_k\) into a matrix, \( \S = \prn{ \mathbf{v}_0 \mathbf{v}_1 \dots \mathbf{v}_{2^{d/2}-1} }\), this matrix maps that basis to our original basis:
+%
+\begin{equation}\label{eq:similarBW}
+  \Gammab^\mu \mathbf{v}
+    = \Gammab^\mu \S \mathbf{u}
+    = \S \Gamma^\mu_\text{BW} \mathbf{u},
+  \qquad \implies \qquad
+  \Gammab^\mu = \S \Gamma^\mu_\text{BW} \S\inv.
+\end{equation}
+%
+Thus, the arbitrary irrep we started with is similar to the Brauer-Weyl representation.
+Therefore, all irreps lie in the same similarity class when \(d\) is even.
 
 
 %===========================================t=====================================
