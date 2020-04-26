@@ -20,7 +20,7 @@
 % New commands etc.
 %
 \newcommand{\todo}[1]{\textcolor{purple}{TODO: #1}}
-\newcommand{\alert}[1]{\textcolor{teal}{#1}}
+\newcommand{\alert}[1]{\textcolor{violet}{\boxed{#1}}}
 %
 \newcommand{\invd}{^{-\dag}}
 \newcommand{\invt}{^{-\mathrm{T}}}
@@ -407,11 +407,12 @@ We can also derive corresponding relations with two of the three matrices/scalar
 \end{equation}
 %
 The signs in each column match.
-The first row contains normalisation choices; the second row is forced on us by \cref{eq:constinvol}.
+The first row contains normalisation choices; 
+the second row is forced on us by \cref{eq:constinvol}.
 For odd \(d\) only one of the four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible, and we can choose to set that \(f_i = 1\).
 
 For even \(d\) we can derive more relations between these scalars and signs by substituting relations from the second column of \cref{eq:chiraltilde} into \cref{eq:ABCtildes}.
-We find that \(a = \pm 1\), \(b = \pm 1\) and expressions for \(f_1,f_2,f_3\) and the three signs in \cref{eq:ABCtildes} in terms of the three signs (including \(a,b\)) in \cref{eq:chiraltilde} and the sign in \cref{eq:comboABC} above.
+We find that \(a = \pm 1\), \(b = \pm 1\) and expressions for \(f_1,f_2,f_3\) and the three signs in \cref{eq:ABCtildes} in terms of the three signs (including \(a\) and \(b\)) in \cref{eq:chiraltilde} and the sign in \cref{eq:comboABC} above.
 These results are all described inn \cref{tab:scalarconstraints} in the doubly-asterisked rows.
 
 The overall result is
@@ -1103,23 +1104,24 @@ These results are summarised in \cref{tab:exist}.
   \centering
   \begin{tabular}{CAACAA}
   \toprule
-    \text{Matrix}  & \colhead{Similarity} & \colhead{Nonexistent when\ldots} & \text{Doubling}
-                    & \colhead{Constant}                 & \colhead{Sign} \\
+    \text{Matrix}  
+            & \colhead{Similarity} & \colhead{Nonexistent}& \text{Doubling}
+            & \colhead{Constant}                          & \colhead{Sign} \\
   \midrule
-    \Gammab & -&\Gammab^\mu        & p\pm q &= 1 \pmod 2              & \Gammab^2
-                    & \gamma &= 1                        &                           \\
-    \A      &  &\Gammab^\mud       & p,q &= 1,0 \pmod 2               & \A\inv \A\hc
-                    & \alpha &= 1                        &                           \\
-    \At     & -&\Gammab^\mud       & p,q &= 0,1 \pmod 2               & \At\inv \At\hc
-                    & \alphat &= (-1)^{pq}               & s_1 &= (-1)^{pq}     \\
-    \B      &  &\Gammab^\muc       & p-q &= 1 \pmod 4                 & \B \B\cc
-                    & \beta &= (-1)^{\floorfrac{p-q+2}{4}}  &                           \\
-    \Bt     & -&\Gammab^\muc       & p-q &= 3 \pmod 4                 & \Bt \Bt\cc
-                    & \betat &= (-1)^{\floorfrac{p-q}{4}} & s_2 &= (-1)^{\floorfrac{p-q}{2}} \\
-    \C      &  &\Gammab^\mut       & p+q &= 3 \pmod 4                 & \C\inv \C\trans
-                    & \chi &= (-1)^{\floorfrac{p+q}{4}}     & \sh &= \beta\chi      \\
-    \Ct     & -&\Gammab^\mut       & p+q &= 1 \pmod 4                 & \Ct\inv \Ct\trans
-                    & \chit &= (-1)^{\floorfrac{p+q+2}{4}}  & s_3 &= (-1)^{\floorfrac{p+q}{2}}  \\
+    \Gammab & -&\Gammab^\mu        & p\pm q &= 1 \pmod 2  & \Gammab^2
+            &  \gamma &= 1                                &                  \\
+    \A      &  &\Gammab^\mud       & p,q &= 1,0 \pmod 2   & \A\inv \A\hc
+            &  \alpha &= 1                                &                  \\
+    \At     & -&\Gammab^\mud       & p,q &= 0,1 \pmod 2   & \At\inv \At\hc
+            & \alphat &= (-1)^{pq}                        & s_1 &= (-1)^{pq} \\
+    \B      &  &\Gammab^\muc       & p-q &= 1 \pmod 4     & \B \B\cc
+            &   \beta &= (-1)^{\floorfrac{p-q+2}{4}}      &                  \\
+    \Bt     & -&\Gammab^\muc       & p-q &= 3 \pmod 4     & \Bt \Bt\cc
+            &  \betat &= (-1)^{\floorfrac{p-q}{4}}        & s_2 &= (-1)^{\floorfrac{p-q}{2}} \\
+    \C      &  &\Gammab^\mut       & p+q &= 3 \pmod 4     & \C\inv \C\trans
+            &    \chi &= (-1)^{\floorfrac{p+q}{4}}        & \sh &= \beta\chi  \\
+    \Ct     & -&\Gammab^\mut       & p+q &= 1 \pmod 4     & \Ct\inv \Ct\trans
+            &   \chit &= (-1)^{\floorfrac{p+q+2}{4}}      & s_3 &= (-1)^{\floorfrac{p+q}{2}}  \\
   \bottomrule
   \end{tabular}
   \caption{Existence of chirality, charge conjugation, \etc matrices and their associated constants.
@@ -1157,7 +1159,7 @@ This means that the inverse transforms are given by
 
 If we split \(\Lambda^\mu{}_\nu\) into \((p,q)\) blocks, \cref{eq:lorentz} means that
 %
-\begin{equation*}
+\begin{equation}\label{eq:blocklorentz}
   \Lambdab = 
     \begin{pmatrix}
       \Lambdab_1 & \Lambdab_2 \\
@@ -1167,14 +1169,14 @@ If we split \(\Lambda^\mu{}_\nu\) into \((p,q)\) blocks, \cref{eq:lorentz} means
 \begin{aligned}
   \Lambdab_1 \Lambdab_1\trans &= \I_p + \Lambdab_2 \Lambdab_2\trans, &
   \Lambdab_1\trans \Lambdab_1 &= \I_p + \Lambdab_3\trans \Lambdab_3, \\
-  \Lambdab_4 \Lambdab_4\trans &= \I_p + \Lambdab_3 \Lambdab_3\trans, &
-  \Lambdab_4\trans \Lambdab_4 &= \I_p + \Lambdab_2\trans \Lambdab_2, \\
+  \Lambdab_4 \Lambdab_4\trans &= \I_q + \Lambdab_3 \Lambdab_3\trans, &
+  \Lambdab_4\trans \Lambdab_4 &= \I_q + \Lambdab_2\trans \Lambdab_2, \\
   \Lambdab_1 \Lambdab_3\trans &= \Lambdab_2 \Lambdab_4\trans, &
   \Lambdab_1\trans \Lambdab_2 &= \Lambdab_3\trans \Lambdab_4.
 \end{aligned}
-\end{equation*}
+\end{equation}
 %
-Considering the eigenvectors of the equations in the first two rows, this means that the SVDs look like
+If we consider the eigenvectors of the equations in the first two rows, we can see that the SVDs must look like
 %
 \begin{equation*}
 \begin{aligned}
@@ -1254,6 +1256,13 @@ If we send \(\theta_i \to 0\), we see that \(\Lambdab\) is continuously connecte
 which is connected to the identity iff \(\sgn \det \Lambdab_1 = \sgn \det \Lambdab_4 = 1\), 
 as \(\U\), etc.\ are connected to any orthogonal matrix with the same determinant.%
 \footnote{By multiplying corresponding columns of \(\U\) and \(\V\) by \(-1\) we can change the signs of \(\det\U\) and \(\det\V\) without changing \(\Lambdab\), so it is only the product of determinants that is meaningful.}
+In general, \(\Lambdab\) is continuously connected to
+\(
+\begin{psmallmatrix}
+  (\sgn \det \Lambdab_1) \I & \mathbf{0} \\
+  \mathbf{0} & (\sgn \det \Lambdab_4) \I
+\end{psmallmatrix}
+\).
 Therefore, the group \(O(p,q)\) has four disconnected components described by the signs of the determinants of the diagonal blocks, \(\Lambda_1\) and  \(\Lambda_4\).
 
 The \((+,+)\) component contains all transformations that can be continuously changed to reach the identity.
@@ -1306,82 +1315,106 @@ In even dimensions, both must exist.
 In odd dimensions, only one can exist.
 We postpone discussion of their relation to Lorentz transformations of spinors to \cref{sec:diraclorentz}.
 
-If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm} we can define a set of scalars associated with \(\Lambdab\) (highlighted with \alert{colour} below).
-\Cref{eq:constnorm} also implies relations between these constants:
+If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm} we can define a set of scalars associated with \(\Lambdab\) (definitions highlighted  \alert{\text{like this}} below).
+\Cref{eq:constnorm} also implies relations between these constants.
+After applying these constraints, we have:
 %
 \begin{equation*}
 \begin{alignedat}{4}
-  h_{\Lambda,\Lambda'}^2 &= \frac{g_{\Lambda}g_{\Lambda'}}{g_{\Lambda\Lambda'}}
-    \mathrlap{\e^{\ir(\phi_{\Lambda\Lambda'} - \phi_\Lambda - \phi_{\Lambda'})}} &&&
-  \Gammab \S_\Lambda
-    &= \alert{s_\Lambda} \S_\Lambda \Gammab 
-    = \mathrlap{ \alert{\hat{g}_\Lambda} \St_\Lambda,} \\
-  \S_\Lambda \S_{\Lambda'} 
-    &= s_{\Lambda} \hat{g}_\Lambda \hat{g}_{\Lambda'}\, \St_\Lambda \St_{\Lambda'} &
-    &= \alert{h_{\Lambda,\Lambda'}}\, \S_{\Lambda\Lambda'}, &\qquad
-  \hat{g}_{\Lambda} \St_\Lambda \S_{\Lambda'} 
-    &= s_{\Lambda} \hat{g}_{\Lambda'}\, \S_\Lambda \St_{\Lambda'} &
-    &= \hat{g}_{\Lambda\Lambda'}h_{\Lambda,\Lambda'}\, \St_{\Lambda\Lambda'}, \\ 
-  \S_\Lambda\hc \A \S_\Lambda
-    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda\hc \A \St_\Lambda &
-    &= \alert{g_\Lambda} \A, &
-  \S_\Lambda\hc \At \S_\Lambda
-    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda\hc \At \St_\Lambda &
-    &= s_\Lambda g_\Lambda \At, \\
-  \S_\Lambda\inv \B \S_\Lambda\cc
-    &= \frac{s_2 \hat{g}_\Lambda\cc}{\hat{g}_\Lambda} \,
-      \St_\Lambda\inv \B \St_\Lambda\cc &
-    &= \alert{\e^{\ir\phi_\Lambda}} \B, &
-  \S_\Lambda\inv \Bt \S_\Lambda\cc
-    &= \frac{s_2 \hat{g}_\Lambda\cc}{\hat{g}_\Lambda} \,
-      \St_\Lambda\inv \Bt \St_\Lambda\cc &
-    &= s_\Lambda \e^{\ir\phi_\Lambda} \Bt, \\
-  \S_\Lambda\trans \C \S_\Lambda
-    &= s_3 \hat{g}_\Lambda^2\, \St_\Lambda\trans \C \St_\Lambda &
-    &= g_\Lambda \e^{-\ir\phi_\Lambda} \C, &
-  \S_\Lambda\trans \Ct \S_\Lambda 
-    &= s_3 \hat{g}_\Lambda^2\, \St_\Lambda\trans \Ct \St_\Lambda &
-    &= s_\Lambda g_\Lambda \e^{-\ir\phi_\Lambda} \Ct,
+  \alert{f_\Lambda} \St_\Lambda
+    &= \Gammab \S_\Lambda 
+    &&= \alert{s_\Lambda} \S_\Lambda \Gammab
+    ,&
+  s_{\Lambda\Lambda'} 
+    &= s_{\Lambda} s_{\Lambda'}
+    ,\\
+  \alert{h_{\Lambda,\Lambda'}}\, \S_{\Lambda\Lambda'}
+    &= \S_\Lambda \, \S_{\Lambda'}  
+    &&= s_{\Lambda} f_\Lambda f_{\Lambda'}\, \St_\Lambda \St_{\Lambda'}
+    ,&\qquad
+  f_{\Lambda\Lambda'}h_{\Lambda,\Lambda'}\, \St_{\Lambda\Lambda'}
+    &= f_{\Lambda} \St_\Lambda \S_{\Lambda'}  
+    &&= s_{\Lambda} f_{\Lambda'}\, \S_\Lambda \St_{\Lambda'}
+    ,\\ 
+  \alert{g_\Lambda} \A
+    &= \S_\Lambda\hc \A \S_\Lambda
+    &&= s_1 \abs{f_\Lambda}^2 \St_\Lambda\hc \A \St_\Lambda
+    ,&
+  s_\Lambda g_\Lambda \At
+    &= \S_\Lambda\hc \At \S_\Lambda 
+    &&= s_1 \abs{f_\Lambda}^2 \St_\Lambda\hc \At \St_\Lambda
+    ,\\
+  \alert{\e^{\ir\phi_\Lambda}} \B
+    &= \S_\Lambda\inv \B \S_\Lambda\cc 
+    &&= \frac{s_2 f_\Lambda\cc}{f_\Lambda} \, \St_\Lambda\inv \B \St_\Lambda\cc
+    ,&
+  s_\Lambda \e^{\ir\phi_\Lambda} \Bt
+    &= \S_\Lambda\inv \Bt \S_\Lambda\cc 
+    &&= \frac{s_2 f_\Lambda\cc}{f_\Lambda} \, \St_\Lambda\inv \Bt \St_\Lambda\cc
+    ,\\
+  g_\Lambda \e^{-\ir\phi_\Lambda} \C
+    &= \S_\Lambda\trans \C \, \S_\Lambda 
+    &&= s_3 f_\Lambda^2\, \St_\Lambda\trans \C \, \St_\Lambda
+    ,&
+  s_\Lambda g_\Lambda \e^{-\ir\phi_\Lambda} \Ct
+    &= \S_\Lambda\trans \Ct \S_\Lambda  
+    &&= s_3 f_\Lambda^2\, \St_\Lambda\trans \Ct \St_\Lambda
+    ,\\
+  g_{\Lambda\Lambda'}  
+    &= \frac{g_{\Lambda}g_{\Lambda'}}{\abs{h_{\Lambda,\Lambda'}}^2} 
+    ,&&&
+  \phi_{\Lambda\Lambda'} 
+    &= \mathrlap{ \phi_\Lambda + \phi_{\Lambda'} + 2\phase(h_{\Lambda,\Lambda'}) }
+    ,\\ 
 \end{alignedat}
 \end{equation*}
 %
-where \(g_\Lambda\) and \(\phi_\Lambda\) are real, \(\frac{g_{\Lambda}g_{\Lambda'}}{g_{\Lambda\Lambda'}} > 0\), \(s_\Lambda = \pm 1\), and \(s_{\Lambda\Lambda'} = s_{\Lambda} s_{\Lambda'}\).
+where \(g_\Lambda\) and \(\phi_\Lambda\) are real and \(s_\Lambda = \pm 1\).
 We can use the freedom to scale \(\S_\Lambda\) to set \(g_\Lambda = \e^{\ir\phi_\Lambda} \equiv r_\Lambda = \pm 1\),
-and the freedom to scale \(\St_\Lambda\) to set \(\hat{g}_\Lambda = 1\).
+and the freedom to scale \(\St_\Lambda\) to set \(f_\Lambda = 1\).
 This leaves us with:
 %
 \begin{equation}\label{eq:constnormlorentz}
 \begin{alignedat}{4}
-  \frac{r_{\Lambda\Lambda'}}{r_{\Lambda} r_{\Lambda'}}
-    &= \frac{s_{\Lambda\Lambda'}}{s_{\Lambda} s_{\Lambda'}} 
-    = 1, &&&
-  \Gammab \S_\Lambda 
-    &= s_\Lambda \S_\Lambda \Gammab &
-    &= \St_\Lambda, \\
-  \S_\Lambda \S_{\Lambda'} 
-    &= s_{\Lambda} \St_\Lambda \St_{\Lambda'} &
-    &= \S_{\Lambda\Lambda'}, &
-  \St_\Lambda \S_{\Lambda'}
-    &= s_{\Lambda} \S_\Lambda \St_{\Lambda'} &
-    &= \St_{\Lambda\Lambda'}, \\ 
-  \S_\Lambda\hc \A \S_\Lambda 
-    &= s_1 \St_\Lambda\hc \A \St_\Lambda &
-    &= r_\Lambda \A, &
-  \S_\Lambda\hc \At \S_\Lambda 
-    &= s_1 \St_\Lambda\hc \At \St_\Lambda &
-    &= r_\Lambda s_\Lambda \At, \\
-  \S_\Lambda\inv \B \S_\Lambda\cc 
-    &= s_2 \St_\Lambda\inv \B \St_\Lambda\cc &
-    &= r_\Lambda \B, &\qquad
-  \S_\Lambda\inv \Bt \S_\Lambda\cc 
-    &= s_2 \St_\Lambda\inv \Bt \St_\Lambda\cc &
-    &= r_\Lambda s_\Lambda \Bt, \\ 
-  \S_\Lambda\trans \C \S_\Lambda 
-    &= s_3 \St_\Lambda\trans \C \St_\Lambda &
-    &= \C, & 
-  \S_\Lambda\trans \Ct \S_\Lambda 
-    &= s_3 \St_\Lambda\trans \Ct \St_\Lambda &
-    &= s_\Lambda \Ct. 
+  \St_\Lambda
+    &= \Gammab \S_\Lambda 
+    &&= s_\Lambda \S_\Lambda \Gammab
+    ,&
+  1 &=\frac{r_{\Lambda\Lambda'}}{r_{\Lambda} r_{\Lambda'}}
+    &&= \frac{s_{\Lambda\Lambda'}}{s_{\Lambda} s_{\Lambda'}}
+    ,\\
+  \S_{\Lambda\Lambda'}
+    &= \S_\Lambda \S_{\Lambda'} 
+    &&= s_{\Lambda} \St_\Lambda \St_{\Lambda'} 
+    ,&
+  \St_{\Lambda\Lambda'}
+    &= \St_\Lambda \S_{\Lambda'}
+    &&= s_{\Lambda} \S_\Lambda \St_{\Lambda'} 
+    ,\\ 
+  r_\Lambda \A
+    &= \S_\Lambda\hc \A \S_\Lambda 
+    &&= s_1 \St_\Lambda\hc \A \St_\Lambda 
+    ,&
+  r_\Lambda s_\Lambda \At
+    &= \S_\Lambda\hc \At \S_\Lambda 
+    &&= s_1 \St_\Lambda\hc \At \St_\Lambda 
+    ,\\
+  r_\Lambda \B
+    &= \S_\Lambda\inv \B \S_\Lambda\cc 
+    &&= s_2 \St_\Lambda\inv \B \St_\Lambda\cc 
+    ,&\qquad
+  r_\Lambda s_\Lambda \Bt
+    &= \S_\Lambda\inv \Bt \S_\Lambda\cc 
+    &&= s_2 \St_\Lambda\inv \Bt \St_\Lambda\cc
+    ,\\ 
+  \C
+    &= \S_\Lambda\trans \C \S_\Lambda 
+    &&= s_3 \St_\Lambda\trans \C \St_\Lambda
+    ,& 
+  s_\Lambda \Ct 
+    &= \S_\Lambda\trans \Ct \S_\Lambda 
+    &&= s_3 \St_\Lambda\trans \Ct \St_\Lambda
+    .
 \end{alignedat}
 \end{equation}
 %
@@ -1491,6 +1524,10 @@ However, from \cref{eq:spinlorentz} we have
     = \Lambda_\mu{}^\nu \Lambda^\mu{}_\rho \Gammab^\rho
     = \delta^\nu_\rho \Gammab^\rho 
     = \Gammab^\nu.
+  % \quad \text{and}\quad
+  % \Lambda_\mu{}^\nu \St\inv_{-\Lambda} \Gammab^\mu \St_{-\Lambda} 
+  %   = \Lambda_\mu{}^\nu (-\Lambda^\mu{}_\rho) (-\Gammab^\rho)
+  %   = \Gammab^\nu.
 \end{equation*}
 %
 Therefore, the Lorentz transform of a spinor is
@@ -1507,7 +1544,12 @@ Therefore, the Lorentz transform of a spinor is
 \end{aligned}
 \end{equation}
 %
-\todo{What happens when only \(\St_\Lambda\) exists????????} \(\St_\Lambda \ra \S_{-\Lambda}\)?
+\todo{What happens when only \(\St_\Lambda\) exists????????} 
+\(\S_\Lambda \to \St_{-\Lambda}\)? Antilinearity?
+If \(\S_\Lambda\) does not exist, we cannot use \( \Psib'(x) = \St_{-\Lambda} \Psib(\Lambda\inv x) \) instead.
+As we will see in \cref{tab:constlorentz}, this issue only arises \(d\) is odd, so one of \(p,q\) is odd and the other is even.
+Therefore, under \( \Lambdab \to -\Lambdab \) one of \(\det\Lambdab_1,\det\Lambdab_4\) changes sign and the other stays the same.
+\Cref{tab:exist} then tells us that whenever \(\S_\Lambda\) does not exist, \(\St_{-\Lambda}\) does not exist either.
 
 Note that, according to \cref{eq:constnormlorentz}, we have
 %
@@ -1645,6 +1687,8 @@ To construct reflections in two different directions, we can multiply the reflec
 %
 where the second and fourth do not exist in odd dimensions.
 
+More general improper transforms can be constructed by multiplying those above by proper orthochronous transforms.
+
 These signs are summarised in \cref{tab:constlorentz}.
 In even dimensions, \(s_\Lambda = \det \Lambdab\). 
 In odd dimensions \(\det \Lambdab = 1 \implies \S\) exists, \(\det \Lambdab = -1 \implies \St\) exists.
@@ -1666,7 +1710,9 @@ otherwise \(r_\Lambda = \sgn \det \Lambdab_1\).
     (-,-) & -1   & 1  & -1   & yes        & even \(d\) \\
     \bottomrule
   \end{tabular}
-  \caption{Signs associated with improper Lorentz transforms, see \cref{eq:constnormlorentz}.}\label{tab:constlorentz}
+  \caption{Signs associated with improper Lorentz transforms, see \cref{eq:constnormlorentz}.
+  The column labelled ``component'' contains \( ( \sgn\det\Lambdab_1, \sgn\det\Lambdab_4 ) \) which specifies the connected component of \(O(p,q)\), see \cref{eq:blocklorentz,eq:sgnlorentz}.
+  }\label{tab:constlorentz}
 \end{table}
 
 
@@ -2152,7 +2198,7 @@ We can construct project operators for the null spaces of \(\Gammab^a_\pm\):
   \mathbf{P}^a_- = \Gammab^a_- \Gammab^a_+, \qquad
   \prn{\mathbf{P}^a_\pm}^2 = \mathbf{P}^a_\pm, \qquad
   \mathbf{P}^a_+ + \mathbf{P}^a_- = \I, \qquad
-  \brk{\mathbf{P}^a_\pm, \mathbf{P}^b_\pm} = \mathbf{0}.
+  \brk{\mathbf{P}^a_\pm, \mathbf{P}^b_\pm} = \mathbf{0}. 
 \end{equation*}
 %
 
