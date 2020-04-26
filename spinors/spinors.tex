@@ -20,10 +20,13 @@
 % New commands etc.
 %
 \newcommand{\todo}[1]{\textcolor{purple}{TODO: #1}}
+\newcommand{\alert}[1]{\textcolor{teal}{#1}}
 %
 \newcommand{\invd}{^{-\dag}}
 \newcommand{\invt}{^{-\mathrm{T}}}
 \newcommand{\invc}{^{-\ast}}
+\newcommand{\cc}{^\ast}
+\newcommand{\hc}{^\dag}
 \newcommand{\Gammab}{\boldsymbol{\Gamma}}
 % \newcommand{\Gammap}[1][\mu]{\prn{\Gammab^{#1}}}
 \NewDocumentCommand \Gammap { s !O{\mu} } {\prn{
@@ -45,6 +48,7 @@
 \newcommand{\Ct}{\widetilde{\C}}
 \newcommand{\St}{\widetilde{\S}}
 \newcommand{\Cb}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}_2}
 \newcommand{\sigmab}{\boldsymbol{\sigma}}
 \newcommand{\Sigmab}{\boldsymbol{\Sigma}}
 \newcommand{\psib}{\boldsymbol{\psi}}
@@ -60,6 +64,7 @@
 \newcommand{\alphat}{\tilde{\alpha}}
 \newcommand{\betat}{\tilde{\beta}}
 \newcommand{\chit}{\tilde{\chi}}
+\newcommand{\sh}{\hat{s}}
 %
 %================================================================================
 \begin{document}
@@ -183,27 +188,29 @@ This means we can perform them twice and use \cref{it:commute} to derive new ide
         &= \Gammab\invsq \Gammab^\mu \Gammab^2 &\quad
   &\implies &
   \Gammab^2 &= \gamma \I, \\
-  \Gammab^\mu &= \Gammap[\mud]^\dag &
-        &= (\A \Gammab^\mu \A\inv)^\dag &
-        &= \A\invd \Gammab^\mud \A^\dag \\ && &&
-        &= \A\invd \A \Gammab^\mu \A\inv \A^\dag \\ && &&
-        &= (\A\inv \A^\dag)\inv \Gammab^\mu (\A\inv \A^\dag) &
+  \Gammab^\mu &= \Gammap[\mud]\hc &
+        &= (\A \Gammab^\mu \A\inv)\hc &
+        &= \A\invd \Gammab^\mud \A\hc \\ && &&
+        &= \A\invd \A \Gammab^\mu \A\inv \A\hc \\ && &&
+        &= (\A\inv \A\hc)\inv \Gammab^\mu (\A\inv \A\hc) &
   &\implies &
-  \A\inv \A^\dag &= \alpha \I,
+  \A\inv \A\hc &= \alpha \I,
 \end{alignedat} \\
 \begin{aligned}
   \mathclap{\text{similarly:}} &&\qquad
-  \B \B^\ast &= \beta \I, &\qquad
+  \B \B\cc &= \beta \I, &\qquad
   \C\inv \C\trans &= \chi \I, \\
-  \At\inv \At^\dag &= \alphat \I, &
-  \Bt \Bt^\ast &= \betat \I, &
+  \At\inv \At\hc &= \alphat \I, &
+  \Bt \Bt\cc &= \betat \I, &
   \Ct\inv \Ct\trans &= \chit \I.
 \end{aligned}
 \end{gathered}
 \end{equation*}
 %
-We can rewrite some of these relations as, e.g., \(\A^\dag = \alpha \At\).
-Taking the Hermitian conjugate gives \(\A = \alpha^\ast \A^\dag = \abs{\alpha}^2 \A\).
+The proofs of the unproven statements are described in \cref{tab:scalarconstraints} in the unasterisked rows.
+
+We can rewrite some of these relations as, e.g., \(\A\hc = \alpha \At\).
+Taking the Hermitian conjugate gives \(\A = \alpha\cc \A\hc = \abs{\alpha}^2 \A\).
 Similar aruments tell us that
 %
 \begin{equation}\label{eq:constinvol}
@@ -219,14 +226,14 @@ Under these redefinitions the scalars above transform as
 %
 \begin{equation*}
   \gamma \rightarrow \lambda^2 \gamma, \qquad
-  \alpha \rightarrow \frac{\lambda^\ast}{\lambda} \alpha, \qquad
+  \alpha \rightarrow \frac{\lambda\cc}{\lambda} \alpha, \qquad
   \beta \rightarrow \abs{\lambda}^2 \beta, \qquad
   \chi \rightarrow \chi,
 \end{equation*}
 %
 with similar relations for the tilde versions.
 These redefinitions allow us to impose some normalisation choices, noting that we can change the phase of \(\alpha\) but not its magnitude, vice-versa for \(\beta\), and \(\chi\) cannot be changed at all.
-We can choose to set the phase of \(\alpha\) to zero and the magnitude of \(\beta\) to one.
+We can partially fix these scalar ambiguities in the definitions of \(\Gammab,\A,\B,\C\) by choosing to set the phase of \(\alpha\) to zero, the magnitude of \(\beta\) to one and \(\gamma\) to one.
 Combined with \cref{eq:constinvol}, we have  
 %
 \begin{equation}\label{eq:normscalar}
@@ -240,13 +247,13 @@ or in terms of the matrices
 %
 \begin{equation}\label{eq:normmats}
   \Gammab^2 = \I, \qquad
-  \A^\dag = \A  \qquad
-  \B \B^\ast \B \B^\ast = \I.
+  \A\hc = \A  \qquad
+  \prn{\B \B\cc}^2 = \I.
 \end{equation}
 %
-Again, the same relations apply to the tilde versions, except that in some situations it will be more convenient to choose to set \( \alphat = -1 \).
+Again, the same relations apply to the tilde versions, except that we will leave the scalar ambiguities unfixed for now.
 These choices do not completely eliminate the scalar ambiguity.
-For \(\Gammab\) we can still use \(\lambda = \pm 1\), for \(\A\) any \(\lambda \in \R\), for \(\B\) any \(\lambda\) with \(\abs{\lambda} = 1\) and for \(\C\) any \(\lambda \in \Cb^\ast\).
+For \(\Gammab\) we can still use \(\lambda = \pm 1\), for \(\A\) any \(\lambda \in \R\), for \(\B\) any \(\lambda\) with \(\abs{\lambda} = 1\) and for \(\C\) any \(\lambda \in \Cb\cc\).
 
 %-------Section------------------------------------------------------------------
 
@@ -254,16 +261,88 @@ For \(\Gammab\) we can still use \(\lambda = \pm 1\), for \(\A\) any \(\lambda \
 
 The transformations in \cref{eq:cccmats} can also be performed by combining two others in either order.
 We can use these combinations to find more scalars and normalisation conditions.
-First, for \(\A,\B,\C\):
+
+When \(d\) is even, we can use this approach to find relations between tilde versions, tilde-free versions and \(\Gammab\).
+For example:
 %
 \begin{equation*}
 \begin{alignedat}{6}
-  \Gammab^\mud &= \Gammap[\mut]^\ast &
-    &= (\C \Gammab^\mu \C\inv)^\ast &
-    &= \C^\ast \Gammab^\muc \C\invc &
-    &= \C^\ast \B\inv \Gammab^\mu \B \C\invc &
+  -\Gammab^\mud 
+  %
+    &= -\Gammap[\mud] &
+    &= \A \Gammap*[\mu] \A\inv &
+    &= \A \Gammab\inv \Gammab^\mu \Gammab \A\inv &
+    &= \prn{\A \Gammab\inv} \Gammab^\mu \prn{\A \Gammab\inv}\inv &
     &\implies &
-  \C^\ast \B\inv &= f \A, \\
+  \At &= a \A \Gammab\inv, \\
+  %
+    &= \Gammap*[\mu]\hc &
+    &= (\Gammab\inv \Gammab^\mu \Gammab)\hc &
+    &= \Gammab\hc \Gammab^\mud \Gammab\invd &
+    &= \Gammab\hc \A \Gammab^\mu \A\inv \Gammab\invd &
+    &\implies &
+  \At &= \tilde{a} \Gammab\hc \A. \\
+\end{alignedat}
+\end{equation*}
+%
+We can relate these scalars to the earlier ones by substituting the final two relations into the definition of \(\alphat\).
+%
+\begin{equation*}
+\begin{alignedat}[t]{2}
+  \At\inv &= \frac{1}{a} \, \Gammab \, \A\inv &
+    &= \frac{1}{\tilde{a}} \A\inv \Gammab\invd, \\
+  \At\hc &= a\cc \Gammab\invd \A\hc &
+    &= \tilde{a}\cc \A\hc \Gammab,
+\end{alignedat}
+   \quad\implies\quad
+\begin{alignedat}[t]{3}
+  \alphat \I &= \At\inv \At\hc &
+    &= \frac{\tilde{a}\cc}{a} \Gammab \A\inv \A\hc \Gammab &
+    %  &= \frac{\tilde{a}\cc \alpha}{a} \Gammab^2 &
+      &= \frac{\tilde{a}\cc \gamma \alpha}{a} \I, \\ &&
+    &= \frac{a\cc}{\tilde{a}} \A\inv \Gammab\invd \Gammab\invd \A\hc &
+    %  &= \frac{a\cc}{\tilde{a} \gamma\cc} \A\inv \A\hc &
+      &= \frac{a\cc \alpha}{\tilde{a} \gamma\cc} \I.
+\end{alignedat}
+\end{equation*}
+%
+We find that \( \alphat = \frac{\tilde{a}\cc \gamma}{a} \alpha = \frac{a\cc}{\tilde{a} \gamma\cc} \alpha \),
+and therefore \( \abs{a} = \abs{\tilde{a}} \abs{\gamma} \).
+We can then use the scalar ambiguity in \(\At\) to set \(a' = 1\), having already set \(\alpha = \gamma = 1\).
+Using similar arguments, we find
+%
+\begin{equation}\label{eq:chiraltilde}
+\begin{aligned}
+  \A\inv \A\hc = a \At\inv \At\hc &=  \I,       &\quad
+  \At &= \Gammab\hc \A = a \A \Gammab,            &\quad
+  \abs{a} &= 1,                                         \\
+  \B \B\cc = b \Bt \Bt\cc &= \beta \I,             &
+  \Bt &= \Gammab \B = b \B \Gammab\cc, &
+  b &\in \R_+,                                       \\
+  \C\inv \C\trans = \pm \Ct\inv \Ct\trans &= \chi \I,    &
+  \Ct &= \Gammab\trans \C = \pm \C \Gammab.              &
+%  \A = \B\trans \C &= \pm \C\cc \B\inv, &
+%  \chi &= \pm \alpha \beta,
+\end{aligned}
+\end{equation}
+%
+The signs across the last two rows match.
+The first column is forced on us by other relations; the other columns contain normalisation choices.
+The remaining scalar ambiguities are multiplying \(\Gammab,\At,\Bt,\Ct\) by \(\pm1\)
+and performing \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
+\( \Ct \rightarrow r\e^{\ir\phi} \Ct \) simultaneously with the transformations of \(\A\), \(\B\), \(\C\) below \cref{eq:comboABC}.
+These arguments are summarised in \cref{tab:scalarconstraints} in the rows with a single asterisk.
+
+In general dimensions, for \(\A,\B,\C\):
+%
+\begin{equation*}
+\begin{alignedat}{6}
+  \Gammab^\mud &= \Gammap[\mut]\cc &
+    &= (\C \Gammab^\mu \C\inv)\cc &
+    &= \C\cc \Gammab^\muc \C\invc &
+    &= \C\cc \B\inv \Gammab^\mu \B \C\invc &
+    &\implies &
+  \C\cc \B\inv &= f \A, \\
     &= \Gammap[\muc]\trans &
     &= (\B\inv \Gammab^\mu \B)\trans &
     &= \B\trans \Gammab^\mut \B\invt &
@@ -273,38 +352,38 @@ First, for \(\A,\B,\C\):
 \end{alignedat}
 \end{equation*}
 %
-We can relate these scalars to the earlier ones as follows
+We can relate these scalars to the earlier ones as before:
 %
 \begin{equation*}
 \begin{alignedat}[t]{2}
   \A\inv &= f \, \B \, \C\invc &
     &= \tilde{f} \C\inv \B\invt, \\
-  \A^\dag &= \frac{1}{f^\ast} \B\invd \C\trans &
-    &= \frac{1}{\tilde{f}^\ast} \C^\dag \B^\ast,
+  \A\hc &= \frac{1}{f\cc} \B\invd \C\trans &
+    &= \frac{1}{\tilde{f}\cc} \C\hc \B\cc,
 \end{alignedat}
    \quad\implies\quad
 \begin{alignedat}[t]{3}
-  \alpha \I &= \A\inv \A^\dag &
-    &= \frac{\tilde{f}}{f^\ast} \C\inv \B\invt \B\invd \C\trans &
-%      &= \frac{\tilde{f}}{f^\ast \beta} \C\inv \C\trans &
-      &= \frac{\tilde{f} \chi}{f^\ast \beta} \I, \\ &&
-    &= \frac{f}{\tilde{f}^\ast} \B \C\invc \C^\dag \B^\ast &
-%      &= \frac{f \chi^\ast}{\tilde{f}^\ast} \B \B^\ast &
-      &= \frac{f \beta \chi^\ast}{\tilde{f}^\ast} \I.
+  \alpha \I &= \A\inv \A\hc &
+    &= \frac{\tilde{f}}{f\cc} \C\inv \B\invt \B\invd \C\trans &
+%      &= \frac{\tilde{f}}{f\cc \beta} \C\inv \C\trans &
+      &= \frac{\tilde{f} \chi}{f\cc \beta} \I, \\ &&
+    &= \frac{f}{\tilde{f}\cc} \B \C\invc \C\hc \B\cc &
+%      &= \frac{f \chi\cc}{\tilde{f}\cc} \B \B\cc &
+      &= \frac{f \beta \chi\cc}{\tilde{f}\cc} \I.
 \end{alignedat}
 \end{equation*}
 %
-So we have \( \frac{\tilde{f}}{f^\ast} = \frac{\alpha \beta}{\chi} \)
-and \( \frac{\tilde{f}^\ast}{f} = \frac{\beta \chi^\ast}{\alpha} \).
+So we have \( \frac{\tilde{f}}{f\cc} = \frac{\alpha \beta}{\chi} \)
+and \( \frac{\tilde{f}\cc}{f} = \frac{\beta \chi\cc}{\alpha} \).
 If we take the complex-conjugate of the second equation and use the results in \cref{eq:constinvol},
-we find that \( \frac{\tilde{f}}{f^\ast} = \frac{f^\ast}{\tilde{f}} \),
-or \( \tilde{f} = \pm f^\ast \) which implies that \(\chi = \pm \alpha \beta\).
-Furthermore, under the \(\C \ra \lambda \C\) ambiguity \( f \rightarrow \lambda^\ast f\),
+we find that \( \frac{\tilde{f}}{f\cc} = \frac{f\cc}{\tilde{f}} \),
+or \( \tilde{f} = \pm f\cc \) which implies that \(\chi = \pm \alpha \beta\).
+Furthermore, under the \(\C \ra \lambda \C\) ambiguity \( f \rightarrow \lambda\cc f\),
 \(\tilde{f} \rightarrow \lambda \tilde{f} \).
 By choosing \(\lambda = 1/\tilde{f}\) we set \(f = \pm1\) and \(\tilde{f} = 1\).
 %
 \begin{equation}\label{eq:comboABC}
-  \A = \B\trans \C = \pm \C^\ast \B\inv, \qquad
+  \A = \B\trans \C = \pm \C\cc \B\inv, \qquad
   \chi = \pm \alpha \beta.
 \end{equation}
 %
@@ -312,14 +391,14 @@ The first relation is a normalisation choice; the second is forced on us by \cre
 This reduces the scalar ambiguity to simultaneous \( \A \rightarrow r \A \),
 \( \B \rightarrow \e^{-\ir\phi} \B \), \( \C \rightarrow r\e^{\ir\phi} \C \)
 with \( r, \phi \in \R \).
-We can also derive corresponding relations with two of the three matrices/scalars replaced by the tilde versions, but without the freedom to scale \(\C\) (we reserve the freedom to rescale \(\Ct\) for \cref{eq:chiraltilde}).
+We can also derive corresponding relations with two of the three matrices/scalars replaced by the tilde versions, but without the freedom to scale \(\C\) (we have already used the freedom to rescale \(\Ct\) for \cref{eq:chiraltilde}).
 %
 \begin{equation}\label{eq:ABCtildes}
 \begin{aligned}
-%  \A &= \B\trans \C = \pm \C^\ast \B\inv, &
-  f_1 \A &= \Bt\trans \Ct = \pm \Ct^\ast \Bt\inv, &\quad
-  f_2 \At &= \B\trans \Ct = \pm \Ct^\ast \B\inv, &\quad
-  f_3 \At &= \Bt\trans \C = \pm \C^\ast \Bt\inv, \\
+%  \A &= \B\trans \C = \pm \C\cc \B\inv, &
+  f_1 \A &= \Bt\trans \Ct = \pm \Ct\cc \Bt\inv, &\quad
+  f_2 \At &= \B\trans \Ct = \pm \Ct\cc \B\inv, &\quad
+  f_3 \At &= \Bt\trans \C = \pm \C\cc \Bt\inv, \\
 %  {\chi} &= \pm {\alpha} {\beta}, &
   {\chit} &= \pm {\alpha} {\betat}, &
   {\chit} &= \pm {\alphat} {\beta}, &
@@ -331,69 +410,24 @@ The signs in each column match.
 The first row contains normalisation choices; the second row is forced on us by \cref{eq:constinvol}.
 For odd \(d\) only one of the four sets of relations from \cref{eq:comboABC,eq:ABCtildes} is possible, and we can choose to set that \(f_i = 1\).
 
-When \(d\) is even, we can apply the same approach leads to findrelations between tilde versions, tilde-free versions and \(\Gammab\).
-For example:
-%
-\begin{equation*}
-\begin{alignedat}{6}
-  -\Gammab^\mud 
-  %
-    &= -\Gammap[\mud] &
-    &= \A \Gammap*[\mu] \A\inv &
-    &= \A \Gammab\inv \Gammab^\muc \Gammab \A\inv &
-    &= \prn{\A \Gammab\inv} \Gammab^\mu \prn{\A \Gammab\inv}\inv &
-    &\implies &
-  \At &= a \A \Gammab\inv, \\
-  %
-    &= \Gammap*[\mu]^\dag &
-    &= (\Gammab\inv \Gammab^\mu \Gammab)^\dag &
-    &= \Gammab^\dag \Gammab^\mud \Gammab\invd &
-    &= \Gammab^\dag \A \Gammab^\mu \A\inv \Gammab\invd &
-    &\implies &
-  \At &= \tilde{a} \Gammab^\dag \A. \\
-\end{alignedat}
-\end{equation*}
-%
-We find
-%
-\begin{equation}\label{eq:chiraltilde}
-\begin{aligned}
-  \A\inv \A^\dag = a \At\inv \At^\dag &= \alpha \I, &\quad
-  \At &= \Gammab^\dag \A = a \A \Gammab,            &\quad
-  \abs{a} &= 1,                                         \\
-  \B \B^\ast = \pm \Bt \Bt^\ast &= \beta \I,             &
-  \Bt &= b \Gammab \B = \pm \frac{1}{b} \B \Gammab^\ast, &
-  b &\in \R_+,                                       \\
-  \C\inv \C\trans = \pm \Ct\inv \Ct\trans &= \chi \I,    &
-  \Ct &= \Gammab\trans \C = \pm \C \Gammab.              &
-%  \A = \B\trans \C &= \pm \C^\ast \B\inv, &
-%  \chi &= \pm \alpha \beta,
-\end{aligned}
-\end{equation}
-%
-The signs across each row match.
-The first column is forced on us by other relations; the other columns contain normalisation choices.
-The remaining scalar ambiguities are multiplying \(\Gammab,\At,\Bt,\Ct\) by \(\pm1\)
-and performing \( \At \rightarrow r \At \), \( \Bt \rightarrow \e^{-\ir\phi} \Bt \),
-\( \Ct \rightarrow r\e^{\ir\phi} \Ct \) simultaneously with the transformations of \(\A\), \(\B\), \(\C\) below \cref{eq:comboABC}.
-
 For even \(d\) we can derive more relations between these scalars and signs by substituting relations from the second column of \cref{eq:chiraltilde} into \cref{eq:ABCtildes}.
-We find that \(a = \pm 1\), \(b = 1\) and relations between the four signs in \cref{eq:comboABC,eq:ABCtildes} and the three signs (including \(a\)) in \cref{eq:chiraltilde} above.
+We find that \(a = \pm 1\), \(b = \pm 1\) and expressions for \(f_1,f_2,f_3\) and the three signs in \cref{eq:ABCtildes} in terms of the three signs (including \(a,b\)) in \cref{eq:chiraltilde} and the sign in \cref{eq:comboABC} above.
+These results are all described inn \cref{tab:scalarconstraints} in the doubly-asterisked rows.
 
 The overall result is
 %
 \begin{equation}\label{eq:constnorm}
 \begin{gathered}
 \begin{alignedat}{4}
-  \A\inv \A^\dag &= s_1 \At\inv \At^\dag &
-        &= \alpha \I, &
-    \At &= \Gammab^\dag \A &
+  \A\inv \A\hc &= s_1 \At\inv \At\hc &
+        &= \I, &
+    \At &= \Gammab\hc \A &
         &= s_1 \A \Gammab,
   \\
-  \B \B^\ast &= s_2 \Bt \Bt^\ast &
+  \B \B\cc &= s_2 \Bt \Bt\cc &
         &= \beta \I, &
     \Bt &= \Gammab \B &
-        &= s_2 \B \Gammab^\ast,
+        &= s_2 \B \Gammab\cc,
   \\
   \C\inv \C\trans &= s_3 \Ct\inv \Ct\trans &
         &= \chi \I, &\qquad
@@ -404,27 +438,27 @@ The overall result is
 \\
 \begin{alignedat}{3}
   \A &= \B\trans \C &
-        &= \hat{s}\, \C^\ast \B\inv, &\qquad
+        &= \sh\, \C\cc \B\inv, &\qquad
     \Gammab^2 &= \I,
   \\
   \A &= \Bt\trans \Ct &
-        &= s_1 \hat{s}\, \Ct^\ast \Bt\inv, &\qquad
-    \A^\dag &= \A,
+        &= s_1 \sh\, \Ct\cc \Bt\inv, &\qquad
+    \A\hc &= \A,
   \\
   s_3 \At &= \B\trans \Ct &
-        &= s_2 \hat{s}\, \Ct^\ast \B\inv, &\qquad
-    \B \B^\ast \B \B^\ast &= \I,
+        &= s_2 \sh\, \Ct\cc \B\inv, &\qquad
+    \prn{\B \B\cc}^2 &= \I,
   \\
   s_3 \At &= \Bt\trans \C &
-        &= s_3 \hat{s}\, \C^\ast \Bt\inv, &\qquad
-    \prn{\C\trans}^2 = \C^2,
+        &= s_3 \sh\, \C\cc \Bt\inv, &\qquad
+    \prn{\C\trans}^2 &= \C^2,
 \end{alignedat}
 \\
   \text{or}\quad
   \alpha = \beta^2 = \chi^2 = 1 , \qquad 
   \text{and} \quad
-  \chi = \hat{s}\, \beta, \qquad
-  s_i^2 = s_1 s_2 s_3 = \hat{s}^2 = 1.
+  \chi = \sh\, \beta, \qquad
+  s_i^2 = s_1 s_2 s_3 = \sh^2 = 1.
   %s s' s'' &= 1.
 \end{gathered}
 \end{equation}
@@ -433,8 +467,8 @@ The first column and last row are forced on us by \cref{eq:normscalar} and other
 For odd \(d\), on each of the first three rows only one of the two left equations, and none of the right, will exist.
 Only one of the left sides of the next four rows will exist, and for that row only one of the two right sides will exist.
 
-In total, we have three undetermined signs in the \(s_i\) and \(\hat{s}\), and one undetermined complex number \(\alpha \beta\).
-For odd \(d\), we can make any choice for the \(s_i\), provided we adjust \(\alpha\), \(\beta\) and \(\hat{s}\) accordingly.
+In total, we have three undetermined signs in the \(s_i\) and \(\sh\), and one undetermined complex number \(\alpha \beta\).
+For odd \(d\), we can make any choice for the \(s_i\), provided we adjust \(\alpha\), \(\beta\) and \(\sh\) accordingly.
 
 The remaining scalar ambiguities are multiplying \(\Gammab,\At,\Bt,\Ct\) by \(\pm1\) (for even \(d\) only)
 and simultaneous \( \A \rightarrow r \A \),
@@ -446,33 +480,46 @@ and simultaneous \( \A \rightarrow r \A \),
   \centering
   \begin{tabular}{CAAAACL}
   \toprule
-    \text{Matrix}  & \colhead{Similarity} & \colhead{Doubling} & \colhead{Constraint} 
-        & \colhead{Normalisation} & \colhead{Ambiguity} \\
+    \text{Matrix}  & \colheadc{Similarity} & \colheadc{Doubling} & \colheadc{Constraint} 
+        & \colheadc{Choice} & \colheadc{Ambiguity} \\
   \midrule
-    \Gammab & -&\Gammab^\mu  &         \Gammab^2 &= \gamma \I  &               &-      &       \gamma &= 1   & \mathbb{Z}_2 \\
-    \A      &  &\Gammab^\mud &    \A\inv \A^\dag &= \alpha \I  &  \abs{\alpha} &= 1    &       \alpha &= 1   & \R \\
-    \At     & -&\Gammab^\mud &  \At\inv \At^\dag &= \alphat \I & \abs{\alphat} &= 1    &      \alphat &= s_1 & \R \\
-            &&&               \At \Gammab \A\inv &= a \I       & \alpha a^*/a' &= \alphat &         a &= s_1 & \R       & (*) \\
-            &&&          \At \A\inv \Gammab^\dag &= a' \I      &      \abs{a'} &= \abs{a} &        a' &= 1   & -        & (*) \\
-    \B      &  &\Gammab^\muc &        \B \B^\ast &= \beta \I   &         \beta &\in \R &  \abs{\beta} &= 1   & U(1) \\
-    \Bt     & -&\Gammab^\muc &      \Bt \Bt^\ast &= \betat \I  &        \betat &\in \R & \abs{\betat} &= 1   & U(1) \\
-            &&&               \Bt \B\inv \Gammab &= b \I       &  \beta b^* b' &= \betat &          b &= 1   & U(1)     & (*) \\
-            &&&          \Bt \Gammab^\ast \B\inv &= b' \I      &        b^* b' &\in \R   &         b' &= s_2 & -        & (*) \\
-    \C      &  &\Gammab^\mut &   \C\inv \C\trans &= \chit \I   &        \chi^2 &= 1    &              &-     & \Cb^\ast \\
-    \Ct     & -&\Gammab^\mut & \Ct\inv \Ct\trans &= \chit \I   &       \chit^2 &= 1    &              &-     & \Cb^\ast \\
-            &&&               \Ct \Gammab \C\inv &= c \I       & \alpha a^*/a' &= \alphat &         c &= s_3 & \Cb^\ast & (*) \\
-            &&&         \Ct \C\inv \Gammab\trans &= c' \I      &      \abs{a'} &= \abs{a} &        c' &= 1   & -        & (*) \\
+\Gammab & -&\Gammab^\mu  &         \Gammab^2 &= \gamma \I  &               &-             &     \gamma &= 1   & \ZZ      \\
+    \A  &  &\Gammab^\mud &      \A\inv \A\hc &= \alpha \I  &  \abs{\alpha} &= 1           &     \alpha &= 1   & \R       \\
+    \At & -&\Gammab^\mud &    \At\inv \At\hc &= \alphat \I & \abs{\alphat} &= 1           &    \alphat &= s_1 & \R       \\
+        &&&               \At \Gammab \A\inv &= a \I       & \alpha a^*/a' &= \alphat     &          a &= s_1 & \R       & (*) \\
+        &&&            \At \A\inv \Gammab\hc &= a' \I      &      \abs{a'} &= \abs{a}     &         a' &= 1   & \ZZ      & (*) \\
+    \B  &  &\Gammab^\muc &          \B \B\cc &= \beta \I   &         \beta &\in \R        &  \abs{\beta} &= 1 & U(1)     \\
+    \Bt & -&\Gammab^\muc &        \Bt \Bt\cc &= \betat \I  &        \betat &\in \R        & \abs{\betat} &= 1 & U(1)     \\
+        &&&            \Bt \Gammab\cc \B\inv &= b \I       &  \beta b^* b' &= \betat      &          b &= s_2 & U(1)     & (*) \\
+        &&&               \Bt \B\inv \Gammab &= b' \I      &        b^* b' &\in \R        &         b' &= 1   & \ZZ      & (*) \\
+    \C  &  &\Gammab^\mut &   \C\inv \C\trans &= \chit \I   &        \chi^2 &= 1           &            &-     & \Cb\cc \\
+    \Ct & -&\Gammab^\mut & \Ct\inv \Ct\trans &= \chit \I   &       \chit^2 &= 1           &            &-     & \Cb\cc \\
+        &&&               \Ct \Gammab \C\inv &= c \I       &     \chi c/c' &= \chit       &          c &= s_3 & \Cb\cc & (*) \\
+        &&&         \Ct \C\inv \Gammab\trans &= c' \I      &        (c')^2 &= c^2         &         c' &= 1   & \ZZ      & (*) \\
+        &  &\Gammab^\mud &   \C\cc(\A\B)\inv &= f \I       &   \alpha\beta &= \chi f'/f^* &          f &= \sh & \Cb\cc & (**) \\
+        &&&               \A\inv \B\trans \C &= f' \I      &       (f^*)^2 &= (f')^2      &         f' &= 1   & -        & (**) \\
+        &&&                \Ct\cc(\A\Bt)\inv &= f_1 \I     &     f c^* / b &= f_1         &            &-     & \ZZ      & (**) \\
+        &&&             \A\inv \Bt\trans \Ct &= f_1' \I    &      f' b' c' &= f_1'        &            &-     & -        & (**) \\
+        & -&\Gammab^\mud & \Ct\cc(\At\B)\inv &= f_2 \I     & f (c')^* / a' &= f_2         &            &-     & -        & (**) \\
+        &&&             \At\inv \B\trans \Ct &= f_2' \I    &     f' c' / a &= f_2'        &            &-     & -        & (**) \\
+        &&&                \C\cc(\At\Bt)\inv &= f_3 \I     &      f / a b' &= f_3         &            &-     & -        & (**) \\
+        &&&             \At\inv \Bt\trans \C &= f_3' \I    &     f' b / a' &= f_3'        &            &-     & -        & (**) \\
   \bottomrule
   \end{tabular}
   \caption{Constants associated with chirality, charge conjugation, \etc matrices.
   The second column lists the result of the matrix in the first column being used in a similarity transform on \(\Gammab^\mu\).
   The third column lists the matrix that performs the operation from the second column twice.
-  The result must be proportional to the identity matrix. 
-  The constant of proportionality appears there.
+  The result must be proportional to the identity matrix,
+  and the constant of proportionality is defined there.
   The fourth column contains constraints from \cref{eq:constinvol}.
   The fifth column contains normalisation choices from \cref{eq:normscalar}.
   The sixth column contains the remaining scalar ambiguity that the first column may be multiplied by after imposing the fifth column.
-  For the rows marked with an asterisk: the constraints and normalisation conditions should be read together, and the scalar ambiguity is the diagonal subgroup of the previous two rows.
+  For the rows marked with an asterisk: the constraints follow from the previous two rows and should be read together, 
+  the first scalar ambiguity is the diagonal subgroup of the previous two rows, 
+  the second ambiguity is the diagonal subgroup of the ambiguities in the last unasterisked row and the very first row of the table.
+  For the rows marked with two asterisks: the first two constraints follow from the unasterisked rows and should be read together, 
+  the other six constraints follow from the singly asterisked rows
+  and the ambiguities are the diagonal subgroup of the ambiguities from the singly asterisked rows.
   }\label{tab:scalarconstraints}
 \end{table}
 
@@ -493,62 +540,61 @@ How are they related to the corresponding matrices for the previous basis?
 
 Lets illustrate one of these calculations
 %
-\begin{equation*}
-\begin{gathered}
-\begin{aligned}
+\begin{align*}
   \Gammab'^\mud
-    &= (\S\inv \Gammab^\mu \S)^\dag
-    = \S^\dag \Gamma^\mud \S\invd
-    = \S^\dag \A \Gammab^\mu \A\inv \S\invd
-    = \S^\dag \A \S \Gammab^\mu \S\inv \A\inv \S\invd \\
-    &= (\S^\dag \A \S) \Gammab'^\mu (\S^\dag \A \S)\inv,
+    &= (\S\inv \Gammab^\mu \S)\hc
+    = \S\hc \Gamma^\mud \S\invd
+    = \S\hc \A \Gammab^\mu \A\inv \S\invd
+    = \S\hc \A \S \Gammab^\mu \S\inv \A\inv \S\invd \\
+    &= (\S\hc \A \S) \Gammab'^\mu (\S\hc \A \S)\inv,
     \qquad \implies \quad
-    \A' \propto \S^\dag \A \S,
-\end{aligned}
-\\
-\begin{aligned}
-  \Psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \Psib
-    &= \Psib^\dag (\S^\dag \A \S)\inv (\S^\dag \A \S)^\dag \Psib
-     = \Psib^\dag \S\inv \A\inv \S\invd \S^\dag \A^\dag \S \Psib \\
-    &= \Psib^\dag \S\inv \A\inv \A^\dag \S \Psib
-     = \alpha\, \Psib^\dag \S\inv \S \Psib
-     = \alpha\, \Psib^\dag \Psib
-     \geq 0.
-\end{aligned}
-\end{gathered}
+    \A' \propto \S\hc \A \S,
+\end{align*}
+%
+check normalisation:
+%
+\begin{equation*}
+  \alpha' \I
+    = (\A')\inv (\A')\hc 
+    = (\S\hc \A \S)\inv (\S\hc \A \S)\hc 
+    = \S\inv \A\inv \S\invd \S\hc \A\hc \S 
+    = \S\inv \A\inv \A\hc \S 
+    = \alpha\, \S\inv \S 
+    = \alpha \I.
 \end{equation*}
 %
 Once we apply our normalisation condition we find, up to a positive real scalar multiple,
-\( \A' = \S^\dag \A \S \).
+\( \A' = \S\hc \A \S \).
 Similar arguments give us
 %
 \begin{equation}\label{eq:ccctransform}
 \begin{aligned}
   \Gammab' &= \S\inv \Gammab \S, &
-  \A' &= \S^\dag \A \S, &
-  \B' &= \S\inv \B \S^\ast, &
+  \A' &= \S\hc \A \S, &
+  \B' &= \S\inv \B \S\cc, &
   \C' &= \S\trans \C \S,
 \\ &&
-  \At' &= \S^\dag \At \S, &
-  \Bt' &= \S\inv \Bt \S^\ast, &
-  \Ct' &= \S\trans \Ct \S.
+  \At' &= \S\hc \At \S, &
+  \Bt' &= \S\inv \Bt \S\cc, &
+  \Ct' &= \S\trans \Ct \S,
 \end{aligned}
 \end{equation}
 %
-We still have the same ambiguities as at the end of the \hyperref[eq:constnorm]{last section}, but it makes sense to choose \( r \e^{\ir\phi} = 1 \).
+up to the same ambiguities as at the end of the \hyperref[eq:constnorm]{last section}.
+But it makes sense to choose \( r \e^{\ir\phi} = 1 \).
 Regardless, we can substitute \cref{eq:ccctransform} into \cref{eq:constnorm} to compute the scalars:
 %
 \begin{equation*}
   \alpha' = \alpha, \qquad
   \beta' = \beta, \qquad
   s_i' = s_i, \qquad
-  \hat{s}' = \hat{s}.
+  \sh' = \sh.
 \end{equation*}
 %
 In other words, these scalars are invariant under a change of basis and are constant throughout any similarity class of representations.
 
 Although there are two similarity classes of irreps when \(d\) is odd, the same set of \(\A/\At\), \(\B/\Bt\), \(\C/\Ct\) will work for both \(\brc{\Gammab^\mu}\) and \(\brc{ -\Gammab^\mu }\).
-Therefore \cref{it:oddchi} implies that both classes have the same \(\alpha, \beta, s_i, \hat{s}\).
+Therefore \cref{it:oddchi} implies that both classes have the same \(\alpha, \beta, s_i, \sh\).
 
 \Cref{it:even,it:odd} imply that the only thing these constants can depend on is the space-time dimensionality, \(p\) and \(q\).
 In the \hyperref[sec:explicit]{next section} we will compute these quantities for one specific representation that we will construct.
@@ -584,31 +630,31 @@ This means we have the following transformations:
 %
 \begin{equation}\label{eq:spinorbasis}
   \Psib' = \S\inv \Psib, \qquad
-  \Psib'^\dag \A' = \Psib^\dag \A \S, \qquad
-  \B' \Psib'^\ast = \S\inv \B \Psib^\ast, \qquad
+  \Psib'{}\hc \A' = \Psib\hc \A \S, \qquad
+  \B' \Psib'{}\cc = \S\inv \B \Psib\cc, \qquad
   \Psib'\transp \C' = \Psib\trans \C \S,
 \end{equation}
 %
 and similar for tilde versions.
-Note that \(\Psib^\dag \Psib\) is not an invariant quantity, as \(\S\) is not necessarily unitary.
-However, with the transformations above, we see that \(\Psib\) and \(\B \Psib^\ast\) are contravariant and \(\Psib^\dag\A\) and \(\Psib\trans \C\) are covariant.
+Note that \(\Psib\hc \Psib\) is not an invariant quantity, as \(\S\) is not necessarily unitary.
+However, with the transformations above, we see that \(\Psib\) and \(\B \Psib\cc\) are contravariant and \(\Psib\hc\A\) and \(\Psib\trans \C\) are covariant.
 We can construct these invariants:
 %
 \begin{equation}\label{eq:spinorinvt}
 \begin{gathered}
-  \Psib^\dag \A\, \Psib, \qquad
-  \Psib^\dag \A\, \B \Psib^\ast, \qquad
+  \Psib\hc \A\, \Psib, \qquad
+  \Psib\hc \A\, \B \Psib\cc, \qquad
   \Psib\trans \C\, \Psib, \qquad
-  \Psib\trans \C\, \B \Psib^\ast, \qquad
-  \Psib^\dag \A\, \Gammab^\mu \Psib, \\
-  \Psib^\dag \A\, \Gammab^\mu \Gammab^\nu \cdots\, \Psib, \qquad
-  \Psib^\dag \A\, \Gammab^\mu \Gammab^\nu \cdots\, \B \Psib^\ast, \qquad
+  \Psib\trans \C\, \B \Psib\cc, \qquad
+  \Psib\hc \A\, \Gammab^\mu \Psib, \\
+  \Psib\hc \A\, \Gammab^\mu \Gammab^\nu \cdots\, \Psib, \qquad
+  \Psib\hc \A\, \Gammab^\mu \Gammab^\nu \cdots\, \B \Psib\cc, \qquad
   \Psib\trans \C\, \Gammab^\mu \Gammab^\nu \cdots\, \Gammab \Psib, \qquad
   \ldots
 \end{gathered}
 \end{equation}
 %
-The quantity \( \Psib^\dag \A \) or \( \Psib^\dag \At \) occurs frequently enough to have its own notation \( \overline{\Psib} \equiv \Psib^\dag \A \).
+The quantity \( \Psib\hc \A \) or \( \Psib\hc \At \) occurs frequently enough to have its own notation \( \overline{\Psib} \equiv \Psib\hc \A \).
 
 
 %-------Section------------------------------------------------------------------
@@ -662,7 +708,7 @@ Similarly, each matrix is either Hermitian or antihermitian, and symmetric or an
 Finding \(\A, \B, \dots\) matrices boils down to finding matrices that commute with all matrices in each category and anticommute with all matrices in the complement.
 We can construct candidate matrices from the product of all the Hermitian matrices, the product of all the antihermitian matrices, etc.
 
-When \(d\) is even, we can use \(\Gammab^{d+1}\) as \(\Gammab\), so \(\Gammab = \Gammab^\dag = \Gammab^\ast =\Gammab\trans\).
+When \(d\) is even, we can use \(\Gammab^{d+1}\) as \(\Gammab\), so \(\Gammab = \Gammab\hc = \Gammab\cc =\Gammab\trans\).
 For the others we consider even/odd \(p,q\) separately.
 
 %-------Section------------------------------------------------------------------
@@ -679,7 +725,7 @@ We can choose
         \otimes \mbigg\brk{\bigotimes_{k=1}^{q/2} \sigmab_3}.
 \end{equation*}
 %
-We can check \cref{eq:constnorm} to see that \(\A^\dag = \A\) so \(\alpha=1\), \(\Gammab \A = \A \Gammab = \At\) so \(s_1 = 1\).
+We can check \cref{eq:constnorm} to see that \(\A\hc = \A\) so \(\alpha=1\), \(\Gammab \A = \A \Gammab = \At\) so \(s_1 = 1\).
 
 We can also choose
 %
@@ -729,14 +775,14 @@ We can also choose
 %
 We can check that \(\Gammab \C = (-1)^{d/2}\C \Gammab = \Ct\), giving \(s_3 = s_2\).
 We also find that, from \cref{eq:constnorm}, we have
-\( \hat{s} = (-1)^{\floor{d/4}} \beta = (-1)^{p/2} \).
+\( \sh = (-1)^{\floor{d/4}} \beta = (-1)^{p/2} \).
 The remaining four identities in \cref{eq:constnorm} can also be verified, leaving us with
 %
 \begin{equation}\label{eq:consteveneven}
   p, q = 0 \pmod 2 : \quad
   \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
   s_2 = s_3 = (-1)^{(p-q)/2}, \quad
-  \hat{s} = (-1)^{p/2}.
+  \sh = (-1)^{p/2}.
 \end{equation}
 %
 with unspecified constants equal to 1.
@@ -758,7 +804,7 @@ We choose
         \otimes \mbigg\brk{\bigotimes_{k=1}^{\floor{q/2}} \I}.
 \end{equation*}
 %
-We see again that \(\A^\dag = \A\) and \(\alpha=1\), and also \(\Gammab \A = - \A \Gammab =  \At\) giving us \(s_1 = -1\).
+We see again that \(\A\hc = \A\) and \(\alpha=1\), and also \(\Gammab \A = - \A \Gammab =  \At\) giving us \(s_1 = -1\).
 
 We also choose
 %
@@ -818,7 +864,7 @@ We can make almost the same choice of \(\C\) as for even \(p,q\)
 %
 We can check that \(\Gammab \C = (-1)^{d/2}\C \Gammab = \Ct\), giving \(s_3 = s_1 s_2\).
 We also find that, from \cref{eq:constnorm}, we have
-\( \hat{s} = (-1)^{\floor{d/4}} \beta = (-1)^{(q-1)/2} \).
+\( \sh = (-1)^{\floor{d/4}} \beta = (-1)^{(q-1)/2} \).
 The remaining four identities in \cref{eq:constnorm} can also be verified, leaving us with
 %
 \begin{equation}\label{eq:constoddodd}
@@ -826,7 +872,7 @@ The remaining four identities in \cref{eq:constnorm} can also be verified, leavi
   \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
   s_1 = -1, \quad
   s_2 = -s_3 = (-1)^{\frac{p-q}{2}}, \quad
-  \hat{s} = (-1)^{\frac{q-1}{2}}.
+  \sh = (-1)^{\frac{q-1}{2}}.
 \end{equation}
 %
 with unspecified constants equal to 1.
@@ -884,7 +930,7 @@ We find
 %
 where \( z = \floorfrac{p}{4} + \floorfrac{q-1}{4}\).
 
-Because \(s_2\) only appears with \(\beta\) and \(\hat{s}\) in \cref{eq:constnorm}, we can make any choice of \(s_2\) with a redefinition of \(\beta\) and \(\hat{s}\).
+Because \(s_2\) only appears with \(\beta\) and \(\sh\) in \cref{eq:constnorm}, we can make any choice of \(s_2\) with a redefinition of \(\beta\) and \(\sh\).
 We can also check that in all four cases we can write \(\beta, \betat\) in the forms \(\beta = (-1)^{\floor{(p-q+2)/4}}\) and \(\betat = (-1)^{\floor{(p-q)/4}}\), 
 which are consistent with \(s_2 = (-1)^{\floorfrac{p-q}{2}}\).
 The existence of \(\B\) or \(\Bt\) is determined by \((d \mod 4) = (p-q \mod 4)\).
@@ -909,7 +955,7 @@ We find
 %
 Once again, we can choose any value of \(s_3\).
 We also find that we can write \(\chi = (-1)^{\floor{d/4}}\) and \(\chit = (-1)^{\floor{(d+2)/4}}\) which is consistent with \(s_3 = -s_2\).
-This implies that \(\hat{s} = (-1)^{p/2}\).
+This implies that \(\sh = (-1)^{p/2}\).
 This leaves us with
 %
 \begin{equation}\label{eq:constevenodd}
@@ -917,7 +963,7 @@ This leaves us with
   \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
   s_1 = -1, \quad
   s_2 = -s_3 = (-1)^{\floorfrac{p-q}{2}} \quad
-  \hat{s} = (-1)^{\frac{p}{2}}.
+  \sh = (-1)^{\frac{p}{2}}.
 \end{equation}
 %
 with unspecified constants equal to 1.
@@ -937,7 +983,7 @@ We choose
 \end{equation*}
 %
 The expression for \(\A\) in \cref{sec:oddodd} fails to commute with \(\Gammab^d\).
-Clearly \(\At^\dag = \At\), so \(\alphat = 1\).
+Clearly \(\At\hc = \At\), so \(\alphat = 1\).
 The sign \(s_1\) doesn't play a role in \cref{eq:constnorm}, but we can say \(s_1 = 1\).
 We can then see that \(\alpha = 1\).
 
@@ -1011,14 +1057,14 @@ We find
 %
 And again, we can choose any value of \(s_3\).
 We also find that we can write \(\chi = (-1)^{\floor{d/4}}\) and \(\chit = (-1)^{\floor{(d+2)/4}}\) which is consistent with \(s_3 = s_2\).
-This implies that \(\hat{s} = (-1)^{(p-1)/2}\).
+This implies that \(\sh = (-1)^{(p-1)/2}\).
 This leaves us with
 %
 \begin{equation}\label{eq:constoddeven}
   p, q = 1,0 \pmod 2 : \quad
   \beta = (-1)^{\floorfrac{p-q+2}{4}}, \quad
   s_2 = s_3 = (-1)^{\floorfrac{p-q}{2}} \quad
-  \hat{s} = (-1)^{\frac{p-1}{2}}.
+  \sh = (-1)^{\frac{p-1}{2}}.
 \end{equation}
 %
 with unspecified constants equal to 1.
@@ -1046,8 +1092,8 @@ In \cref{sec:subtypes} we will see that these two constants,
 We can reconstruct \(\betat = s_2 \beta = (-1)^{\floorfrac{p-q}{4}}\).
 
 We found that \(s_3 = s_1 s_2\) in all cases, which is equivalent to \(s_3 = (-1)^{\floorfrac{d}{2}}\).
-The sign \(\hat{s}\) took different forms depending on \(p,q \mod 2\).
-Rather than try to combine them into one formula, \(\hat{s} = (-1)^{(q-1)\floorfrac{p}{2} + q \floorfrac{q}{2}}\),
+The sign \(\sh\) took different forms depending on \(p,q \mod 2\).
+Rather than try to combine them into one formula, \(\sh = (-1)^{(q-1)\floorfrac{p}{2} + q \floorfrac{q}{2}}\),
 but it is easier to reconstruct \(\chi = (-1)^{\floor{d/4}}\) and \(\chit = s_3 \chi = (-1)^{\floor{(d+2)/4}}\).
 
 These results are summarised in \cref{tab:exist}.
@@ -1062,16 +1108,16 @@ These results are summarised in \cref{tab:exist}.
   \midrule
     \Gammab & -&\Gammab^\mu        & p\pm q &= 1 \pmod 2              & \Gammab^2
                     & \gamma &= 1                        &                           \\
-    \A      &  &\Gammab^\mud       & p,q &= 1,0 \pmod 2               & \A\inv \A^\dag
+    \A      &  &\Gammab^\mud       & p,q &= 1,0 \pmod 2               & \A\inv \A\hc
                     & \alpha &= 1                        &                           \\
-    \At     & -&\Gammab^\mud       & p,q &= 0,1 \pmod 2               & \At\inv \At^\dag
+    \At     & -&\Gammab^\mud       & p,q &= 0,1 \pmod 2               & \At\inv \At\hc
                     & \alphat &= (-1)^{pq}               & s_1 &= (-1)^{pq}     \\
-    \B      &  &\Gammab^\muc       & p-q &= 1 \pmod 4                 & \B \B^\ast
+    \B      &  &\Gammab^\muc       & p-q &= 1 \pmod 4                 & \B \B\cc
                     & \beta &= (-1)^{\floorfrac{p-q+2}{4}}  &                           \\
-    \Bt     & -&\Gammab^\muc       & p-q &= 3 \pmod 4                 & \Bt \Bt^\ast
+    \Bt     & -&\Gammab^\muc       & p-q &= 3 \pmod 4                 & \Bt \Bt\cc
                     & \betat &= (-1)^{\floorfrac{p-q}{4}} & s_2 &= (-1)^{\floorfrac{p-q}{2}} \\
     \C      &  &\Gammab^\mut       & p+q &= 3 \pmod 4                 & \C\inv \C\trans
-                    & \chi &= (-1)^{\floorfrac{p+q}{4}}     & \hat{s} &= \beta\chi      \\
+                    & \chi &= (-1)^{\floorfrac{p+q}{4}}     & \sh &= \beta\chi      \\
     \Ct     & -&\Gammab^\mut       & p+q &= 1 \pmod 4                 & \Ct\inv \Ct\trans
                     & \chit &= (-1)^{\floorfrac{p+q+2}{4}}  & s_3 &= (-1)^{\floorfrac{p+q}{2}}  \\
   \bottomrule
@@ -1260,7 +1306,7 @@ In even dimensions, both must exist.
 In odd dimensions, only one can exist.
 We postpone discussion of their relation to Lorentz transformations of spinors to \cref{sec:diraclorentz}.
 
-If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm} we can define a set of scalars associated with \(\Lambdab\).
+If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm} we can define a set of scalars associated with \(\Lambdab\) (highlighted with \alert{colour} below).
 \Cref{eq:constnorm} also implies relations between these constants:
 %
 \begin{equation*}
@@ -1268,27 +1314,27 @@ If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm}
   h_{\Lambda,\Lambda'}^2 &= \frac{g_{\Lambda}g_{\Lambda'}}{g_{\Lambda\Lambda'}}
     \mathrlap{\e^{\ir(\phi_{\Lambda\Lambda'} - \phi_\Lambda - \phi_{\Lambda'})}} &&&
   \Gammab \S_\Lambda
-    &= s_\Lambda \S_\Lambda \Gammab 
-    \mathrlap{= \hat{g}_\Lambda \St_\Lambda,} \\
+    &= \alert{s_\Lambda} \S_\Lambda \Gammab 
+    = \mathrlap{ \alert{\hat{g}_\Lambda} \St_\Lambda,} \\
   \S_\Lambda \S_{\Lambda'} 
     &= s_{\Lambda} \hat{g}_\Lambda \hat{g}_{\Lambda'}\, \St_\Lambda \St_{\Lambda'} &
-    &= h_{\Lambda,\Lambda'}\, \S_{\Lambda\Lambda'}, &\qquad
+    &= \alert{h_{\Lambda,\Lambda'}}\, \S_{\Lambda\Lambda'}, &\qquad
   \hat{g}_{\Lambda} \St_\Lambda \S_{\Lambda'} 
     &= s_{\Lambda} \hat{g}_{\Lambda'}\, \S_\Lambda \St_{\Lambda'} &
     &= \hat{g}_{\Lambda\Lambda'}h_{\Lambda,\Lambda'}\, \St_{\Lambda\Lambda'}, \\ 
-  \S_\Lambda^\dag \A \S_\Lambda
-    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda^\dag \A \St_\Lambda &
-    &= g_\Lambda \A, &
-  \S_\Lambda^\dag \At \S_\Lambda
-    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda^\dag \At \St_\Lambda &
+  \S_\Lambda\hc \A \S_\Lambda
+    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda\hc \A \St_\Lambda &
+    &= \alert{g_\Lambda} \A, &
+  \S_\Lambda\hc \At \S_\Lambda
+    &= s_1 \abs{\hat{g}_\Lambda}^2 \St_\Lambda\hc \At \St_\Lambda &
     &= s_\Lambda g_\Lambda \At, \\
-  \S_\Lambda\inv \B \S_\Lambda^\ast
-    &= \frac{s_2 \hat{g}_\Lambda^\ast}{\hat{g}_\Lambda} \,
-      \St_\Lambda\inv \B \St_\Lambda^\ast &
-    &= \e^{\ir\phi_\Lambda} \B, &
-  \S_\Lambda\inv \Bt \S_\Lambda^\ast
-    &= \frac{s_2 \hat{g}_\Lambda^\ast}{\hat{g}_\Lambda} \,
-      \St_\Lambda\inv \Bt \St_\Lambda^\ast &
+  \S_\Lambda\inv \B \S_\Lambda\cc
+    &= \frac{s_2 \hat{g}_\Lambda\cc}{\hat{g}_\Lambda} \,
+      \St_\Lambda\inv \B \St_\Lambda\cc &
+    &= \alert{\e^{\ir\phi_\Lambda}} \B, &
+  \S_\Lambda\inv \Bt \S_\Lambda\cc
+    &= \frac{s_2 \hat{g}_\Lambda\cc}{\hat{g}_\Lambda} \,
+      \St_\Lambda\inv \Bt \St_\Lambda\cc &
     &= s_\Lambda \e^{\ir\phi_\Lambda} \Bt, \\
   \S_\Lambda\trans \C \S_\Lambda
     &= s_3 \hat{g}_\Lambda^2\, \St_\Lambda\trans \C \St_\Lambda &
@@ -1299,7 +1345,7 @@ If we follow the approach in \cref{sec:ccmats} that leads to \cref{eq:constnorm}
 \end{alignedat}
 \end{equation*}
 %
-where \(g_\Lambda\) and \(\phi_\Lambda\) are real, the argument of the square root is positive, \(s_\Lambda = \pm 1\), and \(s_{\Lambda\Lambda'} = s_{\Lambda} s_{\Lambda'}\).
+where \(g_\Lambda\) and \(\phi_\Lambda\) are real, \(\frac{g_{\Lambda}g_{\Lambda'}}{g_{\Lambda\Lambda'}} > 0\), \(s_\Lambda = \pm 1\), and \(s_{\Lambda\Lambda'} = s_{\Lambda} s_{\Lambda'}\).
 We can use the freedom to scale \(\S_\Lambda\) to set \(g_\Lambda = \e^{\ir\phi_\Lambda} \equiv r_\Lambda = \pm 1\),
 and the freedom to scale \(\St_\Lambda\) to set \(\hat{g}_\Lambda = 1\).
 This leaves us with:
@@ -1318,17 +1364,17 @@ This leaves us with:
   \St_\Lambda \S_{\Lambda'}
     &= s_{\Lambda} \S_\Lambda \St_{\Lambda'} &
     &= \St_{\Lambda\Lambda'}, \\ 
-  \S_\Lambda^\dag \A \S_\Lambda 
-    &= s_1 \St_\Lambda^\dag \A \St_\Lambda &
+  \S_\Lambda\hc \A \S_\Lambda 
+    &= s_1 \St_\Lambda\hc \A \St_\Lambda &
     &= r_\Lambda \A, &
-  \S_\Lambda^\dag \At \S_\Lambda 
-    &= s_1 \St_\Lambda^\dag \At \St_\Lambda &
+  \S_\Lambda\hc \At \S_\Lambda 
+    &= s_1 \St_\Lambda\hc \At \St_\Lambda &
     &= r_\Lambda s_\Lambda \At, \\
-  \S_\Lambda\inv \B \S_\Lambda^\ast 
-    &= s_2 \St_\Lambda\inv \B \St_\Lambda^\ast &
+  \S_\Lambda\inv \B \S_\Lambda\cc 
+    &= s_2 \St_\Lambda\inv \B \St_\Lambda\cc &
     &= r_\Lambda \B, &\qquad
-  \S_\Lambda\inv \Bt \S_\Lambda^\ast 
-    &= s_2 \St_\Lambda\inv \Bt \St_\Lambda^\ast &
+  \S_\Lambda\inv \Bt \S_\Lambda\cc 
+    &= s_2 \St_\Lambda\inv \Bt \St_\Lambda\cc &
     &= r_\Lambda s_\Lambda \Bt, \\ 
   \S_\Lambda\trans \C \S_\Lambda 
     &= s_3 \St_\Lambda\trans \C \St_\Lambda &
@@ -1461,7 +1507,7 @@ Therefore, the Lorentz transform of a spinor is
 \end{aligned}
 \end{equation}
 %
-\todo{What happens when only \(\St_\Lambda\) exists????????} \(\St_\Lambda = \S_{-\Lambda}\)?
+\todo{What happens when only \(\St_\Lambda\) exists????????} \(\St_\Lambda \ra \S_{-\Lambda}\)?
 
 Note that, according to \cref{eq:constnormlorentz}, we have
 %
@@ -1471,14 +1517,14 @@ Note that, according to \cref{eq:constnormlorentz}, we have
     &= \Lambda^\mu{}_\nu \S_\Lambda \Gammab^\nu \Psib, &
   \Gammab \Psib &\longmapsto \Gammab \Psib' &
     &= s_\Lambda \S_\Lambda \Gammab \Psib, \\ 
-  \Psib^\dag \A &\longmapsto \Psib'^\dag \A &
-    &= r_\Lambda \Psib^\dag \A \S_\Lambda\inv, & \qquad
-  \Psib^\dag \At &\longmapsto \Psib'^\dag \At &
-    &= r_\Lambda s_\Lambda \Psib^\dag \At \S_\Lambda\inv, \\ 
-  \B \Psib^\ast &\longmapsto \B \Psib'^\ast &
-    &= r_\Lambda \S_\Lambda \B \Psib^\ast, & 
-  \Bt \Psib^\ast &\longmapsto \Bt \Psib'^\ast &
-    &= r_\Lambda s_\Lambda \S_\Lambda \Bt \Psib^\ast, \\ 
+  \Psib\hc \A &\longmapsto \Psib'{}\hc \A &
+    &= r_\Lambda \Psib\hc \A \S_\Lambda\inv, & \qquad
+  \Psib\hc \At &\longmapsto \Psib'{}\hc \At &
+    &= r_\Lambda s_\Lambda \Psib\hc \At \S_\Lambda\inv, \\ 
+  \B \Psib\cc &\longmapsto \B \Psib'{}\cc &
+    &= r_\Lambda \S_\Lambda \B \Psib\cc, & 
+  \Bt \Psib\cc &\longmapsto \Bt \Psib'{}\cc &
+    &= r_\Lambda s_\Lambda \S_\Lambda \Bt \Psib\cc, \\ 
   \Psib\trans \C &\longmapsto \Psib'{}\trans \C &
     &= \Psib\trans \C \S_\Lambda\inv, &
   \Psib\trans \Ct &\longmapsto \Psib'{}\trans \Ct &
@@ -1490,7 +1536,7 @@ This means that under Lorentz transforms for which \(r_\Lambda = s_\Lambda = 1\)
 \(\overline{\Psib} \Psib\) is a scalar,
 \(\overline{\Psib} \Gammab^\mu \Psib\) is a vector,
 \(\overline{\Psib} \Gammab^\mu \Gammab^\nu \Psib\) is a second-rank tensor, etc.
-We can replace \(\Psib\) with \(\B \Psib^\ast\) or \(\overline{\Psib}\) with \(\Psib\trans \C\) in these expressions. 
+We can replace \(\Psib\) with \(\B \Psib\cc\) or \(\overline{\Psib}\) with \(\Psib\trans \C\) in these expressions. 
 
 
 %-------Section------------------------------------------------------------------
@@ -1739,23 +1785,23 @@ A \emph{single} Weyl spinor can only be used for massless particles.
 
 \subsection{Majorana spinors}\label{sec:majorana}
 
-Can we impose a reality condition, like \(\Psib^\ast = \Psib\)?
+Can we impose a reality condition, like \(\Psib\cc = \Psib\)?
 Changes of basis and spinor Lorentz transforms can be complex, so a spinor that is real in one basis will not necessarily be real in another basis.
-The problem comes from the fact that \(\Psib\) and \(\Psib^\ast\) transform differently under a change of basis/Lorentz transform.
+The problem comes from the fact that \(\Psib\) and \(\Psib\cc\) transform differently under a change of basis/Lorentz transform.
 If we want an invariant characterisation of real spinors, we need a version of complex conjugation that transforms the same way.
-From \cref{eq:spinorbasis,eq:cclorentz} we see that this is provided by \emph{charge conjugation}: \( \Psib \to \B \Psib^\ast \) or \( \Bt \Psib^\ast \).
+From \cref{eq:spinorbasis,eq:cclorentz} we see that this is provided by \emph{charge conjugation}: \( \Psib \to \B \Psib\cc \) or \( \Bt \Psib\cc \).
 We will focus on \(\B\) below, but our discussion applies equally well to \(\Bt\).
 
-But are there any self-conjugate spinors, \ie solutions to the condition \( \Psib = \B \Psib^\ast \)?%
+But are there any self-conjugate spinors, \ie solutions to the condition \( \Psib = \B \Psib\cc \)?%
 \footnote{Many authors write this condition as \( \overline{\Psib} = \Psib\trans \C \).}
 Let's perform a consistency  check by substituting thus equation into itself
 %
 \begin{equation*}
-  \Psib = \B \Psib^\ast = \B (\B \psi^\ast)^\ast = \B \B^\ast \Psib = \beta \Psib.
+  \Psib = \B \Psib\cc = \B (\B \psi\cc)\cc = \B \B\cc \Psib = \beta \Psib.
 \end{equation*}
 %
 Therefore, unless \(\beta = 1\) there are no self-conjugate solutions
-(you might try to get around it by using something like \( \Psib = \ir \B \Psib^\ast \) but, because charge conjugation is antilinear, it doesn't work).
+(you might try to get around it by using something like \( \Psib = \ir \B \Psib\cc \) but, because charge conjugation is antilinear, it doesn't work).
 Assuming either \(\beta\) or \(\beta\) is one, do any solutions exist?
 To answer, we can use a doubling trick where we map \(\Cb^n \to \R^{2n}\).
 In block matrix format:
@@ -1784,7 +1830,7 @@ In block matrix format:
   , \\
 %\begin{aligned}
   \implies
-  \B \B^\ast \longmapsto
+  \B \B\cc \longmapsto
          \begin{pmatrix}
            \B_r & -\B_i \\
            \B_i &  \B_r \\
@@ -1812,7 +1858,7 @@ Multiplication of these real doubled matrices is equivalent to multiplication of
 In this language complex conjugation is a linear operation, so
 %
 \begin{equation}\label{eq:doublingtrick}
-  \B \Psib^\ast \longmapsto
+  \B \Psib\cc \longmapsto
          \begin{pmatrix}
            \B_r & -\B_i \\
            \B_i &  \B_r \\
@@ -1866,13 +1912,13 @@ Consulting \cref{tab:types}, we can use \(\B\) when \(p-q = 0,6,7 \pmod 8\) and 
 Either way, Dirac spinors can be split into their real and imaginary parts
 %
 \begin{equation}\label{eq:majorana}
-  \psib_r = \frac{\Psib + \B \Psib^\ast}{2},
+  \psib_r = \frac{\Psib + \B \Psib\cc}{2},
   \quad
-  \psib_i = \frac{\Psib - \B \Psib^\ast}{2\ir},
+  \psib_i = \frac{\Psib - \B \Psib\cc}{2\ir},
   \qquad
-  \psib_r = \B \psib^\ast_r,
+  \psib_r = \B \psib\cc_r,
   \quad
-  \psib_i = \B \psib^\ast_i,
+  \psib_i = \B \psib\cc_i,
   \quad
   \Psib = \psib_r + \ir \psib_i.
 \end{equation}
@@ -1886,11 +1932,11 @@ We need to check if the Lorentz transform of a Majorana spinor is still a Majora
 Using \cref{eq:constnormlorentz}:
 %
 \begin{equation*}
-  \Psib = \B \Psib^\ast
+  \Psib = \B \Psib\cc
   \quad\implies\quad
-  \B \prn{\S_\Lambda \Psib}^\ast 
-    = \B \S_\Lambda^\ast \Psib^\ast 
-    = r_\Lambda \S_\Lambda \B \Psib^\ast 
+  \B \prn{\S_\Lambda \Psib}\cc 
+    = \B \S_\Lambda\cc \Psib\cc 
+    = r_\Lambda \S_\Lambda \B \Psib\cc 
     = r_\Lambda \S_\Lambda \Psib.
 \end{equation*}
 %
@@ -1901,15 +1947,15 @@ From \cref{tab:constlorentz} we see this includes all proper orthochronous trans
 \todo{If only \(\St\) exists??????????}
 
 Are there any self-conjugate solutions to the Dirac equation?
-If \(\Psib\) is a solution, is \(\B \Psib^\ast\) also a solution?
+If \(\Psib\) is a solution, is \(\B \Psib\cc\) also a solution?
 For timelike-positive signature:
 %
 \begin{equation*}
   \ir\, \Gammab^\mu \partial_\mu \Psib = m \Psib
   \quad\implies\quad
-  m \Bt \Psib^\ast 
-    = - \ir\, \Bt \Gammab^\muc \partial_\mu \Psib^\ast 
-    = \ir\, \Gammab^\mu \partial_\mu \prn{\Bt \Psib^\ast} 
+  m \Bt \Psib\cc 
+    = - \ir\, \Bt \Gammab^\muc \partial_\mu \Psib\cc 
+    = \ir\, \Gammab^\mu \partial_\mu \prn{\Bt \Psib\cc} 
     = \ir\, \Gammab^\mu \partial_\mu \Psib. 
 \end{equation*}
 %
@@ -1918,9 +1964,9 @@ For spacelike-positive signature:
 \begin{equation*}
   \ir\, \Gammab^\mu \partial_\mu \Psib = \ir\, m \Psib
   \quad\implies\quad
-  - \ir\, m \B \Psib^\ast 
-    = - \ir\, \B \Gammab^\muc \partial_\mu \Psib^\ast 
-    = - \ir\, \Gammab^\mu \partial_\mu \prn{\B \Psib^\ast} 
+  - \ir\, m \B \Psib\cc 
+    = - \ir\, \B \Gammab^\muc \partial_\mu \Psib\cc 
+    = - \ir\, \Gammab^\mu \partial_\mu \prn{\B \Psib\cc} 
     = - \ir\, \Gammab^\mu \partial_\mu \Psib. 
 \end{equation*}
 %
@@ -1935,11 +1981,11 @@ Clearly it is necessary that a spinor and its charge conjugate  have the same ch
 This is sufficient to ensure that the operations of taking the chiral part in \cref{eq:Weylanti} and taking the real part in \cref{eq:majorana} commute:
 %
 \begin{equation}\label{eq:majoranaweyl}
-  \Gammab \B \Psib^\ast = \B \Gammab^\ast \Psib^\ast
+  \Gammab \B \Psib\cc = \B \Gammab\cc \Psib\cc
   \quad\means\quad
   \frac{1}{2}\prn{\brkfrac{\I+\Gammab}{2} \Psib 
-    + \B \brkfrac{\I+\Gammab}{2}^{\mathrlap{\ast}} \Psib^\ast} 
-    = \brkfrac{\I+\Gammab}{2} \prnfrac{\Psib + \B \Psib^\ast}{2}.
+    + \B \brkfrac{\I+\Gammab}{2}^{\mathrlap{\ast}} \Psib\cc} 
+    = \brkfrac{\I+\Gammab}{2} \prnfrac{\Psib + \B \Psib\cc}{2}.
 \end{equation}
 %
 If this is true, we could split the chiral/antichiral spinors into their real and imaginary parts, and \emph{vice versa}.
@@ -1967,20 +2013,20 @@ The doubling trick of \cref{eq:doublingtrick} doesn't work the same way here bec
 However, using \(\B\) for \( p-q = 3,4 \pmod 8 \) or \(\Bt\) for \( p-q = 4,5 \pmod 8 \), it is possible to group spinors into pairs such that
 %
 \begin{equation}\label{eq:pseudomajorana}
-  \psib_1 = \B \psib_2^\ast,
+  \psib_1 = \B \psib_2\cc,
   \qquad
-  \psib_2 = - \B \psib_1^\ast.
+  \psib_2 = - \B \psib_1\cc.
 \end{equation}
 %
 This endows spinors with a symplectic structure, like the Poisson bracket for phase space in Hamiltonian mechanics.
 
 We can see this by temporarily extending the doubling trick of  of \cref{eq:doublingtrick} from \(\R^{2n}\) to \(\Cb^{2n}\).
-Then we can find a set of basis eigenvectors, \(\zetab_a,\zetab^\ast_a\), \(a = 1,\ldots,n\):
+Then we can find a set of basis eigenvectors, \(\zetab_a,\zetab\cc_a\), \(a = 1,\ldots,n\):
 %
 \begin{equation*}
   \mathcal{B} \zetab_a = \ir \zetab_a,
   \qquad
-  \mathcal{B} \zetab^\ast_a = -\ir \zetab^\ast_a.
+  \mathcal{B} \zetab\cc_a = -\ir \zetab\cc_a.
 \end{equation*}
 %
 These vectors do not come from any spinors in \(\Cb^n\) because they are complex.
@@ -1988,25 +2034,25 @@ But their real and imaginary parts, \(\thetab_a,\phi_a\), do come from spinors \
 %
 \begin{equation*}
 \begin{aligned}
-  \Thetab_a \longmapsto \thetab_a &= \frac{\zetab_a + \zetab^\ast_a}{2}, &
+  \Thetab_a \longmapsto \thetab_a &= \frac{\zetab_a + \zetab\cc_a}{2}, &
     &&
   \mathcal{B} \thetab_a &= - \phib_a, &
     &&
-  \B \Thetab_a^\ast &= - \Phib_a, \\[-0.8em]
+  \B \Thetab_a\cc &= - \Phib_a, \\[-0.8em]
   &&
     \qquad &\smash{\implies} \qquad &
   &&
     \qquad &\smash{\implies} \qquad \\[-0.8em]
-  \Phib_a \longmapsto \phib_a &= \frac{\zetab - \zetab^\ast}{2\ir}, &
+  \Phib_a \longmapsto \phib_a &= \frac{\zetab - \zetab\cc}{2\ir}, &
     &&
   \mathcal{B} \phib_a &= \thetab_a, &
     &&
-  \B \Phib_a^\ast &= \Thetab_a.
+  \B \Phib_a\cc &= \Thetab_a.
 \end{aligned}
 \end{equation*}
 %
 In \(\R^{2n}\) we have \(2n\) linearly independent vectors, \(\theta_a,\phi_a\)
-(they must be linearly independent, otherwise \(\zetab_a,\zetab^\ast_a\) would not be linearly independent: any putative counterexample to one can be converted to a counterexample of the other).
+(they must be linearly independent, otherwise \(\zetab_a,\zetab\cc_a\) would not be linearly independent: any putative counterexample to one can be converted to a counterexample of the other).
 Therefore any real vector \(\psib\) can be written as a linear combination of the \(\theta_a,\phi_a\) with \emph{real} coefficients.
 Because the map between spinors in \(\Cb^n\) and vectors in \(\R^{2n}\) preserves real linear combinations, this can be carried over to any spinor \(\Psib\):
 %
@@ -2020,17 +2066,17 @@ We can use this two split a spinor into two parts:
 %
 \begin{equation*}
 \begin{aligned}
-  \Psib_1 = \Psib_{1x} + \Psib_{1y} = \B \Psib_2^\ast, 
+  \Psib_1 = \Psib_{1x} + \Psib_{1y} = \B \Psib_2\cc, 
   \qquad
   \Psib_{1x} &= \sum_a x_a \Thetab_a, 
   &\qquad
-  \Psib_{1x} &=   \B \Psib_{2y}^\ast, &\quad
-  \Psib_{1y} &= - \B \Psib_{2x}^\ast, 
+  \Psib_{1x} &=   \B \Psib_{2y}\cc, &\quad
+  \Psib_{1y} &= - \B \Psib_{2x}\cc, 
   \\
   \Psib_{1y} &= \sum_a y_a \Phib_a, 
   &
-  \Psib_{2y} &= - \B \Psib_{1x}^\ast, &
-  \Psib_{2x} &=   \B \Psib_{1y}^\ast,
+  \Psib_{2y} &= - \B \Psib_{1x}\cc, &
+  \Psib_{2x} &=   \B \Psib_{1y}\cc,
 \end{aligned}
 \end{equation*}
 %
