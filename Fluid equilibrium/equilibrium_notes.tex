@@ -51,6 +51,9 @@
 \newcommand{\aint}{\int_{\p\Gamma}\!\!\dr^{d-2}x}
 \newcommand{\dvint}{\int_{\Delta\Gamma}\!\dr^{d-1}x}
 \newcommand{\daint}{\int_{\p\Delta\Gamma}\!\!\dr^{d-2}x}
+\newcommand{\perf}{_\text{perfect}}
+\newcommand{\surf}{_\text{surface}}
+\newcommand{\diss}{_\text{dissipative}}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title info:
@@ -67,15 +70,16 @@
                    Harvard University, Cambridge MA 02138, USA}}
 %
 }
+\date{}
 
 \begin{document}
 
 \maketitle
 
-% Preprint numbers, etc.
-\preprintno{8cm}{6cm}{
-    \texttt{arXiv:yymm.nnnn [hep-th]}
-}
+% % Preprint numbers, etc.
+% \preprintno{8cm}{6cm}{
+%     \texttt{arXiv:yymm.nnnn [hep-th]}
+% }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -117,6 +121,7 @@ Defining intensive quantities: density $\rho=\eloc/\mathcal{V}$, entropy density
 %
 Note that all intensive thermodynamic quantities can be written as functions of $(1+c)$ variables, which we will usually choose to be the temperature, $\tloc$ and chemical potentials $\ml_i$. Once we are given the pressure as a function of temperature and chemical potential, we can use \eqref{inttherm:eq} to determine the others.
 
+%--------------------------------------------------------------------------------
 
 \section{Fluid mechanics}\label{sec:stress}
 
@@ -154,9 +159,9 @@ To zeroth order in the derivative expansion, Lorentz invariance and the correct 
 %
 \begin{equation}\label{currents:eq}
 \begin{split}
-  T^{\mu\nu}_\mathrm{perfect}& = \rho u^\mu u^\nu + \ploc P^{\mu\nu}, \\
-  (J^\mu_i)_\mathrm{perfect}&=\rl_iu^\mu, \\
-  (J^\mu_S)_\mathrm{perfect}&=s u^\mu,
+  T^{\mu\nu}\perf& = \rho u^\mu u^\nu + \ploc P^{\mu\nu}, \\
+  (J^\mu_i)\perf&=\rl_iu^\mu, \\
+  (J^\mu_S)\perf&=s u^\mu,
 \end{split}
 \end{equation}
 %
@@ -168,10 +173,10 @@ Now, we proceed to examine the first subleading order in the derivative expansio
 %
 \begin{equation}\label{extraTvisc:eq}
 \begin{split}
-  T^{\mu\nu}_\mathrm{dissipative} &= -\zeta \vartheta P^{\mu\nu} -
+  T^{\mu\nu}\diss &= -\zeta \vartheta P^{\mu\nu} -
   2\eta\sigma^{\mu\nu} + q^\mu u^\nu + u^\mu q^\nu,\\
- (J^\mu_i)_\mathrm{dissipative} &= j^\mu_{i},\\
-(J^\mu_S)_\mathrm{dissipative} &= \frac{q^\mu-\ml_i j^\mu_{i}}{\tloc}\,.
+ (J^\mu_i)\diss &= j^\mu_{i},\\
+(J^\mu_S)\diss &= \frac{q^\mu-\ml_i j^\mu_{i}}{\tloc}\,.
 \end{split}
 \end{equation}
 %
@@ -233,6 +238,7 @@ For fluids with gravity duals, the shear viscosity is given by $\eta=\frac{s}{4\
 This length scale may plausibly be identified with the thermalisation length scale of the fluid. This may be demonstrated within the kinetic theory, where $\mfp$ is simply the mean free path of colliding molecules, but is expected to apply to more generally to any fluid with short range interactions.
 
 %When studying fluids on curved manifolds (as we will proceed to do in this paper), one could add generally covariant terms, built out of curvatures, to the stress tensor. For instance, we could add a term proportional to $R^{\mu \nu}$ to the expression for $T^{\mu\nu}$. We will ignore all such terms in this paper for a reason we now explain. In all the solutions of fluid mechanics that we will study, the length scale over which fluid quantities vary is the same as the length scale of curvatures of the manifold. Any expression built out of a curvature contains at least two spacetime derivatives of the metric; it follows that any contribution to the stress tensor proportional to a curvature is effectively at least two orders subleading in the derivative expansion, and so is negligible compared to all the other terms we have retained in this paper.
+%--------------------------------------------------------------------------------
 
 \section{Surfaces}\label{sec:surface}
 
@@ -301,7 +307,7 @@ If we demand invariance under reparameterisations of the function $f(x) \to g(x)
 the most general surface stress tensor we can have is (see \S2.3 of \cite{Lahiri:2007ae})
 %
 \begin{equation*}
-    T^{\mu\nu}_\mathrm{surface}\delta(f) = \brk{A n^\mu n^\nu
+    T^{\mu\nu}\surf\delta(f) = \brk{A n^\mu n^\nu
                    +B u^\mu u^\nu
                    +C \prn{u^\mu n^\nu + n^\mu u^\nu}
                    +D g^{\mu\nu}}\sqrt{\p f\cdt\p f}\delta(f)\,.
@@ -313,7 +319,7 @@ where $n_\mu = -\p_\mu f / \sqrt{\p f \cdt \p f}$ is the outward pointing unit n
 We can fix $A,B,C,D$ by looking at a fluid at rest, $u^\mu = (1,0,0,\ldots)$, with a surface $f(x)=x$
 %
 \begin{equation*}
-  T^{\mu\nu}_\mathrm{surface} =
+  T^{\mu\nu}\surf =
   \begin{pmatrix}
     B-D & -C   & 0  \\
     -C   & A+D & 0  \\
@@ -331,7 +337,7 @@ We can fix $A,B,C,D$ by looking at a fluid at rest, $u^\mu = (1,0,0,\ldots)$, wi
 This gives
 %
 \begin{equation}\label{surfstressgen:eq}
-  T^{\mu\nu}_\text{surface} = \sqrt{\p f \cdt \p f} \brk{\sigma_E u^\mu u^\nu -\sigma(h^{\mu\nu} + u^\mu u^\nu)},
+  T^{\mu\nu}\surf = \sqrt{\p f \cdt \p f} \brk{\sigma_E u^\mu u^\nu -\sigma(h^{\mu\nu} + u^\mu u^\nu)},
 \end{equation}
 %
 where $h_{\mu\nu} = g_{\mu\nu} - n_\mu n_\nu$ is the induced metric of the surface.
@@ -362,7 +368,7 @@ which provides the correct change of integration measure for localisation to the
 We have
 %
 \begin{equation}\label{surfeom:eq}
-  \nabla_\mu T^{\mu\nu} = \theta(f)\nabla_\mu T^{\mu\nu}_\text{fluid} + \delta(f)(\p_\mu f) T^{\mu\nu}_\text{fluid} + \delta(f)\nabla_\mu T^{\mu\nu}_\text{surface} + \delta'(f)(\p_\mu f) T^{\mu\nu}_\text{surface}.
+  \nabla_\mu T^{\mu\nu} = \theta(f)\nabla_\mu T^{\mu\nu}_\text{fluid} + \delta(f)(\p_\mu f) T^{\mu\nu}_\text{fluid} + \delta(f)\nabla_\mu T^{\mu\nu}\surf + \delta'(f)(\p_\mu f) T^{\mu\nu}\surf.
 \end{equation}
 %
 Taking the derivative of \eqref{surfvel:eq} and contracting with $\nabla_\nu f$ gives
@@ -378,7 +384,7 @@ This can be used to eliminate the last term of \eqref{surfeom:eq}
 %
 \begin{multline}\label{surfeom2:eq}
   \nabla_\mu T^{\mu\nu} = \theta(f)\nabla_\mu T^{\mu\nu}_\text{fluid} +\\ \delta(f)\sqrt{\p f \cdt \p f}\brk{
-  -n_\mu T^{\mu\nu}_\text{fluid} + \frac{\nabla_\mu T^{\mu\nu}_\text{surface}}{\sqrt{\p f \cdt \p f}}
+  -n_\mu T^{\mu\nu}_\text{fluid} + \frac{\nabla_\mu T^{\mu\nu}\surf}{\sqrt{\p f \cdt \p f}}
   +(\sigma_E-\sigma)u^\nu\prn{\frac{u^\mu n^\lambda \nabla_\mu\nabla_\lambda f}{\sqrt{\p f \cdt \p f}} - n_\mu n_\lambda \nabla^\mu u^\lambda}
   }.
 \end{multline}
@@ -416,13 +422,13 @@ so there is no entropy production at the surface to leading order in the derivat
 %If we have several disconnected surfaces, it is convenient to make the separation $f=\prod_i f_i$. As the surfaces are disconnected, the zero sets of the $f_i$ do not intersect. Also, the $f_i$ are all positive inside the fluid. Therefore, whenever one of the $f_i$ is negative or zero, all the others are positive. Luckily, \eqref{surfeom:eq} splits nicely
 %%
 %\begin{equation*}
-%  \nabla_\mu T^{\mu\nu} = \prod_i \theta\prn{f_i}\nabla_\mu T^{\mu\nu}_\text{fluid} + \sum_i \delta(f_i)\brk{(\p_\mu f_i) T^{\mu\nu}_\text{fluid} + \nabla_\mu T^{\mu\nu}_\text{surface}(f_i)}.
+%  \nabla_\mu T^{\mu\nu} = \prod_i \theta\prn{f_i}\nabla_\mu T^{\mu\nu}_\text{fluid} + \sum_i \delta(f_i)\brk{(\p_\mu f_i) T^{\mu\nu}_\text{fluid} + \nabla_\mu T^{\mu\nu}\surf(f_i)}.
 %\end{equation*}
 %%
 
 
 
-
+%--------------------------------------------------------------------------------
 
 \section{Rigid rotation}\label{sec:rigidrot}
 
@@ -465,7 +471,7 @@ One can also show that
 %
 \begin{equation*}
 \begin{split}
-  \nabla_\mu T^{\mu\nu}_\mathrm{perfect} =&
+  \nabla_\mu T^{\mu\nu}\perf =&
     \gamma \prn{s P^{\nu\mu}
         + \brc{\tloc \pdiffc{s}{\tloc} + \ml_i \pdiffc{\rl_i}{\tloc}} u^\nu u^\mu}
        \p_\mu \brk{\frac{\tloc}{\gamma}}\\
@@ -648,6 +654,85 @@ We have seen that
 and the $\Omega_a$, $T$ and $\mg_i$ are the same as those given by \eqref{rigidrot:eq} and \eqref{rotsol:eq}.
 
 
+%-------Section------------------------------------------------------------------
+
+\section{Conformal fluids}\label{sec:Conformal}
+
+Determining the velocity above depended on the following arguments:
+%
+\begin{itemize}
+  \item From \eqref{increase:eq} we see that we require \(\sigma_{\mu\nu} = \vartheta = 0\).
+  \item From \cite{Caldarelli:2008mv} we see that \(\sigma_{\mu\nu} = \vartheta = 0\) combined with \( \nabla_\mu T^{\mu\nu}\perf = 0  \) imply that \(a_\mu\) is an exact form: \(a = \dr\alpha\) for some scalar field \(\alpha\).
+  \item From \cite{Caldarelli:2008mv} we see that \(\sigma_{\mu\nu} = \vartheta = 0\) and \(a = \dr\alpha\) for some \(\alpha\) imply that \( \e^\alpha u \) is a Killing vector: \( \nabla_{(\mu} \prn{\e^\alpha u_{\nu)}} = \e^\alpha (\p_{(\mu}\alpha - a_\mu) u_{\nu)} = 0 \).
+\end{itemize}
+%
+However, for a conformal fluid the bulk viscosity \(\zeta = 0\). 
+Therefore \eqref{increase:eq} does not imply that \( \vartheta = 0 \).
+
+Instead we can use the following series of arguments:
+%
+\begin{itemize}
+  \item From \eqref{increase:eq} we see that we require \(\sigma_{\mu\nu} = 0\).
+  \item We will see that \(\sigma_{\mu\nu} = 0\) combined with \( \nabla_\mu T^{\mu\nu}\perf = 0 \) and a conformal equation of state, \( \rho = (d-1) \ploc \), imply that Loganayagam's Weyl connection from \cite{Loganayagam:2008is}, \(A_\mu = a_\mu - \frac{\vartheta}{d-1}u_\mu \), is an exact form: \(A = d\alpha\) for some scalar field \(\alpha\).
+  \item We will see that \(\sigma_{\mu\nu} = 0\) and \(A = \dr\alpha\) for some \(\alpha\) imply that \( \e^\alpha u \) is a \emph{conformal} Killing vector.
+  \( \nabla_{(\mu} \prn{\e^\alpha u_{\nu)}} - \frac{g_{\mu\nu}}{d} \nabla_\lambda \prn{\e^\alpha u^\lambda} = 0 \).
+\end{itemize}
+%
+Then performing a conformal transformation to bring this vector into the Cartan subalgebra of the conformal group leaves us with the same space of possible fluid velocities studied above.
+
+To prove the second and third propositions, begin by noting that \(\sigma_{\mu\nu} = 0\) means that \eqref{velder:eq} becomes
+%
+\begin{equation}\label{eq:confvelder}
+  \nabla_\mu u_\mu = \omega_{\mu\nu} + \frac{P_{\mu\nu}}{d-1} \vartheta - u_\mu a_\nu.
+\end{equation}
+%
+To prove the second proposition, we now use the conformal equation of state to write \( T^{\mu\nu}\perf = \ploc \prn{d\, u^\mu u^\nu + g^{\mu\nu}} \).
+Taking the divergence and using \eqref{eq:confvelder} we find
+%
+\begin{equation}\label{eq:confdiv}
+  \nabla_\mu T^{\mu\nu}\perf 
+      = \prn{d\, u^\nu u^\mu + g^{\nu\mu}} \p_\mu \ploc
+      + d\, \ploc \prn{\vartheta u^\nu + a^\nu}
+      = 0.
+\end{equation}
+%
+If we project \eqref{eq:confdiv} onto the velocity, we find
+%
+\begin{equation*}
+  \vartheta = - \frac{(d-1) u^\mu \p_\mu \ploc}{d\, \ploc} ,
+\end{equation*}
+%
+and if we project \eqref{eq:confdiv} onto the rest frame, we find
+%
+\begin{equation*}
+  a^\mu = - \frac{P^{\mu\nu} \p_\nu \ploc}{d\, \ploc},
+\end{equation*}
+%
+and therefore 
+%
+\begin{equation}\label{eq:confweyl}
+  A_\mu = a_\mu - \frac{\vartheta}{d-1} u_\mu
+      = \prn{\frac{u_\mu u^\nu - P_\mu\up{\nu}}{d\, \ploc }}  \p_\nu \ploc
+      = \p_\mu \prn{-\frac{\log \ploc}{d}}.
+\end{equation}
+%
+This is the second proposition with \(\alpha = -\frac{\log \ploc}{d}\).
+
+To prove the third proposition, we can use  \eqref{eq:confdiv} to expand the following
+%
+\begin{equation}\label{eq:confckv}
+\begin{aligned}
+  \nabla_{(\mu} \prn{\e^\alpha u_{\nu)}} - \frac{g_{\mu\nu}}{d} \nabla_\lambda \prn{\e^\alpha u^\lambda} 
+    &= \e^\alpha \prn{\p_{(\mu}\alpha - A_\mu } u_{\nu)}  - \frac{\e^\alpha g_{\mu\nu}}{d} \prn{u^\lambda \p_\lambda \alpha - \tfrac{\vartheta}{d-1}}
+    \\
+    &= \e^\alpha \prn{ u_{(\mu} \delta^\lambda_{\nu)}  - \frac{g_{\mu\nu}}{d} u^\lambda } \prn{\p_\lambda \alpha - A_\lambda}.
+\end{aligned}
+\end{equation}
+%
+Therefore, if we choose \(\alpha\) to be the scalar field that appears in \eqref{eq:confweyl}, \( \e^\alpha u \) must be a conformal Killing vector.
+
+
+%--------------------------------------------------------------------------------
 
 \section{Determining surface tension from gravity duals}\label{sec:fromgravity}
 
@@ -681,7 +766,7 @@ Then we find that the radius behaves as
   r \sim \prn{\frac{\sic\tc}{\rc}}\frac{d-2}{\tloc-\tc}, 
 \end{equation}
 %
-where the combination $\frac{\sic\tc}{\rc}$ id precisely what was determined in \cite{Aharony:2005bm}.
+where the combination $\frac{\sic\tc}{\rc}$ is precisely what was determined in \cite{Aharony:2005bm}.
 Thus we know both the location of a pole in the radius function and its residue.
 
 
