@@ -19,69 +19,18 @@
 \documentclass[12pt]{article}
 % Preamble:
 \usepackage{a4wide}
-\usepackage[centertags]{amsmath}
-\usepackage{amssymb}
-\usepackage[sort&compress,numbers]{natbib}
-%\usepackage{citeB}
-\usepackage{ifpdf}
-\usepackage{graphicx}
-%\usepackage{graphics} for finding documentation only
-%\usepackage{xcolor}
-%\usepackage{pgf}
-\ifpdf
-\usepackage[pdftex,bookmarks]{hyperref}
-\else
-\usepackage[hypertex]{hyperref}
-\DeclareGraphicsRule{.png}{eps}{.bb}{}
-\fi
-%
-% >> Only for drafts! <<
-\usepackage[notref,notcite]{showkeys}
-% ----------------------------------------------------------------
-\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
-\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
-%\numberwithin{equation}{section}
-%\renewcommand{\baselinestretch}{1.5}
-% ----------------------------------------------------------------
-\usepackage{amsthm}
-\newtheoremstyle{sldefinition}%
-  {3pt}%space above
-  {3pt}%space below
-  {}%body font
-  {}%indent amount
-  {\bfseries}%theorem head font
-  {}%theorem head punctuation
-  {\newline}%space after head
-  {\thmname{#1}\thmnumber{ #2}:{\bfseries\thmnote{ #3}}}%head spec
-\newtheoremstyle{slplain}%
-  {3pt}%space above
-  {3pt}%space below
-  {}%body font
-  {}%indent amount
-  {\bfseries}%theorem head font
-  {}%theorem head punctuation
-  {\newline}%space after head
-  {\thmname{#1}\thmnumber{ #2}{\bfseries\thmnote{ (#3)}}: }%head spec
-%
-\theoremstyle{slplain}
-\newtheorem{thm}{Theorem}
-%
-\theoremstyle{sldefinition}
-\newtheorem{defn}{Definition}
-%
-\theoremstyle{remark}
-\newtheorem*{notn}{Notation}
-\newtheorem*{rem}{Remark}
+\usepackage[theorem,draft]{sl-preamble}
 % ----------------------------------------------------------------
 % New commands etc.
-\input{mydefs.tex}
-\input{newsymb.tex}
 \DeclareMathOperator{\ETC}{ETC}
 \newcommand{\tj}{\widetilde{J}}
 \newcommand{\hz}{\widehat{\Gamma}}
 \newcommand{\hhz}{\widehat{\overline{\Gamma}}}
 \newcommand{\hw}{\widehat{W}}
 \newcommand{\hhw}{\widehat{\overline{W}}}
+\newcommand{\p}{\partial}
+\newcommand{\contd}[1][=]{\phantom{#1}\mathord{}}
+\newcommand{\ds}{\dr s}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title info:
@@ -90,22 +39,17 @@
 % Author List:
 %
 \author{Subhaneil Lahiri
-\\
+% \\
 %
 % Addresses:
 %
-\small{\emph{Harvard University}}
+% \small{\emph{Harvard University}}
 %
 }
 
 \begin{document}
 
 \maketitle
-
-%% Preprint numbers, etc.
-%\preprintno{8cm}{6cm}{
-%    \texttt{arXiv:yymm.nnnn [hep-th]}
-%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -128,7 +72,7 @@ In this note we will look at responses, $r(t)$, that are \emph{functionals} of s
 \end{equation}
 %
 
-We will look at types of series expansion: the Volterra series in \sref{sec:volterra} that is analogous to the Taylor expansion for function; and the Wiener series in \sref{sec:wiener} that is analogous to the expansion in Hermite polynomials for functions.
+We will look at types of series expansion: the Volterra series in \cref{sec:volterra} that is analogous to the Taylor expansion for function; and the Wiener series in \cref{sec:wiener} that is analogous to the expansion in Hermite polynomials for functions.
 
 When constructing a set of orthogonal polynomials, one has to choose a weighting function for the integration measure:
 %
@@ -151,20 +95,30 @@ In analogy with the Hermite polynomials, we will choose
 \end{equation}
 %
 
-There is a statistical way of looking at this that is helpful when thinking about how to measure these quantities. In the case of functions, one can normalise $w(t)$ and think of it as a probability density, then we have $f \cdot g = \av{f(t)g(t)}$, where $t$ is a random variable whose probability distribution is given by $w(t)$.
+There is a statistical way of looking at this that is helpful when thinking about how to measure these quantities.
+In the case of functions, one can normalise $w(t)$ and think of it as a probability density, then we have $f \cdot g = \av{f(t)g(t)}$, where $t$ is a random variable whose probability distribution is given by $w(t)$.
 
-For functionals, we should think of the input, $s(t)$, as being a \emph{stochastic process}. The stochastic process corresponding to \eqref{eq:whitenoisemeasure} is called zero-mean, Gaussian white noise. We will discuss this in more detail in \sref{sec:whitenoise}.
+For functionals, we should think of the input, $s(t)$, as being a \emph{stochastic process}.
+The stochastic process corresponding to \eqref{eq:whitenoisemeasure} is called zero-mean, Gaussian white noise.
+We will discuss this in more detail in \cref{sec:whitenoise}.
 
-When the response function, $r(t)$, is the rate of an inhomogeneous Poisson process, it can be difficult to measure. One has to repeat the stimulus many times and count the events in various time bins. If one wishes to use small time bins, one has to repeat the stimulus more times to get enough data in each bin.
+When the response function, $r(t)$, is the rate of an inhomogeneous Poisson process, it can be difficult to measure.
+One has to repeat the stimulus many times and count the events in various time bins.
+If one wishes to use small time bins, one has to repeat the stimulus more times to get enough data in each bin.
 
-Instead, there is a simpler method where one compute averages of the \emph{stimulus} at various time shifts before each event. With this method, one never needs to determine $r(t)$. We will discuss this further in \sref{sec:poisson}.
+Instead, there is a simpler method where one compute averages of the \emph{stimulus} at various time shifts before each event.
+With this method, one never needs to determine $r(t)$.
+We will discuss this further in \cref{sec:poisson}.
 
+%--------------------------------------------------------------------------------
 
 \section{Volterrra series}\label{sec:volterra}
 
-Suppose we have a functional that is also a function of the independent variable, \eg if we have a system that responds to some time varying input, $x(t)$, in a history dependent way (\ie the system has some memory), then the response at time $t$ is a function of $t$ as well as a functional of $x(t')$. We will assume that the response is invariant under time translations, \ie $F_t[x(t')]=F_{t+T}[x(t'+T)]$.
+Suppose we have a functional that is also a function of the independent variable, \eg if we have a system that responds to some time varying input, $x(t)$, in a history dependent way (\ie the system has some memory), then the response at time $t$ is a function of $t$ as well as a functional of $x(t')$.
+We will assume that the response is invariant under time translations, \ie $F_t[x(t')]=F_{t+T}[x(t'+T)]$.
 
-The Volterra series is a way of expanding such a functional in powers of the input. It is analogous to the Taylor series expansion of a function.
+The Volterra series is a way of expanding such a functional in powers of the input.
+It is analogous to the Taylor series expansion of a function.
 
 \begin{defn}[Volterra functional]
   A Volterra functional of degree $p$ is one of the form:
@@ -173,9 +127,9 @@ The Volterra series is a way of expanding such a functional in powers of the inp
     V\rp{p}_t[x] = \prod_{i=1}^p \int\!\dr t_i\,  v(t_1,\ldots,t_p) \prod_{i=1}^p x(t-t_i).
   \end{equation}
   %
-  Without loss of generality, we may assume that the function $v(t_1,\ldots,t_p)$ is symmetric under interchange of any of its arguments. It is causal if $v$ vanishes whenever any of its arguments is negative.
+  Without loss of generality, we may assume that the function $v(t_1,\ldots,t_p)$ is symmetric under interchange of any of its arguments.
+  It is causal if $v$ vanishes whenever any of its arguments is negative.
 \end{defn}
-
 
 \begin{defn}[Volterra series]
   A Volterra series of degree $n$ is a sum of Volterra functionals of degree less than or equal to $n$:
@@ -192,10 +146,11 @@ The Volterra series is a way of expanding such a functional in powers of the inp
 \end{defn}
 
 \begin{thm}[Determination of Volterra kernels]
-  Suppose we are given some functional, $F_t[x]$, and we want to express it as a Volterra sreies. The Volterra kernels that we would use are given by
+  Suppose we are given some functional, $F_t[x]$, and we want to express it as a Volterra sreies.
+  The Volterra kernels that we would use are given by
   %
   \begin{equation}\label{eq:volkern}
-    f_p(t_1,\ldots,t_p) = \frac{1}{p!}\, \frac{\delta^p F_t[0]}{\delta x(t-t_1) \ldots \delta x(t-t_p)}.
+    f_p(t_1,\ldots,t_p) = \frac{1}{p!}\, \fdf[p]{F_t[0]}{x(t-t_1);...;x(t-t_p)}.
   \end{equation}
   %
 \end{thm}
@@ -203,11 +158,14 @@ The Volterra series is a way of expanding such a functional in powers of the inp
   Substitute \eqref{eq:volser} into \eqref{eq:volkern} and see what you get.
 \end{proof}
 
-The Volterra expansion is only valid for inputs close to zero if all the functional derivatives in \eqref{eq:volkern} exist, similar to how a Taylor series can only be used for analytic functions. In addition, the Taylor series is only valid inside the radius of convergence, which is equal to the distance to the nearest non-analyticity. This is one of the reasons why orthogonal function expansions are often better than Taylor series: in return for demanding a weaker form of convergence, the class of functions that can be represented is larger.
+The Volterra expansion is only valid for inputs close to zero if all the functional derivatives in \eqref{eq:volkern} exist, similar to how a Taylor series can only be used for analytic functions.
+In addition, the Taylor series is only valid inside the radius of convergence, which is equal to the distance to the nearest non-analyticity.
+This is one of the reasons why orthogonal function expansions are often better than Taylor series: in return for demanding a weaker form of convergence, the class of functions that can be represented is larger.
 
 
 \begin{rem}[impulse response]
-  The experimental analogue of \eqref{eq:volkern} involves measuring the response to a series of impulses. Let
+  The experimental analogue of \eqref{eq:volkern} involves measuring the response to a series of impulses.
+  Let
   %
   \begin{equation}\label{eq:imulses}
   \begin{aligned}
@@ -216,23 +174,26 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   \end{aligned}
   \end{equation}
   %
-  where $\vec{t}$ represents $(t_1,\ldots,t_p)$, etc. Then one can determine the Volterra kernels via
+  where $\vec{t}$ represents $(t_1,\ldots,t_p)$, etc.
+  Then one can determine the Volterra kernels via
   %
   \begin{equation}\label{eq:impkern}
-    f_p(t-t_1,\ldots,t-t_p) = \frac{1}{p!}\, \frac{\p^p F(t;\vec{t},\vec{0})}{\p\epsilon_1\ldots\p\epsilon_p}.
+    f_p(t-t_1,\ldots,t-t_p) = \frac{1}{p!}\, \pdiff[p]{F(t;\vec{t},\vec{0})}{\epsilon_1;...;\epsilon_p}.
   \end{equation}
   %
   However, one has to perform this experiment several times, varying $\vec{\epsilon}$ and $\vec{t}$, in order to determine one of the Volterra kernels.
 \end{rem}
 
 
+%--------------------------------------------------------------------------------
+
 \section{Gaussian white noise}\label{sec:whitenoise}
 
 \begin{defn}[Stationary process]
-  A stochastic process, $x(t)$ is said to be stationary if
+  A stochastic process, $z(t)$ is said to be stationary if
   %
   \begin{equation}\label{eq:statproc}
-    \av{x(t_1)x(t_2) \ldots x(t_n)} = \av{x(t_1+\tau)x(t_2+\tau) \ldots x(t_n+\tau)}
+    \av{z(t_1)z(t_2) \ldots z(t_n)} = \av{z(t_1+\tau)z(t_2+\tau) \ldots z(t_n+\tau)}
     \qquad \forall n,t_i,\tau
   \end{equation}
   %
@@ -242,16 +203,19 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
   A stochastic process is said to be Gaussian if
   %
   \begin{equation}\label{eq:gaussproc}
-    \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{\ir\!\intd{t} [J(t)\mu(t)] - \frac{1}{2}\intd{t\dr t'} [J(t)J(t')\phi(t,t')]}.
+    \av{\e^{\ir\!\intd{t} [J(t) z(t)]}}
+      = \e^{\ir\!\intd{t} [J(t)\mu(t)] - \frac{1}{2}\intd{t\dr t'} [J(t)J(t')\phi(t,t')]}.
   \end{equation}
   %
   This means that all correlation functions can be expressed in terms of the connected one and two-point functions, \eg
   %
   \begin{equation}\label{eq:gaussmom}
     \begin{aligned}
-      \av{x(t_1)} &= \mu(t_1), \\
-      \av{x(t_1)x(t_2)}  &= \mu(t_1)\mu(t_2) + \phi(t_1,t_2), \\
-      \av{x(t_1)x(t_2)x(t_3)}  &= \mu(t_1)\mu(t_2)\mu(t_3) + \phi(t_1,t_2)\mu(t_3) + \phi(t_1,t_3)\mu(t_2) + \phi(t_2,t_3)\mu(t_1).
+      \av{z(t_1)} &= \mu(t_1), \\
+      \av{z(t_1)z(t_2)} &= \mu(t_1)\mu(t_2) + \phi(t_1,t_2), \\
+      \av{z(t_1)z(t_2)z(t_3)}
+        &= \mu(t_1)\mu(t_2)\mu(t_3) + \phi(t_1,t_2)\mu(t_3)
+            + \phi(t_1,t_3)\mu(t_2) + \phi(t_2,t_3)\mu(t_1).
     \end{aligned}
   \end{equation}
   %
@@ -264,7 +228,7 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
     \end{aligned}
   \end{equation}
   %
-  The Fourier transform of $\phi(t)$, $\tilde{\phi}(\omega)$, is called the \textbf{power density spectrum} of $x(t)$.
+  The Fourier transform of $\phi(t)$, $\tilde{\phi}(\omega)$, is called the \textbf{power density spectrum} of $z(t)$.
 \end{defn}
 
 \begin{defn}[Gaussian white noise]
@@ -275,42 +239,50 @@ The Volterra expansion is only valid for inputs close to zero if all the functio
     \tilde{\phi}(\omega) = \sigma^2.
   \end{equation}
   %
-  \ie the power density spectrum is the same for all frequencies. In practice, one can only have white noise up to some high frequency cut-off.
+  \ie the power density spectrum is the same for all frequencies.
+  In practice, one can only have white noise up to some high frequency cut-off.
 \end{defn}
 
 Most of the time, we will be dealing with zero-mean gaussian white noise, \ie
 %
 \begin{equation}\label{eq:zeromeanwhite}
   \mu=0, \qquad
-  \av{\e^{\ir\!\intd{t} [J(t) x(t)]}} = \e^{-\frac{\sigma^2}{2}\!\intd{t} [J(t)]^2}.
+  \av{\e^{\ir\!\intd{t} [J(t) z(t)]}} = \e^{-\frac{\sigma^2}{2}\!\intd{t} [J(t)]^2}.
 \end{equation}
 %
 
+
+%--------------------------------------------------------------------------------
 
 \section{Wiener series}\label{sec:wiener}
 
-The Wiener series is an alternative series expansion of a response functional (the type described at the beginning of \sref{sec:volterra}) that is analogous to an expansion of a function as a series of orthogonal functions. For this, we need to define an inner product for functionals:
+The Wiener series is an alternative series expansion of a response functional (the type described at the beginning of \cref{sec:volterra}) that is analogous to an expansion of a function as a series of orthogonal functions.
+For this, we need to define an inner product for functionals:
 %
 \begin{equation}\label{eq:innerfunc}
-  F \cdot G = \av{F_t[x]G_t[x]} \propto \int\!\CD x \brc{F_t[x]G_t[x]\,\e^{-\intd{t}\brk{\frac{x(t)^2}{2\sigma^2}}}},
+  F \cdot G = \av{F_t[z]G_t[z]}
+    \propto \int\!\CD z \brc{F_t[z]G_t[z]\,\e^{-\intd{t}\brk{\frac{z(t)^2}{2\sigma^2}}}},
 \end{equation}
 %
-\ie $x(t)$ is zero mean Gaussian white noise with power $\sigma^2$.
+\ie $z(t)$ is zero mean Gaussian white noise with power $\sigma^2$.
 
 \begin{defn}[Wiener functional]
   A Wiener functional of degree $p$ is a Volterra series of degree $p$ that is orthogonal to all Volterra functionals of degree less than $p$.
 \end{defn}
 
-Once the $p^{\text{th}}$ Volterra kernel of a degree $p$ Wiener functional has been specified, all the lower order Volterra kernels are determined. We will use the notation $G\rp{p}_t[k;x]$ for a degree $p$ Wiener functional whose $p^{\text{th}}$ Volterra kernel is $k$, at time $t$ with input $x$. \eg \cite[ch.12]{schetzen:1980}:
+Once the $p^{\text{th}}$ Volterra kernel of a degree $p$ Wiener functional has been specified, all the lower order Volterra kernels are determined.
+We will use the notation $G\rp{p}_t[k;x]$ for a degree $p$ Wiener functional whose $p^{\text{th}}$ Volterra kernel is $k$, at time $t$ with input $x$.
+\eg \cite[ch.2]{schetzen:1980}:
 %
 \begin{equation}\label{eq:wienerex}
   \begin{aligned}
-    G\rp{0}_t[k;x] =& k, \\
-    G\rp{1}_t[k;x] =& \intd{t_1}k(t_1)\,x(t-t_1), \\
-    G\rp{2}_t[k;x] =& \intd{t_1\dr t_2} k(t_1,t_2)\,x(t-t_1)\,x(t-t_2)
+    G\rp{0}_t[k;x] &= k, \\
+    G\rp{1}_t[k;x] &= \intd{t_1}k(t_1)\,x(t-t_1), \\
+    G\rp{2}_t[k;x] &= \intd{t_1\dr t_2} k(t_1,t_2)\,x(t-t_1)\,x(t-t_2)
                      -\sigma^2\intd{t_1}k(t_1,t_1), \\
-    G\rp{3}_t[k;x] =& \intd{t_1\dr t_2\dr t_3} k(t_1,t_2,t_3)\,x(t-t_1)\,x(t-t_2)\,x(t-t_3)\\
-                     &-3\sigma^2\intd{t_1\dr t_2} k(t_1,t_2,t_2)\,x(t-t_1).
+    G\rp{3}_t[k;x] &= \intd{t_1\dr t_2\dr t_3} k(t_1,t_2,t_3)\,x(t-t_1)\,x(t-t_2)\,x(t-t_3)\\
+                  &\contd
+                  - 3\sigma^2\intd{t_1\dr t_2} k(t_1,t_2,t_2)\,x(t-t_1).
   \end{aligned}
 \end{equation}
 %
@@ -346,98 +318,165 @@ A particularly useful set of Wiener functionals are:
 %
 \begin{equation}\label{eq:wienerdelta}
   \begin{aligned}
-    D\rp{p}_{t,\vec{\tau}}[x] =& \, G\rp{p}_t[\delta\rp{p}_{\vec{\tau}};x], \\ \text{where}\quad
-    \delta\rp{p}_{\vec{\tau}}(t_1,\ldots,t_p) =& \, \frac{1}{p!}\,\sum_{\pi\in S_p} \prod_{i=1}^p \delta(t_i-\tau_{\pi(i)}),
+    D\rp{p}_{t,\vec{\tau}}[x] &= \, G\rp{p}_t[\delta\rp{p}_{\vec{\tau}};x], \\ \text{where}\quad
+    \delta\rp{p}_{\vec{\tau}}(t_1,\ldots,t_p) &= \, \frac{1}{p!}\,\sum_{\pi\in S_p} \prod_{i=1}^p \delta(t_i-\tau_{\pi(i)}),
   \end{aligned}
 \end{equation}
 %
 where $S_p$ is the group of permutations of $p$ objects.
-\eg
+For example
 %
 \begin{equation}\label{eq:wienerdeltaex}
   \begin{aligned}
-    D\rp{0}_{t,\vec{\tau}} =&\, 1, \\
-    D\rp{1}_{t,\vec{\tau}} =&\, x(t-\tau_1), \\
-    D\rp{2}_{t,\vec{\tau}} =&\, x(t-\tau_1)\,x(t-\tau_2) - \sigma^2\delta(\tau_1-\tau_2), \\
-    D\rp{3}_{t,\vec{\tau}} =&\, x(t-\tau_1)\,x(t-\tau_2)\,x(t-\tau_3) \\& - \sigma^2 [\delta(\tau_1-\tau_2)\,x(t-\tau_3) + \delta(\tau_1-\tau_3)\,x(t-\tau_2) + \delta(\tau_2-\tau_3)\,x(t-\tau_1) ]. \\
-    D\rp{4}_{t,\vec{\tau}} =&\, x(t-\tau_1)\,x(t-\tau_2)\,x(t-\tau_3)\,x(t-\tau_4) \\& - \sigma^2 [\delta(\tau_1-\tau_2)\,x(t-\tau_3)\,x(t-\tau_4) + \delta(\tau_1-\tau_3)\,x(t-\tau_2)\,x(t-\tau_4) \\&\quad + \delta(\tau_2-\tau_3)\,x(t-\tau_1)\,x(t-\tau_4) + \delta(\tau_1-\tau_4)\,x(t-\tau_2)\,x(t-\tau_3) \\&\quad + \delta(\tau_2-\tau_4)\,x(t-\tau_1)\,x(t-\tau_3) +     \delta(\tau_3-\tau_4)\,x(t-\tau_1)\,x(t-\tau_2) ] \\& + \sigma^4 [ \delta(\tau_1-\tau_2)\,\delta(\tau_3-\tau_4) + \delta(\tau_1-\tau_3)\,\delta(\tau_2-\tau_4) + \delta(\tau_1-\tau_4)\,\delta(\tau_2-\tau_3) ].
+    D\rp{0}_{t,\vec{\tau}}[x] &= 1, \\
+    D\rp{1}_{t,\vec{\tau}}[x] &= x(t-\tau_1), \\
+    D\rp{2}_{t,\vec{\tau}}[x]
+      &= x(t-\tau_1)\,x(t-\tau_2) - \sigma^2\delta(\tau_1-\tau_2), \\
+    D\rp{3}_{t,\vec{\tau}}[x]
+      &= x(t-\tau_1)\,x(t-\tau_2)\,x(t-\tau_3) \\
+      &\contd - \sigma^2 [\delta(\tau_1-\tau_2)\,x(t-\tau_3)
+        + \delta(\tau_1-\tau_3)\,x(t-\tau_2)
+        + \delta(\tau_2-\tau_3)\,x(t-\tau_1) ]. \\
+    D\rp{4}_{t,\vec{\tau}}[x]
+      &= x(t-\tau_1)\,x(t-\tau_2)\,x(t-\tau_3)\,x(t-\tau_4) \\
+      &\contd
+        - \sigma^2 [\delta(\tau_1-\tau_2)\,x(t-\tau_3)\,x(t-\tau_4)
+        + \delta(\tau_1-\tau_3)\,x(t-\tau_2)\,x(t-\tau_4) \\
+      &\contd[=-\sigma^2[]
+        + \delta(\tau_2-\tau_3)\,x(t-\tau_1)\,x(t-\tau_4)
+        + \delta(\tau_1-\tau_4)\,x(t-\tau_2)\,x(t-\tau_3) \\
+      &\contd[=-\sigma^2[]
+        + \delta(\tau_2-\tau_4)\,x(t-\tau_1)\,x(t-\tau_3)
+        +     \delta(\tau_3-\tau_4)\,x(t-\tau_1)\,x(t-\tau_2) ] \\
+      &\contd
+        + \sigma^4 [ \delta(\tau_1-\tau_2)\,\delta(\tau_3-\tau_4)
+        + \delta(\tau_1-\tau_3)\,\delta(\tau_2-\tau_4)
+        + \delta(\tau_1-\tau_4)\,\delta(\tau_2-\tau_3) ].
   \end{aligned}
 \end{equation}
 %
-In general:
-%
-\begin{equation}\label{eq:wienerdeltagen}
-  D\rp{p}_{t,\vec{\tau}}[x] = \exp\prn{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{x(u)^2}} \prod_{i=1}^p x(t-\tau_i).
-\end{equation}
+\begin{rem}
+  In general:
+  %
+  \begin{equation}\label{eq:wienerdeltagen}
+    D\rp{p}_{t,\vec{\tau}}[x] = \exp\prn{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{x(u)^2}}
+        \prod_{i=1}^p x(t-\tau_i).
+  \end{equation}
+  %
+\end{rem}
 %
 \begin{proof}
-  It's not difficult to see that the highest degree terms in \eqref{eq:wienerdelta} and \eqref{eq:wienerdeltagen} agree. Therefore we only need to show that it is orthogonal to all lower degree Volterra functionals. In fact, it suffices to show that it is orthogonal to $\prod_{i=1}^q x(t-s_i)$ for $q<p$, as these form a basis for the Volterra functionals.
+  It's not difficult to see that the highest degree terms in \eqref{eq:wienerdelta} and \eqref{eq:wienerdeltagen} agree.
+  Therefore we only need to show that it is orthogonal to all lower degree Volterra functionals.
+  In fact, it suffices to show that it is orthogonal to $\prod_{i=1}^q x(t-s_i)$ for $q<p$, as these form a basis for the Volterra functionals.
   %
   \begin{equation}\label{eq:wienerdeltavol}
-    \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{x(u)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{k=1}^q x(t-s_k)} = 0 \quad \forall q<p.
+    \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{z(u)^2}}
+             \prn{\prod_{i=1}^p z(t-\tau_i)}}
+        \prod_{k=1}^q z(t-s_k)} = 0 \quad \forall q<p.
   \end{equation}
   %
   We can construct a generating function for the left hand side:
   %
   \begin{equation}\label{eq:wienerdeltavolgen}
     \begin{aligned}
-      Z[J,j] &= \brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{x(u)^2}} \e^{\ir\!\intd{v} [J(v) x(t-v)]}} \e^{\ir\!\intd{s} [j(s) x(t-s)]},\\
-      \frac{(-\ir)^{p+q}\delta^{p+q}Z[0,0]}{\delta J(\tau_1)\ldots\delta J(\tau_p) \delta j(s_1)\ldots\delta j(s_q)}  &= \brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{^2}{x(u)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{k=1}^q x(t-s_k).
+      Z[J,j;x] &= \brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{}{x(u),2}}
+                     \prn{\e^{\ir\!\intd{v} [J(v) x(t-v)]}}}
+                \e^{\ir\!\intd{s} [j(s) x(t-s)]},\\
+      \frac{(-\ir)^{p+q}\delta^{p+q}Z[0,0;x]}
+           {\delta J(\tau_1) \cdots \delta J(\tau_p) \delta j(s_1) \cdots \delta j(s_q)}
+           &= \brk{\e^{-\frac{\sigma^2}{2}\intd{u}\fdf{}{x(u),2}}
+                  \prn{\prod_{i=1}^p x(t-\tau_i)}}
+              \prod_{k=1}^q x(t-s_k).
     \end{aligned}
   \end{equation}
   %
   Using \eqref{eq:zeromeanwhite},
   %
   \begin{equation*}
-    \begin{aligned}
-      Z[J,j] &= \e^{\frac{\sigma^2}{2}\!\intd{u} [J(u)]^2} \e^{\ir\!\intd{s} [J(t-s)+j(t-s)] x(s)}, \\
-       \av{Z[J,j]} &= \e^{-\frac{\sigma^2}{2}\intd{s} j(s)[j(s)+2J(s)]},\\
-       \frac{(-\ir)^{p}\delta^{p}\av{Z[0,0]}}{\delta J(\tau_1)\ldots\delta J(\tau_p)}  &= (\ir\sigma^2)^p \prn{\prod_{i=1}^p j(\tau_i)}\e^{-\frac{\sigma^2}{2}\intd{s} [j(s)]^2}.
-    \end{aligned}
+  \begin{aligned}
+    Z[J,j;x] &= \e^{\frac{\sigma^2}{2}\!\intd{u} [J(u)]^2}
+                \e^{\ir\!\intd{s} [J(t-s)+j(t-s)] x(s)}, \\
+    \av{Z[J,j;z]} &= \e^{-\frac{\sigma^2}{2}\intd{s} j(s)[j(s)+2J(s)]},\\
+    \frac{(-\ir)^{p}\delta^{p}\av{Z[0,j;z]}}
+         {\delta J(\tau_1) \cdots \delta J(\tau_p)}
+      &= (\ir\sigma^2)^p \prn{\prod_{i=1}^p j(\tau_i)}
+          \e^{-\frac{\sigma^2}{2}\intd{s} [j(s)]^2}.
+  \end{aligned}
   \end{equation*}
   %
-  Therefore, if we take the functional derivative with respect to $j(s_j)$ $q$ times, with $q<p$, we will still have some of the factors of $j(\tau_i)$ left in front. When we set $j(s)=0$ after that, we will get zero, \ie
+  Therefore, if we take the functional derivative with respect to $j(s_j)$ $q$ times, with $q<p$, we will still have some of the factors of $j(\tau_i)$ left in front.
+  When we set $j(s)=0$ after that, we will get zero, \ie
   %
   \begin{equation*}
   \begin{aligned}
-    \frac{(-\ir)^{p+q}\delta^{p+q}\av{Z[0,0]}}{\delta J(\tau_1)\ldots\delta J(\tau_p) \delta j(s_1)\ldots\delta j(s_q)}  &= \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{^2}{x(\tau)^2}} \prod_{i=1}^p x(t-\tau_i)}\prod_{k=1}^q x(t-s_k)}\\ &= 0 \quad \forall q<p.
+    \frac{(-\ir)^{p+q}\delta^{p+q}\av{Z[0,0;z]}}
+         {\delta J(\tau_1) \cdots \delta J(\tau_p) \delta j(s_1) \cdots \delta j(s_q)}
+         &= \av{\brk{\e^{-\frac{\sigma^2}{2}\intd{\tau}\fdf{}{z(\tau),2}}
+                      \prn{\prod_{i=1}^p z(t-\tau_i)}}
+            \prod_{k=1}^q z(t-s_k)}\\ &= 0 \quad \forall q<p.
   \end{aligned}
   \end{equation*}
   %
 \end{proof}
 
+Note that this also gives us a generating function for the \( D\rp{p}_{t,\vec{\tau}}[x] \):
+%
+\begin{equation*}
+\begin{aligned}
+  \Delta_t[J;x] &= \e^{-\frac{\sigma^2}{2}\intd{u}\fdf{}{x(u),2}}
+        \prn{ \e^{\ir\!\intd{s} J(s) x(t-s)} }
+    = \e^{\intd{s}\brk{ \ir J(s) x(t-s) + \frac{\sigma^2}{2} J(s)^2}  }, \\
+  D\rp{p}_{t,\vec{\tau}}[x]
+    &= (-\ir)^p \fdf[p]{ \Delta_t[0;x] }{J(\tau_1);...;J(\tau_p)}.
+\end{aligned}
+\end{equation*}
+%
+
 Using \eqref{eq:wienerinner}, we have
 %
 \begin{equation}\label{eq:wienerkern}
-  \av{F_t[x] D\rp{p}_{t,\vec{\tau}}[x]} = p!\,\sigma^{2p}\,k_p(\tau_1,\ldots,\tau_p),
+  \av{F_t[z] D\rp{p}_{t,\vec{\tau}}[z]} = p!\,\sigma^{2p}\,k_p(\tau_1,\ldots,\tau_p),
 \end{equation}
 %
-where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$. This formula can be used to determine the kernels to use if we want to represent a functional as a Wiener series. One can show that this choice is optimal, in a least squares sense \cite[\S15.2]{schetzen:1980}. Note that the kernels depend on the choice of $\sigma^2$, which should not be a surprise, as the Wiener functionals themselves depend on it.
+where $k_p$ is the $p^{\text{th}}$ Wiener kernel of $F_t$.
+This formula can be used to determine the kernels to use if we want to represent a functional as a Wiener series.
+One can show that this choice is optimal, in a least squares sense \cite[\S15.]{schetzen:1980}.
+Note that the kernels depend on the choice of $\sigma^2$, which should not be a surprise, as the Wiener functionals themselves depend on it.
 
 If you are worried by the presence of delta functions in \eqref{eq:wienerdelta}, note the alternative expression \cite{Lee1965}:
 %
 \begin{equation}\label{eq:wieneralt}
-  \av{\prn{ F_t[x] - \sum_{q=0}^{p-1} G_t\rp{p}[k_q;x]} \prod_{i=1}^p x(t-\tau_i) } = p!\,\sigma^{2p}\,k_p(\tau_1,\ldots,\tau_p).
+  \av{\prn{ F_t[z] - \sum_{q=0}^{p-1} G_t\rp{p}[k_q;z]} \prod_{i=1}^p z(t-\tau_i) } 
+    = p!\,\sigma^{2p}\,k_p(\tau_1,\ldots,\tau_p).
 \end{equation}
 %
-This formula agrees with \eqref{eq:wienerkern} because $\av{x(s)x(t)}=\delta(s-t)$. In a practical situation, delta functions cannot be realised, but we see that one should simply replace the delta functions in \eqref{eq:wienerdelta} with the actual autocorrelation function of the stimulus.
+This formula agrees with \eqref{eq:wienerkern} because $\av{z(s)z(t)}=\delta(s-t)$.
+In a practical situation, delta functions cannot be realised.
+But we see that one should simply replace the delta functions in \eqref{eq:wienerdelta} with the actual autocorrelation function of the stimulus.
+
+%--------------------------------------------------------------------------------
 
 \subsection{Estimators}\label{sec:wienerest}
 
 There are several sources of error in estimating the response functions in an experiment, e.g.:
 \begin{itemize}
-  \item finite sample size,
+  \item finite size sample of white noise,
+  \item discrete time steps,
   \item non-whiteness of stimulus (perfectly white noise is an idealisation requiring infinite power and temporal resolution),
   \item non-gaussianity of the stimulus (truly gaussian quantities can go to $\pm\infty$),
   \item noise in measurements of response and stimulus.
 \end{itemize}
-We will concentrate on the first of these for now. A great deal of discussion of the practical issues of using these methods can be found in \cite{Marmerelis:1978}.
+We will concentrate on the first of these for now.
+A great deal of discussion of the practical issues of using these methods can be found in \cite{Marmerelis:1978}.
 
-Suppose we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$. Say we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we record the response $F_t[x]$ at least for the time period $0 \leq t \leq T$. The obvious choice of estimator is
+Suppose we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$.
+Say we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we record the response $F_t[z]$ at least for the time period $0 \leq t \leq T$.
+The obvious choice of estimator is
 %
 \begin{equation}\label{eq:wienerest}
   \begin{aligned}
-    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd[_0^T\!\!]{t} F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x] .
+    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd[_0^T\!\!]{t} F_t[z] D\rp{p}_{t_i,\vec{\tau}}[z] .
   \end{aligned}
 \end{equation}
 %
@@ -445,22 +484,30 @@ It is trivial to show that this estimator is unbiased
 %
 \begin{equation}\label{eq:wienerestbias}
   \begin{aligned}
-    \hat{k}_p(\tau_1,\ldots,\tau_n) &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} \av{F_t[x] D\rp{p}_{t_i,\vec{\tau}}[x]}
-      &= \frac{1}{T}\intd{t}k_p(\tau_1,\ldots,\tau_p) \\
+    \hat{k}_p(\tau_1,\ldots,\tau_n)
+      &= \frac{1}{p!\,\sigma^{2p}\,T} \, \intd{t} \av{F_t[z] D\rp{p}_{t_i,\vec{\tau}}[z]}
+      = \frac{1}{T}\intd{t}k_p(\tau_1,\ldots,\tau_p) \\
       &= k_p(\tau_1,\ldots,\tau_p).
   \end{aligned}
 \end{equation}
 %
-It is much harder to show that this is consistent. First we define some generating functionals:
+It is much harder to show that this is consistent.
+Rather than show this term by term in the Wiener series, we can create generating functionals.
+If we prove consistency for the generating functions, it will automatically hold for each term.
+We define the generating functionals as:
 %
 \begin{equation}\label{eq:wienergen}
   \begin{aligned}
-    \Gamma[J] &= \av{F_t[x(t')] \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}},  \\
-    W[J] &= \av{F_t[x(t')] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{x(v)^2}} \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}}
-     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  \\
-    \hz[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}},  \\
-    \hw[J] &= \frac{1}{T}\intd{t} \brk{F_t[x(t')] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{x(v)^2}} \e^{\frac{\ir}{\sigma^2} \intd{u} x(t-u)J(u)}}
-     = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],
+    \Gamma[J] &= \av{F_t[z] \e^{\frac{\ir}{\sigma^2} \intd{u} z(t-u)J(u)}},  \\
+    W[J] &= \av{F_t[z] \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{z(v)^2}}
+            \e^{\frac{\ir}{\sigma^2} \intd{u} z(t-u)J(u)}}
+      = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \Gamma[J],  \\
+    \hz[J;z] &= \frac{1}{T}\intd{t} \brk{F_t[z]
+                \e^{\frac{\ir}{\sigma^2} \intd{u} z(t-u)J(u)}},  \\
+    \hw[J;z] &= \frac{1}{T}\intd{t} \brk{F_t[z]
+                \e^{-\frac{\sigma^2}{2} \intd{v}\fdf{^2}{z(v)^2}}
+                \e^{\frac{\ir}{\sigma^2} \intd{u} z(t-u)J(u)}}
+      = \e^{\frac{1}{2\sigma^2} \intd{v}J(v)^2} \hz[J],
   \end{aligned}
 \end{equation}
 %
@@ -468,18 +515,20 @@ then
 %
 \begin{equation}\label{eq:wienergendiff}
   \begin{aligned}
-     k_p(\tau_1,\ldots,\tau_p) &= \frac{(-\ir)^{p}}{p!} \fdf{^p W[J]}{J(\tau_1)\ldots\delta J(\tau_p)}, \\
-     \hat{k}_p(\tau_1,\ldots,\tau_p) &= \frac{(-\ir)^{p}}{p!} \fdf{^p \hw[J]}{J(\tau_1)\ldots\delta J(\tau_p)}.
+    k_p(\tau_1,\ldots,\tau_p)
+        &= \frac{(-\ir)^{p}}{p!} \fdf[p]{W[J]}{J(\tau_1);...; J(\tau_p)}, \\
+    \hat{k}_p(\tau_1,\ldots,\tau_p)
+        &= \frac{(-\ir)^{p}}{p!} \fdf[p]{\hw[J;z]}{J(\tau_1);...;J(\tau_p)}.
   \end{aligned}
 \end{equation}
 %
-As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
+As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J;z]}=W[J]$.
 
 \begin{thm}[Consistency of estimators \eqref{eq:wienerest}]
   The covariance of the estimators \eqref{eq:wienerest} vanishes as the sample size goes to infinity:
   %
   \begin{equation}\label{eq:wienercons}
-    \lim_{T\to\infty} \cov\prn{ \hw[J], \hw[\tj] } = 0.
+    \lim_{T\to\infty} \cov\prn{ \hw[J;z], \hw[\tj;z] } = 0.
   \end{equation}
   %
   As we have already showed that they are unbiased, this is sufficient for consistency.
@@ -489,87 +538,107 @@ As a consequence of \eqref{eq:wienerestbias}, $\av{\hw[J]}=W[J]$.
 We will need to use an identity from Sidney Coleman:
 %
 \begin{equation}\label{eq:coleman}
-  F\prn{-\ir\pdiff{}{x}} G\prn{x} = \left. G\prn{-\ir\pdiff{}{y}} F\prn{y} \e^{\ir x \cdt y} \right|_{y=0}.
+  F\prn{-\ir\pdiff{}{x}} G\prn{x}
+      = \left. G\prn{-\ir\pdiff{}{y}} F\prn{y} \e^{\ir x \cdt y} \right|_{y=0}.
 \end{equation}
 %
-It can be proved by expressing both sides in terms of the Fourier transforms of $F$ and $G$ and verifying that the integrands are equal. It holds equally well when we replace functions by functionals and partial derivatives by functional derivatives.
+It can be proved by expressing both sides in terms of the Fourier transforms of $F$ and $G$ and verifying that the integrands are equal.
+It holds equally well when we replace functions by functionals and partial derivatives by functional derivatives.
 %
 \begin{proof}
   First let's look at $\hz[J]$:
   %
   \begin{equation}\label{eq:wienergenex1}
     \begin{aligned}
-      \av{\hz[J]} =& \int\!\!\frac{\dr t}{T} \av{F_t[x(t')] \e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}}  \\
-        =& \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \av{\e^{\frac{\ir}{\sigma^2}\intd{u}x(u)J(t-u)}} \\
-        =&  \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}} \e^{-\frac{1}{2\sigma^2}\intd{u}J(t-u)^2} \\
-        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\fdf{^2}{x(v)^2}} \int\!\!\frac{\dr t}{T} F_t[x(t')] \, \e^{\frac{\ir}{\sigma^2}\intd{u}x(t-u)J(u)} \right|_{x=0}.
+      \av{\hz[J;z]}
+        &= \int\!\!\frac{\dr t}{T} \av{F_t[z(t')]
+                        \e^{\frac{\ir}{\sigma^2}\intd{u}z(u)J(t-u)}}  \\
+        &= \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}}
+                  \av{\e^{\frac{\ir}{\sigma^2}\intd{u}z(u)J(t-u)}} \\
+        &=  \int\!\!\frac{\dr t}{T} F_t\!\brk{-\ir\sigma^2\fdf{}{J(t-t')}}
+            \e^{-\frac{1}{2\sigma^2}\intd{u}J(t-u)^2} \\
+        &= \left. \e^{\frac{\sigma^2}{2}\intd{v}\fdf{^2}{x(v)^2}}
+            \int\!\!\frac{\dr t}{T} F_t[x(t')] \,
+            \e^{\frac{\ir}{\sigma^2}\intd{u}x(t-u)J(u)} \right|_{x=0}.
     \end{aligned}
   \end{equation}
   %
+  Note that \(x\) in the last line above is a dummy function -- it is not a stochastic process like \(z\) in the first two lines.
   Using essentially the same argument:
   %
   \begin{equation}\label{eq:wienergenex2}
     \begin{aligned}
-      \av{\hz[J]\hz[\tj]}
-        =& \left. \e^{-\frac{\sigma^2}{2}\intd{v}\!\brk{\fdf{}{x(v)}+\fdf{}{y(v)}}^2} \!\!\int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
+      \av{\hz[J;z]\hz[\tj;z]}
+        &= \left. \e^{\frac{\sigma^2}{2}\intd{v}\!\brk{\fdf{}{x(v)}+\fdf{}{y(v)}}^2}
+            \!\!\int\!\!\frac{\dt \ds}{T^2} F_t[x] F_s[y]
+            \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
     \end{aligned}
   \end{equation}
   %
   Combining \eqref{eq:wienergenex1} and \eqref{eq:wienergenex2} leads to
   %
-  \begin{equation}\label{eq:wienergencov}
-    \begin{aligned}
-      \cov\prn{\hz[J],\hz[\tj]}
-        =&
-        \prn{\e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1}
-        \e^{-\frac{\sigma^2}{2} \intd{v}\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}}
-        \\& \quad\quad\quad \left.
-        \int\!\!\frac{\dr t\dr s}{T^2} F_t[x(t')] F_s[y(s')] \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
-    \end{aligned}
-  \end{equation}
+  \begin{multline}\label{eq:wienergencov}
+    \cov\prn{\hz[J],\hz[\tj]}
+      = \prn{\e^{\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1}
+          \e^{\frac{\sigma^2}{2} \intd{v}\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}} \\
+      \left. \int\!\!\frac{\dt \ds}{T^2} F_t[x] F_s[y]
+          \e^{\frac{\ir}{\sigma^2}\intd{u}[x(t-u)J(u)+y(s-u)\tj(u)]} \right|_{x=y=0}.
+  \end{multline}
   %
   Note that
   %
   \begin{equation*}
-    \intd{v}\fdf{}{x(v)}\fdf{}{y(v)}\: x(u) y(v) =
-    \frac{1}{2} \intd{v}\fdf{^2}{x(v)^2}\: x(u)x(v) =
-    \delta(u-v).
+    \intd{\tau}\fdf{}{x(\tau);y(\tau)}\: x(u) y(v)
+      = \frac{1}{2} \intd{\tau}\fdf{}{x(\tau),2}\: x(u)x(v)
+      = \delta(u-v).
   \end{equation*}
   %
-  If we look at a Volterra expansion of $F$, \eqref{eq:volser}, we see that $t$ only appears in $x(t-u_a)$ and $s$ only appears in $y(s-v_a)$. As we will set $x=y=0$ at the end, the only $s$ and $t$ dependence will come from the delta functions. Furthermore, in the delta functions resulting from $\frac{\sigma^2}{2} \intd{v}\!\!\brk{\fdf{^2}{x(v)^2}+\fdf{^2}{y(v)^2}}$, the $s$ and $t$ dependence will cancel. Because
+  If we look at Volterra expansions of $F$ and the exponential, \eqref{eq:volser}, we see that $t$ only appears in $x(t-u_a)$ and $s$ only appears in $y(s-v_a)$.
+  As we will set $x=y=0$ at the end, the only $s$ and $t$ dependence will come from the delta functions arising from the functional derivatives above.
+  Furthermore, in the delta functions resulting from $\frac{\sigma^2}{2} \intd{v}\!\!\fdf{^2}{x(v)^2}$ or $\frac{\sigma^2}{2} \intd{v}\!\!\fdf{^2}{y(v)^2}$, the $s$ and $t$ dependence will cancel -- the first will produce terms of the form \( \delta((t-u_a) - (t-u_a)) = \delta(u_b-u_a) \) and the second will produce \( \delta((s-v_a) - (s-v_a)) = \delta(v_b-v_a) \).
+  Because
   %
   \begin{equation*}
-    \e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1 =
-      \sum_{n=1}^\infty \frac{(-\sigma^2)^n}{n!} \brk{ \intd{v}\fdf{}{x(v)}\fdf{}{y(v)} }^n,
+    \e^{-\sigma^2\intd{v}\fdf{}{x(v)}\fdf{}{y(v)}}-1
+      = \sum_{n=1}^\infty \frac{(-\sigma^2)^n}{n!}
+        \brk{ \intd{v}\fdf{}{x(v)}\fdf{}{y(v)} }^n,
   \end{equation*}
   %
-  every term will have at least one delta function of the form $\delta(s-t+u_a-v_b)$. Terms with multiple delta functions of that for can be processed using
+  every term will have at least one delta function of the form $\delta(s-t+u_a-v_b)$.
+  Terms with multiple delta functions of that form can be processed using
   %
   \begin{equation*}
     \delta(s-t+u_a-v_b)\delta(s-t+u_c-v_d)\delta(s-t+u_e-v_f)\ldots
     = \delta(s-t+u_a-v_b)\delta(v_b-u_a+u_c-v_d)\delta(v_b-u_a+u_e-v_f)\ldots \,.
   \end{equation*}
   %
-  Therefore, the only $s$ and $t$ dependence will come from a single delta function of the form $\delta(s-t+u_a-v_b)$ in each term. This allows us to do the $s$ and $t$ integrals
+  Therefore, the only $s$ and $t$ dependence will come from a single delta function of the form $\delta(s-t+u_a-v_b)$ in each term.
+  This allows us to do the $s$ and $t$ integrals
   %
   \begin{equation*}
     \int\!\!\frac{\dr t\dr s}{T^2}\,\delta(s-t+u_a-v_b) = \frac{1}{T}.
   \end{equation*}
   %
-  This will be the only $T$ dependent part of the whole thing. In conclusion
+  This will be the only $T$ dependent part of the whole thing.
+  In conclusion
   %
   \begin{equation}\label{eq:wienergenconspf}
-    \cov\prn{\hw[J],\hw[\tj]} =  \e^{\frac{1}{2\sigma^2} \intd{v}[J(v)^2 + \tj(v)^2]} \cov\prn{\hz[J],\hz[\tj]}
-    \propto \frac{1}{T},
+    \cov\prn{\hw[J],\hw[\tj]}
+      = \e^{\frac{1}{2\sigma^2} \intd{v}[J(v)^2 + \tj(v)^2]} \cov\prn{\hz[J],\hz[\tj]}
+      \propto \frac{1}{T},
   \end{equation}
   %
   which implies \eqref{eq:wienercons}.
 \end{proof}
 
 
+%--------------------------------------------------------------------------------
+
 \section{Inhomogeneous Poisson processes}\label{sec:poisson}
 
-A Poisson process consists of a series of discrete events whose timing is stochastic. The probability of an event occurring at time $t$ is given by a rate function, $r(t)$, (for a homogeneous Poisson process, the rate is constant). This probability is independent of the timing of any other events, but in our model it can depend on the history of some stimulus, $s(t)$.
+A Poisson process consists of a series of discrete events whose timing is stochastic.
+The probability of an event occurring at time $t$ is given by a rate function, $r(t)$, (for a homogeneous Poisson process, the rate is constant).
+This probability is independent of the timing of any other events, but in our model it can depend on the history of some stimulus, $s(t)$.
 %
 \begin{equation}\label{eq:poissonrate}
   P(\text{event time}\in[t,t+\dr t]) = r(t)\dr t,
@@ -577,17 +646,24 @@ A Poisson process consists of a series of discrete events whose timing is stocha
   r(t) = r_t[s].
 \end{equation}
 %
-We also assume time translational invariance: $r_t[s(t')] = r_{t+T}[s(t'+T)]$. The probability of a particular event train, $\{t_1,\ldots,t_n\}$, is given by
+We also assume time translational invariance: $r_t[s(t')] = r_{t+T}[s(t'+T)]$.
+The probability of a particular event train, $\{t_1,\ldots,t_n\}$, is given by
 %
 \begin{equation}\label{eq:evtrain}
   P(t_1,\ldots,t_n)\,\dr t_1\ldots \dr t_n = \e^{-\intd{t}r(t)} \prod_{i=1}^n r(t_i)\,\dr t_i, \qquad t_1<t_2<\ldots<t_n,
 \end{equation}
 %
-where the exponential factor comes from demanding that there are no events at times other than $\{t_1,\ldots,t_n\}$. When integrating over all $\{t_1,\ldots,t_n\}$, one can ignore the restriction over the order of the $t_i$ provided one also divides by $n!$. When integrating over all possibilities, one must also sum over all possible event counts, $n$.
+where the exponential factor comes from demanding that there are no events at times other than $\{t_1,\ldots,t_n\}$.
+When integrating over all $\{t_1,\ldots,t_n\}$, one can ignore the restriction over the order of the $t_i$ provided one also divides by $n!$.
+When integrating over all possibilities, one must also sum over all possible event counts, $n$.
 
-Measuring the rate function can be difficult. If one performs $N$ repetitions with tim bins of width $\Delta t$, the uncertainty scales as $1/\sqrt{N\Delta t}$. Using small time bins will require many repetitions. We will now discuss a method of measuring the response to stimuli that circumvents the need to measure $r_t[s]$ if we wanted to use \eqref{eq:impkern} or \eqref{eq:wienerkern} directly.
+Measuring the rate function can be difficult.
+If one performs $N$ repetitions with time bins of width $\Delta t$, the uncertainty scales as $1/\sqrt{N\Delta t}$.
+Using small time bins will require many repetitions.
+We will now discuss a method of measuring the response to stimuli that circumvents the need to measure $r_t[s]$ if we wanted to use \eqref{eq:impkern} or \eqref{eq:wienerkern} directly.
 
-We are going to consider responses to stimuli that are stochastic processes themselves. As we will have two stochastic processes, the stimuli and the timing of events, it will be useful to define some notation.
+We are going to consider responses to stimuli that are stochastic processes themselves.
+As we will have two stochastic processes, the stimuli and the timing of events, it will be useful to define some notation.
 
 \begin{notn}[outcomes]
   Let $\hat{t}$, $\widehat{\{t_i\}}$ and $\hat{s}$ denote the following outcomes:
@@ -614,9 +690,13 @@ We are going to consider responses to stimuli that are stochastic processes them
   %
 \end{notn}
 
+%--------------------------------------------------------------------------------
+
 \subsection{Event-triggered correlators}\label{sec:evtrigcorr}
 
-In this section, we will discuss the theoretical concept of an event-triggered correlator, \ie the expectation values will be integrals over a probability distribution. We will postpone discussion of how to actually measure these quantities to the next section. In neuroscience, the events of interest are when a neuron fires an action potential, hence the quantity usually measured is a spike-triggered average \cite{DayanAbbot:2001,deBoerKuyper:1968}.
+In this section, we will discuss the theoretical concept of an event-triggered correlator, \ie the expectation values will be integrals over a probability distribution.
+We will postpone discussion of how to actually measure these quantities to the next section.
+In neuroscience, the events of interest are when a neuron fires an action potential, hence the quantity usually measured is a spike-triggered average \cite{DayanAbbot:2001,deBoerKuyper:1968}.
 
 \begin{defn}[Event-triggered correlator]
   The event-triggered correlator at delays $(t_1,\ldots,t_n)$ is given by
@@ -642,7 +722,8 @@ In this section, we will discuss the theoretical concept of an event-triggered c
     P(\hat{s}|\hat{t}) = \frac{P(\hat{t}|\hat{s})P(\hat{s})}{P(\hat{t})}.
   \end{equation}
   %
-  However, $P(\hat{t}|\hat{s})=r_t[s]$ and $P(\hat{t})=\int P(\hat{t}|\hat{s})P(\hat{s})\CD s = \av{r_t[s]}$. Therefore
+  However, $P(\hat{t}|\hat{s})=r_t[s]$ and $P(\hat{t})=\int P(\hat{t}|\hat{s})P(\hat{s})\CD s = \av{r_t[s]}$.
+  Therefore
   %
   \begin{equation}\label{eq:pfetcandrate}
     \begin{aligned}
@@ -654,7 +735,7 @@ In this section, we will discuss the theoretical concept of an event-triggered c
   %
 \end{proof}
 
-As these expectations are linear in the $s(t-t_i)$, we can use \eqref{eq:wienerkern}in conjunction with \eqref{eq:etcandrate} to compute the Wiener kernels of the rate:
+As these expectations are linear in the $s(t-t_i)$, we can use \eqref{eq:wienerkern} in conjunction with \eqref{eq:etcandrate} to compute the Wiener kernels of the rate:
 %
 \begin{equation}\label{eq:ratewiener}
   k_p(\tau_1,\ldots,\tau_p) = \frac{ \av{r_t[s]} \av{D\rp{p}_{t,\vec{\tau}}[s]}_{\hat{s}|\hat{t}} }{ p! \, \sigma^{2p} },
@@ -662,12 +743,15 @@ As these expectations are linear in the $s(t-t_i)$, we can use \eqref{eq:wienerk
 %
 where $s(t)$ is Gaussian white noise of power $\sigma^2$.
 
+%--------------------------------------------------------------------------------
+
 \subsection{Unbiased estimators}\label{sec:poissonest}
 
-The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability distributions that we will not know in an experimental situation. We have to estimate it from the results of an experiment.
+The expression on the right hand side of \eqref{eq:ratewiener} involves a theoretical expectation value, with respect to the true probability distributions that we will not know in an experimental situation.
+We have to estimate it from the results of an experiment.
 
-
-Suppose we are in the same situation as in \sref{sec:wienerest}: we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$, we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we see that events take place at times $(t_1,\ldots,t_n) \in [0,T]$. The obvious choice of estimator is
+Suppose we are in the same situation as in \cref{sec:wienerest}: we wish to measure a response function $k_p(\tau_1,\ldots,\tau_n)$ for $\tau_1,\ldots,\tau_n < \tau^*$, we present the system with zero-mean Gaussian white noise of power $\sigma^2$ at least over a time period $-\tau^* \leq t \leq T$, and we see that events take place at times $(t_1,\ldots,t_n) \in [0,T]$.
+The obvious choice of estimator is
 %
 \begin{equation}\label{eq:ratewienerest}
   \begin{aligned}
@@ -708,9 +792,13 @@ Suppose we are in the same situation as in \sref{sec:wienerest}: we wish to meas
 \end{proof}
 
 
+%--------------------------------------------------------------------------------
+
 \subsection{Estimator variance and consistency}\label{sec:poissonvar}
 
-In this section we will compute the variances of the estimators defined in the previous section and show that they are consistent, \ie that the variance vanishes in the limit $T\to\infty$ (we have already shown that the bias vanishes). Again, these will be theoretical variances, with respect to the true probability distributions. We will postpone the definition of estimators for the variance until the next section.
+In this section we will compute the variances of the estimators defined in the previous section and show that they are consistent, \ie that the variance vanishes in the limit $T\to\infty$ (we have already shown that the bias vanishes).
+Again, these will be theoretical variances, with respect to the true probability distributions.
+We will postpone the definition of estimators for the variance until the next section.
 
 First we define some new generating functions, in addition to those in \eqref{eq:wienergen}:
 %
@@ -739,37 +827,45 @@ The results of the previous section imply that $\av{\hhw[J]}=W[J]$.
   %
   \begin{equation*}
     \begin{aligned}
-      \av{\hhz[J]\hhz[\tj]}_{\widehat{\{t_i\}}|\hat{s}} =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \prod_ir(t_i) \sum_{jk} \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]} \\
-        =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \left\{
-         \sum_{j\neq k} \brk{\prn{\prod_{i\neq j,k} r(t_i)} r(t_j) r(t_k) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]}}
-        \right. \\&\left. \qquad\qquad\qquad\qquad
-         + \sum_{j=k} \brk{\prn{\prod_{i\neq j} r(t_i)} r(t_j) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}}
-        \right\} \\
-      =& \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \left\{
-         n(n-1) \prn{\intd{t} r(t)}^{n-2} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)]}}
-         \right.\\& \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad
-         \times \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)\tj(u)]}}
-         \\&
-         \left. \qquad\qquad\qquad
-         +  n \prn{\intd{t} r(t)}^{n-1} \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}}
-        \right\} \\
-        =& \,\hz[J]\hz[\tj] + \frac{\hz[J+\tj]}{T}.
+      \av{\hhz[J]\hhz[\tj]}_{\widehat{\{t_i\}}|\hat{s}} 
+        &= \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \prod_i r(t_i) \sum_{jk} 
+          \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]} \\
+        &= \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \intd{^nt} \left\{
+          \sum_{j\neq k} \brk{\prn{\prod_{i\neq j,k} r(t_i)} r(t_j) r(t_k) 
+          \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)+s(t_k-u)\tj(u)]}} \right. \\
+        &\left. \qquad\qquad\qquad\qquad
+          + \sum_{j=k} \brk{\prn{\prod_{i\neq j} r(t_i)} r(t_j) 
+          \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}}
+          \right\} \\
+        &= \sum_n \frac{\e^{-\intd{v}r(v)}}{n!T^2} \left\{
+          n(n-1) \prn{\intd{t} r(t)}^{n-2} \prn{\intd{t} r(t) 
+          \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)J(u)]}} \right.\\
+        & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad
+          \times \prn{\intd{t} r(t) \e^{\frac{\ir}{\sigma^2}\intd{u}[s(t_j-u)\tj(u)]}} \\
+        &\left. \qquad\qquad\qquad
+          +  n \prn{\intd{t} r(t)}^{n-1} \prn{\intd{t} r(t) 
+          \e^{\frac{\ir}{\sigma^2}\intd{u}s(t_j-u)[J(u)+\tj(u)]}} \right\} \\
+        &= \,\hz[J]\hz[\tj] + \frac{\hz[J+\tj]}{T}.
     \end{aligned}
   \end{equation*}
   %
   If we then average over stimuli, we find
   %
   \begin{equation*}
-    \cov\prn{\hhw[J],\hhw[\tj]} = \cov\prn{\hw[J]\hw[\tj]} + \frac{\e^{-\intd{v}\frac{J(v)\tj(v)}{\sigma^2}}}{T}W[J+\tj]
+    \cov\prn{\hhw[J],\hhw[\tj]} 
+      = \cov\prn{\hw[J]\hw[\tj]} + \frac{\e^{-\intd{v}\frac{J(v)\tj(v)}{\sigma^2}}}{T}W[J+\tj]
   \end{equation*}
   %
-  Given that we showed that the first term vanishes in the limit to prove Th.\ref{th:wienercons}, \eqref{eq:ratewienercons} is clearly true.
+  Given that we showed that the first term vanishes in the limit to prove \cref{th:wienercons}, \eqref{eq:ratewienercons} is clearly true.
 \end{proof}
 
 
+%--------------------------------------------------------------------------------
+
 \subsection{Standard error}\label{sec:poissonstderr}
 
-In this section we will define estimators for the variances computed in the previous section. These will allow us to put error bars on the estimators in \eqref{eq:ratewienerest}.
+In this section we will define estimators for the variances computed in the previous section.
+These will allow us to put error bars on the estimators in \eqref{eq:ratewienerest}.
 
 
 
